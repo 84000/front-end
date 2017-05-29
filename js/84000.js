@@ -256,6 +256,12 @@ $(document).ready(function() {
 	    	    
 	    	    return bookmarks;
 	    	};
+
+	    	function getDomain(){
+	    		var domain = location.hostname.split('.').reverse()[1] + "." + location.hostname.split('.').reverse()[0];
+	    		//console.log(domain);
+	    		return domain;
+	    	}
 	    	
 	    	$(document).on("click",'a.milestone', function(e) {
 	    	
@@ -287,7 +293,7 @@ $(document).ready(function() {
 	    	    }
 	    	    
 	    	    // Add array to cookie
-	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: '84000.local' });
+	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: getDomain() });
 	    	    
 	    	    // Reload bookmarks
 	    	    $.load_bookmarks();
@@ -317,7 +323,7 @@ $(document).ready(function() {
 	    	        }
 	    	    }
 	    	    // Set the cookie
-	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: '84000.local' });
+	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: getDomain() });
 	    	    
 	    	    // Reload bookmarks
 	    	    $.load_bookmarks();

@@ -1,0 +1,4 @@
+# Allow subdomain acces to fonts
+<FilesMatch ".(eot|ttf|otf|woff)">
+	Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

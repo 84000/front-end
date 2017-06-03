@@ -2,6 +2,12 @@
 
     $content_template = array_key_exists('template', $_GET) ? $_GET['template'] : 'home';
 
+    function reading_room_domain(){
+        $host_array = explode(".", $_SERVER['HTTP_HOST']);
+        $host_array[0] = "read";
+        return  implode(".", $host_array);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +24,6 @@
         <link href="css/84000.css" rel="stylesheet">
         <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
         <link href="js/lightbox2-master/src/css/lightbox.css" rel="stylesheet">
-        <link rel='stylesheet' id='sharedaddy-css'  href='http://84000.co/wp-content/plugins/jetpack-sharing/sharedaddy/sharing.css?ver=3.9.6' type='text/css' media='all' />
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -59,7 +64,7 @@
                     <ul class="nav navbar-nav">
                         <li class="home<?php if($content_template === "home") echo ' active' ?>"><a href="/">Home</a></li>
                         <li class="news<?php if(array_search($content_template, ['news','post']) > -1) echo ' active' ?>"><a href="/?template=news">News</a></li>
-                        <li class="reading-room<?php if(array_search($content_template, ['reading-room-lobby','reading-room-list', 'reading-room-text', 'reading-room-section', 'reading-room-translated']) > -1) echo ' active' ?>"><a href="/?template=reading-room-lobby">Reading Room</a></li>
+                        <li class="reading-room"><a href="http://<?php echo reading_room_domain() ?>">Reading Room</a></li>
                         <li class="about<?php if($content_template === "about") echo ' active' ?>"><a href="/?template=about">About</a></li>
                         <li class="resources<?php if($content_template === "resources") echo ' active' ?>"><a href="/?template=resources">Resources</a></li>
                         <li class="how-to-help<?php if(array_search($content_template, ['sponsor-page','sponsor-sutra','84000-circle', 'subscribe'])  > -1) echo ' active' ?>"><a href="/?template=sponsor-page">How you can help</a></li>

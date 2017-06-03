@@ -6,7 +6,7 @@
 
             <div class="panel panel-default">
 
-                <div class="panel-heading">
+                <div class="panel-heading panel-heading-bold">
                     <ul class="nav nav-tabs nav-justified">
                         <li role="presentation" class="active">
                             <a href="#kangyur" aria-controls="kangyur" role="tab" data-toggle="tab">

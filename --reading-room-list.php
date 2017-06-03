@@ -2,16 +2,13 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
-            	<div class="panel-heading center-vertical">
+            	<div class="panel-heading panel-heading-bold center-vertical">
 
                         <span class="title">
                               <ul class="list-inline breadcrumbs">
-                              	<li>
-                              		<a href="/?template=reading-room-section">The Kangyur</a>
-                              	</li>
-                              	<li>
-                              		<a href="/?template=reading-room-section">Discourses</a>
-                              	</li>
+                                    <li><a href="/?template=reading-room-lobby">Reading Room</a></li>
+                              	<li><a href="/?template=reading-room-section">The Kangyur</a></li>
+                              	<li><a href="/?template=reading-room-section">Discourses</a></li>
                               </ul>
                         </span>
 

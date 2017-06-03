@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
-            	<div class="panel-heading">
+            	<div class="panel-heading panel-heading-bold">
 
             		<div class="title">
             			All current translations

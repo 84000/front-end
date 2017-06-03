@@ -165,7 +165,8 @@ $(document).ready(function() {
 		$.fn.match_heights = function () {
 			if($('html').hasClass('screen') && ($('html').hasClass('md') || $('html').hasClass('lg') || $('html').hasClass('sm'))){
 				var heights = {};
-				$("[data-match-height]").each(function(){
+				$("[data-match-height]").height('auto');
+				$("[data-match-height]:visible").each(function(){
 					var $this = $(this)
 					var this_height = $this.height();
 					var height_type = $this.data('match-height');
@@ -177,18 +178,22 @@ $(document).ready(function() {
 					$("[data-match-height='" + i + "']").height(val + 'px');
 				});
 			}
-			else{
-				$("[data-match-height]").height('auto');
-			}
 		}
 	}(jQuery));
 	$(document).match_heights();
 
+	// Get the location of this script
+	// --------------------------------------
+	var getScriptDomain = (function() {
+	    var scriptSrc = $('script[src$="/84000.js"]').attr('src');
+	    var srcChunks = scriptSrc.split('/');
+	    return function() { return srcChunks[0] == "http:" ? srcChunks.slice(0,3).join('/') : "" ; };
+	})();
+
 	// Bookmarks
 	// --------------------------------------
 	if($('html').hasClass('screen')){
-
-		$.getScript( "/js/js-cookies.js" ).done(function( script, textStatus ) {
+		$.getScript( getScriptDomain() + "/js/js-cookies.js" ).done(function( script, textStatus ) {
 		
 	    	(function ($) { 
 	    		$.load_bookmarks = function () {
@@ -228,7 +233,7 @@ $(document).ready(function() {
 	         			
 	    			}
 	    			else {
-	    				var $link = $("<a>", {"href": "", "class": "disabled"}).text("To bookmark texts please select the milestone links to the left of the text.");
+	    				var $link = $("<a>", {"href": "", "class": "disabled"}).text("Bookmarked texts or passages in the Reading Room will be listed here.");
 	    				var $item = $("<li>");
 	    				$item.append($link);
 	    				$list.append($item);
@@ -312,6 +317,7 @@ $(document).ready(function() {
 	    	    // Removes the bookmark
 	    	    
 	            e.preventDefault();
+	            e.stopPropagation();
 	    	    
 	    	    var href = $(this).attr('href');
 	    	    var bookmarks = getBookmarks();
@@ -407,7 +413,7 @@ $(document).ready(function() {
 
     	if($("article #glossary .glossary-item").length){
 
-    		$.getScript( "/js/replace-text.min.js" ).done(function( script, textStatus ) {
+    		$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
 	            
 	            var isWorking = false,
 	                $allGlossaries = $("article #glossary .glossary-item"),
@@ -432,7 +438,7 @@ $(document).ready(function() {
 	                            var regEx = new RegExp("(\^|[\\s\\.,“])(" + escapeRegExp($term.text()) + ")(\$|[\\s\\.,;:”])","i");
 	                            $paragraphs.each(function(paragraphIndex){
 	                                var $paragraph = $(this);
-	                                $paragraph.replaceText(regEx, "$1<a href='#" + glossaryId + "' class='pop-up'>$2<\/a>$3");
+	                                $paragraph.replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3");
 	                                $paragraph.addClass("glossarized");
 	                            });
 	                        });
@@ -566,7 +572,43 @@ $(document).ready(function() {
          
     }
 
-	//Trigger events on resize
+    // Get the href content via ajax and put it in the specified element
+    // ----------------------------------------------------------------- 
+
+    $(document).on("click", "[data-ajax-target]", function(e){
+        
+        e.preventDefault();
+        
+        var $this = $(this);
+        var source = $this.attr('href');
+        var target = $this.data('ajax-target');
+        var $target = $(target);
+
+        if(!$target.is('.loaded')){
+            $.get(source, function(data) {
+                $target.html(data).collapse('show').addClass('loaded');
+            });
+        }
+        else{
+            $target.collapse('toggle');
+        }
+        
+    });
+
+    // Re-filter on change
+    // ----------------------------------------------------------------- 
+
+    $(document).on("change",".filter-form input, .filter-form select", function(e){
+	    $(this).parents("form").submit();
+	});
+
+    // Match heights on hidden content
+	//------------------------------------------
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		$(document).match_heights();
+	});
+
+	// Trigger events on resize
 	//------------------------------------------
 
 	$(window).resize(function(){

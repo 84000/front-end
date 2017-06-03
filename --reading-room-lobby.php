@@ -6,9 +6,9 @@
 
             <div class="panel panel-default">
 
-                <div class="panel-heading center-vertical">
+                <div class="panel-heading panel-heading-bold center-vertical">
 
-                    <span class="title">The 84000 Reading Room</span>
+                    <span class="title">Reading Room</span>
 
                     <span>
                         <a href="/?template=reading-room-translated" class="pull-right">View all translated texts</a>

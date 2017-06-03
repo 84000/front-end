@@ -54,10 +54,10 @@
         <article class="container">
             <div class="panel panel-default">
 
-                <div class="panel-heading hidden-print center-vertical">
+                <div class="panel-heading panel-heading-bold hidden-print center-vertical">
                     
                     <span class="title">
-                        <ul class="list-inline breadcrumbs">
+                        <ul class="list-inline inline-dots">
                             <li><a href="/?template=reading-room-lobby">Reading Room</a></li>
                             <li><a href="/?template=reading-room-section">The Kangyur</a></li>
                             <li><a href="/?template=reading-room-section">Discources</a></li>
@@ -78,7 +78,7 @@
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10 print-width-override">
 
-                            <section id="title" class="section-panel text-center">
+                            <section id="title" class="section-panel indent text-center">
 
                                 <div class="page page-first">
                                     <div id="titles">
@@ -128,7 +128,7 @@
 
                             </section>
 
-                            <aside class="download-options hidden-print text-center">
+                            <aside class="download-options indent hidden-print text-center">
                                 <h4 class="sr-only">Download Options</h4>
                                 
                                 <a href="javascript:window.print()" title="Print">
@@ -145,7 +145,7 @@
 
                             <hr class="hidden-print">
 
-                            <aside id="contents" class="page">
+                            <aside id="contents" class="page indent">
                                 <a href="#contents" class="milestone" title="Bookmark this section">Co.</a>
                                 <h3>Contents</h3>
                                 <table>
@@ -214,7 +214,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="summary" class="page">
+                            <section id="summary" class="page indent">
                                 <a href="#summary" class="milestone" title="Bookmark this section">S.</a>
                                 <h3>Summary</h3>
                                 <p id="62fbb590-fae5-4116-8c1b-866cdc99d5ae">
@@ -225,7 +225,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="acknowledgment" class="page">
+                            <section id="acknowledgment" class="page indent">
                                 <a href="#acknowledgment" class="milestone" title="Bookmark this section">Ac.</a>
                                 <h3>Acknowledgments</h3>
                                 <p id="101dba40-98f7-4f2f-9394-50db03e8ba4f">
@@ -239,7 +239,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="introduction" class="page">
+                            <section id="introduction" class="page indent">
                                 <a href="#introduction" class="milestone" title="Bookmark this section">I.</a>
                                 <h3>Introduction</h3>
                                 <p id="64add122-62c3-4793-adf7-c5aafdae7b15">
@@ -255,14 +255,14 @@
 
                             <hr class="hidden-print">
 
-                            <section id="body-title" class="page">
+                            <section id="body-title" class="page indent">
                                 <a href="#body-title" class="milestone" title="Bookmark this section">Tr.</a>
                                 <h3>The Translation</h3>
                                 <h2>The Noble Mahāyāna Sūtra</h2>
                                 <h1>The Question of Maitreya</h1>
                             </section>
 
-                            <section class="chapter page" id="chapter-1">
+                            <section class="chapter page indent" id="chapter-1">
                                 <p id="6f1d167c-a328-434e-a38d-5ab055f52503">
                                     <a class="milestone" title="Bookmark this section" href="#6f1d167c-a328-434e-a38d-5ab055f52503">C1.1</a>
                                     [F.104.b] Homage to all the buddhas and bodhisattvas!
@@ -293,7 +293,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="colophon" class="page">
+                            <section id="colophon" class="page indent">
                                 <a href="#colophon" class="milestone" title="Bookmark this section">Cl.</a>
                                 <h3>Colophon</h3>
                                 <div class="chapter" id="chapter-1">
@@ -326,7 +326,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="notes" class="page">
+                            <section id="notes" class="page indent">
 
                                 <a href="#notes" class="milestone" title="Bookmark this section">N.</a>
 
@@ -344,7 +344,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="glossary" class="page">
+                            <section id="glossary" class="page indent">
 
                                 <a href="#glossary" class="milestone" title="Bookmark this section">G.</a>
 
@@ -385,7 +385,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="abbreviations" class="page">
+                            <section id="abbreviations" class="page indent">
 
                                 <a href="#abbreviations" class="milestone" title="Bookmark this section">Ab.</a>
 
@@ -411,7 +411,7 @@
 
                             <hr class="hidden-print">
 
-                            <section id="bibliograpy" class="page">
+                            <section id="bibliograpy" class="page indent">
                                 <a href="#bibliograpy" class="milestone" title="Bookmark this section">B.</a>
                                 <h3>Bibliography</h3>
                                 <div>
@@ -557,12 +557,14 @@
 
                 <div id="extra-tab" class="tab-pane" role="tabpanel">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-10">
-                                <aside>
-                                    <div class="data-container">
+                        <div class="pad">
+                            <div class="row">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <div class="indent">
+                                        <div class="data-container">
+                                        </div>
                                     </div>
-                                </aside>
+                                </div>
                             </div>
                         </div>
                     </div>

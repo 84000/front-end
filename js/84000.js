@@ -199,7 +199,7 @@ $(document).ready(function() {
 	    		$.load_bookmarks = function () {
 	    			// get bookmarks from cookies
 	    			
-	    			var page = window.location.pathname;
+	    			var page = window.location.href;
 	    			var bookmarks = getBookmarks();
 	    			
 	    			var $list = $("#bookmarks");
@@ -275,7 +275,7 @@ $(document).ready(function() {
 	            e.preventDefault();
 	    	    
 	    	    var $this = $(this);
-	    	    var page = window.location.pathname;
+	    	    var page = window.location.href;
 	    	    var hash = $this.attr('href');
 	    	    var pageTitle = $("#title h1").text();
 	    	    var sectionTitle = $this.parents("section").find("h3").first().text();

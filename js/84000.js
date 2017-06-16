@@ -595,6 +595,30 @@ $(document).ready(function() {
         
     });
 
+    // Print a page in a link
+    // ----------------------------------------------------------------- 
+
+    $(document).on("click", "a.print-href", function(e){
+
+    	e.preventDefault();
+
+    	var url = $(this).attr('href');
+
+    	var $iframe = $("#print-iframe");
+
+    	if(! $iframe.length)
+    	{
+    		$iframe = $("<iframe id='print-iframe' style='position:absolute;width:100%;height:100px;left:0px;top:-100px;z-index:-1;'>")
+    	}
+
+    	$iframe.attr("src", url).appendTo("body").load(function(){
+	    	var iframe = document.getElementById('print-iframe');
+			var iframeWindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
+	    	iframeWindow.print();
+	    });
+
+	});
+
     // Re-filter on change
     // ----------------------------------------------------------------- 
 

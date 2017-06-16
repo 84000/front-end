@@ -54,7 +54,7 @@ a.disabled {
     }
 }
 
-@media (min-width: @screen-md-min) {
+@media only screen and (min-width: @screen-md-min) {
 
     .col-md-merge-right {
         padding-right: 0px;
@@ -105,8 +105,17 @@ body > footer {
 
 }
 
-body > .container > .panel > .panel-body {
-    padding: 20px 30px 60px 30px;
+body > .container > .panel{
+    width: 100%;
+    overflow: hidden;
+    > .panel-body {
+        padding: 20px 30px 60px 30px;
+    }
+    @media only screen and (max-width: @grid-float-breakpoint) {
+        > .panel-body {
+            padding: 15px 15px 60px 15px;
+        }
+    }
 }
 
 p {
@@ -343,7 +352,7 @@ i.fa-google-plus-square {
     }
 
     // Small nav
-    @media (max-width: @grid-float-breakpoint) {
+    @media only screen and (max-width: @grid-float-breakpoint) {
 
         .brand-header {
         
@@ -702,7 +711,7 @@ article {
         }
     }
 
-    @media (max-width: @screen-sm-max) {
+    @media only screen and (max-width: @screen-sm-max) {
 
         max-width: 100%;
 
@@ -1019,7 +1028,7 @@ a#link-to-top {
 
         }
 
-        @media (max-width: @screen-sm-max) {
+        @media only screen and (max-width: @screen-sm-max) {
 
             position: relative;
             display: block;
@@ -1039,7 +1048,7 @@ a#link-to-top {
             }
 
         }
-        @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+        @media only screen and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
 
             height: 500px;
 
@@ -1313,9 +1322,10 @@ a#link-to-top {
         }
     }
 
-    @media (max-width: @grid-float-breakpoint) {
+    @media only screen and (max-width: @screen-tablet) {
 
         #title {
+            margin-top: 0px;
             margin-left: 0px;
             margin-right: 0px;
             padding: 15px;
@@ -1323,62 +1333,63 @@ a#link-to-top {
 
         article {
             #titles, #long-titles {
-                margin-bottom: 0px;
+                padding-bottom: 22px;
+                margin-bottom: 22px;
+                border-bottom: 1px solid @hr-border;
             }
-        }
 
-        .navbar-brand {
-            .heading {
-                display: none;
+            h3 {
+                margin-top: (@line-height-computed / 2);
             }
         }
 
     }
 
 }
-
 @indent: 90px;
 
 .indent {
 
-    position: relative;
-    margin-left: @indent;
-    margin-right: @indent;
-
-    p {
+    &, p {
         position: relative;
     }
 
-    a.milestone {
-        position: absolute;
-        top: 0px;
-        left: -@indent;
-        max-width: (@indent - 15);
-    }
+    @media only screen and (max-width: @grid-float-breakpoint) {
 
-    p.footnote {
-
-        position: relative;
-        padding-left: @indent;
-        
-        .footnote-number {
-            position: absolute;
-            max-width: (@indent - 15);
-            left: 0px;
-            top: 0px;
-        }
-    }
-
-    @media (max-width: @grid-float-breakpoint) {
-
-        margin-right: 0px;
-
-        &.download-options {
-            margin-left: 0px;
+        a.milestone {
+            display: block;
         }
 
         p.footnote {
-            margin-left: -@indent;
+            .footnote-number {
+                padding-right: 8px;
+            }
+        }
+    }
+
+    @media (min-width: @grid-float-breakpoint) {
+
+        margin-left: @indent;
+        margin-right: @indent;
+
+        a.milestone {
+            position: absolute;
+            top: 0px;
+            left: -@indent;
+            max-width: (@indent - 15);
+        }
+
+        p.footnote {
+
+            position: relative;
+            padding-left: @indent;
+        
+            .footnote-number {
+                position: absolute;
+                max-width: (@indent - 15);
+                left: 0px;
+                top: 0px;
+            }
         }
     }
 
@@ -1474,7 +1485,7 @@ a#link-to-top {
         }
     } 
 
-    @media (max-width: @grid-float-breakpoint) {
+    @media only screen and (max-width: @grid-float-breakpoint) {
 
         .nav-tabs{
 
@@ -1519,6 +1530,7 @@ body.wait > #wait{
     color: #fff;
     padding:10px 25px;
     border-radius:8px;
+    max-width:90%;
 }
 
 .tab-content {
@@ -1721,10 +1733,21 @@ body.wait > #wait{
     }
 
     .breadcrumb {
-        display: inline-block;
+        display: inline;
         margin-bottom: 0px;
         padding: 0px;
         padding-left: 8px;
+    }
+
+    .translation-options {
+        .list-unstyled();
+        > li {
+            margin-bottom: 10px;
+        }
+        i {
+            width: 26px;
+            text-align: left;
+        }
     }
 
 }
@@ -1768,11 +1791,6 @@ body.wait > #wait{
        transition: none !important;
     }
     
-    body {
-        padding-left: 10%;
-        padding-right: 10%;
-    }
-    
     section, aside {
         margin-left: 0px;
         margin-right: 0px;
@@ -1811,6 +1829,11 @@ body.wait > #wait{
         #title {
             margin-top: 0px;
             padding: 15px;
+        }
+        section, aside {
+            .glossary-link {
+                border-bottom: 0px;
+            }
         }
     }    
 

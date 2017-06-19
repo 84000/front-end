@@ -226,6 +226,7 @@ i.fa-google-plus-square {
                 color: #fff;
                 background-color: @brand-blue;
                 .transition(.5s ease-in);
+
                 &:hover {
                     background-color: @brand-blue-dark;
                 }
@@ -270,7 +271,6 @@ i.fa-google-plus-square {
 
             border-style: solid;
             border-width: 0px;
-            border-bottom-width: 5px;
 
             > a {
 
@@ -278,8 +278,6 @@ i.fa-google-plus-square {
                 font-size: 19px;
                 color: #444;
                 text-transform: uppercase;
-                padding-top: 12px;
-                padding-bottom: 7px;
 
                 .transition(background-color .5s ease-in);
 
@@ -319,13 +317,27 @@ i.fa-google-plus-square {
                 .nav-item-variant(@brand-blue);
             }
 
+            @media only screen and (min-width: @grid-float-breakpoint) {
+
+                border-bottom-width: 5px;
+
+                > a {
+                    padding-top: 12px;
+                    padding-bottom: 7px;   
+                }
+            }
+
+            @media only screen and (max-width: @grid-float-breakpoint) {
+
+                border-left-width: 10px;
+            
+            }
+
         }
         
     }
 
     #social {
-
-        margin-top: 6px;
         
         span, a {
 
@@ -342,12 +354,6 @@ i.fa-google-plus-square {
             font-size: 30px;
             color: @text-color;
             
-        }
-    }
-
-    .navbar-form {
-        > * {
-            margin-bottom: 8px;
         }
     }
 
@@ -388,11 +394,37 @@ i.fa-google-plus-square {
             margin-top: 0px;
             margin-bottom: 0px;
             border: 0px;
+            padding: 0px; 
+
+            > * {
+
+                border-left-style: solid;
+                border-left-width: 10px;
+
+            }
+
+            > #language-links {
+                border-left-color: @brand-red;
+                padding: 12px 20px;
+            }
+
+            > #search-controls {
+                border-left-color: @brand-orange;
+                padding: 6px 20px;
+            }
+
+            > #bookmarks-container {
+                border-left-color: @brand-blue;
+                padding: 12px 20px;
+            }
 
         }
 
         #social {
-            margin-bottom: 5px;
+            margin-left: -15px;
+            margin-right: -15px;
+            padding: @nav-link-padding;
+            border-left: 10px solid @brand-red;
         }
 
     }
@@ -428,16 +460,18 @@ i.fa-google-plus-square {
 
             // move the search box in line with the logo
             position: absolute;
-            top: -130px;
+            top: -134px;
             right: floor((@grid-gutter-width / 2));
             
             > * {
                 text-align: right;
+                margin-bottom: 10px;
             }
 
         }
 
         #social {
+            padding-top: 6px;
             .pull-right();
         }
 
@@ -1067,30 +1101,6 @@ a#link-to-top {
 
 .panel-heading {
 
-/*
-    .breadcrumbs {
-
-        margin-left: 0px;
-        margin-bottom: 0px;
-
-        > li {
-
-            padding-left: 0px;
-            padding-right: 10px;
-
-            &:after {
-                padding-left: 10px;
-                content: '/';
-            }
-
-            &:last-child:after {
-                padding-left: 0px;
-                content: '';
-            }
-            
-        }
-    }
-*/
     .bookmark-button {
 
         text-align: right;
@@ -1322,16 +1332,19 @@ a#link-to-top {
         }
     }
 
-    @media only screen and (max-width: @screen-tablet) {
+    @media only screen and (max-width: @screen-md) {
 
         #title {
-            margin-top: 0px;
+            margin-top: 15px;
             margin-left: 0px;
             margin-right: 0px;
             padding: 15px;
         }
 
         article {
+            #titles {
+                margin-top: 50px;
+            }
             #titles, #long-titles {
                 padding-bottom: 22px;
                 margin-bottom: 22px;
@@ -1346,6 +1359,7 @@ a#link-to-top {
     }
 
 }
+
 @indent: 90px;
 
 .indent {
@@ -1354,7 +1368,7 @@ a#link-to-top {
         position: relative;
     }
 
-    @media only screen and (max-width: @grid-float-breakpoint) {
+    @media only screen and (max-width: @screen-md) {
 
         a.milestone {
             display: block;
@@ -1367,7 +1381,7 @@ a#link-to-top {
         }
     }
 
-    @media (min-width: @grid-float-breakpoint) {
+    @media (min-width: @screen-md) {
 
         margin-left: @indent;
         margin-right: @indent;

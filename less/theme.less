@@ -687,23 +687,13 @@ article {
 
 // Nav tab panel 
 // -------------------------------------------
-.tab-pane {
 
-    position: relative;
-
-    > .form-filter {
-
-        margin-top: 15px;
-        margin-bottom: 15px;
-
-        > div {
-            margin-left: 10px;
-            &:last-child {
-                margin-right: 0px;
-            }
+table {
+    td, th {
+        &.nowrap {
+            white-space: nowrap;
         }
-
-    }  
+    }
 }
 
 
@@ -1313,10 +1303,13 @@ a#link-to-top {
         }
 
         .glossary-item {
+
             margin-bottom: @line-height-computed;
+
             .term {
                 margin-top: 0px;
             }
+
             .occurences {
                 li {
                     width: 30px;
@@ -1324,6 +1317,7 @@ a#link-to-top {
                     overflow: visible;
                 }
             }
+
         }
 
         .glossary-link {
@@ -1354,6 +1348,10 @@ a#link-to-top {
             h3 {
                 margin-top: (@line-height-computed / 2);
             }
+        }
+
+        .glossary-item {
+            border-bottom: 1px solid @hr-border;
         }
 
     }
@@ -1497,7 +1495,15 @@ a#link-to-top {
         h4 {
             margin-top: 0px;
         }
-    } 
+    }
+
+    .milestone {
+        display: none;
+    }
+    
+    h3 {
+        margin-top: 0px;
+    }
 
     @media only screen and (max-width: @grid-float-breakpoint) {
 
@@ -1551,23 +1557,12 @@ body.wait > #wait{
 
     position:relative;
 
-    > div:first-child{
-        margin-top:15px;
-    }
-
-    @media (min-width: @grid-float-breakpoint) {
-
-        .filter-form{
-            position:absolute;
-            right: 0px;
-            top: -75px;
-            min-width: 130px;
-        }
-    }
-
 }
 
 #cumulative-glossary {
+
+    margin-top: 15px;
+    position: relative;
 
     .col-items, .col-nav {
         float: left;
@@ -1613,8 +1608,18 @@ body.wait > #wait{
             margin-top:16px;
             margin-bottom:8px;
         }
-    } 
+    }
 
+    .filter-form {
+        position: absolute;
+        top: -60px;
+        right: 15px;
+    }
+
+}
+
+#search-form-container {
+    margin-top: 15px;
 }
 
 .search-result {
@@ -1667,9 +1672,16 @@ body.wait > #wait{
         color: @text-muted;
     }
 
+    .text-list-header {
+
+        margin-left: 15px;
+        margin-right: 15px;
+
+    }
 
     .text-list {
 
+        margin-top: 15px;
         margin-left: 15px;
         margin-right: 15px;
 
@@ -1679,6 +1691,14 @@ body.wait > #wait{
             text-transform: uppercase;
             font-weight: bold;
             font-family: @font-family-heading;
+
+            .checkbox {
+                margin: 0px;
+            }
+            label {
+                font-weight: normal;
+                text-transform: none;
+            }
 
         }
 

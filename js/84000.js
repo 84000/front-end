@@ -355,7 +355,7 @@ $(document).ready(function() {
 		$.popup_footer_height = function () {
 
 			// Footer should not be more than 60% of the viewport
-			$("#fixed-footer .tab-content").css({"max-height": ($(window).height() * 0.6) + "px"});
+			$("#fixed-footer .tab-content").css({"height": ($(window).height() * 0.6) + "px"});
 
 		}
 	}(jQuery));

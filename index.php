@@ -47,7 +47,7 @@
                             </span>
 
                             <span class="nav-button">
-                                <button id="navigation-button" class="btn btn-primary navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <button id="navigation-button" class="btn-round navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                     <i class="fa fa-bars" aria-hidden="true"></i>
                                 </button>
                             </span>
@@ -76,21 +76,24 @@
                             <a href="/">English</a> | <a href="/ch">中文</a>
                         </div>
 
-                        <div class="input-group">
-                            <input type="text" name ="search" class="form-control" placeholder="Search...">
+                        <div id="search-controls" class="input-group">
+                            <input type="text" name="s" class="form-control" placeholder="Search..."/>
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </span>
                         </div>
 
-                        <div class="dropdown">
-
+                        <div id="bookmarks-container" class="dropdown">
+                                    
                             <div id="bookmarks-opener" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <a href="#">Bookmarks <span class="badge">3</span></a>
+                                <a href="#">Bookmarks <span class="badge badge-notification">0</span>
+                                </a>
                             </div>
-
-                            <ul id="bookmarks" class="bookmarks dropdown-menu" aria-labelledby="bookmarks-opener"></ul>
-
+                            
+                            <ul id="bookmarks-dropdown" class="bookmarks dropdown-menu" aria-labelledby="bookmarks-opener"/>
+                            
                         </div>
 
                     </form>

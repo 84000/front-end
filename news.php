@@ -205,7 +205,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <ul>
+                    <ul class="list-unstyled">
                         <li>
                             <a href="#">February 2017</a>
                         </li>

@@ -29,35 +29,35 @@
                     <ol class="sutra-list">
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <br><span class="date">Dec 2016</span>
+                            <p class="date">Dec 2016</p>
                         </li>
                     </ol>
 

@@ -10,11 +10,18 @@ $(document).ready(function() {
 				$body.removeClass("wait");
 			}
 			else{
-			    var $wait = $("<span>", {"id": "wait"}).text(text);
-			    var $window = $(window);
-			    $body.addClass("wait");
-				$body.append($wait);
-				$wait.css({"top": (($window.height() - $wait.outerHeight()) / 2) + "px", "left": (($window.width() - $wait.outerWidth()) / 2) + "px"});
+			    
+			    if(!$body.hasClass("wait")){
+			    	var $wait = $("<span>", {"id": "wait"}).text(text);
+			    	var $window = $(window);
+			    	$body.addClass("wait");
+					$body.append($wait);
+					$wait.css({"top": (($window.height() - $wait.outerHeight()) / 2) + "px", "left": (($window.width() - $wait.outerWidth()) / 2) + "px"});
+			    }
+			    else {
+			    	$("#wait").text(text);
+			    }
+				
 			}
 		}
 	}(jQuery));
@@ -75,7 +82,7 @@ $(document).ready(function() {
 
 	// Scroll to top
 	// --------------------------------------
-	$(document).on("click", "a[href='#top']", function(e) {
+	$(document).on("click", "a[href='#top']:not(.milestone)", function(e) {
 		$.scroll_to_anchor("#top");
 		return false;
 	});
@@ -83,7 +90,6 @@ $(document).ready(function() {
 
 	// Image sizing
 	// --------------------------------------
-
 	(function ($) { 
 		$.fn.center_with_margins = function () {
 			this.each(function(){
@@ -146,7 +152,6 @@ $(document).ready(function() {
 
 	// Lightbox
 	// -------------------------------------------------------
-
 	if($('html').hasClass('screen') && $('[data-lightbox="slideshow"]').length) {
 		jQuery.when(
 		    jQuery.getScript("/js/lightbox2-master/src/js/lightbox.js" ),
@@ -158,9 +163,8 @@ $(document).ready(function() {
 		});
 	}
 
-	//Make multiple elements the same size
-	//------------------------------------------
-
+	// Make multiple elements the same size
+	// ------------------------------------------
 	(function ($) { 
 		$.fn.match_heights = function () {
 			if($('html').hasClass('screen') && ($('html').hasClass('md') || $('html').hasClass('lg') || $('html').hasClass('sm'))){
@@ -182,6 +186,72 @@ $(document).ready(function() {
 	}(jQuery));
 	$(document).match_heights();
 
+	// Load page navigation from DOM
+	// --------------------------------------
+	if($('html').hasClass('screen')){
+		(function ($) { 
+
+			function addLink($link, $list, linkText) {
+
+				if(typeof(linkText) == "undefined"){
+					linkText = $link.text();
+				}
+
+    			var $listLink = $("<a>", {"href": $link.attr('href'), "class": $link.attr('class')}).text(linkText);
+
+ 			    // Create a list item
+				var $item = $("<li>");
+
+				// Append the link to the item
+				$item.append($listLink);
+
+				// Append the item to the list
+				$list.append($item);
+			}
+
+			function addDivider(text, $list) {
+
+ 			    // Create a list item
+				var $item = $("<li>", {"class": "divider-text"}).text(text);
+
+				// Append the item to the list
+				$list.append($item);
+			}
+			
+			$.loadContentsDropdown = function () {
+		    	
+		    	var $list = $("#contents-dropdown");
+	    		$list.empty();
+
+	    		var $contentLinks = $("#contents table tr");
+	    		
+	    		$contentLinks.each(function(){
+
+	    			var $contentLink = $(this);
+	    			addLink($contentLink.find("> td > a"), $list);
+	    			
+	    		});
+
+	    		addDivider("Other links", $list);
+
+	    		addLink($("<a>", {"href": "http://84000.co"}).text("84000 Homepage"), $list);
+
+	    		addLink($("<a>", {"href": "/"}).text("Reading Room Lobby"), $list);
+
+	    		addLink($("<a>", {"href": "http://84000.co/how-you-can-help/donate/#sap"}).text("Sponsor a Page"), $list);
+
+	    	};
+	    }(jQuery));
+	    $.loadContentsDropdown();
+
+	}
+
+	// Close a dropdown on click
+	// --------------------------------------
+	$(document).on("click",'.dropdown-menu a:not(.remove-bookmark)', function(e) {
+		$("body").trigger("click")
+	});
+
 	// Get the location of this script
 	// --------------------------------------
 	var getScriptDomain = (function() {
@@ -190,19 +260,22 @@ $(document).ready(function() {
 	    return function() { return srcChunks[0] == "http:" ? srcChunks.slice(0,3).join('/') : "" ; };
 	})();
 
-	// Bookmarks
+	// Load Bookmarks
 	// --------------------------------------
 	if($('html').hasClass('screen')){
 		$.getScript( getScriptDomain() + "/js/js-cookies.js" ).done(function( script, textStatus ) {
 		
 	    	(function ($) { 
 	    		$.load_bookmarks = function () {
+	    			
 	    			// get bookmarks from cookies
 	    			
-	    			var page = window.location.href;
+		    	    var location = window.location.href;
+		    	    locationSplit = location.split("#");
+		    	    var page = locationSplit[0];
 	    			var bookmarks = getBookmarks();
 	    			
-	    			var $list = $("#bookmarks");
+	    			var $list = $("#bookmarks-dropdown");
 	    			$list.empty();
 	    			
 	    			if(bookmarks.length){
@@ -275,7 +348,9 @@ $(document).ready(function() {
 	            e.preventDefault();
 	    	    
 	    	    var $this = $(this);
-	    	    var page = window.location.href;
+	    	    var location = window.location.href;
+	    	    locationSplit = location.split("#");
+	    	    var page = locationSplit[0];
 	    	    var hash = $this.attr('href');
 	    	    var pageTitle = $("#title h1").text();
 	    	    var sectionTitle = $this.parents("section").find("h3").first().text();
@@ -303,13 +378,6 @@ $(document).ready(function() {
 	    	    // Reload bookmarks
 	    	    $.load_bookmarks();
 
-	    	    //show bookmarks
-	    		$('#fixed-footer').removeClass('in');
-		        $('#fixed-footer .nav-tabs > li').removeClass('active');
-		        $('#fixed-footer .tab-pane').removeClass('in active');
-		        $('#fixed-footer .nav-tabs > li#bookmarks-opener').addClass('active');
-		        $('#fixed-footer #bookmarks-tab').addClass('in active');
-	    	    $("#fixed-footer").collapse("show");
 	    	});
 	    	
 	    	$(document).on("click",'a.remove-bookmark', function(e) {
@@ -338,6 +406,51 @@ $(document).ready(function() {
 		});
 	}
 
+	// Set the size of a dropdown
+	// --------------------------------------
+	$('.dropdown').on('show.bs.dropdown', function () {
+
+
+		var $dropdownMenu = $(this).find(".dropdown-menu");
+		var windowWidth = $(window).width();
+		var dropdownMaxWidth = (windowWidth - 80);
+		var dropdownNormalWidth = 600;
+		var dropdownWidth = dropdownMaxWidth < dropdownNormalWidth ? dropdownMaxWidth : dropdownNormalWidth;
+
+		$dropdownMenu.css({"width":  dropdownWidth + "px", "overflow": "hidden"});
+
+		$dropdownMenu.data("init-height", $dropdownMenu.height());
+
+		$dropdownMenu.height("0px");
+		
+	});
+
+	$('.dropdown').on('shown.bs.dropdown', function () {
+
+		var $dropdownMenu = $(this).find(".dropdown-menu");
+		var windowHeight = $(window).height();
+		var dropdownMaxHeight = (windowHeight - 100);
+		var dropdownInitHeight = $dropdownMenu.data("init-height");
+		var dropdownHeight = dropdownMaxHeight < dropdownInitHeight ? dropdownMaxHeight : dropdownInitHeight;
+
+		// Close the footer
+		// ---------------------------------
+		$('#fixed-footer').collapse('hide');
+
+		$dropdownMenu
+			.height(dropdownHeight + "px")
+			.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){ 
+				$(this).css({"overflow": "auto"})
+			});
+
+	});
+
+	$('.dropdown').on('hide.bs.dropdown', function () {
+
+		$(this).find(".dropdown-menu").css({"height": "auto", "overflow": "auto"});
+
+	});
+
 	// Footer close button
 	// --------------------------------------
 	$(document).on("click",'#fixed-footer .close', function(e) {
@@ -354,8 +467,8 @@ $(document).ready(function() {
 	(function ($) { 
 		$.popup_footer_height = function () {
 
-			// Footer should not be more than 60% of the viewport
-			$("#fixed-footer .tab-content").css({"height": ($(window).height() * 0.6) + "px"});
+			// Footer should not be more than 50% of the viewport
+			$("#fixed-footer .row").css({"max-height": ($(window).height() * 0.5) + "px"});
 
 		}
 	}(jQuery));
@@ -363,58 +476,44 @@ $(document).ready(function() {
 
 	// Pop-up content in the footer
 	// -----------------------------------------
-
 	$(document).on("click",'a.pop-up', function(e) {
 	
         e.preventDefault();
         
         var $this = $(this);
         
-        // Trigger pre-events
-        $this.trigger("prepare");
-        
-        
         // Hide the footer
         $('#fixed-footer').removeClass('in');
 
-        // Clear the tab
-        $('#fixed-footer .nav-tabs > li').removeClass('active');
-        $('#fixed-footer .tab-pane').removeClass('in active');
+        // Trigger pre-events
+        $this.trigger("prepare");
 
         // Copy content to the footer
-        $('#fixed-footer #extra-tab .data-container').html($($this.attr("href")).clone());
-
-        // Set the tab
-        $('#fixed-footer #extra-tab').addClass('in active');
+        var $content = $($this.attr("href")).clone();
+        $content.attr("id", "");
+        $('#fixed-footer .data-container').html($content);
 
         // Show the footer
 		$('#fixed-footer').collapse('show');
         
 	});
 
-	// Clone elements in the pop-up footer
-	// Don't do this until the glossary is parsed
-	// -----------------------------------------
-	(function ($) { 
-        $.cloneElements = function () {
-            $("[data-clone]").each(function(){
-				var $this = $(this);
-				$this.html($($this.data("clone")).clone());
-			});
-        }
-    }(jQuery));
-
 
 	// Find instances of the glossary items in the text 
     // and link them to the glossary.
     // -----------------------------------------------------------
-
     if($('html').hasClass('screen')){
 
     	if($("article #glossary .glossary-item").length){
 
     		$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
-	            
+
+    			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
+			    return function( elem ) {
+			        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+			    };
+});
+    			
 	            var isWorking = false,
 	                $allGlossaries = $("article #glossary .glossary-item"),
 	                $allParagraphs = $("article #summary p, article #introduction p, article .chapter p, article #colophon p"),
@@ -429,19 +528,25 @@ $(document).ready(function() {
 	                   // Highlight instances of the glossary items in each
 	                   // paragraph with a link to the glossary.
 	                   // -------------------------------------------------
-	                   
-	                   $glossaries.each(function(glossaryIndex){
+	                   $glossaries.each(function(){
 	                        var $glossary = $(this);
 	                        var glossaryId = $glossary.attr("id");
 	                        $glossary.find('.term').each(function(termIndex){
+
 	                            var $term = $(this);
-	                            var regEx = new RegExp("(\^|[\\s\\.,“])(" + escapeRegExp($term.text()) + ")(\$|[\\s\\.,;:”])","i");
-	                            $paragraphs.each(function(paragraphIndex){
-	                                var $paragraph = $(this);
-	                                $paragraph.replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3");
-	                                $paragraph.addClass("glossarized");
+	                            var termText = $term.text().toLowerCase();
+	                            var regEx = new RegExp("(\^|[\\s\\.,“])(" + escapeRegExp(termText) + ")(\$|[\\s\\.,;:”])","gi");
+	                            
+	                            $paragraphs.filter(":contains('" + termText + "')").each(function(paragraphIndex){
+	                            	
+	                                $(this)
+	                                	.replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3")
+	                                	.addClass("glossarized");
+
 	                            });
+
 	                        });
+
 	                        $glossary.addClass("glossarized");
 	                   });
 	                   
@@ -456,33 +561,34 @@ $(document).ready(function() {
 	                    // occurences in the text
 	                    // ----------------------------------------------------
 	                    
-	                    $glossaries.each(function(glossaryIndex){
+	                    $glossaries.filter(':not(.backlinked)').each(function(){
 	                        
 	                        var $glossaryItem = $(this);
-	                        if(!$glossaryItem.is('.backlinked')){
-	                            
-	                            // Create a list
-	                            var $list = $("<ul>", {"class": "list-inline"});
-	                            // Find references to this glossary in the text
-	                            $allParagraphs.find("a[href='#" + $glossaryItem.attr("id") + "']").each(function(refIndex){
-	                                var $glossaryRef = $(this);
-	                                // Add an id so we can link to this reference
-	                                $glossaryRef.attr("id","glossary-link-" + glossaryIndex + "-" + refIndex);
-	                                // Create a link to it
-	                                //var title = "In " + $glossaryRef.parents("section").find("h3").text();
-	                                var $link = $("<a>", {"href": "#glossary-link-" + glossaryIndex + "-" + refIndex, "class": "scroll-to-anchor"}).text(refIndex + 1);
-	                                // Create a list item
-	                                var $item = $("<li>");
-	                                // Append the link to the item
-	                                $item.append($link);
-	                                // Append the item to the list
-	                                $list.append($item);
-	                            });
-	                            
-	                            // Append the list to the glossary
-	                            $glossaryItem.find(".occurences").append($list);
-	                            $glossaryItem.addClass("backlinked");   
-	                        }
+	                        var glossaryId = $glossaryItem.attr("id");
+
+                        	// Create a list
+                            var $list = $("<ul>", {"class": "list-inline"});
+
+                            // Find references to this glossary in the text
+                            $allParagraphs.find("a[href='#" + glossaryId + "']").each(function(refIndex){
+                            	
+                                var $glossaryRef = $(this);
+                                // Add an id so we can link to this reference
+                                $glossaryRef.attr("id","glossary-link-" + glossaryId + "-" + refIndex);
+                                // Create a link to it
+                                //var title = "In " + $glossaryRef.parents("section").find("h3").text();
+                                var $link = $("<a>", {"href": "#glossary-link-" + glossaryId + "-" + refIndex, "class": "scroll-to-anchor"}).text(refIndex + 1);
+                                // Create a list item
+                                var $item = $("<li>");
+                                // Append the link to the item
+                                $item.append($link);
+                                // Append the item to the list
+                                $list.append($item);
+                            });
+                            
+                            // Append the list to the glossary
+                            $glossaryItem.find(".occurences").append($list);
+                            $glossaryItem.addClass("backlinked");
 	                            
 	                    });
 	                    
@@ -538,43 +644,81 @@ $(document).ready(function() {
 	     			    return position;
 	     			};
 	            
-	            
-	           (function ($) { 
-	                $.glossarizeAll = function () {
-	                    $.wait("Please wait a few seconds while the text is prepared...");
-	                    setTimeout(function() {
-	                        glossarize(
-	                            $allGlossaries, 
-	                            $allParagraphs,
-	                            glossaryBackLink,
-	                            $allGlossaries,
-	                            function(){ 
-	                            	$.cloneElements();
-	                            	$.wait("", true);
-	                            }
-	                        );
-	                    }, 500);
-	                }
-	            }(jQuery));
-	            $.glossarizeAll();
-	            
-	        }).fail(function() {
 
-	        	$.cloneElements();
+				(function ($) { 
+				    $.glossarizeAll = function () {
 
+				    	// Glossaries all paragraphs
+	     				// ---------------------------------------------
+
+				        $.wait("Please wait a few seconds while the text is prepared...");
+				        setTimeout(function() {
+				            glossarize(
+				                $allGlossaries, 
+				                $allParagraphs,
+				                function(){ 
+				                	$.wait("", true);
+				                }
+				            );
+				        }, 500);
+				    }
+				}(jQuery));
+				$.glossarizeAll();
+	    		
+	    		(function ($) { 
+	    			$.backlinkVisibleGlossaries = function () {
+	    
+	        			// Back link glossaries that have become visible
+	        			// ---------------------------------------------
+	        			
+	        		    if (isWorking) return false;
+	        				
+	        			$allGlossaries.filter(':not(.backlinked)').each(function(){
+	        			
+	        			    var $glossaryItem = $(this);
+	     			    	var elementInViewStatus = elementInView($glossaryItem);
+	     			    	
+	     					if(elementInViewStatus == 'inView'){
+	                            parseGlossary($glossaryItem);
+	     					}
+	     					else if(elementInViewStatus == 'below'){
+	     					    // This allows us to break on the first
+	     					    // non-visible after a visible.
+	     					    return false;
+	     					}
+	        			    
+	     				});
+	     				
+	    			}
+	    		}(jQuery));
+	            
+	            // Check for visible elements on scroll
+	     		// -------------------------------------------
+	            $(window).scroll(function () {
+	     			$.backlinkVisibleGlossaries();
+	     		});
+	     		
+	     		// Also implement on showing in pop-up footer
+	     		// --------------------------------------------
+	     		
+	            $(document).on("prepare",'a.glossary-link', function(e) {
+	               
+	               // Copy content to the footer
+	               parseGlossary($($(this).attr("href")));
+	                   
+	           	});
+	     		
+	     		// Glossarize the currently visible elements
+	     		// -------------------------------------------
+	     		$(window).scroll();
+	            
 	        });
     	}
-    	else {
-
-	    	$.cloneElements();
-
-	    }
          
     }
 
     // Get the href content via ajax and put it in the specified element
     // ----------------------------------------------------------------- 
-
     $(document).on("click", "[data-ajax-target]", function(e){
         
         e.preventDefault();
@@ -597,7 +741,6 @@ $(document).ready(function() {
 
     // Print a page in a link
     // ----------------------------------------------------------------- 
-
     $(document).on("click", "a.print-href", function(e){
 
     	e.preventDefault();
@@ -619,9 +762,8 @@ $(document).ready(function() {
 
 	});
 
-    // Re-filter on change
+    // Filter on change
     // ----------------------------------------------------------------- 
-
     $(document).on("change",".filter-form input, .filter-form select", function(e){
 	    $(this).parents("form").submit();
 	});
@@ -634,7 +776,6 @@ $(document).ready(function() {
 
 	// Trigger events on resize
 	//------------------------------------------
-
 	$(window).resize(function(){
 		$(document).media_size();
 		$(document).match_heights();

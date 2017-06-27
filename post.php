@@ -281,14 +281,14 @@
 
         <div class="col-md-3 col-md-merge-left">
 
-            <div class="panel panel-default link-nav">
+            <div class="panel panel-default">
 
                 <div class="panel-heading">
                     <h3 class="panel-title">Archive</h3>
                 </div>
 
                 <div class="panel-body">
-                    <ul>
+                    <ul class="list-unstyled">
                         <li>
                             <a href="#">February 2017</a>
                         </li>

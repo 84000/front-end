@@ -277,7 +277,7 @@ $(document).ready(function() {
 	    			
 	    			var $list = $("#bookmarks-dropdown");
 	    			$list.empty();
-	    			
+
 	    			if(bookmarks.length){
 	    			    
 	         			// show them in the list
@@ -303,13 +303,12 @@ $(document).ready(function() {
 							// Append the item to the list
 							$list.append($item);
 	         			}
-	         			
+
+	         			$list.append($("<li>", {"class": "divider-text"}).text("Please note that bookmarks are stored as Cookies. Clearing cookies for this site will delete your bookmarks."));
+
 	    			}
 	    			else {
-	    				var $link = $("<a>", {"href": "", "class": "disabled"}).text("Bookmarked texts or passages in the Reading Room will be listed here.");
-	    				var $item = $("<li>");
-	    				$item.append($link);
-	    				$list.append($item);
+	    				$list.append($("<li>", {"class": "divider-text"}).text("You don't have any bookmarks yet. Select milestones on the left of the text to bookmark that passage."));
 	    			}
 	    			
 	    			$('#bookmarks-opener .badge').text(bookmarks.length);
@@ -457,6 +456,13 @@ $(document).ready(function() {
 	
         e.preventDefault();
         
+		// Close the footer
+        $('#fixed-footer').collapse('hide');
+        
+	});
+
+	$(document).on("click",'body', function(e) {
+	
 		// Close the footer
         $('#fixed-footer').collapse('hide');
         

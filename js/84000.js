@@ -170,21 +170,26 @@ $(document).ready(function() {
 			if($('html').hasClass('screen') && ($('html').hasClass('md') || $('html').hasClass('lg') || $('html').hasClass('sm'))){
 				var heights = {};
 				$("[data-match-height]").height('auto');
-				$("[data-match-height]:visible").each(function(){
+				// Match to a particular element
+				$("[data-match-height].match-this-height:visible").each(function(){
+					var $this = $(this)
+					heights[$this.data('match-height')] = $this.height();
+				});
+				// Match to the tallest in the group
+				$("[data-match-height]:not(.match-this-height):visible").each(function(){
 					var $this = $(this)
 					var this_height = $this.height();
-					var height_type = $this.data('match-height');
-					if(!heights[height_type] || this_height > heights[height_type]){
-						heights[height_type] = this_height;
+					var height_group = $this.data('match-height');
+					if(!heights[height_group] || this_height > heights[height_group]){
+						heights[height_group] = this_height;
 					}
 				});
-				$.each(heights, function(i, val) {
-					$("[data-match-height='" + i + "']").height(val + 'px');
+				$.each(heights, function(group, val) {
+					$("[data-match-height='" + group + "']").height(val + 'px');
 				});
 			}
 		}
 	}(jQuery));
-	$(document).match_heights();
 
 	// Load page navigation from DOM
 	// --------------------------------------
@@ -474,7 +479,7 @@ $(document).ready(function() {
 		$.popup_footer_height = function () {
 
 			// Footer should not be more than 50% of the viewport
-			$("#fixed-footer .row").css({"max-height": ($(window).height() * 0.5) + "px"});
+			$("#fixed-footer .fix-height").css({"max-height": ($(window).height() * 0.5) + "px"});
 
 		}
 	}(jQuery));
@@ -515,10 +520,10 @@ $(document).ready(function() {
     		$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
 
     			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
-			    return function( elem ) {
-			        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-			    };
-});
+				    return function( elem ) {
+				        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+				    };
+				});
     			
 	            var isWorking = false,
 	                $allGlossaries = $("article #glossary .glossary-item"),
@@ -541,19 +546,16 @@ $(document).ready(function() {
 
 	                            var $term = $(this);
 	                            var termText = $term.text().toLowerCase();
-	                            var regEx = new RegExp("(\^|[\\s\\.,“])(" + escapeRegExp(termText) + ")(\$|[\\s\\.,;:”])","gi");
+	                            var regEx = new RegExp("(\^|[\\s\\.,“])(" + escapeRegExp(termText) + ")(\$|[\\s\\.,;:!”])","gi");
 	                            
 	                            $paragraphs.filter(":contains('" + termText + "')").each(function(paragraphIndex){
 	                            	
 	                                $(this)
-	                                	.replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3")
-	                                	.addClass("glossarized");
+	                                	.replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3");
 
 	                            });
 
 	                        });
-
-	                        $glossary.addClass("glossarized");
 	                   });
 	                   
 	                   if(callback){
@@ -594,7 +596,6 @@ $(document).ready(function() {
                             
                             // Append the list to the glossary
                             $glossaryItem.find(".occurences").append($list);
-                            $glossaryItem.addClass("backlinked");
 	                            
 	                    });
 	                    
@@ -610,7 +611,10 @@ $(document).ready(function() {
 	                    
 	                    if(!isWorking){
 	                        isWorking = true;
-	                        glossarize($allGlossaries, $paragraph, function(){ isWorking = false; });
+	                        glossarize($allGlossaries, $paragraph, function(){ 
+	                        	isWorking = false; 
+	                            $paragraph.addClass("glossarized")
+	                        });
 	                    }
 	                    
 				    },
@@ -621,7 +625,10 @@ $(document).ready(function() {
 	                    
 	                    if(!isWorking){
 	                        isWorking = true;
-	                        glossarize($glossary, $allParagraphs, glossaryBackLink, $glossary, function(){ isWorking = false; });
+	                        glossarize($glossary, $allParagraphs, glossaryBackLink, $glossary, function(){ 
+	                        	isWorking = false;
+                            	$glossary.addClass("backlinked");
+	                        });
 	                    }
 	                    
 				    },
@@ -650,7 +657,7 @@ $(document).ready(function() {
 	     			    return position;
 	     			};
 	            
-
+	     		/*
 				(function ($) { 
 				    $.glossarizeAll = function () {
 
@@ -670,6 +677,34 @@ $(document).ready(function() {
 				    }
 				}(jQuery));
 				$.glossarizeAll();
+				*/
+
+				(function ($) { 
+	    			$.glossarizeVisibleParagraphs = function () {
+	    
+	        			// Glossarize paragraphs that have become visible
+	        			// ----------------------------------------------
+	        			
+	        		    if (isWorking) return false;
+	        				
+	        			$allParagraphs.filter(':not(.glossarized)').each(function(){
+	        			
+	        			    var $paragraph = $(this);
+	     			    	var elementInViewStatus = elementInView($paragraph);
+	     			    	
+	     					if(elementInViewStatus == 'inView'){
+	                            parseParagraph($paragraph);
+	     					}
+	     					else if(elementInViewStatus == 'below'){
+	     					    // This allows us to break on the first
+	     					    // non-visible after a visible.
+	     					    return false;
+	     					}
+	        			    
+	     				});
+	     				
+	    			}
+	    		}(jQuery));
 	    		
 	    		(function ($) { 
 	    			$.backlinkVisibleGlossaries = function () {
@@ -700,18 +735,20 @@ $(document).ready(function() {
 	            
 	            // Check for visible elements on scroll
 	     		// -------------------------------------------
+	     		var blah;
 	            $(window).scroll(function () {
-	     			$.backlinkVisibleGlossaries();
+	            	blah = setTimeout(function(){
+	            		$.backlinkVisibleGlossaries();
+		     			$.glossarizeVisibleParagraphs();
+		     		}, 100);
+	     			
 	     		});
 	     		
-	     		// Also implement on showing in pop-up footer
-	     		// --------------------------------------------
-	     		
+	     		// Also implement on showing in pop-up footer:
+	     		// Call prepare event on clicking a glossary link
+	     		// ----------------------------------------------
 	            $(document).on("prepare",'a.glossary-link', function(e) {
-	               
-	               // Copy content to the footer
 	               parseGlossary($($(this).attr("href")));
-	                   
 	           	});
 	     		
 	     		// Glossarize the currently visible elements

@@ -1184,7 +1184,7 @@ table#translation-stats {
     background-color: @brand-red;
     padding: @panel-heading-padding;
 
-    &, a {
+    &, a, li {
         color: #fff;
     }
 
@@ -1793,6 +1793,14 @@ table#translation-stats {
         }
     }
 
+    &.tests {
+        .fa-check-circle {
+            color: @brand-green;
+        }
+        .fa-times-circle {
+            color: @brand-red;
+        }
+    }
 }
 
 // Cumulative glossary utility
@@ -1873,6 +1881,7 @@ table#translation-stats {
     }
 
 }
+
 
 
 // Print variations

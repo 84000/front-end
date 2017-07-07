@@ -735,14 +735,23 @@ $(document).ready(function() {
 	            
 	            // Check for visible elements on scroll
 	     		// -------------------------------------------
-	     		var blah;
-	            $(window).scroll(function () {
-	            	blah = setTimeout(function(){
-	            		$.backlinkVisibleGlossaries();
-		     			$.glossarizeVisibleParagraphs();
-		     		}, 100);
-	     			
-	     		});
+
+	     		// Detect when user stops scroll
+	     		$.fn.scrollEnd = function(callback, timeout) {          
+					$(this).scroll(function(){
+						var $this = $(this);
+						if ($this.data('scrollTimeout')) {
+							clearTimeout($this.data('scrollTimeout'));
+						}
+						$this.data('scrollTimeout', setTimeout(callback,timeout));
+					});
+				};
+
+				// Update the dom
+	            $(window).scrollEnd(function () {
+	            	$.backlinkVisibleGlossaries();
+		     		$.glossarizeVisibleParagraphs();
+	     		}, 100);
 	     		
 	     		// Also implement on showing in pop-up footer:
 	     		// Call prepare event on clicking a glossary link

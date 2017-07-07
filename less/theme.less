@@ -1788,99 +1788,122 @@ table#translation-stats {
                 }
             }
         }
-        .row {
+        .fix-height {
             overflow: auto;
         }
     }
 
     &.tests {
+
+        .table th.test,  .table td.test{
+            text-align: center;
+            .fa {
+                margin: -3px;
+            }
+        }
+
+        .fa {
+            font-size: 24px;
+        }
+
         .fa-check-circle {
-            color: @brand-green;
+            color: lighten(@brand-green, 20%);
         }
+
         .fa-times-circle {
-            color: @brand-red;
+            color: lighten(@brand-red, 10%);
         }
-    }
-}
 
-// Cumulative glossary utility
-// ------------------------------------
-#cumulative-glossary {
-
-    margin-top: 15px;
-    position: relative;
-
-    .col-items, .col-nav {
-        float: left;
-        position: relative;
-        min-height: 1px;
-        padding-left: floor((@grid-gutter-width / 2));
-        padding-right: floor((@grid-gutter-width / 2))
-    }
-
-    .col-items {
-        width: 95%;
-    }
-    .col-nav {
-        width: 5%;
-    }
-
-    #milestone-list .affix {
-        top: 20px;
-    }
-
-    .glossary-term {
-
-        border-bottom: 1px solid @hr-border;
-        margin-bottom: (@line-height-computed / 2);
-        margin-left: 40px;
-        position: relative;
-
-         a.milestone {
-            position: absolute;
-            left: -40px;
-            top: 0px;
-            color: #fff;
-            background-color: #aaa;
-            text-decoration:none;
-            padding: 1px 8px;
-            border-radius:4px;
+        #fixed-footer {
+            h3:first-child {
+                margin-top: 0px;
+            }
         }
 
     }
 
-    .glossary-item {
-        .title {
-            margin-top:16px;
-            margin-bottom:8px;
+
+    // Utilities page
+    // ----------------------------------------
+    &.utilities {
+
+        .tab-content {
+            margin-top: 15px;
+        }
+
+        .search-result {
+
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid @hr-border;
+
+            &:last-child {
+                border-bottom: 0px;
+            }
+
+        }
+
+        #cumulative-glossary {
+
+            position: relative;
+
+            .col-items, .col-nav {
+                float: left;
+                position: relative;
+                min-height: 1px;
+                padding-left: floor((@grid-gutter-width / 2));
+                padding-right: floor((@grid-gutter-width / 2))
+            }
+
+            .col-items {
+                width: 95%;
+            }
+            .col-nav {
+                width: 5%;
+            }
+
+            #milestone-list .affix {
+                top: 20px;
+            }
+
+            .glossary-term {
+
+                border-bottom: 1px solid @hr-border;
+                margin-bottom: (@line-height-computed / 2);
+                margin-left: 40px;
+                position: relative;
+
+                 a.milestone {
+                    position: absolute;
+                    left: -40px;
+                    top: 0px;
+                    color: #fff;
+                    background-color: #aaa;
+                    text-decoration:none;
+                    padding: 1px 8px;
+                    border-radius:4px;
+                }
+
+            }
+
+            .glossary-item {
+                .title {
+                    margin-top:16px;
+                    margin-bottom:8px;
+                }
+            }
+
+            .filter-form {
+                position: absolute;
+                top: -60px;
+                right: 15px;
+            }
+
         }
     }
-
-    .filter-form {
-        position: absolute;
-        top: -60px;
-        right: 15px;
-    }
-
 }
 
-// Search utility
-// ------------------------------------
-#search-form-container {
-    margin-top: 15px;
-}
 
-.search-result {
-
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid @hr-border;
-
-    &:last-child {
-        border-bottom: 0px;
-    }
-
-}
 
 
 

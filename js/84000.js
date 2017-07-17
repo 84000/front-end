@@ -33,7 +33,7 @@ $(document).ready(function() {
 			var size = 'lg';
 			var sizes = ['xs','sm','md','lg'];
 			for (var i = sizes.length - 1; i >= 0; i--) {
-				if($('#media_test .visible-'+sizes[i]).css("display").indexOf('none') == -1){
+				if($('#media_test .visible-'+sizes[i]+":visible").length){
 					size = sizes[i];
 					break;
 				};
@@ -825,6 +825,10 @@ $(document).ready(function() {
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		$(document).match_heights();
 	});
+
+	// Close temporary alerts
+	// -----------------------------------------
+	$(".alert.alert-temporary").delay(2000).slideUp(400);
 
 	// Trigger events on resize
 	//------------------------------------------

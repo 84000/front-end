@@ -66,7 +66,7 @@ $(document).ready(function() {
 				pageUri = '/section/all-translated.html';
 			}
 			else{
-				pageUri = '/translation/' + pageIdSplit[0] + '.html';
+				pageUri = '/translation/' + pageId + '.html';
 			}
 			if(hashSplit.length == 2 && hashSplit[1] != 'title'){
 				pageUri += '#' + hashSplit[1];

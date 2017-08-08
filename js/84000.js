@@ -47,22 +47,58 @@ $(document).ready(function() {
 	}(jQuery));
 	$(document).media_size();
 
+	// Handle a link to the old reading room
+	// --------------------------------------
+	function legacyLink(){
+		// A hash in the root indicates a link to 
+		// the old reading room.
+		// --------------------------------------
+		if(window.location.hash && window.location.pathname == '/'){
+			
+			var hashSplit = window.location.hash.split('/')
+			var pageId = hashSplit[0].replace('#','');
+			var pageIdSplit = pageId.split('-');
+			var pageUri = '';
+			if(pageIdSplit[0] == 'section' && pageIdSplit.length == 2){
+				pageUri = '/section/' + pageIdSplit[1] + '.html';
+			}
+			else if (pageIdSplit[0] == "translatedTextList"){
+				pageUri = '/section/all-translated.html';
+			}
+			else{
+				pageUri = '/translation/' + pageIdSplit[0] + '.html';
+			}
+			if(hashSplit.length == 2 && hashSplit[1] != 'title'){
+				pageUri += '#' + hashSplit[1];
+			}
+			if(pageUri){
+				location.href = pageUri;
+			}
+		}
+		// If not redirecting then return false
+		// ------------------------------------
+		return false;
+	}
+
 	// Scroll to an anchor
 	// --------------------------------------
 	(function ($) { 
 		$.scroll_to_anchor = function (hash, delay, parent, offset) {
-			if(!hash) hash = window.location.hash;
-			if(!delay) delay = 0;
-			if(!parent) parent = "html, body";
-			if(!offset) offset = $(hash).offset();
-			if(offset){
-				$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow");
+			if(!legacyLink()) {
+				if(!hash) hash = window.location.hash;
+				if(!delay) delay = 0;
+				if(!parent) parent = "html, body";
+				var $hash = $(hash);
+				if(!offset && $hash) offset = $hash.offset();
+				if(offset){
+					$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow");
+				}
 			}
 		}
 	}(jQuery));
 	
 	$(document).on("click",'a.scroll-to-anchor', function() {
-		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			$.scroll_to_anchor(this.hash);
 			return false;
 		}
@@ -145,7 +181,7 @@ $(document).ready(function() {
 			return this;
 		};
 	}(jQuery));
-	$('.thumbnail img').load(function () {
+	$('.thumbnail img').on("load", function () {
 		$(this).center_with_margins();
 	});
 	$('.thumbnail img').center_with_margins();
@@ -806,7 +842,7 @@ $(document).ready(function() {
     		$iframe = $("<iframe id='print-iframe' style='position:absolute;width:100%;height:100px;left:0px;top:-100px;z-index:-1;'>")
     	}
 
-    	$iframe.attr("src", url).appendTo("body").load(function(){
+    	$iframe.attr("src", url).appendTo("body").on("load", function(){
 	    	var iframe = document.getElementById('print-iframe');
 			var iframeWindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
 	    	iframeWindow.print();
@@ -832,7 +868,7 @@ $(document).ready(function() {
 
 	// Trigger events on resize
 	//------------------------------------------
-	$(window).resize(function(){
+	$(window).on("resize", function(){
 		$(document).media_size();
 		$(document).match_heights();
 		$.popup_footer_height();

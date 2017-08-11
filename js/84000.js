@@ -47,8 +47,12 @@ $(document).ready(function() {
 	}(jQuery));
 	$(document).media_size();
 
-	// Handle a link to the old reading room
-	// --------------------------------------
+	// Handle links to the old reading room.
+	// ------------ DO NOT REMOVE ------------
+	// Unfortunately we can't use apache for 
+	// this as GWT used hash based links
+	// ---------------------------------------
+	
 	function legacyLink(){
 		// A hash in the root indicates a link to 
 		// the old reading room.
@@ -100,6 +104,16 @@ $(document).ready(function() {
 	$(document).on("click",'a.scroll-to-anchor', function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			$.scroll_to_anchor(this.hash);
+			if($(this).hasClass("mark-target")){
+				var $target = $(this.hash);
+				$target.addClass("mark").delay(2000).queue(function(next){
+					$target.addClass("ease-all").removeClass("mark");
+					next();
+				}).delay(1000).queue(function(next){
+					$target.removeClass("ease-all");
+					next();
+				});
+			}
 			return false;
 		}
 	});
@@ -509,6 +523,13 @@ $(document).ready(function() {
         
 	});
 
+	$(document).on("click",'#fixed-footer', function(e) {
+	
+		e.preventDefault();
+		e.stopPropagation();
+        
+	});
+
 	// Set footer max-height
 	// --------------------------------------
 	(function ($) { 
@@ -563,8 +584,11 @@ $(document).ready(function() {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("article #glossary .glossary-item"),
-	                $allParagraphs = $("article #summary p, article #introduction p, article .chapter p, article #colophon p"),
-	                
+	                $allParagraphs = $("article #summary p, article #introduction p, article .chapter p, article #colophon p");
+
+	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
+						return +b.getAttribute('data-priority') - +a.getAttribute('data-priority');
+					}),
 	                escapeRegExp = function(stringToGoIntoTheRegex) {
 	                
 	                    return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -576,8 +600,10 @@ $(document).ready(function() {
 	                   // paragraph with a link to the glossary.
 	                   // -------------------------------------------------
 	                   $glossaries.each(function(){
+
 	                        var $glossary = $(this);
 	                        var glossaryId = $glossary.attr("id");
+
 	                        $glossary.find('.term').each(function(termIndex){
 
 	                            var $term = $(this);
@@ -586,8 +612,7 @@ $(document).ready(function() {
 	                            
 	                            $paragraphs.filter(":contains('" + termText + "')").each(function(paragraphIndex){
 	                            	
-	                                $(this)
-	                                	.replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3");
+	                                $(this).replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3");
 
 	                            });
 
@@ -621,7 +646,7 @@ $(document).ready(function() {
                                 $glossaryRef.attr("id","glossary-link-" + glossaryId + "-" + refIndex);
                                 // Create a link to it
                                 //var title = "In " + $glossaryRef.parents("section").find("h3").text();
-                                var $link = $("<a>", {"href": "#glossary-link-" + glossaryId + "-" + refIndex, "class": "scroll-to-anchor"}).text(refIndex + 1);
+                                var $link = $("<a>", {"href": "#glossary-link-" + glossaryId + "-" + refIndex, "class": "scroll-to-anchor mark-target"}).text(refIndex + 1);
                                 // Create a list item
                                 var $item = $("<li>");
                                 // Append the link to the item
@@ -647,7 +672,7 @@ $(document).ready(function() {
 	                    
 	                    if(!isWorking){
 	                        isWorking = true;
-	                        glossarize($allGlossaries, $paragraph, function(){ 
+	                        glossarize($allGlossariesPrioritised, $paragraph, function(){ 
 	                        	isWorking = false; 
 	                            $paragraph.addClass("glossarized")
 	                        });
@@ -661,6 +686,23 @@ $(document).ready(function() {
 	                    
 	                    if(!isWorking){
 	                        isWorking = true;
+
+	                        
+	                        // First glossarize terms with a higher priority
+	                        var priority = parseInt($glossary.data("priority"));
+
+	                        var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
+								return $(this).data("priority") > priority;
+							});
+
+							$higherPriority.each(function(){
+								var $otherGlossary = $(this);
+								glossarize($otherGlossary, $allParagraphs, glossaryBackLink, $otherGlossary, function(){ 
+		                        	isWorking = false;
+	                            	$otherGlossary.addClass("backlinked");
+		                        });
+							});
+
 	                        glossarize($glossary, $allParagraphs, glossaryBackLink, $glossary, function(){ 
 	                        	isWorking = false;
                             	$glossary.addClass("backlinked");
@@ -749,7 +791,7 @@ $(document).ready(function() {
 	        			// ---------------------------------------------
 	        			
 	        		    if (isWorking) return false;
-	        				
+
 	        			$allGlossaries.filter(':not(.backlinked)').each(function(){
 	        			
 	        			    var $glossaryItem = $(this);

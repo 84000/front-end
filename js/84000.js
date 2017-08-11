@@ -523,9 +523,8 @@ $(document).ready(function() {
         
 	});
 
-	$(document).on("click",'#fixed-footer', function(e) {
+	$(document).on("click",'#fixed-footer, #fixed-footer a', function(e) {
 	
-		e.preventDefault();
 		e.stopPropagation();
         
 	});

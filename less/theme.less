@@ -1543,6 +1543,31 @@ table#translation-stats {
             }
 
         }
+
+        #abbreviations {
+            dl {
+                &:after {
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    clear: both;
+                }
+                dt, dd {
+                    float: left;
+                }
+                dt {
+                    clear: left;
+                }
+                dd {
+                    clear: none;
+                    &:before {
+                        content: '-';
+                        padding: 0px 8px;
+                    }
+                }
+            }
+        }
+        
     }
 
     // Reading room section

@@ -101,6 +101,10 @@ p.date {
     overflow: auto;
 }
 
+p.form-control {
+    height: auto;
+}
+
 // Centered tabs
 // ----------------------------
 .tabs-container-center {
@@ -1196,6 +1200,10 @@ table#translation-stats {
         font-family: @font-family-bold;
     }
 
+    .label {
+        margin-left: 8px;
+    }
+
 }
 
 // A panel for a section of a canon
@@ -1543,7 +1551,6 @@ table#translation-stats {
             }
 
         }
-
         #abbreviations {
             dl {
                 &:after {
@@ -1556,7 +1563,7 @@ table#translation-stats {
                     float: left;
                 }
                 dt {
-                    clear: left;
+                    clear: both;
                 }
                 dd {
                     clear: none;
@@ -1567,7 +1574,7 @@ table#translation-stats {
                 }
             }
         }
-        
+
     }
 
     // Reading room section
@@ -1730,6 +1737,25 @@ table#translation-stats {
             p {
                 font-size: 16px;
                 text-align: left;
+            }
+            #abbreviations {
+                dl {
+                    &:after {
+                        display: none;
+                    }
+                    dt, dd {
+                        float: none;
+                    }
+                    dt {
+                        clear: none;
+                    }
+                    dd {
+                        clear: none;
+                        &:before {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
 
@@ -1939,6 +1965,39 @@ table#translation-stats {
                 }
             }
 
+            &.progress {
+                border-spacing: 2px;
+                border-collapse: separate;
+                tr {
+                    > td {
+                        border-top-width: 0px;
+                        text-align: left;
+                        &:first-child {
+                            border-left-style: solid;
+                            border-left-width: 10px;
+                            border-left-color: @label-default-bg;
+                            padding-left: 18px;
+                        }
+                    }
+                    &.total {
+                        > td:first-child  {
+                            border-left-color: @label-danger-bg;
+                        }
+                    }
+                    &.translated {
+                        > td:first-child  {
+                            border-left-color: @label-success-bg;
+                        }
+                    }
+                    &.in-progress {
+                        > td:first-child  {
+                            border-left-color: @label-warning-bg;
+                        }
+                    }
+                    
+                }
+                
+            }
         }
 
         #cumulative-glossary {
@@ -1998,27 +2057,40 @@ table#translation-stats {
             }
 
         }
+
+        fieldset {
+            border-color: @legend-border-color;
+        }
+
+        legend {
+            color: @legend-color;
+            padding: 8px;
+        }
+
+        label {
+            font-family: @font-family-serif;
+            font-weight: normal;
+            font-size: 15px;
+        }
     }
 }
-
-
-
 
 
 // Print variations
 // All styles should default to desktop
 // ------------------------------------
-@page  
-{ 
-    size: auto;
-    margin: 25mm 15mm 25mm 15mm;  
 
-}
 @media print {
     
     * {
        -webkit-transition: none !important;
        transition: none !important;
+    }
+
+    @page  
+    { 
+        size: 210mm 297mm;
+        margin: 25mm 15mm 25mm 15mm;  
     }
     
     .print-width-override {

@@ -85,7 +85,7 @@
 
                     <ul class="side-nav">
                         <li>
-                            <a href="/?template=news">All news</a>
+                            <a href="?template=news">All news</a>
                         </li>
                         <li>
                             <a href="#">Announcements</a>
@@ -123,7 +123,7 @@
                             </ul>
 
                             <figure>
-                                <img src="imgs/resoundingkids.jpg">
+                                <img src="/imgs/resoundingkids.jpg">
 
                                 <figcaption>
                                     Children read from 84000’s “The Play In Full” to a captive audience.
@@ -144,7 +144,7 @@
                             </p>
 
                             <figure>
-                                <img src="imgs/2016ResoundingKids.jpg">
+                                <img src="/imgs/2016ResoundingKids.jpg">
 
                                 <figcaption>
                                     Children read from 84000’s translation of “The Play in Full.”

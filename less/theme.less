@@ -981,21 +981,18 @@ table#translation-stats {
     tbody {
         > tr {
             > td {
-                .fa {
-                    font-size: 44px;   
-                }
-                line-height: 1.3;
-
+                font-size: 44px;
+                line-height: 44px;
+                font-family: @font-family-stats;
             }
             > th {
-
+                vertical-align: middle;
                 font-size: @font-size-small;
                 line-height: 1.1;
                 font-family: @font-family-bold;
                 font-weight: normal;
                 text-transform: uppercase;
                 padding-left: 10px;
-
             }
         }
     }
@@ -1421,9 +1418,7 @@ table#translation-stats {
 
             #titles {
                 padding: 50px 30px;
-                
-                    text-shadow: 1px 2px 3px #dfe0e0;
-                
+                text-shadow: 1px 2px 3px #dfe0e0;
             }
 
             #long-titles {
@@ -1470,14 +1465,16 @@ table#translation-stats {
             font-weight: bold;
         }
 
+        
         .panel-heading {
 
             .text-center();
+            /*
             background-color: @panel-bg;
             border-bottom: 1px solid @hr-border;
             padding-top: 25px;
             padding-bottom: 25px;
-
+            */
         }
 
         section, aside {
@@ -1584,6 +1581,7 @@ table#translation-stats {
         #title {
 
             text-align: center;
+            margin-bottom: 25px;
 
             p {
                 color: @text-muted;
@@ -1602,7 +1600,6 @@ table#translation-stats {
         }
 
         .nav-tabs {
-            margin-top: 15px;
             margin-bottom: 15px;
         }
 
@@ -1737,6 +1734,11 @@ table#translation-stats {
             p {
                 font-size: 16px;
                 text-align: left;
+            }
+            #title {
+                p {
+                    .text-center();
+                }
             }
             #abbreviations {
                 dl {

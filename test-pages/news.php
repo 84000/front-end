@@ -32,7 +32,7 @@
                     <div class="panel panel-default foreground listing">
 
                         <div class="panel-img-header">
-                            <img src="imgs/Photo-27-10-13-7-35-49-pm.jpg">
+                            <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg">
                             <h1 class="bg-orange">News</h1>
                         </div>
 
@@ -40,119 +40,119 @@
                             
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a href="/?template=post">
-                                        <img src="imgs/Rooster-v1t-224x112.jpg" alt="">
+                                    <a href="?template=post">
+                                        <img src="/imgs/Rooster-v1t-224x112.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-8">
-                                    <a href="/?template=post" class="title">
+                                    <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
                                     <p>
                                         On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                        <br><a href="/?template=post">Read more</a>
+                                        <br><a href="?template=post">Read more</a>
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a href="/?template=post">
-                                        <img src="imgs/IMG_9449-224x112.jpg" alt="">
+                                    <a href="?template=post">
+                                        <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-8">
-                                    <a href="/?template=post" class="title">
+                                    <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
                                     <p>
                                         On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                        <br><a href="/?template=post">Read more</a>
+                                        <br><a href="?template=post">Read more</a>
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a href="/?template=post">
-                                        <img src="imgs/MR1-Copy-1-224x112.jpg" alt="">
+                                    <a href="?template=post">
+                                        <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-8">
-                                    <a href="/?template=post" class="title">
+                                    <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
                                     <p>
                                         On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                        <br><a href="/?template=post">Read more</a>
+                                        <br><a href="?template=post">Read more</a>
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a href="/?template=post">
-                                        <img src="imgs/IMG_9449-224x112.jpg" alt="">
+                                    <a href="?template=post">
+                                        <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-8">
-                                    <a href="/?template=post" class="title">
+                                    <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
                                     <p>
                                         On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                        <br><a href="/?template=post">Read more</a>
+                                        <br><a href="?template=post">Read more</a>
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a href="/?template=post">
-                                        <img src="imgs/MR1-Copy-1-224x112.jpg" alt="">
+                                    <a href="?template=post">
+                                        <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-8">
-                                    <a href="/?template=post" class="title">
+                                    <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
                                     <p>
                                         On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                        <br><a href="/?template=post">Read more</a>
+                                        <br><a href="?template=post">Read more</a>
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a href="/?template=post">
-                                        <img src="imgs/IMG_9449-224x112.jpg" alt="">
+                                    <a href="?template=post">
+                                        <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-8">
-                                    <a href="/?template=post" class="title">
+                                    <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
                                     <p>
                                         On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                        <br><a href="/?template=post">Read more</a>
+                                        <br><a href="?template=post">Read more</a>
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a href="/?template=post">
-                                        <img src="imgs/MR1-Copy-1-224x112.jpg" alt="">
+                                    <a href="?template=post">
+                                        <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-8">
-                                    <a href="/?template=post" class="title">
+                                    <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
                                     <p>
                                         On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                        <br><a href="/?template=post">Read more</a>
+                                        <br><a href="?template=post">Read more</a>
                                     </p>
                                 </div>
                             </div>

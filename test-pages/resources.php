@@ -25,7 +25,7 @@
                 <div class="col-md-9 col-md-merge-left">
                     <div class="panel panel-default foreground">
                         <div class="panel-img-header">
-                            <img src="imgs/DSCN0799-2.jpg">
+                            <img src="/imgs/DSCN0799-2.jpg">
                             <h1 class="bg-orange">Tools</h1>
                         </div>
                         <div class="panel-body">

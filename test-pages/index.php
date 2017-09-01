@@ -19,21 +19,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="84000 is a non-profit global initiative to translate the words of the Buddha and make them available to everyone.">
         <title>84000 | Translating the Words of the Buddha</title>
-        <link href="css/84000.css" rel="stylesheet">
-        <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-        <link href="js/lightbox2-master/src/css/lightbox.css" rel="stylesheet">
+        <link href="/css/84000.css" rel="stylesheet">
+        <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="/js/lightbox2-master/src/css/lightbox.css" rel="stylesheet">
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png"/>
-        <link rel="manifest" href="favicon/manifest.json"/>
-        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#ffffff"/>
-        <link rel="shortcut icon" href="favicon/favicon.ico"/>
-        <meta name="msapplication-config" content="favicon/browserconfig.xml"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
+        <link rel="manifest" href="/favicon/manifest.json"/>
+        <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ffffff"/>
+        <link rel="shortcut icon" href="/favicon/favicon.ico"/>
+        <meta name="msapplication-config" content="/favicon/browserconfig.xml"/>
         <meta name="theme-color" content="#ffffff"/>
     </head>
 
@@ -45,8 +45,8 @@
                     <div class="navbar-header">
                         <div class="navbar-brand center-vertical">
 
-                            <a href="/" class="logo">
-                                <img src="imgs/logo.png">
+                            <a href="/test-pages/" class="logo">
+                                <img src="/imgs/logo.png">
                             </a>
 
                             <span class="tag-line">
@@ -69,18 +69,18 @@
                 <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
                     
                     <ul class="nav navbar-nav">
-                        <li class="home<?php if($content_template === "home") echo ' active' ?>"><a href="/">Home</a></li>
-                        <li class="news<?php if(array_search($content_template, ['news','post']) > -1) echo ' active' ?>"><a href="/?template=news">News</a></li>
+                        <li class="home<?php if($content_template === "home") echo ' active' ?>"><a href="/test-pages/">Home</a></li>
+                        <li class="news<?php if(array_search($content_template, ['news','post']) > -1) echo ' active' ?>"><a href="?template=news">News</a></li>
                         <li class="reading-room"><a href="http://<?php echo reading_room_domain() ?>">Reading Room</a></li>
-                        <li class="about<?php if($content_template === "about") echo ' active' ?>"><a href="/?template=about">About</a></li>
-                        <li class="resources<?php if($content_template === "resources") echo ' active' ?>"><a href="/?template=resources">Resources</a></li>
-                        <li class="how-to-help<?php if(array_search($content_template, ['sponsor-page','sponsor-sutra','84000-circle', 'subscribe'])  > -1) echo ' active' ?>"><a href="/?template=sponsor-page">How you can help</a></li>
+                        <li class="about<?php if($content_template === "about") echo ' active' ?>"><a href="?template=about">About</a></li>
+                        <li class="resources<?php if($content_template === "resources") echo ' active' ?>"><a href="?template=resources">Resources</a></li>
+                        <li class="how-to-help<?php if(array_search($content_template, ['sponsor-page','sponsor-sutra','84000-circle', 'subscribe'])  > -1) echo ' active' ?>"><a href="?template=sponsor-page">How you can help</a></li>
                     </ul>
 
                     <form class="navbar-form navbar-right">
                         
                         <div id="language-links">
-                            <a href="/">English</a> | <a href="/ch">中文</a>
+                            <a href="/test-pages/">English</a> | <a href="/test-pages/ch">中文</a>
                         </div>
 
                         <div id="search-controls" class="input-group">
@@ -126,7 +126,13 @@
 
         ?>
 
-        <a href="#top" id="link-to-top" title="Return to the top of the page"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+        <div class="hidden-print">
+            <div id="link-to-top-container" class="fixed-btn-container">
+                <a href="#top" id="link-to-top" class="btn-round" title="Return to the top of the page">
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
 
         <footer>
             <div class="container">
@@ -146,10 +152,10 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/84000.js"></script>
+        <script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/84000.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="js/ie10-viewport-bug-workaround.js"></script>
+        <script src="/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>

@@ -7,19 +7,19 @@
 
                     <ul class="side-nav">
                         <li>
-                            <a href="/?template=sponsor-page">Sponsor a Page</a>
+                            <a href="?template=sponsor-page">Sponsor a Page</a>
                         </li>
                         <li class="active">
-                            <a href="/?template=sponsor-sutra">Sponsor a Sutra</a>
+                            <a href="?template=sponsor-sutra">Sponsor a Sutra</a>
                         </li>
                         <li>
-                            <a href="/?template=84000-circle">84000 Circle</a>
+                            <a href="?template=84000-circle">84000 Circle</a>
                         </li>
                         <li>
                             <a href="#">Shop &amp; Give</a>
                         </li>
                         <li>
-                            <a href="/?template=subscribe">Subscribe</a>
+                            <a href="?template=subscribe">Subscribe</a>
                         </li>
                         <li>
                             <a href="#">FAQ</a>
@@ -32,7 +32,7 @@
                     <div class="panel panel-default foreground">
                         
                         <div class="panel-img-header">
-                            <img src="imgs/text15.jpg">
+                            <img src="/imgs/text15.jpg">
                             <h1 class="bg-blue">Sponsor a Sutra</h1>
                         </div>
 

@@ -907,6 +907,14 @@ $(document).ready(function() {
 	// -----------------------------------------
 	$(".alert.alert-temporary").delay(2000).slideUp(400);
 
+	// Track some clicks
+	// -----------------------------------------
+	$('a.log-click').on('click', function (e) {
+		if (typeof ga === "function") { 
+		    ga('send', 'pageview', $(this).attr('href'));
+		}
+	});
+
 	// Trigger events on resize
 	//------------------------------------------
 	$(window).on("resize", function(){

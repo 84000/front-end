@@ -607,7 +607,7 @@ $(document).ready(function() {
 
 	                            var $term = $(this);
 	                            var termText = $term.text().toLowerCase();
-	                            var regEx = new RegExp("(\^|[\\s\\.,“])(" + escapeRegExp(termText) + ")(\$|[\\s\\.,;:!”])","gi");
+	                            var regEx = new RegExp("(\^|[\\s\\.,“‘])(" + escapeRegExp(termText) + ")(\$|[\\s\\.,;:!’s”])","gi");
 	                            
 	                            $paragraphs.filter(":contains('" + termText + "')").each(function(paragraphIndex){
 	                            	

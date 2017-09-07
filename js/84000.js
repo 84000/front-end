@@ -310,7 +310,7 @@ $(document).ready(function() {
 	// Get the location of this script
 	// --------------------------------------
 	var getScriptDomain = (function() {
-	    var scriptSrc = $('script[src$="/84000.js"]').attr('src');
+	    var scriptSrc = $('script[src*="/84000.js"]').attr('src');
 	    var srcChunks = scriptSrc.split('/');
 	    return function() { return srcChunks[0] == "http:" ? srcChunks.slice(0,3).join('/') : "" ; };
 	})();

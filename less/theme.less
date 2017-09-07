@@ -1974,6 +1974,7 @@ table#translation-stats {
                     > td {
                         border-top-width: 0px;
                         text-align: left;
+                        padding: 4px;
                         &:first-child {
                             border-left-style: solid;
                             border-left-width: 10px;
@@ -1994,6 +1995,11 @@ table#translation-stats {
                     &.in-progress {
                         > td:first-child  {
                             border-left-color: @label-warning-bg;
+                        }
+                    }
+                    &.commissioned {
+                        > td:first-child  {
+                            border-left-color: @label-primary-bg;
                         }
                     }
                     

@@ -55,6 +55,10 @@ blockquote {
     font-style: italic;
 }
 
+.text-bold {
+    font-weight: bold;
+}
+
 a.disabled {
     .text-muted();
     pointer-events: none;
@@ -1497,16 +1501,18 @@ table#translation-stats {
 
             p {
                 text-align: justify;
+                width: 100%;
                 .blockquote, &.mantra {
                     text-indent: 0;
                     display: inline-block;
-                    padding: (@line-height-computed / 2) @line-height-computed;
+                    padding: 3px @line-height-computed;
                     padding-right: 0px;
                     margin: @line-height-computed 0 @line-height-computed;
                     font-size: @blockquote-font-size;
                     border-left: 5px solid @blockquote-border-color;
                 }
             }
+
             p+p {
                 text-indent: 2em;
                 margin-top: -(@line-height-computed / 2);
@@ -1827,6 +1833,7 @@ table#translation-stats {
 
             text-decoration: none;
             text-indent: 0;
+            font-weight: normal;
 
             &:hover {
                 text-decoration: underline;

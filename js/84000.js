@@ -58,8 +58,8 @@ $(document).ready(function() {
 		// the old reading room.
 		// --------------------------------------
 		if(window.location.hash && window.location.pathname == '/'){
-			
-			var hashSplit = window.location.hash.split('/')
+			var hash = window.location.hash;
+			var hashSplit = hash.split('/');
 			var pageId = hashSplit[0].replace('#','');
 			var pageIdSplit = pageId.split('-');
 			var pageUri = '';
@@ -311,7 +311,7 @@ $(document).ready(function() {
 	// --------------------------------------
 	var getScriptDomain = (function() {
 	    var scriptSrc = $('script[src*="/84000.js"]').attr('src');
-	    var srcChunks = scriptSrc.split('/');
+	    var srcChunks = scriptSrc ? scriptSrc.split('/') : [] ;
 	    return function() { return srcChunks[0] == "http:" ? srcChunks.slice(0,3).join('/') : "" ; };
 	})();
 
@@ -390,7 +390,8 @@ $(document).ready(function() {
 	    	};
 
 	    	function getDomain(){
-	    		var domain = location.hostname.split('.').reverse()[1] + "." + location.hostname.split('.').reverse()[0];
+	    		var hostname = window.location.hostname;
+	    		var domain = hostname.split('.').reverse()[1] + "." + hostname.split('.').reverse()[0];
 	    		//console.log(domain);
 	    		return domain;
 	    	}
@@ -913,6 +914,13 @@ $(document).ready(function() {
 		if (typeof ga === "function") { 
 		    ga('send', 'pageview', $(this).attr('href'));
 		}
+	});
+
+	// Replace text on internal references
+	// -----------------------------------------
+	$("a.internal-ref").each(function(index){
+		var $this = $(this);
+		$this.text($($this.attr('href')).text());
 	});
 
 	// Trigger events on resize

@@ -105,7 +105,7 @@ $(document).ready(function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			$.scroll_to_anchor(this.hash);
 			if($(this).hasClass("mark-target")){
-				var $target = $(this.hash);
+				var $target = $(this.hash).find($(this).data("mark"));
 				$target.addClass("mark").delay(2000).queue(function(next){
 					$target.addClass("ease-all").removeClass("mark");
 					next();
@@ -310,9 +310,12 @@ $(document).ready(function() {
 	// Get the location of this script
 	// --------------------------------------
 	var getScriptDomain = (function() {
+		/*
 	    var scriptSrc = $('script[src*="/84000.js"]').attr('src');
 	    var srcChunks = scriptSrc ? scriptSrc.split('/') : [] ;
 	    return function() { return srcChunks[0] == "http:" ? srcChunks.slice(0,3).join('/') : "" ; };
+	    */
+	    return function() { return "http://cached-fe.84000.co"; };
 	})();
 
 	// Load Bookmarks
@@ -606,13 +609,19 @@ $(document).ready(function() {
 
 	                        $glossary.find('.term').each(function(termIndex){
 
-	                            var $term = $(this);
-	                            var termText = $term.text().toLowerCase();
-	                            var regEx = new RegExp("(\^|[\\s\\.,“‘])(" + escapeRegExp(termText) + ")(\$|[\\s\\.,;:!’s”])","gi");
+	                        	// Unfortunately, as JS doesn't consider accented characters as "word" characaters
+	                        	// we cannot use the \b or \w metachracters. We have to enumerate all non-word characters.
+	                            var regEx = new RegExp("(\\s|'|“|\"|\\(|\\[)(" + escapeRegExp($(this).text().toLowerCase()) + ")(\\s|\\.|,|\\!|\\?|’|'|”|\"|\\)|\\]|s\\W|es\\W)","gi");
 	                            
-	                            $paragraphs.filter(":contains('" + termText + "')").each(function(paragraphIndex){
+	                            $paragraphs.filter(function(){
+
+	                            	return regEx.test($(this).text());
 	                            	
-	                                $(this).replaceText(regEx, "$1<a href='#" + glossaryId + "' class='glossary-link pop-up'>$2<\/a>$3");
+	                            }).each(function(){
+	                            	
+	                            	var $this = $(this);
+	                            	$this.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+	                            	$this.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
 
 	                            });
 
@@ -639,14 +648,17 @@ $(document).ready(function() {
                             var $list = $("<ul>", {"class": "list-inline"});
 
                             // Find references to this glossary in the text
-                            $allParagraphs.find("a[href='#" + glossaryId + "']").each(function(refIndex){
+                            $allParagraphs.has("a[href='#" + glossaryId + "']").each(function(refIndex){
                             	
-                                var $glossaryRef = $(this);
-                                // Add an id so we can link to this reference
-                                $glossaryRef.attr("id","glossary-link-" + glossaryId + "-" + refIndex);
+                                var $paragraph = $(this);
                                 // Create a link to it
                                 //var title = "In " + $glossaryRef.parents("section").find("h3").text();
-                                var $link = $("<a>", {"href": "#glossary-link-" + glossaryId + "-" + refIndex, "class": "scroll-to-anchor mark-target"}).text(refIndex + 1);
+                                var linkAttributes = {
+                                	"href": "#" + $paragraph.attr("id"), 
+                                	"class": "scroll-to-anchor mark-target", 
+                                	"data-mark": "a[href='#" + glossaryId + "']"
+                                };
+                                var $link = $("<a>", linkAttributes).text(refIndex + 1);
                                 // Create a list item
                                 var $item = $("<li>");
                                 // Append the link to the item
@@ -697,13 +709,13 @@ $(document).ready(function() {
 
 							$higherPriority.each(function(){
 								var $otherGlossary = $(this);
-								glossarize($otherGlossary, $allParagraphs, glossaryBackLink, $otherGlossary, function(){ 
+								glossarize($otherGlossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
 		                        	isWorking = false;
 	                            	$otherGlossary.addClass("backlinked");
 		                        });
 							});
 
-	                        glossarize($glossary, $allParagraphs, glossaryBackLink, $glossary, function(){ 
+	                        glossarize($glossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
 	                        	isWorking = false;
                             	$glossary.addClass("backlinked");
 	                        });

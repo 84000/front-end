@@ -100,6 +100,19 @@ $(document).ready(function() {
 			}
 		}
 	}(jQuery));
+
+	// Media size
+	// --------------------------------------
+	(function ($) { 
+		$.fn.pulse = function () {
+			// Flash the button
+			var $button = $(this);
+    	    $button.addClass("pulse");
+    	    setTimeout(function(){
+    	    	$button.removeClass("pulse");
+    	    },1000);
+		}
+	}(jQuery));
 	
 	$(document).on("click",'a.scroll-to-anchor', function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
@@ -109,11 +122,9 @@ $(document).ready(function() {
 				var $button = $buttonContainer.find("button");
 				$button.data("target", $(document).scrollTop());
 				$buttonContainer.removeClass("hidden");
-				// Flash the button
-	    	    $button.addClass("pulse");
-	    	    setTimeout(function(){
-	    	    	$button.removeClass("pulse");
-	    	    },750);
+				setTimeout(function(){
+					$button.pulse();
+				},100);
 			}
 			if($this.hasClass("mark-target")){
 				var $target = $(this.hash).find($this.data("mark"));
@@ -449,10 +460,7 @@ $(document).ready(function() {
 	    	    $.load_bookmarks();
 
 	    	    // Flash the button
-	    	    $("#bookmarks-opener").addClass("pulse");
-	    	    setTimeout(function(){
-	    	    	$("#bookmarks-opener").removeClass("pulse");
-	    	    },750);
+	    	    $("#bookmarks-opener").pulse();
 
 	    	});
 	    	
@@ -988,7 +996,7 @@ $(document).ready(function() {
 	$("#rewind-container button").on('click', function (e) {
 		var $this = $(this);
 		var target = $this.data("target");
-		$("html, body").animate({ scrollTop: (target - 30) }, "slow");
+		$("html, body").animate({ scrollTop: target}, "slow");
 		$this.parents("#rewind-container").addClass("hidden");
 	});
 

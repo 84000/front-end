@@ -724,7 +724,7 @@ i.fa-google-plus-square {
     border-radius: (@btn-round-size / 2);
     position: relative;
     color: #fff;
-    background: @brand-blue;
+    background-color: @brand-blue;
     .transition(.75s ease-out);
 
     button& {
@@ -741,16 +741,16 @@ i.fa-google-plus-square {
         background-color: @btn-link-disabled-color;
     }
 
+    &.pulse {
+        background-color: rgb(255,25,25);
+        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
+    }
+
     .badge {
         position: absolute;
         right: -6px;
         top: -12px;
         z-index: 6;
-    }
-
-    &.pulse {
-        background-color: rgb(255,25,25);
-        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
     }
 
 }

@@ -103,9 +103,20 @@ $(document).ready(function() {
 	
 	$(document).on("click",'a.scroll-to-anchor', function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
-			$.scroll_to_anchor(this.hash);
-			if($(this).hasClass("mark-target")){
-				var $target = $(this.hash).find($(this).data("mark"));
+			var $this = $(this);
+			if($this.hasClass("save-offset")){
+				var $buttonContainer = $("#rewind-container");
+				var $button = $buttonContainer.find("button");
+				$button.data("target", $(document).scrollTop());
+				$buttonContainer.removeClass("hidden");
+				// Flash the button
+	    	    $button.addClass("pulse");
+	    	    setTimeout(function(){
+	    	    	$button.removeClass("pulse");
+	    	    },750);
+			}
+			if($this.hasClass("mark-target")){
+				var $target = $(this.hash).find($this.data("mark"));
 				$target.addClass("mark").delay(2000).queue(function(next){
 					$target.addClass("ease-all").removeClass("mark");
 					next();
@@ -114,6 +125,7 @@ $(document).ready(function() {
 					next();
 				});
 			}
+			$.scroll_to_anchor(this.hash);
 			return false;
 		}
 	});
@@ -435,10 +447,12 @@ $(document).ready(function() {
 	    	    
 	    	    // Reload bookmarks
 	    	    $.load_bookmarks();
-	    	    $(".badge-notification").addClass("pulse");
+
+	    	    // Flash the button
+	    	    $("#bookmarks-opener").addClass("pulse");
 	    	    setTimeout(function(){
-	    	    	$(".badge-notification").removeClass("pulse");
-	    	    },1000);
+	    	    	$("#bookmarks-opener").removeClass("pulse");
+	    	    },750);
 
 	    	});
 	    	
@@ -567,6 +581,7 @@ $(document).ready(function() {
         var $content = $($this.attr("href")).clone();
         $content.attr("id", "");
         $('#fixed-footer .data-container').html($content);
+        $('#fixed-footer .save-offset').removeClass("save-offset");
 
         // Show the footer
 		$('#fixed-footer').collapse('show');
@@ -695,7 +710,7 @@ $(document).ready(function() {
                                 //var title = "In " + $glossaryRef.parents("section").find("h3").text();
                                 var linkAttributes = {
                                 	"href": "#" + $paragraph.attr("id"), 
-                                	"class": "scroll-to-anchor mark-target", 
+                                	"class": "scroll-to-anchor mark-target save-offset", 
                                 	"data-mark": "a[href='#" + glossaryId + "']"
                                 };
                                 var $link = $("<a>", linkAttributes).text(refIndex + 1);
@@ -966,6 +981,15 @@ $(document).ready(function() {
 		if (typeof ga === "function") { 
 		    ga('send', 'pageview', $(this).attr('href'));
 		}
+	});
+
+	// Rewind button
+	// -----------------------------------------
+	$("#rewind-container button").on('click', function (e) {
+		var $this = $(this);
+		var target = $this.data("target");
+		$("html, body").animate({ scrollTop: (target - 30) }, "slow");
+		$this.parents("#rewind-container").addClass("hidden");
 	});
 
 	// Replace text on internal references

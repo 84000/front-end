@@ -725,12 +725,11 @@ i.fa-google-plus-square {
     position: relative;
     color: #fff;
     background: @brand-blue;
+    .transition(.75s ease-out);
 
     button& {
         background: @brand-blue;
     }
-
-    .transition(.5s ease-in);
 
     &:hover {
         color: #fff;
@@ -747,6 +746,11 @@ i.fa-google-plus-square {
         right: -6px;
         top: -12px;
         z-index: 6;
+    }
+
+    &.pulse {
+        background-color: rgb(255,25,25);
+        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
     }
 
 }
@@ -849,6 +853,9 @@ i.fa-google-plus-square {
     &#link-to-top-container {
         top: auto;
         bottom: @button-spacing-top;
+    }
+    &#rewind-container {
+        top: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
     }
     &#fixed-footer-close-container  {
         position: absolute;
@@ -955,11 +962,6 @@ a#link-to-top {
     font-size: 12px;
     line-height: 12px;
     padding: 6px 0px;
-    .transition(1s ease-out);
-    &.pulse {
-        background-color: rgb(255,25,25);
-        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
-    }
 }
 
 // Article 

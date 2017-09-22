@@ -435,6 +435,10 @@ $(document).ready(function() {
 	    	    
 	    	    // Reload bookmarks
 	    	    $.load_bookmarks();
+	    	    $(".badge-notification").addClass("pulse");
+	    	    setTimeout(function(){
+	    	    	$(".badge-notification").removeClass("pulse");
+	    	    },1000);
 
 	    	});
 	    	
@@ -599,39 +603,75 @@ $(document).ready(function() {
 	                },
 	                glossarize = function($glossaries, $paragraphs, callback){
 	                
-	                   // Highlight instances of the glossary items in each
-	                   // paragraph with a link to the glossary.
-	                   // -------------------------------------------------
-	                   $glossaries.each(function(){
+						// Highlight instances of the glossary items in each
+						// paragraph with a link to the glossary.
+						// -------------------------------------------------
+						$glossaries.each(function(){
 
-	                        var $glossary = $(this);
-	                        var glossaryId = $glossary.attr("id");
+						    var $glossary = $(this);
 
-	                        $glossary.find('.term').each(function(termIndex){
+						    $glossary.find('.term').each(function(){
+						    	if($glossary.data("match") == "marked"){
 
-	                        	// Unfortunately, as JS doesn't consider accented characters as "word" characaters
-	                        	// we cannot use the \b or \w metachracters. We have to enumerate all non-word characters.
-	                            var regEx = new RegExp("(\\s|'|“|\"|\\(|\\[)(" + escapeRegExp($(this).text().toLowerCase()) + ")(\\s|\\.|,|\\!|\\?|’|'|”|\"|\\)|\\]|s\\W|es\\W)","gi");
-	                            
-	                            $paragraphs.filter(function(){
+						    		// Markup marked glossaries
+						    		glossaryMarked($(this), $glossary, $paragraphs);
+							    }
+							    else {
 
-	                            	return regEx.test($(this).text());
-	                            	
-	                            }).each(function(){
-	                            	
-	                            	var $this = $(this);
-	                            	$this.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
-	                            	$this.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
+							    	// Markup matching glossaries
+							    	glossaryMatch($(this), $glossary, $paragraphs);
 
-	                            });
-
-	                        });
-	                   });
+							    }
+						    });
+						});
+						if(callback){
+						   callback(arguments[3], arguments[4]);
+						}
 	                   
-	                   if(callback){
-	                       callback(arguments[3], arguments[4]);
-	                   }
-	                   
+	                },
+	                glossaryRegEx = function(term){
+	                	// Unfortunately, as JS doesn't consider accented characters as "word" characaters
+				    	// we cannot use the \b or \w metachracters. We have to enumerate all non-word characters.
+	                	return new RegExp("(^|\\s|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|es\\W|’s\\W|'s\\W|s’\\W|s'\\W)","gi");
+	                },
+	                glossaryMarked = function($term, $glossary, $paragraphs){
+
+	                	
+	                	// Glossarise the marked up terms and replace with links
+
+				    	var glossaryId = $glossary.attr("id");
+				        var regEx = glossaryRegEx($term.text());
+				        
+				        $paragraphs.find("span.term").filter(function(){
+
+				        	return regEx.test($(this).text());
+				        	
+				        }).each(function(spanIndex){
+
+				        	var $span = $(this);
+				        	var muteClass = spanIndex > 0 ? 'mute' : '' ;
+				        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link ' + muteClass + ' pop-up">' + $span.text() + '</a>');
+				        	
+				        });
+	                },
+	                glossaryMatch = function($term, $glossary, $paragraphs){
+
+	                	// Glossarise any matches in the text
+
+				    	var glossaryId = $glossary.attr("id");
+				    	var regEx = glossaryRegEx($term.text());
+				        
+				        $paragraphs.filter(function(){
+
+				        	return regEx.test($(this).html());
+				        	
+				        }).each(function(){
+				        	
+				        	var $paragraph = $(this);
+				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	$paragraph.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
+
+				        });
 	                },
 	                glossaryBackLink = function($glossaries, callback){
 	                

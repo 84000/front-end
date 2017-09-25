@@ -117,7 +117,7 @@ $(document).ready(function() {
 	$(document).on("click",'a.scroll-to-anchor', function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			var $this = $(this);
-			if($this.hasClass("save-offset")){
+			if($this.not(".pop-up")){
 				var $buttonContainer = $("#rewind-container");
 				var $button = $buttonContainer.find("button");
 				$button.data("target", $(document).scrollTop());
@@ -589,7 +589,6 @@ $(document).ready(function() {
         var $content = $($this.attr("href")).clone();
         $content.attr("id", "");
         $('#fixed-footer .data-container').html($content);
-        $('#fixed-footer .save-offset').removeClass("save-offset");
 
         // Show the footer
 		$('#fixed-footer').collapse('show');
@@ -718,7 +717,7 @@ $(document).ready(function() {
                                 //var title = "In " + $glossaryRef.parents("section").find("h3").text();
                                 var linkAttributes = {
                                 	"href": "#" + $paragraph.attr("id"), 
-                                	"class": "scroll-to-anchor mark-target save-offset", 
+                                	"class": "scroll-to-anchor mark-target", 
                                 	"data-mark": "a[href='#" + glossaryId + "']"
                                 };
                                 var $link = $("<a>", linkAttributes).text(refIndex + 1);

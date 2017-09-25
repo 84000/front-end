@@ -113,14 +113,18 @@ $(document).ready(function() {
     	    },1000);
 		}
 	}(jQuery));
+
+	var rewindHistory = new Array;
 	
 	$(document).on("click",'a.scroll-to-anchor', function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			var $this = $(this);
+			// Rewind functionality
 			if($this.not(".pop-up")){
 				var $buttonContainer = $("#rewind-container");
 				var $button = $buttonContainer.find("button");
-				$button.data("target", $(document).scrollTop());
+				rewindHistory.push($(document).scrollTop());
+				console.log(rewindHistory);
 				$buttonContainer.removeClass("hidden");
 				setTimeout(function(){
 					$button.pulse();
@@ -994,9 +998,15 @@ $(document).ready(function() {
 	// -----------------------------------------
 	$("#rewind-container button").on('click', function (e) {
 		var $this = $(this);
-		var target = $this.data("target");
-		$("html, body").animate({ scrollTop: target}, "slow");
-		$this.parents("#rewind-container").addClass("hidden");
+		if(rewindHistory.length){
+			var target = rewindHistory.pop();
+			$("html, body").animate({ scrollTop: target}, "slow");
+			console.log(rewindHistory);
+			if(!rewindHistory.length){
+				$this.parents("#rewind-container").addClass("hidden");
+			}
+		}
+		
 	});
 
 	// Replace text on internal references

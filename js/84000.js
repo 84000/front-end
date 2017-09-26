@@ -10,7 +10,6 @@ $(document).ready(function() {
 				$body.removeClass("wait");
 			}
 			else{
-			    
 			    if(!$body.hasClass("wait")){
 			    	var $wait = $("<span>", {"id": "wait"}).text(text);
 			    	var $window = $(window);
@@ -21,7 +20,6 @@ $(document).ready(function() {
 			    else {
 			    	$("#wait").text(text);
 			    }
-				
 			}
 		}
 	}(jQuery));
@@ -29,7 +27,7 @@ $(document).ready(function() {
 	// Media size
 	// --------------------------------------
 	(function ($) { 
-		$.fn.media_size = function () {
+		$.media_size = function () {
 			var size = 'lg';
 			var sizes = ['xs','sm','md','lg'];
 			for (var i = sizes.length - 1; i >= 0; i--) {
@@ -45,7 +43,31 @@ $(document).ready(function() {
 			$('html').removeClass(sizes.join(' ')).addClass(size).addClass(media);
 		}
 	}(jQuery));
-	$(document).media_size();
+	$.media_size();
+
+	// Detect if an element is in view
+	// ---------------------------------------
+
+	$.fn.elementInView = function (){
+
+	    var $window = $(window);
+	    var docViewTop = $window.scrollTop();
+	    var docViewBottom = docViewTop + $window.height();
+
+	    var elementTop = this.offset().top;
+	    var elementBottom = elementTop + this.height();
+	    
+	    var position = "inView";
+	    
+	    if(elementBottom <= docViewTop){
+	        position = "above";
+	    }
+	    else if(elementTop >= docViewBottom){
+	        position = "below";
+	    }
+
+	    return position;
+	};
 
 	// Handle links to the old reading room.
 	// ------------ DO NOT REMOVE ------------
@@ -101,16 +123,21 @@ $(document).ready(function() {
 		}
 	}(jQuery));
 
-	// Media size
+	// Flash the button
 	// --------------------------------------
 	(function ($) { 
 		$.fn.pulse = function () {
-			// Flash the button
-			var $button = $(this);
-    	    $button.addClass("pulse");
-    	    setTimeout(function(){
-    	    	$button.removeClass("pulse");
-    	    },1000);
+			var $button = this;
+			// Let other updates happen
+			setTimeout(function(){
+				// Flash the button
+	    	    $button.addClass("pulse");
+	    	    // Let the transition happen
+	    	    setTimeout(function(){
+	    	    	// Un-flash the button
+	    	    	$button.removeClass("pulse");
+	    	    },750);
+    	    },100);
 		}
 	}(jQuery));
 
@@ -118,20 +145,26 @@ $(document).ready(function() {
 	
 	$(document).on("click",'a.scroll-to-anchor', function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
+			
 			var $this = $(this);
+
 			// Rewind functionality
 			if($this.not(".pop-up")){
+
 				var $buttonContainer = $("#rewind-container");
 				var $button = $buttonContainer.find("button");
+
 				rewindHistory.push($(document).scrollTop());
-				console.log(rewindHistory);
 				$buttonContainer.removeClass("hidden");
-				setTimeout(function(){
-					$button.pulse();
-				},100);
+				$button.pulse();
+
 			}
+
+			// Mark elements in the text
 			if($this.hasClass("mark-target")){
+
 				var $target = $(this.hash).find($this.data("mark"));
+
 				$target.addClass("mark").delay(2000).queue(function(next){
 					$target.addClass("ease-all").removeClass("mark");
 					next();
@@ -139,8 +172,11 @@ $(document).ready(function() {
 					$target.removeClass("ease-all");
 					next();
 				});
+
 			}
+
 			$.scroll_to_anchor(this.hash);
+
 			return false;
 		}
 	});
@@ -243,7 +279,7 @@ $(document).ready(function() {
 	// Make multiple elements the same size
 	// ------------------------------------------
 	(function ($) { 
-		$.fn.match_heights = function () {
+		$.match_heights = function () {
 			if($('html').hasClass('screen') && ($('html').hasClass('md') || $('html').hasClass('lg') || $('html').hasClass('sm'))){
 				var heights = {};
 				$("[data-match-height]").height('auto');
@@ -350,6 +386,48 @@ $(document).ready(function() {
 	if($('html').hasClass('screen')){
 		$.getScript( getScriptDomain() + "/js/js-cookies.js" ).done(function( script, textStatus ) {
 		
+			(function ($) { 
+		    	$.getBookmarks = function () {
+		    	
+		    	    // Get current bookmarks as array
+		    	    
+		    	    var bookmarks = Cookies.get('bookmarks');
+		    	    
+		    	    if(bookmarks){
+		    	        bookmarks = JSON.parse(bookmarks);
+		    	    }
+		    			
+		    	    if(!(bookmarks instanceof Object)){
+		    	        bookmarks = new Array();
+		    	    }
+		    	    
+		    	    return bookmarks;
+		    	}
+	    	}(jQuery));
+
+	    	(function ($) { 
+		    	$.getDomain = function () {
+		    		var hostname = window.location.hostname;
+		    		var domain = hostname.split('.').reverse()[1] + "." + hostname.split('.').reverse()[0];
+		    		//console.log(domain);
+		    		return domain;
+		    	}
+		    }(jQuery));
+
+	    	(function ($) { 
+		    	$.fn.bookmarkData = function () {
+		    		var location = window.location.href;
+		    	    locationSplit = location.split("#");
+		    	    var page = locationSplit[0];
+		    	    var hash = this.attr('href');
+		    	    var pageTitle = $("#title h1").text();
+		    	    var sectionTitle = this.parents("section").find("h3").first().text();
+		    	    var milestoneTitle = this.text();
+		    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
+		    	    return {'page': page, 'hash': hash, 'title': title};
+		    	}
+	    	}(jQuery));
+
 	    	(function ($) { 
 	    		$.load_bookmarks = function () {
 	    			
@@ -358,7 +436,7 @@ $(document).ready(function() {
 		    	    var location = window.location.href;
 		    	    locationSplit = location.split("#");
 		    	    var page = locationSplit[0];
-	    			var bookmarks = getBookmarks();
+	    			var bookmarks = $.getBookmarks();
 	    			
 	    			var $list = $("#bookmarks-dropdown");
 	    			$list.empty();
@@ -402,63 +480,30 @@ $(document).ready(function() {
 	    	}(jQuery));
 	    	$.load_bookmarks();
 	    	
-	    	function getBookmarks() {
-	    	
-	    	    // Get current bookmarks as array
-	    	    
-	    	    var bookmarks = Cookies.get('bookmarks');
-	    	    
-	    	    if(bookmarks){
-	    	        bookmarks = JSON.parse(bookmarks);
-	    	    }
-	    			
-	    	    if(!(bookmarks instanceof Object)){
-	    	        bookmarks = new Array();
-	    	    }
-	    	    
-	    	    return bookmarks;
-	    	};
-
-	    	function getDomain(){
-	    		var hostname = window.location.hostname;
-	    		var domain = hostname.split('.').reverse()[1] + "." + hostname.split('.').reverse()[0];
-	    		//console.log(domain);
-	    		return domain;
-	    	}
-	    	
 	    	$(document).on("click",'a.milestone', function(e) {
 	    	
 	    	    // Adds a bookmark
 	    	    
 	            e.preventDefault();
 	    	    
-	    	    var $this = $(this);
-	    	    var location = window.location.href;
-	    	    locationSplit = location.split("#");
-	    	    var page = locationSplit[0];
-	    	    var hash = $this.attr('href');
-	    	    var pageTitle = $("#title h1").text();
-	    	    var sectionTitle = $this.parents("section").find("h3").first().text();
-	    	    var milestoneTitle = $this.text();
-	    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
-	    	    var bookmark = {'page': page, 'hash': hash, 'title': title};
+	    	    var bookmarkData = $(this).bookmarkData();
 	    	    
 	    	    // Get current bookmarks as array
-	    	    var bookmarks = getBookmarks();
+	    	    var bookmarks = $.getBookmarks();
 	    	    
-	    	    // Add bookmark to array
+	    	    // Add section to array
 	    	    var found = false;
 	    	    for(var i = 0; i < bookmarks.length; i++){
-	    	        if(bookmarks[i].page == bookmark.page && bookmarks[i].hash == bookmark.hash){
+	    	        if(bookmarks[i].page == bookmarkData.page && bookmarks[i].hash == bookmarkData.hash){
 	    	           found = true;
 	    	        }
 	    	    }
 	    	    if(!found){
-	    	        bookmarks.push(bookmark);
+	    	        bookmarks.push(bookmarkData);
 	    	    }
 	    	    
 	    	    // Add array to cookie
-	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: getDomain() });
+	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
 	    	    
 	    	    // Reload bookmarks
 	    	    $.load_bookmarks();
@@ -476,7 +521,7 @@ $(document).ready(function() {
 	            e.stopPropagation();
 	    	    
 	    	    var href = $(this).attr('href');
-	    	    var bookmarks = getBookmarks();
+	    	    var bookmarks = $.getBookmarks();
 	    	    
 	    	    // Remove the bookmark
 	    	    for(var i = 0; i < bookmarks.length; i++){
@@ -485,11 +530,76 @@ $(document).ready(function() {
 	    	        }
 	    	    }
 	    	    // Set the cookie
-	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: getDomain() });
+	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
 	    	    
 	    	    // Reload bookmarks
 	    	    $.load_bookmarks();
 	    	});
+
+    		// Auto-bookmark for next visit
+			// -----------------------------------------
+
+			(function ($) { 
+				$.saveCurrentLocation = function () {
+
+				    $(".translation a.milestone").each(function(index){
+				    	// We are on a translation so remove the lastLocation
+				    	if(index == 0){
+				    		Cookies.remove('lastLocation', { domain: $.getDomain() });
+				    	}
+				    	// If we scroll down then set a new last location
+				    	var $this = $(this);
+				    	if($this.elementInView() == "inView"){
+				    		Cookies.set('lastLocation', JSON.stringify($this.bookmarkData()), { expires: 31, domain: $.getDomain() });
+				    		return false;
+				    	}
+					});
+
+				}
+			}(jQuery));
+
+			(function ($) { 
+	    		$.lastLocationOption = function () {
+	    			
+	    			// get bookmarks from cookies
+	    			
+		    	    var lastLocation = Cookies.get('lastLocation');
+		    	    
+		    	    if(lastLocation){
+		    	        lastLocation = JSON.parse(lastLocation);
+		    	        if(lastLocation.page){
+
+		    	        	$alert = $("#page-alert");
+
+		    	        	$alert.find(".container").append(
+		    	        		$("<small>").text("You were last reading:")
+		    	        	).append(
+		    	        		$("<br>")
+		    	        	).append(
+		    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor"})
+		    	        			.text(lastLocation.title)
+		    	        			.on("click", function(e){
+							    		Cookies.remove('lastLocation', { domain: $.getDomain() });
+							    		$(this).parents("#page-alert").collapse('hide');
+							    	})
+		    	        	);
+		    	        	
+		    	        	$alert.find("button.close").on("click", function(e){
+					    		e.preventDefault();
+					    		Cookies.remove('lastLocation', { domain: $.getDomain() });
+					    		$(this).parents("#page-alert").collapse('hide');
+					    	});
+
+					    	$alert.collapse('show');
+		    	        }
+		    	    }
+	    			
+	    		}
+	    	}(jQuery));
+
+	    	if($("#page-alert").length){
+	    		$.lastLocationOption();
+	    	}
 	    	
 		});
 	}
@@ -586,17 +696,34 @@ $(document).ready(function() {
         // Hide the footer
         $('#fixed-footer').removeClass('in');
 
-        // Trigger pre-events
-        $this.trigger("prepare");
+        var doPopUp = function(){
+        	// Trigger pre-events
+	        $this.trigger("prepare");
 
-        // Copy content to the footer
-        var $content = $($this.attr("href")).clone();
-        $content.attr("id", "");
-        $('#fixed-footer .data-container').html($content);
+	        // Copy content to the footer
+	        var $content = $($this.attr("href")).clone();
+	        $content.attr("id", "");
+	        $('#fixed-footer .data-container').html($content);
+	        // Show the footer
+			$('#fixed-footer').collapse('show');
+        	
+        }
 
-        // Show the footer
-		$('#fixed-footer').collapse('show');
-        
+        // Is this the first call to the glossary?
+        if($this.hasClass("glossary-link") && !$(".backlinked").length){
+        	// It could take a while...
+        	$.wait("Preparing the glossary...");
+        	setTimeout(function(){
+        		doPopUp();
+	        	$.wait("", true);
+
+	        },100);
+        }
+        else {
+        	// Just do it
+        	doPopUp();
+        }
+
 	});
 
 
@@ -765,8 +892,7 @@ $(document).ready(function() {
 	                    if(!isWorking){
 	                        isWorking = true;
 
-	                        
-	                        // First glossarize terms with a higher priority
+                        	// First glossarize terms with a higher priority
 	                        var priority = parseInt($glossary.data("priority"));
 
 	                        var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
@@ -785,33 +911,10 @@ $(document).ready(function() {
 	                        	isWorking = false;
                             	$glossary.addClass("backlinked");
 	                        });
+
 	                    }
 	                    
-				    },
-	     			elementInView = function ($element){
-	     
-	     				// Is this element visible?
-	     				// -----------------------------------
-	     
-	     			    var $window = $(window);
-	     
-	     			    var docViewTop = $window.scrollTop();
-	     			    var docViewBottom = docViewTop + $window.height();
-	     
-	     			    var elementTop = $element.offset().top;
-	     			    var elementBottom = elementTop + $element.height();
-	     			    
-	     			    var position = "inView";
-	     			    
-	     			    if(elementBottom <= docViewTop){
-	     			        position = "above";
-	     			    }
-	     			    else if(elementTop >= docViewBottom){
-	     			        position = "below";
-	     			    }
-	     
-	     			    return position;
-	     			};
+				    };
 	            
 	     		/*
 				(function ($) { 
@@ -846,7 +949,7 @@ $(document).ready(function() {
 	        			$allParagraphs.filter(':not(.glossarized)').each(function(){
 	        			
 	        			    var $paragraph = $(this);
-	     			    	var elementInViewStatus = elementInView($paragraph);
+	     			    	var elementInViewStatus = $paragraph.elementInView();
 	     			    	
 	     					if(elementInViewStatus == 'inView'){
 	                            parseParagraph($paragraph);
@@ -873,7 +976,7 @@ $(document).ready(function() {
 	        			$allGlossaries.filter(':not(.backlinked)').each(function(){
 	        			
 	        			    var $glossaryItem = $(this);
-	     			    	var elementInViewStatus = elementInView($glossaryItem);
+	     			    	var elementInViewStatus = $glossaryItem.elementInView();
 	     			    	
 	     					if(elementInViewStatus == 'inView'){
 	                            parseGlossary($glossaryItem);
@@ -889,25 +992,6 @@ $(document).ready(function() {
 	    			}
 	    		}(jQuery));
 	            
-	            // Check for visible elements on scroll
-	     		// -------------------------------------------
-
-	     		// Detect when user stops scroll
-	     		$.fn.scrollEnd = function(callback, timeout) {          
-					$(this).scroll(function(){
-						var $this = $(this);
-						if ($this.data('scrollTimeout')) {
-							clearTimeout($this.data('scrollTimeout'));
-						}
-						$this.data('scrollTimeout', setTimeout(callback,timeout));
-					});
-				};
-
-				// Update the dom
-	            $(window).scrollEnd(function () {
-	            	$.backlinkVisibleGlossaries();
-		     		$.glossarizeVisibleParagraphs();
-	     		}, 100);
 	     		
 	     		// Also implement on showing in pop-up footer:
 	     		// Call prepare event on clicking a glossary link
@@ -924,6 +1008,29 @@ $(document).ready(function() {
     	}
          
     }
+
+    // Detect when user stops scrolling
+	// ---------------------------------------
+	$.fn.scrollEnd = function(callback, timeout) {  
+		var $this = this;       
+		$this.scroll(function(){
+			if ($this.data('scrollTimeout')) {
+				clearTimeout($this.data('scrollTimeout'));
+			}
+			$this.data('scrollTimeout', setTimeout(callback,timeout));
+		});
+	};
+
+    $(window).scrollEnd(function () {
+    	if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
+ 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
+	}, 100);
+
+    // Detect when user closes window
+	// ---------------------------------------
+	$(window).on("unload", function() {
+		if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
+	});
 
     // Get the href content via ajax and put it in the specified element
     // ----------------------------------------------------------------- 
@@ -979,7 +1086,7 @@ $(document).ready(function() {
     // Match heights on hidden content
 	//------------------------------------------
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		$(document).match_heights();
+		$.match_heights();
 	});
 
 	// Close temporary alerts
@@ -997,16 +1104,14 @@ $(document).ready(function() {
 	// Rewind button
 	// -----------------------------------------
 	$("#rewind-container button").on('click', function (e) {
-		var $this = $(this);
+		var $button = $(this);
 		if(rewindHistory.length){
 			var target = rewindHistory.pop();
 			$("html, body").animate({ scrollTop: target}, "slow");
-			console.log(rewindHistory);
 			if(!rewindHistory.length){
-				$this.parents("#rewind-container").addClass("hidden");
+				$button.parents("#rewind-container").addClass("hidden");
 			}
 		}
-		
 	});
 
 	// Replace text on internal references
@@ -1019,8 +1124,8 @@ $(document).ready(function() {
 	// Trigger events on resize
 	//------------------------------------------
 	$(window).on("resize", function(){
-		$(document).media_size();
-		$(document).match_heights();
+		$.media_size();
+		$.match_heights();
 		$.popup_footer_height();
 	});
 	$(window).resize();

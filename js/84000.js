@@ -476,9 +476,10 @@ $(document).ready(function() {
 	    			var $list = $("#bookmarks-dropdown");
 	    			$list.empty();
 
+	    			$list.append($("<li>", {"class": "header-text"}).text("Your Bookmarks"));
+
 	    			if(bookmarks.length){
 	    			    
-	    			    $list.append($("<li>", {"class": "header-text"}).text("Your Bookmarks"));
 
 	         			// show them in the list
 	         			for(var i = 0; i < bookmarks.length; i++){

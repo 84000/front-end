@@ -332,7 +332,7 @@ $(document).ready(function() {
 			function addDivider(text, $list) {
 
  			    // Create a list item
-				var $item = $("<li>", {"class": "divider-text"}).text(text);
+				var $item = $("<li>", {"class": "header-text"}).text(text);
 
 				// Append the item to the list
 				$list.append($item);
@@ -447,6 +447,8 @@ $(document).ready(function() {
 
 	    			if(bookmarks.length){
 	    			    
+	    			    $list.append($("<li>", {"class": "header-text"}).text("Your Bookmarks"));
+
 	         			// show them in the list
 	         			for(var i = 0; i < bookmarks.length; i++){
 	         			    
@@ -471,11 +473,11 @@ $(document).ready(function() {
 							$list.append($item);
 	         			}
 
-	         			$list.append($("<li>", {"class": "divider-text"}).text("Please note that bookmarks are stored as Cookies. Clearing cookies for this site will delete your bookmarks."));
+	         			$list.append($("<li>", {"class": "footer-text"}).text("Please note that bookmarks are stored as Cookies. Clearing cookies for this site will delete your bookmarks."));
 
 	    			}
 	    			else {
-	    				$list.append($("<li>", {"class": "divider-text"}).text("You don't have any bookmarks yet. Select milestones on the left of the text to bookmark that passage."));
+	    				$list.append($("<li>", {"class": "footer-text"}).text("You don't have any bookmarks yet. Select milestones on the left of the text to bookmark that passage."));
 	    			}
 	    			
 	    			$('#bookmarks-opener .badge').text(bookmarks.length);

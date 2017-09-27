@@ -898,6 +898,7 @@ a#link-to-top {
     padding-top: 0px;
     padding-bottom: 0px;
     overflow: auto;
+    background-color: #f5f5f5;
     .transition(.5s ease-out);
 
     > li {
@@ -907,6 +908,7 @@ a#link-to-top {
         padding-top: 5px;
         padding-bottom: 5px;
         border-bottom: 1px solid @dropdown-border;
+        background-color: #fff;
 
         &:last-child {
             border-bottom: 0px;
@@ -938,12 +940,20 @@ a#link-to-top {
             }
         }
 
-        &.divider-text {
+        &.header-text {
             padding: 8px 20px;
             background-color: @brand-red;
             color: #fff;
             font-family: @font-family-heading;
             font-weight: bold;
+        }
+
+        &.footer-text {
+            padding: 8px 20px;
+            background-color: #f5f5f5;
+            font-size: @font-size-small;
+            color: @brand-red;
+            font-family: @font-family-sans-serif;
         }
     }
 

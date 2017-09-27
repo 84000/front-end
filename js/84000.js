@@ -54,6 +54,8 @@ $(document).ready(function() {
 	    var docViewTop = $window.scrollTop();
 	    var docViewBottom = docViewTop + $window.height();
 
+	    if(!this.offset()) return "missing";
+
 	    var elementTop = this.offset().top;
 	    var elementBottom = elementTop + this.height();
 	    
@@ -429,7 +431,7 @@ $(document).ready(function() {
 	    	}(jQuery));
 
 	    	(function ($) { 
-	    		$.load_bookmarks = function () {
+	    		$.loadBookmarks = function () {
 	    			
 	    			// get bookmarks from cookies
 	    			
@@ -478,7 +480,7 @@ $(document).ready(function() {
 	    			
 	    		}
 	    	}(jQuery));
-	    	$.load_bookmarks();
+	    	$.loadBookmarks();
 	    	
 	    	$(document).on("click",'a.milestone', function(e) {
 	    	
@@ -506,7 +508,7 @@ $(document).ready(function() {
 	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
 	    	    
 	    	    // Reload bookmarks
-	    	    $.load_bookmarks();
+	    	    $.loadBookmarks();
 
 	    	    // Flash the button
 	    	    $("#bookmarks-opener").pulse();
@@ -533,7 +535,7 @@ $(document).ready(function() {
 	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
 	    	    
 	    	    // Reload bookmarks
-	    	    $.load_bookmarks();
+	    	    $.loadBookmarks();
 	    	});
 
     		// Auto-bookmark for next visit
@@ -566,34 +568,59 @@ $(document).ready(function() {
 		    	    var lastLocation = Cookies.get('lastLocation');
 		    	    
 		    	    if(lastLocation){
+
 		    	        lastLocation = JSON.parse(lastLocation);
+
 		    	        if(lastLocation.page){
 
-		    	        	$alert = $("#page-alert");
+		    	        	// Check it's not already bookmarked
+		    	        	var bookmarks = $.getBookmarks()
+		    	        	var bookmarked = false;
+		    	        	for (var i = bookmarks.length - 1; i >= 0; i--) {
+		    	        		if(bookmarks[i].page == lastLocation.page && bookmarks[i].hash == lastLocation.hash){
+		    	        			bookmarked = true;
+		    	        			break;
+		    	        		}
+		    	        	}
 
-		    	        	$alert.find(".container").append(
-		    	        		$("<small>").text("You were last reading:")
-		    	        	).append(
-		    	        		$("<br>")
-		    	        	).append(
-		    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor"})
-		    	        			.text(lastLocation.title)
-		    	        			.on("click", function(e){
+		    	        	if(!bookmarked)
+		    	        	{
+		    	        		// Check it's not on screen
+		    	        		var $lastLocation = $(lastLocation.hash);
+		    	        		var inView = false;
+						    	if($lastLocation.elementInView() == "inView"){
+						    		var inView = true;
+						    	}
+
+						    	if(!inView)
+		    	        		{
+		    	        			// Offer some options
+				    	        	$alert = $("#page-alert");
+
+				    	        	$alert.find(".container").append(
+				    	        		$("<small>").text("You were last reading:")
+				    	        	).append(
+				    	        		$("<br>")
+				    	        	).append(
+				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor"})
+				    	        			.text(lastLocation.title)
+				    	        			.on("click", function(e){
+									    		Cookies.remove('lastLocation', { domain: $.getDomain() });
+									    		$(this).parents("#page-alert").collapse('hide');
+									    	})
+				    	        	);
+				    	        	
+				    	        	$alert.find("button.close").on("click", function(e){
+							    		e.preventDefault();
 							    		Cookies.remove('lastLocation', { domain: $.getDomain() });
 							    		$(this).parents("#page-alert").collapse('hide');
-							    	})
-		    	        	);
-		    	        	
-		    	        	$alert.find("button.close").on("click", function(e){
-					    		e.preventDefault();
-					    		Cookies.remove('lastLocation', { domain: $.getDomain() });
-					    		$(this).parents("#page-alert").collapse('hide');
-					    	});
+							    	});
 
-					    	$alert.collapse('show');
+							    	$alert.collapse('show');
+							    }
+		    	        	}
 		    	        }
 		    	    }
-	    			
 	    		}
 	    	}(jQuery));
 

@@ -343,6 +343,16 @@ $(document).ready(function() {
 		    	var $list = $("#contents-dropdown");
 	    		$list.empty();
 
+	    		addDivider("84000", $list);
+
+	    		addLink($("<a>", {"href": "http://84000.co"}).text("Homepage"), $list);
+
+	    		addLink($("<a>", {"href": "/"}).text("Reading Room Lobby"), $list);
+
+	    		addLink($("<a>", {"href": "http://84000.co/how-you-can-help/donate/#sap"}).text("Sponsor a Page"), $list);
+
+	    		addDivider($("#title h1").text(), $list);
+
 	    		var $contentLinks = $("#contents table tr");
 	    		
 	    		$contentLinks.each(function(){
@@ -351,14 +361,6 @@ $(document).ready(function() {
 	    			addLink($contentLink.find("> td > a"), $list);
 	    			
 	    		});
-
-	    		addDivider("Other links", $list);
-
-	    		addLink($("<a>", {"href": "http://84000.co"}).text("84000 Homepage"), $list);
-
-	    		addLink($("<a>", {"href": "/"}).text("Reading Room Lobby"), $list);
-
-	    		addLink($("<a>", {"href": "http://84000.co/how-you-can-help/donate/#sap"}).text("Sponsor a Page"), $list);
 
 	    	};
 	    }(jQuery));

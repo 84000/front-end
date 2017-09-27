@@ -795,11 +795,7 @@ $(document).ready(function() {
 				    	var glossaryId = $glossary.attr("id");
 				        var regEx = glossaryRegEx($term.text());
 				        
-				        $paragraphs.find("span.term").filter(function(){
-
-				        	return regEx.test($(this).text());
-				        	
-				        }).each(function(spanIndex){
+				        $paragraphs.find("span.term:contains(" + $term.text() + ")").each(function(spanIndex){
 
 				        	var $span = $(this);
 				        	var muteClass = spanIndex > 0 ? 'mute' : '' ;

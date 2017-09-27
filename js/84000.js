@@ -433,6 +433,37 @@ $(document).ready(function() {
 	    	}(jQuery));
 
 	    	(function ($) { 
+		    	$.bookmark = function (bookmarkData) {
+
+		    		// Get current bookmarks as array
+		    	    var bookmarks = $.getBookmarks();
+		    	    
+		    	    // Check first if it's there already
+		    	    var found = false;
+		    	    for(var i = 0; i < bookmarks.length; i++){
+		    	        if(bookmarks[i].page == bookmarkData.page && bookmarks[i].hash == bookmarkData.hash){
+		    	           found = true;
+		    	        }
+		    	    }
+		    	    // Add bookmark to array
+		    	    if(!found){
+		    	        bookmarks.push(bookmarkData);
+		    	    }
+		    	    
+		    	    // Add array to cookie
+		    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
+		    	    
+		    	    // Reload bookmarks
+		    	    $.loadBookmarks();
+
+		    	    // Flash the button
+		    	    $("#bookmarks-opener .badge-notification").pulse();
+		    	}
+	    	}(jQuery));
+
+	    	
+
+	    	(function ($) { 
 	    		$.loadBookmarks = function () {
 	    			
 	    			// get bookmarks from cookies
@@ -494,28 +525,7 @@ $(document).ready(function() {
 	    	    
 	    	    var bookmarkData = $(this).bookmarkData();
 	    	    
-	    	    // Get current bookmarks as array
-	    	    var bookmarks = $.getBookmarks();
-	    	    
-	    	    // Add section to array
-	    	    var found = false;
-	    	    for(var i = 0; i < bookmarks.length; i++){
-	    	        if(bookmarks[i].page == bookmarkData.page && bookmarks[i].hash == bookmarkData.hash){
-	    	           found = true;
-	    	        }
-	    	    }
-	    	    if(!found){
-	    	        bookmarks.push(bookmarkData);
-	    	    }
-	    	    
-	    	    // Add array to cookie
-	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
-	    	    
-	    	    // Reload bookmarks
-	    	    $.loadBookmarks();
-
-	    	    // Flash the button
-	    	    $("#bookmarks-opener").pulse();
+	    	    $.bookmark(bookmarkData);
 
 	    	});
 	    	
@@ -598,27 +608,47 @@ $(document).ready(function() {
 
 						    	if(!inView)
 		    	        		{
+
 		    	        			// Offer some options
 				    	        	$alert = $("#page-alert");
 
 				    	        	$alert.find(".container").append(
-				    	        		$("<small>").text("You were last reading:")
+				    	        		$("<small>").text("You were reading:")
 				    	        	).append(
 				    	        		$("<br>")
 				    	        	).append(
-				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor"})
-				    	        			.text(lastLocation.title)
+				    	        		lastLocation.title
+				    	        	).append(
+				    	        		$("<br>")
+				    	        	).append(
+				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor small"})
+				    	        			.text("go there")
 				    	        			.on("click", function(e){
 									    		Cookies.remove('lastLocation', { domain: $.getDomain() });
 									    		$(this).parents("#page-alert").collapse('hide');
 									    	})
+				    	        	).append(
+				    	        		" &bull; "
+				    	        	).append(
+				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
+				    	        			.text("bookmark it")
+				    	        			.on("click", function(e){
+				    	        				e.preventDefault();
+				    	        				$.bookmark(lastLocation);
+									    		Cookies.remove('lastLocation', { domain: $.getDomain() });
+									    		$(this).parents("#page-alert").collapse('hide');
+									    	})
+				    	        	).append(
+				    	        		" &bull; "
+				    	        	).append(
+				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
+				    	        			.text("forget it")
+				    	        			.on("click", function(e){
+				    	        				e.preventDefault();
+									    		Cookies.remove('lastLocation', { domain: $.getDomain() });
+									    		$(this).parents("#page-alert").collapse('hide');
+									    	})
 				    	        	);
-				    	        	
-				    	        	$alert.find("button.close").on("click", function(e){
-							    		e.preventDefault();
-							    		Cookies.remove('lastLocation', { domain: $.getDomain() });
-							    		$(this).parents("#page-alert").collapse('hide');
-							    	});
 
 							    	$alert.collapse('show');
 							    }

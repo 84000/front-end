@@ -27,7 +27,7 @@ $(document).ready(function() {
 	// Media size
 	// --------------------------------------
 	(function ($) { 
-		$.media_size = function () {
+		$.mediaSize = function () {
 			var size = 'lg';
 			var sizes = ['xs','sm','md','lg'];
 			for (var i = sizes.length - 1; i >= 0; i--) {
@@ -43,7 +43,7 @@ $(document).ready(function() {
 			$('html').removeClass(sizes.join(' ')).addClass(size).addClass(media);
 		}
 	}(jQuery));
-	$.media_size();
+	$.mediaSize();
 
 	// Detect if an element is in view
 	// ---------------------------------------
@@ -111,7 +111,7 @@ $(document).ready(function() {
 	// Scroll to an anchor
 	// --------------------------------------
 	(function ($) { 
-		$.scroll_to_anchor = function (hash, delay, parent, offset) {
+		$.scrollToAnchor = function (hash, delay, parent, offset) {
 			if(!legacyLink()) {
 				if(!hash) hash = window.location.hash;
 				if(!delay) delay = 0;
@@ -153,36 +153,48 @@ $(document).ready(function() {
 			// Rewind functionality
 			if($this.not(".pop-up")){
 
-				var $buttonContainer = $("#rewind-container");
-				var $button = $buttonContainer.find("button");
+				// Only if it's not in view
+				$target = $(this.hash);
 
-				rewindHistory.push($(document).scrollTop());
-				$buttonContainer.removeClass("hidden");
-				$button.pulse();
+				//if($this.elementInView() != "inView"){
+
+					var $buttonContainer = $("#rewind-container");
+					var $button = $buttonContainer.find("button");
+
+					rewindHistory.push($(document).scrollTop());
+					$buttonContainer.removeClass("hidden");
+					$button.pulse();
+
+				//}
 
 			}
 
 			// Mark elements in the text
-			if($this.hasClass("mark-target")){
+			if($this.has("[data-mark]")){
 
-				var $target = $(this.hash).find($this.data("mark"));
+				var selector = $this.data("mark");
+				selector = (this.hash != selector) ? this.hash + " " + selector : selector;
 
-				$target.addClass("mark").delay(2000).queue(function(next){
-					$target.addClass("ease-all").removeClass("mark");
-					next();
-				}).delay(1000).queue(function(next){
-					$target.removeClass("ease-all");
-					next();
-				});
+				$(selector)
+					.removeClass("mark")
+					.removeClass("ease-all")
+					.addClass("mark");
+
+				setTimeout(function(){
+					$(selector).addClass("ease-all").removeClass("mark");
+					setTimeout(function(){
+						$(selector).removeClass("ease-all");
+					},2000);
+				},3000);
 
 			}
 
-			$.scroll_to_anchor(this.hash);
+			$.scrollToAnchor(this.hash);
 
 			return false;
 		}
 	});
-	$.scroll_to_anchor();
+	$.scrollToAnchor();
 
 	// Show/hide scroll to top link
 	// --------------------------------------
@@ -198,7 +210,7 @@ $(document).ready(function() {
 	// Scroll to top
 	// --------------------------------------
 	$(document).on("click", "a[href='#top']:not(.milestone)", function(e) {
-		$.scroll_to_anchor("#top");
+		$.scrollToAnchor("#top");
 		return false;
 	});
 
@@ -206,7 +218,7 @@ $(document).ready(function() {
 	// Image sizing
 	// --------------------------------------
 	(function ($) { 
-		$.fn.center_with_margins = function () {
+		$.fn.centerWithMargins = function () {
 			this.each(function(){
 				var $this = $(this);
 				$this.css({
@@ -261,9 +273,9 @@ $(document).ready(function() {
 		};
 	}(jQuery));
 	$('.thumbnail img').on("load", function () {
-		$(this).center_with_margins();
+		$(this).centerWithMargins();
 	});
-	$('.thumbnail img').center_with_margins();
+	$('.thumbnail img').centerWithMargins();
 
 	// Lightbox
 	// -------------------------------------------------------
@@ -281,7 +293,7 @@ $(document).ready(function() {
 	// Make multiple elements the same size
 	// ------------------------------------------
 	(function ($) { 
-		$.match_heights = function () {
+		$.matchHeights = function () {
 			if($('html').hasClass('screen') && ($('html').hasClass('md') || $('html').hasClass('lg') || $('html').hasClass('sm'))){
 				var heights = {};
 				$("[data-match-height]").height('auto');
@@ -460,8 +472,6 @@ $(document).ready(function() {
 		    	    $("#bookmarks-opener .badge-notification").pulse();
 		    	}
 	    	}(jQuery));
-
-	    	
 
 	    	(function ($) { 
 	    		$.loadBookmarks = function () {
@@ -738,14 +748,14 @@ $(document).ready(function() {
 	// Set footer max-height
 	// --------------------------------------
 	(function ($) { 
-		$.popup_footer_height = function () {
+		$.popupFooterHeight = function () {
 
 			// Footer should not be more than 50% of the viewport
 			$("#fixed-footer .fix-height").css({"max-height": ($(window).height() * 0.5) + "px"});
 
 		}
 	}(jQuery));
-	$.popup_footer_height();
+	$.popupFooterHeight();
 
 	// Pop-up content in the footer
 	// -----------------------------------------
@@ -796,7 +806,7 @@ $(document).ready(function() {
 
     	if($("article #glossary .glossary-item").length){
 
-    		$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
+    		//$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
 
     			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
 				    return function( elem ) {
@@ -845,8 +855,8 @@ $(document).ready(function() {
 	                   
 	                },
 	                glossaryRegEx = function(term){
-	                	// Unfortunately, as JS doesn't consider accented characters as "word" characaters
-				    	// we cannot use the \b or \w metachracters. We have to enumerate all non-word characters.
+	                	// Unfortunately, as JS doesn't consider accented characters as "word" characters.
+				    	// Therefore cannot use the \b or \w metacharacters. We have to enumerate all word boundaries ourselves.
 	                	return new RegExp("(^|\\s|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|es\\W|’s\\W|'s\\W|s’\\W|s'\\W)","gi");
 	                },
 	                glossaryMarked = function($term, $glossary, $paragraphs){
@@ -871,15 +881,28 @@ $(document).ready(function() {
 
 				    	var glossaryId = $glossary.attr("id");
 				    	var regEx = glossaryRegEx($term.text());
+				    	var term = $term.text();
 				        
 				        $paragraphs.filter(function(){
-
+				        	
 				        	return regEx.test($(this).html());
 				        	
 				        }).each(function(){
 				        	
 				        	var $paragraph = $(this);
-				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+
+				        	// Avoid adding links in links.
+				        	// Also ignore content in span.ignore.
+
+				        	var content = $paragraph.html()
+				        		.replace(new RegExp("(<a\\s.*>.*)(" + term + ")(<\\/a>)","gi"), "$1--preserve--$2--preserve--$3")
+				        		.replace(new RegExp('(<span\\s.*ignore.*>.*)(' + term + ')(<\\/span>)',"gi"), "$1--preserve--$2--preserve--$3");
+				        	//console.log(content);
+				        	content = content.replace(regEx , '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	content = content.replace(new RegExp("--preserve--","gi") , '');
+				        	
+				        	$paragraph.html(content);
+				        	//$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
 				        	$paragraph.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
 
 				        });
@@ -906,7 +929,7 @@ $(document).ready(function() {
                                 //var title = "In " + $glossaryRef.parents("section").find("h3").text();
                                 var linkAttributes = {
                                 	"href": "#" + $paragraph.attr("id"), 
-                                	"class": "scroll-to-anchor mark-target", 
+                                	"class": "scroll-to-anchor", 
                                 	"data-mark": "a[href='#" + glossaryId + "']"
                                 };
                                 var $link = $("<a>", linkAttributes).text(refIndex + 1);
@@ -927,6 +950,22 @@ $(document).ready(function() {
 	                        callback();
 	                    }
 	                    
+	                },
+	                prepGlossary = function($glossary){
+	                	// First glossarize terms with a higher priority
+                        var priority = parseInt($glossary.data("priority"));
+
+                        var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
+							return $(this).data("priority") > priority;
+						});
+
+						$higherPriority.each(function(){
+							var $otherGlossary = $(this);
+							glossarize($otherGlossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
+	                        	isWorking = false;
+                            	$otherGlossary.addClass("backlinked");
+	                        });
+						});
 	                },
 	                parseParagraph = function($paragraph){
 	                
@@ -949,23 +988,8 @@ $(document).ready(function() {
 	                    
 	                    if(!isWorking){
 	                        isWorking = true;
-
-                        	// First glossarize terms with a higher priority
-	                        var priority = parseInt($glossary.data("priority"));
-
-	                        var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
-								return $(this).data("priority") > priority;
-							});
-
-							$higherPriority.each(function(){
-								var $otherGlossary = $(this);
-								glossarize($otherGlossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
-		                        	isWorking = false;
-	                            	$otherGlossary.addClass("backlinked");
-		                        });
-							});
-
-	                        glossarize($glossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
+	                        prepGlossary($glossary);
+							glossarize($glossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
 	                        	isWorking = false;
                             	$glossary.addClass("backlinked");
 	                        });
@@ -1060,9 +1084,9 @@ $(document).ready(function() {
 	     		
 	     		// Glossarize the currently visible elements
 	     		// -------------------------------------------
-	     		$(window).scroll();
+	     		//$(window).scroll();
 	            
-	        });
+	        //});
     	}
          
     }
@@ -1083,6 +1107,7 @@ $(document).ready(function() {
     	if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
  		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 	}, 100);
+	$(window).scroll();
 
     // Detect when user closes window
 	// ---------------------------------------
@@ -1144,7 +1169,7 @@ $(document).ready(function() {
     // Match heights on hidden content
 	//------------------------------------------
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		$.match_heights();
+		$.matchHeights();
 	});
 
 	// Close temporary alerts
@@ -1182,9 +1207,9 @@ $(document).ready(function() {
 	// Trigger events on resize
 	//------------------------------------------
 	$(window).on("resize", function(){
-		$.media_size();
-		$.match_heights();
-		$.popup_footer_height();
+		$.mediaSize();
+		$.matchHeights();
+		$.popupFooterHeight();
 	});
 	$(window).resize();
 

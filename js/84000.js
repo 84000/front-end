@@ -857,7 +857,7 @@ $(document).ready(function() {
 	                glossaryRegEx = function(term){
 	                	// Unfortunately, as JS doesn't consider accented characters as "word" characters.
 				    	// Therefore cannot use the \b or \w metacharacters. We have to enumerate all word boundaries ourselves.
-	                	return new RegExp("(^|\\s|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|es\\W|’s\\W|'s\\W|s’\\W|s'\\W)","gi");
+	                	return new RegExp("(^|\\s|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|—|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|es\\W|’s\\W|'s\\W|s’\\W|s'\\W)","gi");
 	                },
 	                glossaryMarked = function($term, $glossary, $paragraphs){
 
@@ -879,8 +879,8 @@ $(document).ready(function() {
 
 	                	// Glossarise any matches in the text
 
-				    	var glossaryId = $glossary.attr("id");
 				    	var term = $term.text();
+				    	var glossaryId = $glossary.attr("id");
 				    	var regEx = glossaryRegEx(term);
 				        
 				        $paragraphs.filter(function(){
@@ -907,6 +907,9 @@ $(document).ready(function() {
 				        	*/
 				        	//console.log(regEx);
 				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	$paragraph.find("span").not(".ignore").each(function(){
+				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	})
 				        	$paragraph.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
 
 				        });

@@ -1204,7 +1204,15 @@ $(document).ready(function() {
 	// -----------------------------------------
 	$("a.internal-ref").each(function(index){
 		var $this = $(this);
-		$this.text($($this.attr('href')).text());
+		var $target = $($this.attr('href'));
+		var text = $this.text();
+		if($target.hasClass("milestone")){
+			text = $target.text();
+		}
+		if($target.hasClass("footnote")){
+			text = $target.find(".footnote-number").text();
+		}
+		$this.text(text);
 	});
 
 	// Trigger events on resize

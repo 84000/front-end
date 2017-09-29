@@ -806,7 +806,7 @@ $(document).ready(function() {
 
     	if($("article #glossary .glossary-item").length){
 
-    		//$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
+    		$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
 
     			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
 				    return function( elem ) {
@@ -880,8 +880,8 @@ $(document).ready(function() {
 	                	// Glossarise any matches in the text
 
 				    	var glossaryId = $glossary.attr("id");
-				    	var regEx = glossaryRegEx($term.text());
 				    	var term = $term.text();
+				    	var regEx = glossaryRegEx(term);
 				        
 				        $paragraphs.filter(function(){
 				        	
@@ -893,16 +893,20 @@ $(document).ready(function() {
 
 				        	// Avoid adding links in links.
 				        	// Also ignore content in span.ignore.
-
+				        	/*
 				        	var content = $paragraph.html()
-				        		.replace(new RegExp("(<a\\s.*>.*)(" + term + ")(<\\/a>)","gi"), "$1--preserve--$2--preserve--$3")
-				        		.replace(new RegExp('(<span\\s.*ignore.*>.*)(' + term + ')(<\\/span>)',"gi"), "$1--preserve--$2--preserve--$3");
-				        	//console.log(content);
+				        		.replace(new RegExp("(<a.*>.*)(" + term + ")(.*<\\/a>)","gi"), "$1--preserve--$2--preserve--$3")
+				        		.replace(new RegExp('(<span\\s.*ignore.*>.*)(' + term + ')(.*<\\/span>)',"gi"), "$1--preserve--$2--preserve--$3");
+				        	console.log(term);
+				        	
 				        	content = content.replace(regEx , '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	console.log(content);
 				        	content = content.replace(new RegExp("--preserve--","gi") , '');
 				        	
 				        	$paragraph.html(content);
-				        	//$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	*/
+				        	//console.log(regEx);
+				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
 				        	$paragraph.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
 
 				        });
@@ -1084,9 +1088,13 @@ $(document).ready(function() {
 	     		
 	     		// Glossarize the currently visible elements
 	     		// -------------------------------------------
-	     		//$(window).scroll();
+	     		$(window).scrollEnd(function () {
+			    	if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
+			 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
+				}, 100);
+	     		$(window).scroll();
 	            
-	        //});
+	        });
     	}
          
     }
@@ -1103,11 +1111,6 @@ $(document).ready(function() {
 		});
 	};
 
-    $(window).scrollEnd(function () {
-    	if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
- 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
-	}, 100);
-	$(window).scroll();
 
     // Detect when user closes window
 	// ---------------------------------------

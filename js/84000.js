@@ -816,7 +816,7 @@ $(document).ready(function() {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("article #glossary .glossary-item"),
-	                $allParagraphs = $("article #summary p, article #introduction p, article .chapter p, article #colophon p");
+	                $allParagraphs = $("article #summary p, article #introduction p, article .chapter p, article #colophon p, article #notes p");
 
 	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
 						return +b.getAttribute('data-priority') - +a.getAttribute('data-priority');

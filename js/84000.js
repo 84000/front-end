@@ -932,10 +932,15 @@ $(document).ready(function() {
                             $allParagraphs.has("a[href='#" + glossaryId + "']").each(function(refIndex){
                             	
                                 var $paragraph = $(this);
+                                var paragraph_id = $paragraph.attr("id");
+                                if(!paragraph_id){
+                                	paragraph_id = $paragraph.parents("[id]").attr("id");
+                                }
+
                                 // Create a link to it
                                 //var title = "In " + $glossaryRef.parents("section").find("h3").text();
                                 var linkAttributes = {
-                                	"href": "#" + $paragraph.attr("id"), 
+                                	"href": "#" + paragraph_id, 
                                 	"class": "scroll-to-anchor", 
                                 	"data-mark": "a[href='#" + glossaryId + "']"
                                 };

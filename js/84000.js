@@ -907,9 +907,9 @@ $(document).ready(function() {
 				        	*/
 				        	//console.log(regEx);
 				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
-				        	$paragraph.find("span").not(".ignore").each(function(){
+				        	$paragraph.find("span, em").not(".ignore").each(function(){
 				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
-				        	})
+				        	});
 				        	$paragraph.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
 
 				        });

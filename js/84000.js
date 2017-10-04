@@ -732,13 +732,6 @@ $(document).ready(function() {
         
 	});
 
-	$(document).on("click",'body', function(e) {
-	
-		// Close the footer
-        $('#fixed-footer').collapse('hide');
-        
-	});
-
 	$(document).on("click",'#fixed-footer, #fixed-footer a', function(e) {
 	
 		e.stopPropagation();
@@ -1032,6 +1025,19 @@ $(document).ready(function() {
 				$.glossarizeAll();
 				*/
 
+				(function ($){
+					$.showGlossary = function(){
+
+				    	$("article").removeClass("mute-glossary");
+
+     			    	clearTimeout(hideTermsTimeout);
+
+     			    	hideTermsTimeout = setTimeout(function(){
+     			    		$("article").addClass("mute-glossary");
+     			    	}, 2000);
+				    }
+				}(jQuery));
+
 				(function ($) { 
 	    			$.glossarizeVisibleParagraphs = function () {
 	    
@@ -1045,13 +1051,7 @@ $(document).ready(function() {
 	        			    var $paragraph = $(this);
 	     			    	var elementInViewStatus = $paragraph.elementInView();
 
-	     			    	$("article").removeClass("mute");
-
-	     			    	clearTimeout(hideTermsTimeout);
-
-	     			    	hideTermsTimeout = setTimeout(function(){
-	     			    		$("article").addClass("mute");
-	     			    	}, 2000);
+	     			    	$.showGlossary();
 	     			    	
 	     					if(elementInViewStatus == 'inView'){
 	                            parseParagraph($paragraph);
@@ -1229,6 +1229,17 @@ $(document).ready(function() {
 			text = $target.find(".footnote-number").text();
 		}
 		$this.text(text);
+	});
+
+
+	// Eventy on body click
+	// //------------------------------------------
+	$(document).on("click",'body', function(e) {
+	
+		// Close the footer
+        $('#fixed-footer').collapse('hide');
+        if(typeof $.showGlossary === 'function'){ $.showGlossary(); };
+        
 	});
 
 	// Trigger events on resize

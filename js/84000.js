@@ -906,11 +906,10 @@ $(document).ready(function() {
 				        	$paragraph.html(content);
 				        	*/
 				        	//console.log(regEx);
-				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
 				        	$paragraph.find("span, em").not(".ignore").each(function(){
-				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
 				        	});
-				        	$paragraph.find('a[href="#' + glossaryId + '"]').first().removeClass('mute');
 
 				        });
 	                },
@@ -1008,7 +1007,8 @@ $(document).ready(function() {
 
 	                    }
 	                    
-				    };
+				    },
+				    hideTermsTimeout;
 	            
 	     		/*
 				(function ($) { 
@@ -1044,6 +1044,14 @@ $(document).ready(function() {
 	        			
 	        			    var $paragraph = $(this);
 	     			    	var elementInViewStatus = $paragraph.elementInView();
+
+	     			    	$("article").removeClass("mute");
+
+	     			    	clearTimeout(hideTermsTimeout);
+
+	     			    	hideTermsTimeout = setTimeout(function(){
+	     			    		$("article").addClass("mute");
+	     			    	}, 2000);
 	     			    	
 	     					if(elementInViewStatus == 'inView'){
 	                            parseParagraph($paragraph);

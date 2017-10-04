@@ -1388,12 +1388,14 @@ table#translation-stats {
     a.footnote, a.glossary-link, .mute-glossary a.glossary-link:hover {
         text-decoration: none;
         border-bottom: 1px dashed lighten(@link-color, 20%);
+        
     }
 
     .mute-glossary {
         a.glossary-link {
+            .transition(1s ease-in);
             color: inherit;
-            border-bottom: 0px;
+            border-bottom-color: transparent;
         }
     }
 

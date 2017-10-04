@@ -1375,30 +1375,6 @@ table#translation-stats {
         color: @gray;
     }
 
-    // Link styles 
-    // ---------------------------------------------
-    a.footnote {
-        font-size: 75%;
-        line-height: 0;
-        position: relative;
-        vertical-align: baseline;
-        top: -0.5em;
-    }
-
-    a.footnote, a.glossary-link, .mute-glossary a.glossary-link:hover {
-        text-decoration: none;
-        border-bottom: 1px dashed lighten(@link-color, 20%);
-        
-    }
-
-    .mute-glossary {
-        a.glossary-link {
-            .transition(1s ease-in);
-            color: inherit;
-            border-bottom-color: transparent;
-        }
-    }
-
     hr {
         border-top: 1px dotted #dadbdc;
     }
@@ -1430,6 +1406,31 @@ table#translation-stats {
 
         h4 {
             margin-top: @line-height-computed;
+        }
+
+
+        // Link styles 
+        // ---------------------------------------------
+        a.footnote {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+            top: -0.5em;
+        }
+
+        a.footnote, a.glossary-link, .mute-glossary a.glossary-link:hover {
+            text-decoration: none;
+            border-bottom: 1px dashed lighten(@link-color, 20%);
+            
+        }
+
+        &.mute-glossary {
+            a.glossary-link {
+                .transition(1s ease-in);
+                color: inherit;
+                border-bottom-color: transparent;
+            }
         }
 
         .mark {

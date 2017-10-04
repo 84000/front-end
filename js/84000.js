@@ -1028,12 +1028,14 @@ $(document).ready(function() {
 				(function ($){
 					$.showGlossary = function(){
 
-				    	$("article").removeClass("mute-glossary");
+						var $translation = $(".translation");
+
+				    	$translation.removeClass("mute-glossary");
 
      			    	clearTimeout(hideTermsTimeout);
 
      			    	hideTermsTimeout = setTimeout(function(){
-     			    		$("article").addClass("mute-glossary");
+     			    		$translation.addClass("mute-glossary");
      			    	}, 1000);
 				    }
 				}(jQuery));

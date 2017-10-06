@@ -797,7 +797,7 @@ $(document).ready(function() {
     // -----------------------------------------------------------
     if($('html').hasClass('screen')){
 
-    	if($("article #glossary .glossary-item").length){
+    	if($("#glossary .glossary-item").length){
 
     		$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
 
@@ -808,8 +808,8 @@ $(document).ready(function() {
 				});
     			
 	            var isWorking = false,
-	                $allGlossaries = $("article #glossary .glossary-item"),
-	                $allParagraphs = $("article #summary p, article #introduction p, article .chapter p, article #colophon p, article #notes p");
+	                $allGlossaries = $("#glossary .glossary-item"),
+	                $allParagraphs = $("#summary p, #introduction p, #introduction ul>li, .chapter p, .chapter ul>li, #colophon p, #colophon ul>li, #notes p");
 
 	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
 						return +b.getAttribute('data-priority') - +a.getAttribute('data-priority');

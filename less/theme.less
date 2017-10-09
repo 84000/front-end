@@ -1557,6 +1557,7 @@ table#translation-stats {
             p {
                 text-align: justify;
                 width: 100%;
+                text-indent: 0;
                 .blockquote, &.mantra {
                     text-indent: 0;
                     display: inline-block;
@@ -1581,18 +1582,23 @@ table#translation-stats {
                 text-indent: 0;
                 margin-left: @line-height-computed;
             }
-            .line-group{
+            .line-group {
                 position: relative;
-                p {
+                > p, > li {
                     padding-left: @line-height-computed;
                     text-indent: -@line-height-computed;
+                }
+                .line-group {
+                    margin-top: (@line-height-computed / 2);
                 }
             } 
             ul {
                 list-style: none;
+                padding-left: 0px;
                 li {
                     margin-bottom: (@line-height-computed / 2);
                 }
+
             }
         }
 

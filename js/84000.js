@@ -809,7 +809,7 @@ $(document).ready(function() {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("#glossary .glossary-item"),
-	                $allParagraphs = $("#summary [id], #introduction [id], .chapter [id], #colophon [id], #notes [id]");
+	                $allParagraphs = $(".glossarize");
 
 	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
 						return +b.getAttribute('data-priority') - +a.getAttribute('data-priority');
@@ -900,10 +900,15 @@ $(document).ready(function() {
 				        	*/
 				        	//console.log(regEx);
 				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-				        	$paragraph.find("span, em, h5, li").not(".ignore").each(function(){
+				        	/*
+				        	$paragraph.find("span, em, h5").not(".ignore").each(function(){
 				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-				        	});
-
+				        	});*/
+							/*
+							var content = $paragraph.html();
+							content = content.replace(regEx , '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
+				        	$paragraph.html(content);
+							*/
 				        });
 	                },
 	                glossaryBackLink = function($glossaries, callback){
@@ -1227,8 +1232,11 @@ $(document).ready(function() {
 		if($target.hasClass("milestone")){
 			text = $target.text();
 		}
-		if($target.hasClass("footnote")){
+		else if($target.hasClass("footnote")){
 			text = $target.find(".footnote-number").text();
+		}
+		else if($target.find(".milestone").length) {
+			text = $target.find(".milestone").first().text();
 		}
 		$this.text(text);
 	});

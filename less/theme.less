@@ -1571,7 +1571,7 @@ table#translation-stats {
             }
 
             p+p {
-                text-indent: 2em;
+                text-indent: @line-height-computed;
                 margin-top: -(@line-height-computed / 2);
             }
             h2+p, h3+p, h4+p, p.space, div.space {
@@ -1584,7 +1584,7 @@ table#translation-stats {
             }
             .line-group {
                 position: relative;
-                > p, > li {
+                p {
                     padding-left: @line-height-computed;
                     text-indent: -@line-height-computed;
                 }
@@ -1594,7 +1594,7 @@ table#translation-stats {
             } 
             ul {
                 list-style: none;
-                padding-left: 0px;
+                padding-left: @line-height-computed;
                 li {
                     margin-bottom: (@line-height-computed / 2);
                 }

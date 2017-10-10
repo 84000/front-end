@@ -809,7 +809,7 @@ $(document).ready(function() {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("#glossary .glossary-item"),
-	                $allParagraphs = $("#summary p, #introduction p, #introduction ul>li, .chapter p, .chapter ul>li, #colophon p, #colophon ul>li, #notes p");
+	                $allParagraphs = $("#summary [id], #introduction [id], .chapter [id], #colophon [id], #notes [id]");
 
 	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
 						return +b.getAttribute('data-priority') - +a.getAttribute('data-priority');
@@ -900,7 +900,7 @@ $(document).ready(function() {
 				        	*/
 				        	//console.log(regEx);
 				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-				        	$paragraph.find("span, em").not(".ignore").each(function(){
+				        	$paragraph.find("span, em, h5, li").not(".ignore").each(function(){
 				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
 				        	});
 

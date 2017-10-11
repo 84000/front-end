@@ -47,29 +47,30 @@ $(document).ready(function() {
 
 	// Detect if an element is in view
 	// ---------------------------------------
+	(function ($) { 
+		$.fn.elementInView = function (){
 
-	$.fn.elementInView = function (){
+		    var $window = $(window);
+		    var docViewTop = $window.scrollTop();
+		    var docViewBottom = docViewTop + $window.height();
 
-	    var $window = $(window);
-	    var docViewTop = $window.scrollTop();
-	    var docViewBottom = docViewTop + $window.height();
+		    if(!this.offset()) return "missing";
 
-	    if(!this.offset()) return "missing";
+		    var elementTop = this.offset().top;
+		    var elementBottom = elementTop + this.height();
+		    
+		    var position = "inView";
+		    
+		    if(elementBottom <= docViewTop){
+		        position = "above";
+		    }
+		    else if(elementTop >= docViewBottom){
+		        position = "below";
+		    }
 
-	    var elementTop = this.offset().top;
-	    var elementBottom = elementTop + this.height();
-	    
-	    var position = "inView";
-	    
-	    if(elementBottom <= docViewTop){
-	        position = "above";
-	    }
-	    else if(elementTop >= docViewBottom){
-	        position = "below";
-	    }
-
-	    return position;
-	};
+		    return position;
+		};
+	}(jQuery));
 
 	// Handle links to the old reading room.
 	// ------------ DO NOT REMOVE ------------
@@ -123,6 +124,20 @@ $(document).ready(function() {
 				}
 			}
 		}
+	}(jQuery));
+
+	// Detect when user stops scrolling
+	// ---------------------------------------
+	(function ($) { 
+		$.fn.scrollEnd = function(callback, timeout) {  
+			var $this = this;       
+			$this.scroll(function(){
+				if ($this.data('scrollTimeout')) {
+					clearTimeout($this.data('scrollTimeout'));
+				}
+				$this.data('scrollTimeout', setTimeout(callback,timeout));
+			});
+		};
 	}(jQuery));
 
 	// Flash the button
@@ -290,7 +305,7 @@ $(document).ready(function() {
 		});
 	}
 
-	// Make multiple elements the same size
+	// Make multiple elements the same height
 	// ------------------------------------------
 	(function ($) { 
 		$.matchHeights = function () {
@@ -635,7 +650,6 @@ $(document).ready(function() {
 				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor small"})
 				    	        			.text("go there")
 				    	        			.on("click", function(e){
-									    		Cookies.remove('lastLocation', { domain: $.getDomain() });
 									    		$(this).parents("#page-alert").collapse('hide');
 									    	})
 				    	        	).append(
@@ -646,7 +660,6 @@ $(document).ready(function() {
 				    	        			.on("click", function(e){
 				    	        				e.preventDefault();
 				    	        				$.bookmark(lastLocation);
-									    		Cookies.remove('lastLocation', { domain: $.getDomain() });
 									    		$(this).parents("#page-alert").collapse('hide');
 									    	})
 				    	        	).append(
@@ -656,10 +669,12 @@ $(document).ready(function() {
 				    	        			.text("forget it")
 				    	        			.on("click", function(e){
 				    	        				e.preventDefault();
-									    		Cookies.remove('lastLocation', { domain: $.getDomain() });
 									    		$(this).parents("#page-alert").collapse('hide');
 									    	})
 				    	        	);
+
+				    	        	// Only show it once
+									Cookies.remove('lastLocation', { domain: $.getDomain() });
 
 							    	$alert.collapse('show');
 							    }
@@ -882,29 +897,12 @@ $(document).ready(function() {
 				        	
 				        }).each(function(){
 				        	
-				        	var $paragraph = $(this);
+				        	$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
 
-				        	// Avoid adding links in links.
-				        	// Also ignore content in span.ignore.
-				        	/*
-				        	var content = $paragraph.html()
-				        		.replace(new RegExp("(<a.*>.*)(" + term + ")(.*<\\/a>)","gi"), "$1--preserve--$2--preserve--$3")
-				        		.replace(new RegExp('(<span\\s.*ignore.*>.*)(' + term + ')(.*<\\/span>)',"gi"), "$1--preserve--$2--preserve--$3");
-				        	console.log(term);
-				        	
-				        	content = content.replace(regEx , '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
-				        	console.log(content);
-				        	content = content.replace(new RegExp("--preserve--","gi") , '');
-				        	
-				        	$paragraph.html(content);
-				        	*/
-				        	//console.log(regEx);
-				        	$paragraph.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-				        	/*
-				        	$paragraph.find("span, em, h5").not(".ignore").each(function(){
-				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-				        	});*/
 							/*
+							This faster alternative has some issues.
+							-----------------------------------
+							var $paragraph = $(this);
 							var content = $paragraph.html();
 							content = content.replace(regEx , '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
 				        	$paragraph.html(content);
@@ -1109,37 +1107,19 @@ $(document).ready(function() {
 	               parseGlossary($($(this).attr("href")));
 	           	});
 	     		
-	     		// Glossarize the currently visible elements
-	     		// -------------------------------------------
-	     		$(window).scrollEnd(function () {
-			    	if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
-			 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
-				}, 100);
-	     		$(window).scroll();
-	            
 	        });
     	}
          
     }
 
-    // Detect when user stops scrolling
-	// ---------------------------------------
-	$.fn.scrollEnd = function(callback, timeout) {  
-		var $this = this;       
-		$this.scroll(function(){
-			if ($this.data('scrollTimeout')) {
-				clearTimeout($this.data('scrollTimeout'));
-			}
-			$this.data('scrollTimeout', setTimeout(callback,timeout));
-		});
-	};
-
-
-    // Detect when user closes window
-	// ---------------------------------------
-	$(window).on("unload", function() {
+    // Glossarize the currently visible elements
+	// -------------------------------------------
+	$(window).scrollEnd(function () {
+		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
+		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 		if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
-	});
+	}, 100);
+	$(window).scroll();
 
     // Get the href content via ajax and put it in the specified element
     // ----------------------------------------------------------------- 

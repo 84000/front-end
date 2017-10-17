@@ -1411,7 +1411,7 @@ table#translation-stats {
 
         // Link styles 
         // ---------------------------------------------
-        a.footnote {
+        a.footnote-link {
             font-size: 75%;
             line-height: 0;
             position: relative;
@@ -1419,11 +1419,10 @@ table#translation-stats {
             top: -0.5em;
         }
 
-        a.footnote, a.glossary-link, &.mute-glossary a.glossary-link:hover {
+        a.footnote-link, a.glossary-link, &.mute-glossary a.glossary-link:hover {
             .transition(none);
             text-decoration: none;
             border-bottom: 1px dashed lighten(@link-color, 20%);
-            
         }
 
         &.mute-glossary {

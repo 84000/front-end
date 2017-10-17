@@ -1207,22 +1207,24 @@ $(document).ready(function() {
 	// -----------------------------------------
 	$("a.internal-ref").each(function(index){
 		var $this = $(this);
-		var $target = $($this.attr('href'));
 		var text = $this.text();
-		if($target.hasClass("milestone")){
-			text = $target.text();
+		if(!text){
+			var $target = $($this.attr('href'));
+			if($target.hasClass("milestone")){
+				text = $target.text();
+			}
+			else if($target.hasClass("footnote")){
+				text = $target.find(".footnote-number").text();
+			}
+			else if($target.find(".milestone").length) {
+				text = $target.find(".milestone").first().text();
+			}
+			$this.text(text);
 		}
-		else if($target.hasClass("footnote")){
-			text = $target.find(".footnote-number").text();
-		}
-		else if($target.find(".milestone").length) {
-			text = $target.find(".milestone").first().text();
-		}
-		$this.text(text);
 	});
 
 
-	// Eventy on body click
+	// Event on body click
 	// //------------------------------------------
 	$(document).on("click",'body', function(e) {
 	

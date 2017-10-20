@@ -23,6 +23,11 @@ p {
     .transition(.5s ease-in);
 }
 
+.btn-uppercase {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
 .close {
     opacity: 1;
     &:focus, &:hover {
@@ -57,6 +62,9 @@ blockquote {
 
 .text-bold {
     font-weight: bold;
+}
+.uppercase {
+    text-transform: uppercase;
 }
 
 a.disabled {
@@ -1237,7 +1245,7 @@ table#translation-stats {
 
     display: block;
     margin: 20px 0px;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     background: 
         url(../imgs/ornament/title-ornament.svg) no-repeat top center, 
@@ -1266,17 +1274,15 @@ table#translation-stats {
     }
 
     .title {
-
-        padding-bottom: (@line-height-computed / 2);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
         color: @brand-blue;
         border-bottom: 1px solid @panel-inner-border;
-
     }
 
     h3.title {
-
         font-weight: bold;
-
+        margin-top: 15px;
     }
 
     .notes {
@@ -1288,7 +1294,7 @@ table#translation-stats {
 
     .footer {
 
-        margin: 0px -15px -15px -15px;
+        margin: 0px -10px -10px -10px;
         padding: 0px;
         background-color: #fff;
         font-family: @font-family-sans-serif;
@@ -1313,6 +1319,7 @@ table#translation-stats {
 
             th, td {
                 border-color: darken(@brand-orange, 10%);
+                line-height: 1.1;
             }
 
         }
@@ -1701,20 +1708,21 @@ table#translation-stats {
                 text-transform: uppercase;
                 font-weight: bold;
                 font-family: @font-family-heading;
+                font-size: 15px;
 
                 .checkbox {
                     margin: 0px;
+                    label {
+                        font-weight: normal;
+                        text-transform: none;
+                        min-height: 0px;
+                    }
                 }
-                label {
-                    font-weight: normal;
-                    text-transform: none;
-                }
-
             }
 
             > .row {
-                padding-top: 15px;
-                padding-bottom: 15px;
+                padding-top: 10px;
+                padding-bottom: 10px;
 
                 hr {
                     margin-top:    10px;
@@ -1733,7 +1741,7 @@ table#translation-stats {
                 }
 
                 .well {
-                    background-color: #f5f5f5;
+                    background-color: #fff;
                 }
                 
             }

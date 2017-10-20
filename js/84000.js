@@ -376,7 +376,7 @@ $(document).ready(function() {
 
 	    		addLink($("<a>", {"href": "/"}).text("Reading Room Lobby"), $list);
 
-	    		addLink($("<a>", {"href": "http://84000.co/how-you-can-help/donate/#sap"}).text("Sponsor a Page"), $list);
+	    		addLink($("<a>", {"href": "http://84000.co/how-you-can-help/donate/#sap"}).text("Sponsor Translation"), $list);
 
 	    		addDivider($("#title h1").text(), $list);
 

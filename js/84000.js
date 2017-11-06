@@ -189,16 +189,17 @@ $(document).ready(function() {
 
 				var selector = $this.data("mark");
 				selector = (this.hash != selector) ? this.hash + " " + selector : selector;
+				var $targets = $(selector);
 
-				$(selector)
+				$targets
 					.removeClass("mark")
 					.removeClass("ease-all")
 					.addClass("mark");
 
 				setTimeout(function(){
-					$(selector).addClass("ease-all").removeClass("mark");
+					$targets.addClass("ease-all").removeClass("mark");
 					setTimeout(function(){
-						$(selector).removeClass("ease-all");
+						$targets.removeClass("ease-all");
 					},2000);
 				},3000);
 
@@ -824,7 +825,7 @@ $(document).ready(function() {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("#glossary .glossary-item"),
-	                $allParagraphs = $(".glossarize");
+	                $allMatchable = $(".glossarize").not("#glossary .glossarize").not("#acknowledgments .glossarize");
 
 	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
 						return +b.getAttribute('data-priority') - +a.getAttribute('data-priority');
@@ -834,7 +835,7 @@ $(document).ready(function() {
 	                    return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 	                    
 	                },
-	                glossarize = function($glossaries, $paragraphs, callback){
+	                glossarize = function($glossaries, $matchable, callback){
 	                
 						// Highlight instances of the glossary items in each
 						// paragraph with a link to the glossary.
@@ -847,12 +848,12 @@ $(document).ready(function() {
 						    	if($glossary.data("match") == "marked"){
 
 						    		// Markup marked glossaries
-						    		glossaryMarked($(this), $glossary, $paragraphs);
+						    		glossaryMarked($(this), $glossary, $matchable);
 							    }
 							    else {
 
 							    	// Markup matching glossaries
-							    	glossaryMatch($(this), $glossary, $paragraphs);
+							    	glossaryMatch($(this), $glossary, $matchable);
 
 							    }
 						    });
@@ -867,7 +868,7 @@ $(document).ready(function() {
 				    	// Therefore cannot use the \b or \w metacharacters. We have to enumerate all word boundaries ourselves.
 	                	return new RegExp("(^|\\s|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|—|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|es\\W|’s\\W|'s\\W|s’\\W|s'\\W)","gi");
 	                },
-	                glossaryMarked = function($term, $glossary, $paragraphs){
+	                glossaryMarked = function($term, $glossary, $matchable){
 
 	                	
 	                	// Glossarise the marked up terms and replace with links
@@ -875,7 +876,7 @@ $(document).ready(function() {
 				    	var glossaryId = $glossary.attr("id");
 				        var regEx = glossaryRegEx($term.text());
 				        
-				        $paragraphs.find("span.term:contains(" + $term.text() + ")").each(function(spanIndex){
+				        $matchable.find("span.term:contains(" + $term.text() + ")").each(function(spanIndex){
 
 				        	var $span = $(this);
 				        	var muteClass = spanIndex > 0 ? 'mute' : '' ;
@@ -883,7 +884,7 @@ $(document).ready(function() {
 				        	
 				        });
 	                },
-	                glossaryMatch = function($term, $glossary, $paragraphs){
+	                glossaryMatch = function($term, $glossary, $matchable){
 
 	                	// Glossarise any matches in the text
 
@@ -891,22 +892,10 @@ $(document).ready(function() {
 				    	var glossaryId = $glossary.attr("id");
 				    	var regEx = glossaryRegEx(term);
 				        
-				        $paragraphs.filter(function(){
-				        	
-				        	return regEx.test($(this).html());
-				        	
-				        }).each(function(){
+				        $matchable.each(function(){
 				        	
 				        	$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-
-							/*
-							This faster alternative has some issues.
-							-----------------------------------
-							var $paragraph = $(this);
-							var content = $paragraph.html();
-							content = content.replace(regEx , '$1<a href="#' + glossaryId + '" class="glossary-link mute pop-up">$2<\/a>$3');
-				        	$paragraph.html(content);
-							*/
+				        	
 				        });
 	                },
 	                glossaryBackLink = function($glossaries, callback){
@@ -924,7 +913,7 @@ $(document).ready(function() {
                             var $list = $("<ul>", {"class": "list-inline"});
 
                             // Find references to this glossary in the text
-                            $allParagraphs.has("a[href='#" + glossaryId + "']").each(function(refIndex){
+                            $allMatchable.has("a[href='#" + glossaryId + "']").each(function(refIndex){
                             	
                                 var $paragraph = $(this);
                                 var paragraph_id = $paragraph.attr("id");
@@ -932,20 +921,24 @@ $(document).ready(function() {
                                 	paragraph_id = $paragraph.parents("[id]").attr("id");
                                 }
 
-                                // Create a link to it
-                                //var title = "In " + $glossaryRef.parents("section").find("h3").text();
-                                var linkAttributes = {
-                                	"href": "#" + paragraph_id, 
-                                	"class": "scroll-to-anchor", 
-                                	"data-mark": "a[href='#" + glossaryId + "']"
-                                };
-                                var $link = $("<a>", linkAttributes).text(refIndex + 1);
-                                // Create a list item
-                                var $item = $("<li>");
-                                // Append the link to the item
-                                $item.append($link);
-                                // Append the item to the list
-                                $list.append($item);
+                                if(!$list.find("a[href='#" + paragraph_id + "']").length)
+                                {
+                                	// Create a link to it
+	                                //var title = "In " + $glossaryRef.parents("section").find("h3").text();
+	                                var linkAttributes = {
+	                                	"href": "#" + paragraph_id, 
+	                                	"class": "scroll-to-anchor", 
+	                                	"data-mark": "a[href='#" + glossaryId + "']"
+	                                };
+	                                var $link = $("<a>", linkAttributes).text($list.find("li").length + 1);
+	                                // Create a list item
+	                                var $item = $("<li>");
+	                                // Append the link to the item
+	                                $item.append($link);
+	                                // Append the item to the list
+	                                $list.append($item);
+                                }
+                                
                             });
                             
                             // Append the list to the glossary
@@ -968,7 +961,7 @@ $(document).ready(function() {
 
 						$higherPriority.each(function(){
 							var $otherGlossary = $(this);
-							glossarize($otherGlossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
+							glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
 	                        	isWorking = false;
                             	$otherGlossary.addClass("backlinked");
 	                        });
@@ -996,7 +989,7 @@ $(document).ready(function() {
 	                    if(!isWorking){
 	                        isWorking = true;
 	                        prepGlossary($glossary);
-							glossarize($glossary, $allParagraphs.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
+							glossarize($glossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
 	                        	isWorking = false;
                             	$glossary.addClass("backlinked");
 	                        });
@@ -1017,7 +1010,7 @@ $(document).ready(function() {
 				        setTimeout(function() {
 				            glossarize(
 				                $allGlossaries, 
-				                $allParagraphs,
+				                $allMatchable,
 				                function(){ 
 				                	$.wait("", true);
 				                }
@@ -1051,7 +1044,7 @@ $(document).ready(function() {
 	        			
 	        		    if (isWorking) return false;
 	        				
-	        			$allParagraphs.filter(':not(.glossarized)').each(function(){
+	        			$allMatchable.filter(':not(.glossarized)').each(function(){
 	        			
 	        			    var $paragraph = $(this);
 	     			    	var elementInViewStatus = $paragraph.elementInView();

@@ -1419,6 +1419,31 @@ table#translation-stats {
             margin-top: @line-height-computed;
         }
 
+        // Text classes 
+        // ---------------------------------------------
+
+        .name {
+            font-weight: bold;
+            font-style: italic;
+        }
+        .title {
+            font-style: italic;
+        }
+        .foreign {
+            font-style: italic;
+        }
+        .trailer {
+            font-style: italic;
+        }
+        .section-label {
+            font-weight: bold;
+        }
+        .mark {
+            padding: 0px;
+            background-color: @brand-blue;
+            color: #fff !important;
+        }
+
 
         // Link styles 
         // ---------------------------------------------
@@ -1442,18 +1467,6 @@ table#translation-stats {
                 color: inherit;
                 border-bottom-color: transparent;
             }
-        }
-
-        .mark {
-            padding: 0px;
-            /*
-            background-color: rgba(255, 255, 0, .25);
-            box-shadow: 0px 0px 2px 2px rgba(255, 255, 0, .25);*/
-            /*
-            background-color: @brand-orange;
-            box-shadow: 0px 0px 0px 10px @brand-orange;*/
-            background-color: @brand-blue;
-            color: #fff !important;
         }
 
         #title {
@@ -1529,11 +1542,6 @@ table#translation-stats {
             }
         }
 
-        .name {
-            font-weight: bold;
-        }
-
-        
         .panel-heading {
 
             .text-center();
@@ -1600,7 +1608,7 @@ table#translation-stats {
                 .line-group {
                     margin-top: (@line-height-computed / 2);
                 }
-            } 
+            }
             ul {
                 list-style: none;
                 padding-left: @line-height-computed;

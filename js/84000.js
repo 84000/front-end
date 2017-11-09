@@ -173,7 +173,7 @@ $(document).ready(function() {
 
 				//if($this.elementInView() != "inView"){
 
-					var $buttonContainer = $("#rewind-container");
+					var $buttonContainer = $("#rewind-btn-container");
 					var $button = $buttonContainer.find("button");
 
 					rewindHistory.push($(document).scrollTop());
@@ -334,68 +334,6 @@ $(document).ready(function() {
 		}
 	}(jQuery));
 
-	// Load page navigation from DOM
-	// --------------------------------------
-	if($('html').hasClass('screen')){
-		(function ($) { 
-
-			function addLink($link, $list, linkText) {
-
-				if(typeof(linkText) == "undefined"){
-					linkText = $link.text();
-				}
-
-    			var $listLink = $("<a>", {"href": $link.attr('href'), "class": $link.attr('class')}).text(linkText);
-
- 			    // Create a list item
-				var $item = $("<li>");
-
-				// Append the link to the item
-				$item.append($listLink);
-
-				// Append the item to the list
-				$list.append($item);
-			}
-
-			function addDivider(text, $list) {
-
- 			    // Create a list item
-				var $item = $("<li>", {"class": "header-text"}).text(text);
-
-				// Append the item to the list
-				$list.append($item);
-			}
-			
-			$.loadContentsDropdown = function () {
-		    	
-		    	var $list = $("#contents-dropdown");
-	    		$list.empty();
-
-	    		addDivider("84000", $list);
-
-	    		addLink($("<a>", {"href": "http://84000.co"}).text("Homepage"), $list);
-
-	    		addLink($("<a>", {"href": "/"}).text("Reading Room Lobby"), $list);
-
-	    		addLink($("<a>", {"href": "http://84000.co/how-you-can-help/donate/#sap"}).text("Sponsor Translation"), $list);
-
-	    		addDivider($("#title h1").text(), $list);
-
-	    		var $contentLinks = $("#contents table tr");
-	    		
-	    		$contentLinks.each(function(){
-
-	    			var $contentLink = $(this);
-	    			addLink($contentLink.find("> td > a"), $list);
-	    			
-	    		});
-
-	    	};
-	    }(jQuery));
-	    $.loadContentsDropdown();
-
-	}
-
 	// Close a dropdown on click
 	// --------------------------------------
 	$(document).on("click",'.dropdown-menu a:not(.remove-bookmark)', function(e) {
@@ -485,7 +423,7 @@ $(document).ready(function() {
 		    	    $.loadBookmarks();
 
 		    	    // Flash the button
-		    	    $("#bookmarks-opener .badge-notification").pulse();
+		    	    $("#bookmarks-btn-container .badge-notification").pulse();
 		    	}
 	    	}(jQuery));
 
@@ -499,46 +437,45 @@ $(document).ready(function() {
 		    	    var page = locationSplit[0];
 	    			var bookmarks = $.getBookmarks();
 	    			
-	    			var $list = $("#bookmarks-dropdown");
-	    			$list.empty();
-
-	    			$list.append($("<li>", {"class": "header-text"}).text("Your Bookmarks"));
+	    			var $tbody = $("table#bookmarks-list tbody");
+	    			var $tfoot = $("table#bookmarks-list tfoot");
+	    			
+	    			$tbody.empty();
+	    			$tfoot.empty();
 
 	    			if(bookmarks.length){
-	    			    
 
 	         			// show them in the list
 	         			for(var i = 0; i < bookmarks.length; i++){
 	         			    
 	         			    var href = bookmarks[i].page + bookmarks[i].hash;
-	         			    var cssClass = "";
-	         			    
-	         			    if(bookmarks[i].page == page){
-	         			        cssClass = "scroll-to-anchor";
-	         			    }
+	         			    var cssClass = (bookmarks[i].page == page) ? "scroll-to-anchor" : "";
 	         			    
 	         			    var $link = $("<a>", {"href": href, "class": cssClass}).text(bookmarks[i].title);
 	         			    var $removeLink = $("<a>", {"href": href, "class": "remove-bookmark", "title": "Remove this bookmark"}).html('<i class="fa fa-minus-circle"></i>');
 	         			    
-							// Create a list item
-							var $item = $("<li>");
+							var $trow = $("<tr>");
+							var $tcell1 = $("<td>");
+							var $tcell2 = $("<td>");
 
-							// Append the link to the item
-							$item.append($link);
-							$item.append($removeLink);
+							$tcell1.append($link);
+							$tcell2.append($removeLink);
 
-							// Append the item to the list
-							$list.append($item);
+							$trow.append($tcell1);
+							$trow.append($tcell2);
+							$tbody.append($trow);
 	         			}
 
-	         			$list.append($("<li>", {"class": "footer-text"}).text("Please note that bookmarks are stored as Cookies. Clearing cookies for this site will delete your bookmarks."));
+	         			var $row = $("<tr>").append($("<td>", {"colspan": "2"}).text("Please note that bookmarks are stored as Cookies. Clearing cookies for this site will delete your bookmarks."));
+	         			$tfoot.append($row);
 
-	    			}
+	         		}
 	    			else {
-	    				$list.append($("<li>", {"class": "footer-text"}).text("You don't have any bookmarks yet. Select milestones on the left of the text to bookmark that passage."));
+	    				var $row = $("<tr>").append($("<td>", {"colspan": "2"}).text("You don't have any bookmarks yet. Select milestones on the left of the text to bookmark that passage."));
+	         			$tfoot.append($row);
 	    			}
 	    			
-	    			$('#bookmarks-opener .badge').text(bookmarks.length);
+	    			$('#bookmarks-btn-container .badge').text(bookmarks.length);
 	    			
 	    		}
 	    	}(jQuery));
@@ -692,63 +629,18 @@ $(document).ready(function() {
 		});
 	}
 
-	// Set the size of a dropdown
+	// Close button
 	// --------------------------------------
-	$('.dropdown').on('show.bs.dropdown', function () {
-
-
-		var $dropdownMenu = $(this).find(".dropdown-menu");
-		var windowWidth = $(window).width();
-		var dropdownMaxWidth = (windowWidth - 80);
-		var dropdownNormalWidth = 600;
-		var dropdownWidth = dropdownMaxWidth < dropdownNormalWidth ? dropdownMaxWidth : dropdownNormalWidth;
-
-		$dropdownMenu.css({"width":  dropdownWidth + "px", "overflow": "hidden"});
-
-		$dropdownMenu.data("init-height", $dropdownMenu.height());
-
-		$dropdownMenu.height("0px");
-		
-	});
-
-	$('.dropdown').on('shown.bs.dropdown', function () {
-
-		var $dropdownMenu = $(this).find(".dropdown-menu");
-		var windowHeight = $(window).height();
-		var dropdownMaxHeight = (windowHeight - 100);
-		var dropdownInitHeight = $dropdownMenu.data("init-height");
-		var dropdownHeight = dropdownMaxHeight < dropdownInitHeight ? dropdownMaxHeight : dropdownInitHeight;
-
-		// Close the footer
-		// ---------------------------------
-		$('#fixed-footer').collapse('hide');
-
-		$dropdownMenu
-			.height(dropdownHeight + "px")
-			.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){ 
-				$(this).css({"overflow": "auto"})
-			});
-
-	});
-
-	$('.dropdown').on('hide.bs.dropdown', function () {
-
-		$(this).find(".dropdown-menu").css({"height": "auto", "overflow": "auto"});
-
-	});
-
-	// Footer close button
-	// --------------------------------------
-	$(document).on("click",'#fixed-footer .close', function(e) {
+	$(document).on("click",'.collapse .close', function(e) {
 	
         e.preventDefault();
         
 		// Close the footer
-        $('#fixed-footer').collapse('hide');
+        $(this).parents('.collapse').collapse('hide');
         
 	});
 
-	$(document).on("click",'#fixed-footer, #fixed-footer a', function(e) {
+	$(document).on("click",'.fixed-footer, .fixed-footer a, .fixed-sidebar, .fixed-sidebar a', function(e) {
 	
 		e.stopPropagation();
         
@@ -760,7 +652,7 @@ $(document).ready(function() {
 		$.popupFooterHeight = function () {
 
 			// Footer should not be more than 50% of the viewport
-			$("#fixed-footer .fix-height").css({"max-height": ($(window).height() * 0.5) + "px"});
+			$("#popup-footer .fix-height").css({"max-height": ($(window).height() * 0.5) + "px"});
 
 		}
 	}(jQuery));
@@ -775,7 +667,7 @@ $(document).ready(function() {
         var $this = $(this);
         
         // Hide the footer
-        $('#fixed-footer').removeClass('in');
+        $('#popup-footer').removeClass('in');
 
         var doPopUp = function(){
         	// Trigger pre-events
@@ -784,9 +676,9 @@ $(document).ready(function() {
 	        // Copy content to the footer
 	        var $content = $($this.attr("href")).clone();
 	        $content.attr("id", "");
-	        $('#fixed-footer .data-container').html($content);
+	        $('#popup-footer .data-container').html($content);
 	        // Show the footer
-			$('#fixed-footer').collapse('show');
+			$('#popup-footer').collapse('show');
         	
         }
 
@@ -804,6 +696,48 @@ $(document).ready(function() {
         	// Just do it
         	doPopUp();
         }
+
+	});
+
+	$(document).on("click",'a[href="#contents-sidebar"]', function(e) {
+	
+        e.preventDefault();
+
+        var $sidebar = $("#contents-sidebar");
+        
+        $('.fixed-footer, .fixed-sidebar').not("#contents-sidebar").collapse('hide');
+        
+        if(!$sidebar.hasClass("loaded")){
+        	var $toc = $("#contents > table");
+        	$sidebar.find(".data-container").html($toc.clone());
+        	$sidebar.addClass("loaded");
+        }
+
+        $('.lg #contents-sidebar .container').width(($(window).width() * 0.35) - 40);
+        $('.md #contents-sidebar .container').width(($(window).width() * 0.6) - 40);
+        $('.sm #contents-sidebar .container').width(($(window).width() * 0.75) - 40);
+        $('.xs #contents-sidebar .container').width(($(window).width()) - 40);
+
+		$sidebar.collapse('toggle');
+	});
+
+	$(document).on("click",'a[href="#bookmarks-sidebar"]', function(e) {
+	
+        e.preventDefault();
+        
+        $('.fixed-footer, .fixed-sidebar').not("#bookmarks-sidebar").collapse('hide');
+
+        $('.lg #bookmarks-sidebar .container').width(($(window).width() * 0.35) - 40);
+        $('.md #bookmarks-sidebar .container').width(($(window).width() * 0.6) - 40);
+        $('.sm #bookmarks-sidebar .container').width(($(window).width() * 0.75) - 40);
+        $('.xs #bookmarks-sidebar .container').width(($(window).width()) - 40);
+
+		$("#bookmarks-sidebar").collapse('toggle');
+	});
+
+	$(document).on("click",'.fixed-sidebar a', function(e) {
+
+		$(this).parents(".fixed-sidebar ").collapse('hide');
 
 	});
 
@@ -1185,13 +1119,13 @@ $(document).ready(function() {
 
 	// Rewind button
 	// -----------------------------------------
-	$("#rewind-container button").on('click', function (e) {
+	$("#rewind-btn-container button").on('click', function (e) {
 		var $button = $(this);
 		if(rewindHistory.length){
 			var target = rewindHistory.pop();
 			$("html, body").animate({ scrollTop: target}, "slow");
 			if(!rewindHistory.length){
-				$button.parents("#rewind-container").addClass("hidden");
+				$button.parents("#rewind-btn-container").addClass("hidden");
 			}
 		}
 	});
@@ -1222,7 +1156,7 @@ $(document).ready(function() {
 	$(document).on("click",'body', function(e) {
 	
 		// Close the footer
-        $('#fixed-footer').collapse('hide');
+        $('.fixed-footer, .fixed-sidebar').collapse('hide');
         if(typeof $.showGlossary === 'function'){ $.showGlossary(); };
         
 	});

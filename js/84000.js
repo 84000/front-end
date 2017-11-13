@@ -334,12 +334,6 @@ $(document).ready(function() {
 		}
 	}(jQuery));
 
-	// Close a dropdown on click
-	// --------------------------------------
-	$(document).on("click",'.dropdown-menu a:not(.remove-bookmark)', function(e) {
-		$("body").trigger("click")
-	});
-
 	// Get the location of this script
 	// --------------------------------------
 	var getScriptDomain = (function() {
@@ -475,7 +469,7 @@ $(document).ready(function() {
 	         			$tfoot.append($row);
 	    			}
 	    			
-	    			$('#bookmarks-btn-container .badge').text(bookmarks.length);
+	    			$('#bookmarks-btn .badge').text(bookmarks.length);
 	    			
 	    		}
 	    	}(jQuery));
@@ -511,7 +505,7 @@ $(document).ready(function() {
 	    	    }
 	    	    // Set the cookie
 	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
-	    	    
+
 	    	    // Reload bookmarks
 	    	    $.loadBookmarks();
 	    	});
@@ -735,7 +729,7 @@ $(document).ready(function() {
 		$("#bookmarks-sidebar").collapse('toggle');
 	});
 
-	$(document).on("click",'.fixed-sidebar a', function(e) {
+	$(document).on("click",'.fixed-sidebar a:not(.remove-bookmark)', function(e) {
 
 		$(this).parents(".fixed-sidebar ").collapse('hide');
 
@@ -956,7 +950,7 @@ $(document).ready(function() {
 				*/
 
 				(function ($){
-					$.showGlossary = function(){
+					$.showGlossaryLinks = function(){
 
 						var $translation = $(".translation");
 
@@ -983,7 +977,7 @@ $(document).ready(function() {
 	        			    var $paragraph = $(this);
 	     			    	var elementInViewStatus = $paragraph.elementInView();
 
-	     			    	$.showGlossary();
+	     			    	$.showGlossaryLinks();
 	     			    	
 	     					if(elementInViewStatus == 'inView'){
 	                            parseParagraph($paragraph);
@@ -1157,7 +1151,8 @@ $(document).ready(function() {
 	
 		// Close the footer
         $('.fixed-footer, .fixed-sidebar').collapse('hide');
-        if(typeof $.showGlossary === 'function'){ $.showGlossary(); };
+        // show glossary highlights
+        if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
         
 	});
 

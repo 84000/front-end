@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	// Disable page while loading js
+	// Disable page while processing js
 	// -------------------------------------
 	(function ($) { 
 		$.wait = function (text, cancel) {
@@ -140,7 +140,7 @@ $(document).ready(function() {
 		};
 	}(jQuery));
 
-	// Flash the button
+	// Flash a button
 	// --------------------------------------
 	(function ($) { 
 		$.fn.pulse = function () {
@@ -157,9 +157,11 @@ $(document).ready(function() {
     	    },100);
 		}
 	}(jQuery));
-
-	var rewindHistory = new Array;
 	
+	// Smoothe scroll to an anchor
+	// --------------------------------------
+	var rewindHistory = new Array;
+
 	$(document).on("click",'a.scroll-to-anchor', function() {
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			
@@ -229,7 +231,6 @@ $(document).ready(function() {
 		$.scrollToAnchor("#top");
 		return false;
 	});
-
 
 	// Image sizing
 	// --------------------------------------
@@ -338,6 +339,7 @@ $(document).ready(function() {
 	// --------------------------------------
 	var getScriptDomain = (function() {
 		/*
+		No longer working!
 	    var scriptSrc = $('script[src*="/84000.js"]').attr('src');
 	    var srcChunks = scriptSrc ? scriptSrc.split('/') : [] ;
 	    return function() { return srcChunks[0] == "http:" ? srcChunks.slice(0,3).join('/') : "" ; };
@@ -623,7 +625,7 @@ $(document).ready(function() {
 		});
 	}
 
-	// Close button
+	// Close button for a collapse element
 	// --------------------------------------
 	$(document).on("click",'.collapse .close', function(e) {
 	
@@ -631,12 +633,6 @@ $(document).ready(function() {
         
 		// Close the footer
         $(this).parents('.collapse').collapse('hide');
-        
-	});
-
-	$(document).on("click",'.fixed-footer, .fixed-footer a, .fixed-sidebar, .fixed-sidebar a', function(e) {
-	
-		e.stopPropagation();
         
 	});
 
@@ -652,7 +648,7 @@ $(document).ready(function() {
 	}(jQuery));
 	$.popupFooterHeight();
 
-	// Pop-up content in the footer
+	// Pop-up footer
 	// -----------------------------------------
 	$(document).on("click",'a.pop-up', function(e) {
 	
@@ -693,42 +689,33 @@ $(document).ready(function() {
 
 	});
 
-	$(document).on("click",'a[href="#contents-sidebar"]', function(e) {
+	// Pop-out sidebar
+	// -----------------------------------------
+	$(document).on("click",'a.show-sidebar', function(e) {
 	
         e.preventDefault();
+        var selector = $(this).attr('href');
 
-        var $sidebar = $("#contents-sidebar");
+        var $sidebar = $(selector);
         
-        $('.fixed-footer, .fixed-sidebar').not("#contents-sidebar").collapse('hide');
+        $('.fixed-footer, .fixed-sidebar').not(selector).collapse('hide');
         
-        if(!$sidebar.hasClass("loaded")){
+        if(selector == "#contents-sidebar" &&  !$sidebar.hasClass("loaded")){
         	var $toc = $("#contents > table");
         	$sidebar.find(".data-container").html($toc.clone());
         	$sidebar.addClass("loaded");
         }
 
-        $('.lg #contents-sidebar .container').width(($(window).width() * 0.35) - 40);
-        $('.md #contents-sidebar .container').width(($(window).width() * 0.6) - 40);
-        $('.sm #contents-sidebar .container').width(($(window).width() * 0.75) - 40);
-        $('.xs #contents-sidebar .container').width(($(window).width()) - 40);
+        $('.lg ' + selector + ' .container').width(($(window).width() * 0.35) - 40);
+        $('.md ' + selector + ' .container').width(($(window).width() * 0.6) - 40);
+        $('.sm ' + selector + ' .container').width(($(window).width() * 0.75) - 40);
+        $('.xs ' + selector + ' .container').width(($(window).width()) - 40);
 
 		$sidebar.collapse('toggle');
 	});
 
-	$(document).on("click",'a[href="#bookmarks-sidebar"]', function(e) {
-	
-        e.preventDefault();
-        
-        $('.fixed-footer, .fixed-sidebar').not("#bookmarks-sidebar").collapse('hide');
-
-        $('.lg #bookmarks-sidebar .container').width(($(window).width() * 0.35) - 40);
-        $('.md #bookmarks-sidebar .container').width(($(window).width() * 0.6) - 40);
-        $('.sm #bookmarks-sidebar .container').width(($(window).width() * 0.75) - 40);
-        $('.xs #bookmarks-sidebar .container').width(($(window).width()) - 40);
-
-		$("#bookmarks-sidebar").collapse('toggle');
-	});
-
+	// Close after click
+	// -----------------------------------------
 	$(document).on("click",'.fixed-sidebar a:not(.remove-bookmark)', function(e) {
 
 		$(this).parents(".fixed-sidebar ").collapse('hide');
@@ -926,28 +913,6 @@ $(document).ready(function() {
 	                    
 				    },
 				    hideTermsTimeout;
-	            
-	     		/*
-				(function ($) { 
-				    $.glossarizeAll = function () {
-
-				    	// Glossaries all paragraphs
-	     				// ---------------------------------------------
-
-				        $.wait("Please wait a few seconds while the text is prepared...");
-				        setTimeout(function() {
-				            glossarize(
-				                $allGlossaries, 
-				                $allMatchable,
-				                function(){ 
-				                	$.wait("", true);
-				                }
-				            );
-				        }, 500);
-				    }
-				}(jQuery));
-				$.glossarizeAll();
-				*/
 
 				(function ($){
 					$.showGlossaryLinks = function(){
@@ -1144,15 +1109,22 @@ $(document).ready(function() {
 		}
 	});
 
-
-	// Event on body click
-	// //------------------------------------------
+	// Body click event
+	// ------------------------------------------
 	$(document).on("click",'body', function(e) {
 	
 		// Close the footer
         $('.fixed-footer, .fixed-sidebar').collapse('hide');
         // show glossary highlights
         if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
+        
+	});
+
+	// Stop propagation to body click
+	// --------------------------------------
+	$(document).on("click",'.fixed-footer, .fixed-footer a, .fixed-sidebar, .fixed-sidebar a', function(e) {
+	
+		e.stopPropagation();
         
 	});
 

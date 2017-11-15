@@ -79,10 +79,6 @@
 
                     <form class="navbar-form navbar-right">
                         
-                        <div id="language-links">
-                            <a href="/test-pages/">English</a> | <a href="/test-pages/ch">中文</a>
-                        </div>
-
                         <div id="search-controls" class="input-group">
                             <input type="text" name="s" class="form-control" placeholder="Search..."/>
                             <span class="input-group-btn">
@@ -92,15 +88,8 @@
                             </span>
                         </div>
 
-                        <div id="bookmarks-container" class="dropdown">
-                                    
-                            <div id="bookmarks-opener" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <a href="#">Bookmarks <span class="badge badge-notification">0</span>
-                                </a>
-                            </div>
-                            
-                            <ul id="bookmarks-dropdown" class="bookmarks dropdown-menu" aria-labelledby="bookmarks-opener"/>
-                            
+                        <div id="language-links">
+                            <a href="/test-pages/">English</a> | <a href="/test-pages/ch">中文</a>
                         </div>
 
                     </form>

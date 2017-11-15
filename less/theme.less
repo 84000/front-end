@@ -645,6 +645,11 @@ i.fa-google-plus-square {
         }
     }
 
+    .navbar-form {
+        position: relative;
+        z-index: 2;
+    }
+
     // Mobile nav variations
     // --------------------------------------------------
     @media only screen and (max-width: @grid-float-breakpoint) {
@@ -683,7 +688,7 @@ i.fa-google-plus-square {
             margin-top: 0px;
             margin-bottom: 0px;
             border: 0px;
-            padding: 0px; 
+            padding: 0px;
 
             > * {
 
@@ -1283,6 +1288,12 @@ table#translation-stats {
 
 }
 
+.panel-default .panel-heading-danger {
+
+    background-color: @brand-red-alert;
+
+}
+
 // A panel for a section of a canon
 // --------------------------------------------
 .section-panel {
@@ -1495,6 +1506,7 @@ table.contents-table {
         }
         .mark {
             padding: 0px;
+            .box-shadow(0px 0px 0px 2px @state-warning-bg);
         }
 
         // Link styles 
@@ -1511,6 +1523,10 @@ table.contents-table {
             .transition(none);
             text-decoration: none;
             border-bottom: 1px dashed lighten(@link-color, 20%);
+            &.mark {
+                color: #000;
+                border-bottom-color: #000;
+            }
         }
 
         &.mute-glossary {

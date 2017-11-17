@@ -67,14 +67,148 @@
 
             <div class="container">
                 <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
-                    
                     <ul class="nav navbar-nav">
                         <li class="home<?php if($content_template === "home") echo ' active' ?>"><a href="/test-pages/">Home</a></li>
-                        <li class="news<?php if(array_search($content_template, ['news','post']) > -1) echo ' active' ?>"><a href="?template=news">News</a></li>
-                        <li class="reading-room"><a href="http://<?php echo reading_room_domain() ?>">Reading Room</a></li>
-                        <li class="about<?php if($content_template === "about") echo ' active' ?>"><a href="?template=about">About</a></li>
-                        <li class="resources<?php if($content_template === "resources") echo ' active' ?>"><a href="?template=resources">Resources</a></li>
-                        <li class="how-to-help<?php if(array_search($content_template, ['sponsor-page','sponsor-sutra','84000-circle', 'subscribe'])  > -1) echo ' active' ?>"><a href="?template=sponsor-page">How you can help</a></li>
+                        <li class="news dropdown-toggle-container <?php if(array_search($content_template, ['news','post']) > -1) echo 'active' ?>">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                News
+                                <span>
+                                    <i class="fa fa-plus"></i>
+                                    <i class="fa fa-minus"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="<?php if($content_template === "news") echo 'active' ?>">
+                                    <a href="?template=news">All news</a>
+                                </li>
+                                <li>
+                                    <a href="?template=news">Announcements</a>
+                                </li>
+                                <li>
+                                    <a href="?template=news">Events</a>
+                                </li>
+                                <li>
+                                    <a href="?template=news">People</a>
+                                </li>
+                                <li>
+                                    <a href="?template=news">In Depth</a>
+                                </li>
+                                <li>
+                                    <a href="?template=news">Newsletters</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="reading-room">
+                            <a href="http://<?php echo reading_room_domain() ?>">Reading Room</a>
+                        </li>
+                        <li class="about dropdown-toggle-container <?php if($content_template === "about") echo 'active' ?>">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                About
+                                <span>
+                                    <i class="fa fa-plus"></i>
+                                    <i class="fa fa-minus"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="<?php if($content_template === "about") echo 'active' ?>">
+                                    <a href="?template=about">Vison</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Urgency</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Origin</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Progress</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Global Impact</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Work Flow</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Translations</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Copyright</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Reading Room</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Team</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Translators</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Sponsors</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Endorsements</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Quotes</a>
+                                </li>
+                                <li>
+                                    <a href="?template=about">Contact</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="resources dropdown-toggle-container <?php if($content_template === "resources") echo 'active' ?>">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Resources
+                                <span>
+                                    <i class="fa fa-plus"></i>
+                                    <i class="fa fa-minus"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="?template=resources">Training</a>
+                                </li>
+                                <li>
+                                    <a href="?template=resources">Grants</a>
+                                </li>
+                                <li class="<?php if($content_template === "resources") echo 'active' ?>">
+                                    <a href="?template=resources">Tools</a>
+                                </li>
+                                <li>
+                                    <a href="?template=resources">Others</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="how-to-help dropdown-toggle-container <?php if(array_search($content_template, ['sponsor-page','sponsor-sutra','84000-circle', 'subscribe'])  > -1) echo 'active' ?>">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                How you can help
+                                <span>
+                                    <i class="fa fa-plus"></i>
+                                    <i class="fa fa-minus"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="<?php if($content_template === "sponsor-page") echo 'active' ?>">
+                                    <a href="?template=sponsor-page">Sponsor a Page</a>
+                                </li>
+                                <li class="<?php if($content_template === "sponsor-sutra") echo 'active' ?>">
+                                    <a href="?template=sponsor-sutra">Sponsor a Sutra</a>
+                                </li>
+                                <li class="<?php if($content_template === "84000-circle") echo 'active' ?>">
+                                    <a href="?template=84000-circle">84000 Circle</a>
+                                </li>
+                                <li>
+                                    <a href="?template=sponsor-page">Shop &amp; Give</a>
+                                </li>
+                                <li class="<?php if($content_template === "subscribe") echo 'active' ?>">
+                                    <a href="?template=subscribe">Subscribe to Our Newsletter</a>
+                                </li>
+                                <li>
+                                    <a href="?template=sponsor-page">FAQ</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <form class="navbar-form navbar-right">
@@ -96,11 +230,13 @@
 
                     <div class="navbar-right">
                         <div id="social" class="center-vertical">
-                            <span>Follow our work:</span>
+                            <span>Follow our work</span>
                             <a href="mailto:info@84000.co" target="_blank"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
                             <a href="http://www.facebook.com/Translate84000" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
                             <a href="https://twitter.com/Translate84000" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
                             <a href="http://www.youtube.com/Translate84000" target="_blank"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+                            <span>Chat</span>
+                            <a href="http://mp.weixin.qq.com/s/Y0K4_5CzA9oLtdflsJZfSQ" target="_blank"><i class="fa fa-weixin" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     
@@ -134,7 +270,10 @@
             <span class="visible-sm"></span>
             <span class="visible-md"></span>
             <span class="visible-lg"></span>
-            <span class="visible-print-inline"></span>
+            <span class="visible-print"></span>
+            <span class="visible-mobile"></span>
+            <span class="visible-desktop"></span>
+            <span class="event-hover"></span>
         </span>
 
         <!-- Bootstrap core JavaScript

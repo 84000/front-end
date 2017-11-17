@@ -20,6 +20,8 @@
                 </tr>
             </tbody>
         </table>
-        <a href="?template=sponsor-page" class="btn btn-primary pull-right">Sponsor a page now</a>
+        <div class="text-center">
+            <a href="?template=sponsor-page" class="btn btn-primary">Sponsor a page now</a>
+        </div>
     </div>
 </div>

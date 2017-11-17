@@ -2,7 +2,7 @@
 
     <div class="md-adjacent-panels">
         <span class="md-three-quarter-width foreground">
-            <div class="panel movie">
+            <div class="panel panel-default movie">
                 <iframe src="http://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720" allowfullscreen></iframe>
             </div>
         </span>
@@ -29,35 +29,35 @@
                     <ol class="sutra-list">
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                         <li>
                             <a href="#">The Sutra on Dependent Arising</a>
-                            <p class="date">Dec 2016</p>
+                            <p class="date">13th December 2016</p>
                         </li>
                     </ol>
 
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="media-panel-body">
                                     <a href="#">Support by Spreading the Word</a>
-                                    <p class="date">Dec 2016</p>
+                                    <p class="date">13th December 2016</p>
                                     <p>Rinpoche thanks supporters and urges everyone to spread the word: "Please talk about it. Please share our existence. Please share the information."</p>
                                     <a href="#">Read more</a>
                                 </div>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="media-panel-body">
                                     <a href="#">Support by Spreading the Word</a>
-                                    <p class="date">Dec 2016</p>
+                                    <p class="date">13th December 2016</p>
                                     <p>Rinpoche thanks supporters and urges everyone to spread the word: "Please talk about it. Please share our existence. Please share the information."</p>
                                     <a href="#">Read more</a>
                                 </div>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="media-panel-body">
                                     <a href="#">Support by Spreading the Word</a>
-                                    <p class="date">Dec 2016</p>
+                                    <p class="date">13th December 2016</p>
                                     <p>Rinpoche thanks supporters and urges everyone to spread the word: "Please talk about it. Please share our existence. Please share the information."</p>
                                     <a href="#">Read more</a>
                                 </div>
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="media-panel-body">
                                     <a href="#">Support by Spreading the Word</a>
-                                    <p class="date">Dec 2016</p>
+                                    <p class="date">13th December 2016</p>
                                     <p>Rinpoche thanks supporters and urges everyone to spread the word: "Please talk about it. Please share our existence. Please share the information."</p>
                                     <a href="#">Read more</a>
                                 </div>
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="media-panel-body">
                                     <a href="#">Support by Spreading the Word</a>
-                                    <p class="date">Dec 2016</p>
+                                    <p class="date">13th December 2016</p>
                                     <p>Rinpoche thanks supporters and urges everyone to spread the word: "Please talk about it. Please share our existence. Please share the information."</p>
                                     <a href="#">Read more</a>
                                 </div>
@@ -173,7 +173,7 @@
                                 </div>
                                 <div class="media-panel-body">
                                     <a href="#">Support by Spreading the Word</a>
-                                    <p class="date">Dec 2016</p>
+                                    <p class="date">13th December 2016</p>
                                     <p>Rinpoche thanks supporters and urges everyone to spread the word: "Please talk about it. Please share our existence. Please share the information."</p>
                                     <a href="#">Read more</a>
                                 </div>

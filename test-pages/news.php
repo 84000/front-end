@@ -2,49 +2,23 @@
 
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
-            <div class="row">
-                <div class="col-md-3 col-md-pad-top col-md-merge-right">
 
-                    <ul class="side-nav">
-                        <li class="active">
-                            <a href="#">All news</a>
-                        </li>
-                        <li>
-                            <a href="#">Announcements</a>
-                        </li>
-                        <li>
-                            <a href="#">Events</a>
-                        </li>
-                        <li>
-                            <a href="#">People</a>
-                        </li>
-                        <li>
-                            <a href="#">In Depth</a>
-                        </li>
-                        <li>
-                            <a href="#">Newsletters</a>
-                        </li>
-                    </ul>
-
-                </div>
-
-                <div class="col-md-9 col-md-merge-left">
                     <div class="panel panel-default foreground listing">
 
                         <div class="panel-img-header">
                             <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg">
-                            <h1 class="bg-orange">News</h1>
+                            <h1 class="bg-orange">All News</h1>
                         </div>
 
                         <div class="panel-body">
                             
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-sm-4">
                                     <a href="?template=post">
                                         <img src="/imgs/Rooster-v1t-224x112.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-sm-8">
                                     <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
@@ -56,12 +30,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-sm-4">
                                     <a href="?template=post">
                                         <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-sm-8">
                                     <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
@@ -73,12 +47,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-sm-4">
                                     <a href="?template=post">
                                         <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-sm-8">
                                     <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
@@ -90,12 +64,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-sm-4">
                                     <a href="?template=post">
                                         <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-sm-8">
                                     <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
@@ -107,12 +81,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-sm-4">
                                     <a href="?template=post">
                                         <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-sm-8">
                                     <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
@@ -124,12 +98,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-sm-4">
                                     <a href="?template=post">
                                         <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-sm-8">
                                     <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
@@ -141,12 +115,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-sm-4">
                                     <a href="?template=post">
                                         <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-sm-8">
                                     <a href="?template=post" class="title">
                                         <h4>Happy Losar 2017!</h4>
                                     </a>
@@ -183,9 +157,6 @@
 
                         </div>
 
-                    </div>
-                        
-                </div>
             </div>
         </div>
         <div class="col-md-3 col-md-merge-left col-md-pad-top">

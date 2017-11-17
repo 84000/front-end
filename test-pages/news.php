@@ -5,8 +5,8 @@
 
                     <div class="panel panel-default foreground listing">
 
-                        <div class="panel-img-header">
-                            <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg">
+                        <div class="panel-img-header thumbnail">
+                            <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
                             <h1 class="bg-orange">All News</h1>
                         </div>
 

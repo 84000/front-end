@@ -208,7 +208,7 @@
 
                     <div class="row">
                         <?php foreach ($gallery as $index => $gallery_image) {  ?>
-                            <div class="col-sm-3 gallery">
+                            <div class="col-xs-6 col-sm-3 gallery">
                                 <a href="<?php echo $gallery_image->img_src ?>" 
                                     class="thumbnail" 
                                     data-lightbox="slideshow" 

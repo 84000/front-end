@@ -422,12 +422,12 @@ body.wait > #wait{
 // -------------------------------------------
 .panel-img-header {
 
-    width: 100%;
+    height: 400px;
     position: relative;
+    background-color: #333;
 
-    img {
+    img.stretch {
         width: 100%;
-        .img-responsive();
     }
 
     h1 {
@@ -452,18 +452,15 @@ body.wait > #wait{
         background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.65);
     }
 
-    @media (min-width: @screen-sm) {
+    blockquote {
+        position: absolute;
+        margin: 0px;
+        bottom: 20px;
+        left: 20px;
 
-        blockquote {
-            position: absolute;
-            margin: 0px;
-            bottom: 20px;
-            left: 20px;
-
-            &, footer {
-                color: #fff;
-                text-shadow: 0 1px 2px rgba(0,0,0,.6);
-            }
+        &, footer {
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,.6);
         }
     }
 
@@ -474,8 +471,19 @@ body.wait > #wait{
         }
 
         blockquote {
-            margin-bottom: 0px;
+            line-height: 1;
         }
+    }
+
+    @media only screen and (max-width: @screen-sm-max) {
+
+        position: relative;
+        display: block;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+        padding-bottom: 56.25%;
+
     }
 
 }
@@ -1151,18 +1159,21 @@ table#translation-stats {
     tbody {
         > tr {
             > td {
+                vertical-align: middle;
                 font-size: 44px;
                 line-height: 44px;
                 font-family: @font-family-stats;
+                text-align: left;
             }
             > th {
                 vertical-align: middle;
-                font-size: @font-size-small;
-                line-height: 1.1;
+                font-size: 15px;
+                line-height: 1.3;
                 font-family: @font-family-bold;
                 font-weight: normal;
                 text-transform: uppercase;
-                padding-left: 10px;
+                padding: 0px 6px;
+                text-align: left;
             }
         }
     }
@@ -1262,11 +1273,13 @@ table#translation-stats {
 // Thumbnail 
 // -------------------------------------------
 .thumbnail {
-    height: 100px;
     width: 100%;
     display: inline-block;
     overflow: hidden;
-    margin-bottom: @grid-gutter-width;
+    .gallery & {
+        height: 100px;
+        margin-bottom: @grid-gutter-width;
+    }
 }
 
 // Home page
@@ -1379,6 +1392,7 @@ table#translation-stats {
         margin: 0px;
         border-bottom: 1px solid @gray-border-color;
         .box-shadow(none);
+        padding-bottom: 40px;
     }
 }
 

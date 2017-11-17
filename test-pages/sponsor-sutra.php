@@ -4,8 +4,8 @@
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default foreground">
                 
-                <div class="panel-img-header">
-                    <img src="/imgs/text15.jpg">
+                <div class="panel-img-header thumbnail">
+                    <img src="/imgs/text15.jpg" data-max-horizontal-crop="500" data-max-vertical-crop="100">
                     <h1 class="bg-blue">Sponsor a Sutra</h1>
                 </div>
 

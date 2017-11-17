@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default foreground">
-                <div class="panel-img-header">
-                    <img src="/imgs/DSCN0799-2.jpg">
+                <div class="panel-img-header thumbnail">
+                    <img src="/imgs/text7.jpg">
                     <h1 class="bg-orange">Tools</h1>
                 </div>
                 <div class="panel-body">

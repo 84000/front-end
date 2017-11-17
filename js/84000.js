@@ -284,14 +284,13 @@ $(document).ready(function() {
 					'height': ''
 				});
 				var $viewport = $this.parents(".thumbnail");
-				var viewport_width = parseFloat($viewport.width());
-				var viewport_height = parseFloat($viewport.height());
+				var viewport_width = parseFloat($viewport.outerWidth());
+				var viewport_height = parseFloat($viewport.outerHeight());
 				var image_width = parseFloat($this.width());
 				var image_height = parseFloat($this.height());
 				var image_ratio = image_width/image_height;
-				var min_width_margin = -100;
-				var min_height_margin = -100;
-				//TO DO: set these data attributes backend
+				var min_width_margin = -300;
+				var min_height_margin = -300;
 				if($this.data("max-horizontal-crop")){
 					min_width_margin = -(parseInt($this.data("max-horizontal-crop")));
 				}

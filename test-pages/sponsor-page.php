@@ -4,8 +4,8 @@
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default foreground">
                 
-                <div class="panel-img-header">
-                    <img src="/imgs/text7.jpg">
+                <div class="panel-img-header thumbnail">
+                    <img src="/imgs/DSCN0799-2.jpg" data-max-horizontal-crop="200" data-max-vertical-crop="100">
                     <h1 class="bg-blue">Sponsor a Page</h1>
                 </div>
 

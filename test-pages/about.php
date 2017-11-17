@@ -4,8 +4,8 @@
         <div class="col-md-9 col-md-merge-right">
 
             <div class="panel panel-default foreground">
-                <div class="panel-img-header">
-                    <img src="/imgs/Photo-27-10-13-7-37-58-pm.jpg">
+                <div class="panel-img-header thumbnail">
+                    <img src="/imgs/Photo-27-10-13-7-37-58-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
                     <h1 class="bg-red">Vision</h1>
                     <blockquote>
                         <p>We will be making available to people of all nationalities everything they need to follow the Buddha's path to infinite liberation</p>

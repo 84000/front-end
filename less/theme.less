@@ -1255,14 +1255,14 @@ table#translation-stats {
         }
     }
 
-    .panel-body img {
-        .img-responsive();
+    img {
         margin-top: (@line-height-computed / 2);
     }
 
     .title {
         color: @brand-orange;
     }
+
     @media only screen and (max-width: @screen-sm) {
         .panel-body img {
             margin: auto;
@@ -1279,6 +1279,11 @@ table#translation-stats {
     .gallery & {
         height: 100px;
         margin-bottom: @grid-gutter-width;
+    }
+    .listing &{
+        background-color: #f5f5f5;
+        border: 1px solid #e5e5e5;
+        height: 114px;
     }
 }
 

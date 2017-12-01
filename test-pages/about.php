@@ -3,16 +3,20 @@
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
 
-            <div class="panel panel-default foreground">
+            <div class="panel panel-default main-panel foreground">
                 <div class="panel-img-header thumbnail">
-                    <img src="/imgs/Photo-27-10-13-7-37-58-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
+
                     <h1 class="bg-red">Vision</h1>
+                    <img src="/imgs/Photo-27-10-13-7-37-58-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
+
+                </div>
+                <div class="panel-body">
+
                     <blockquote>
                         <p>We will be making available to people of all nationalities everything they need to follow the Buddha's path to infinite liberation</p>
                         <footer>Dzongsar Khyentse Rinpoche</footer>
                     </blockquote>
-                </div>
-                <div class="panel-body">
+
                     <h2>Help us Preserve a Living Tradition</h2>
 
                     <p>84000: Translating the Words of the Buddha is a global non-profit initiative to translate all of the Buddha’s words into modern languages, and to make them available to <strong>everyone</strong>.</p>

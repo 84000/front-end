@@ -260,7 +260,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <ul class="list-unstyled">
+                    <ul class="list-archive">
                         <li>
                             <a href="#">February 2017</a>
                         </li>

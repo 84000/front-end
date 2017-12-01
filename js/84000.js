@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$.noConflict();
+jQuery(document).ready(function($) {
 
 	// Disable page while processing js
 	// -------------------------------------
@@ -22,7 +23,7 @@ $(document).ready(function() {
 			    }
 			}
 		}
-	}(jQuery));
+	}($));
 
 	// Media size
 	// --------------------------------------
@@ -63,7 +64,7 @@ $(document).ready(function() {
 				.addClass(mode)
 				.addClass(hover);
 		}
-	}(jQuery));
+	}($));
 	$.mediaSize();
 
 	// Detect if an element is in view
@@ -91,7 +92,7 @@ $(document).ready(function() {
 
 		    return position;
 		};
-	}(jQuery));
+	}($));
 
 	// Handle links to the old reading room.
 	// ------------ DO NOT REMOVE ------------
@@ -145,7 +146,7 @@ $(document).ready(function() {
 				}
 			}
 		}
-	}(jQuery));
+	}($));
 
 	// Detect when user stops scrolling
 	// ---------------------------------------
@@ -159,7 +160,7 @@ $(document).ready(function() {
 				$this.data('scrollTimeout', setTimeout(callback,timeout));
 			});
 		};
-	}(jQuery));
+	}($));
 
 	// Flash a button
 	// --------------------------------------
@@ -177,7 +178,7 @@ $(document).ready(function() {
 	    	    },750);
     	    },100);
 		}
-	}(jQuery));
+	}($));
 	
 	// Smoothe scroll to an anchor
 	// --------------------------------------
@@ -324,7 +325,7 @@ $(document).ready(function() {
 			});
 			return this;
 		};
-	}(jQuery));
+	}($));
 	$('.thumbnail img').on("load", function () {
 		$(this).centerWithMargins();
 	});
@@ -333,10 +334,10 @@ $(document).ready(function() {
 	// Lightbox
 	// -------------------------------------------------------
 	if($('html').hasClass('screen') && $('[data-lightbox="slideshow"]').length) {
-		jQuery.when(
-		    jQuery.getScript("/js/lightbox2-master/src/js/lightbox.js" ),
-		    jQuery.Deferred(function( deferred ){
-		        jQuery( deferred.resolve );
+		$.when(
+		    $.getScript("/js/lightbox2-master/src/js/lightbox.js" ),
+		    $.Deferred(function( deferred ){
+		        $( deferred.resolve );
 		    })
 		).done(function(){
 
@@ -369,7 +370,7 @@ $(document).ready(function() {
 				});
 			}
 		}
-	}(jQuery));
+	}($));
 
 	// Get the location of this script
 	// --------------------------------------
@@ -405,7 +406,7 @@ $(document).ready(function() {
 		    	    
 		    	    return bookmarks;
 		    	}
-	    	}(jQuery));
+	    	}($));
 
 	    	(function ($) { 
 		    	$.getDomain = function () {
@@ -414,7 +415,7 @@ $(document).ready(function() {
 		    		//console.log(domain);
 		    		return domain;
 		    	}
-		    }(jQuery));
+		    }($));
 
 	    	(function ($) { 
 		    	$.fn.bookmarkData = function () {
@@ -428,7 +429,7 @@ $(document).ready(function() {
 		    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
 		    	    return {'page': page, 'hash': hash, 'title': title};
 		    	}
-	    	}(jQuery));
+	    	}($));
 
 	    	(function ($) { 
 		    	$.bookmark = function (bookmarkData) {
@@ -457,7 +458,7 @@ $(document).ready(function() {
 		    	    // Flash the button
 		    	    $("#bookmarks-btn-container .badge-notification").pulse();
 		    	}
-	    	}(jQuery));
+	    	}($));
 
 	    	(function ($) { 
 	    		$.loadBookmarks = function () {
@@ -510,7 +511,7 @@ $(document).ready(function() {
 	    			$('#bookmarks-btn .badge').text(bookmarks.length);
 	    			
 	    		}
-	    	}(jQuery));
+	    	}($));
 	    	$.loadBookmarks();
 	    	
 	    	$(document).on("click",'a.milestone', function(e) {
@@ -568,7 +569,7 @@ $(document).ready(function() {
 					});
 
 				}
-			}(jQuery));
+			}($));
 
 			(function ($) { 
 	    		$.lastLocationOption = function () {
@@ -652,7 +653,7 @@ $(document).ready(function() {
 		    	        }
 		    	    }
 	    		}
-	    	}(jQuery));
+	    	}($));
 
 	    	if($("#page-alert").length){
 	    		$.lastLocationOption();
@@ -681,7 +682,7 @@ $(document).ready(function() {
 			$("#popup-footer .fix-height").css({"max-height": ($(window).height() * 0.5) + "px"});
 
 		}
-	}(jQuery));
+	}($));
 	$.popupFooterHeight();
 
 	// Pop-up footer
@@ -963,7 +964,7 @@ $(document).ready(function() {
      			    		$translation.addClass("mute-glossary");
      			    	}, 1000);
 				    }
-				}(jQuery));
+				}($));
 
 				(function ($) { 
 	    			$.glossarizeVisibleParagraphs = function () {
@@ -992,7 +993,7 @@ $(document).ready(function() {
 	     				});
 	     				
 	    			}
-	    		}(jQuery));
+	    		}($));
 	    		
 	    		(function ($) { 
 	    			$.backlinkVisibleGlossaries = function () {
@@ -1019,7 +1020,7 @@ $(document).ready(function() {
 	     				});
 	     				
 	    			}
-	    		}(jQuery));
+	    		}($));
 	            
 	     		
 	     		// Also implement on showing in pop-up footer:

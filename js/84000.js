@@ -685,6 +685,15 @@ jQuery(document).ready(function($) {
 	}($));
 	$.popupFooterHeight();
 
+	// Position blockquote in header
+	// -----------------------------------------
+	$(".panel.main-panel > .panel-body blockquote:first-child").each(function(){
+		if(!$("html.xs").length){
+			var $this = $(this);
+			$this.css({'top': -($this.outerHeight() + 30) });
+		}
+	});
+
 	// Pop-up footer
 	// -----------------------------------------
 	$(document).on("click",'a.pop-up', function(e) {

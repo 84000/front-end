@@ -3,14 +3,14 @@
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
 
-            <div class="panel panel-default panel-main foreground">
+            <div class="panel panel-default listing-panel foreground">
 
                 <div class="panel-img-header thumbnail">
                     <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
                     <h1 class="bg-orange">All News</h1>
                 </div>
 
-                <div class="panel-body listing">
+                <div class="panel-body">
                     
                     <div class="row">
                         <div class="col-sm-4">

@@ -381,12 +381,18 @@ body .container > .panel, .panel.main-panel {
             blockquote:first-child {
                 position: absolute;
                 top: -130px;
+                left: 0px;
+                right: 0px;
                 font-size: 17px;
                 padding-top: 0px;
                 padding-bottom: 0px;
-                &, footer {
-                    color: #fff;
-                    text-shadow: 0 1px 1px rgba(0,0,0,1);
+                background-color: rgba(0, 0, 0, 0.5);
+                border: 0px;
+                margin: 0px;
+                padding: 20px 30px;
+                color: #fff;
+                footer {
+                    color: #ddd;
                 }
             }
         }
@@ -1262,13 +1268,6 @@ ul.list-archive {
         text-transform: uppercase;
     }
 
-    .media-panel-image {
-        .img-responsive();
-        img {
-            width: 100%;
-        }
-    }
-
     .media-panel-body {
         > * {
             display: block;
@@ -1333,8 +1332,9 @@ ul.list-archive {
 // -------------------------------------------
 .thumbnail {
     width: 100%;
-    display: inline-block;
+    display: block;
     overflow: hidden;
+    background-color: #eee;
     img.stretch {
         width: 100%;
     }

@@ -690,7 +690,7 @@ jQuery(document).ready(function($) {
 	$(".panel.main-panel > .panel-body blockquote:first-child").each(function(){
 		if(!$("html.xs").length){
 			var $this = $(this);
-			$this.css({'top': -($this.outerHeight() + 30) });
+			$this.css({'top': -($this.outerHeight()) });
 		}
 	});
 

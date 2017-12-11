@@ -187,10 +187,18 @@ p.form-control {
 
     display: table;
 
+    &.panel-margin {
+        margin-bottom: @line-height-computed;
+    }
+
     > span, > a {
 
         display: table-cell;
-        vertical-align: top;
+        vertical-align: middle;
+
+        >  .panel {
+            margin-bottom: 0px;
+        }
 
     }
 }
@@ -217,6 +225,12 @@ p.form-control {
 
         }
     }
+}
+
+.max-width-sm {
+    max-width: @screen-sm;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 // Dot seperators on inline list
@@ -345,7 +359,13 @@ body > footer {
     .md-three-quarter-width {
         width: 75%;
     }
+    .col-md-top-left {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
 }
+
 
 // Full body panel
 // -------------------------------------------
@@ -716,6 +736,9 @@ i.fa-google-plus-square {
             &:last-child {
                 padding-right: 0px;
             }
+        }
+        > a:hover > i {
+            color: @brand-orange;
         }
 
         > span {
@@ -1373,6 +1396,9 @@ ul.list-archive {
 // Home page
 // ----------------------------------
 .home {
+    .movie-container {
+        background-color: #333
+    }
     .movie {
 
         width:100%;
@@ -1401,7 +1427,6 @@ ul.list-archive {
                 top: 0;
                 left: 0;
                 bottom: 0;
-                
 
             }
 

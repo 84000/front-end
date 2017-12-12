@@ -737,9 +737,6 @@ i.fa-google-plus-square {
                 padding-right: 0px;
             }
         }
-        > a:hover > i {
-            color: @brand-orange;
-        }
 
         > span {
             font-family: @font-family-heading;
@@ -747,12 +744,17 @@ i.fa-google-plus-square {
             padding-left: 10px;
         }
 
-        i {
-
-            font-size: 30px;
-            color: @text-color;
-            
+        > a {
+            i {
+                font-size: 30px;
+                color: @text-color;
+                .transition(color .3s ease-out);
+            }
+            &:hover > i {
+                color: @brand-orange;
+            }
         }
+        
     }
 
     .navbar-form {

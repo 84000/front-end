@@ -1,7 +1,7 @@
 // General variations from bootstrap
 // ----------------------------------------
 
-@btn-icon-size: 20px;
+@btn-icon-size: 18px;
 
 p {
     a {
@@ -25,11 +25,13 @@ label, .label {
 .btn {
     font-family: @font-family-heading;
     font-size: @font-size-small;
+    padding: 8px 12px;
     text-transform: uppercase;
     white-space: normal;
     .transition(.5s ease-in);
     i {
         font-size: @btn-icon-size;
+        display: block;
     }
 }
 
@@ -2839,4 +2841,17 @@ ul.responsive-tabs__list{
             border-bottom-color: @brand-red-alert !important;
         }
     }
+}
+
+.environment-warning {
+    position: fixed;
+    z-index: 9;
+    top: 0px;
+    left: 0px;
+    background-color: @brand-orange;
+    color: #fff;
+    padding: 2px 7px;
+    font-size: @font-size-small;
+    font-family: @font-family-sans-serif;
+    border-bottom-right-radius: 4px;
 }

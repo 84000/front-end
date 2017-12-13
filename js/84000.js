@@ -1122,6 +1122,16 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	// Log an error
+	// ------------------------------------------
+	$(".client-error").each(function(e){
+		$.ajax({
+			url: "/log-error.html",
+			method: "POST",
+			data: {'url' : window.location.href}
+		});
+	});
+
 	// Rewind button
 	// -----------------------------------------
 	$("#rewind-btn-container button").on('click', function (e) {

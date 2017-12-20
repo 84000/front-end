@@ -232,14 +232,24 @@ p.form-control {
     }
 }
 
+// Max width is sm size
+// -----------------------------------
 .max-width-sm {
     max-width: @screen-sm;
     margin-left: auto;
     margin-right: auto;
 }
 
+// Set a min height for md of greater
+// -----------------------------------
+@media only screen and (min-width: @screen-md) {
+    .min-height-md {
+        min-height: 520px;
+    }
+}
+
 // Dot seperators on inline list
-// ------------------------------
+// -----------------------------------
 .list-inline.inline-dots {
     margin-bottom: 0px;
     > li {
@@ -255,7 +265,7 @@ p.form-control {
 }
 
 // Bar seperators on inline list
-// ------------------------------
+// -----------------------------------
 .list-inline.inline-bars {
     margin-bottom: 0px;
     > li {

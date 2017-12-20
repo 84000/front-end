@@ -354,12 +354,12 @@ jQuery(document).ready(function($) {
 				// Match to a particular element
 				$("[data-match-height].match-this-height:visible").each(function(){
 					var $this = $(this)
-					heights[$this.data('match-height')] = $this.height();
+					heights[$this.data('match-height')] = $this.outerHeight();
 				});
 				// Match to the tallest in the group
 				$("[data-match-height]:not(.match-this-height):visible").each(function(){
 					var $this = $(this)
-					var this_height = $this.height();
+					var this_height = $this.outerHeight();
 					var height_group = $this.data('match-height');
 					if(!heights[height_group] || this_height > heights[height_group]){
 						heights[height_group] = this_height;

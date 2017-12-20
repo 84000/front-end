@@ -1132,6 +1132,12 @@ jQuery(document).ready(function($) {
 		});
 	});
 
+	// Redirect page
+	// ------------------------------------------
+	$("a.redirect-onload").each(function(e){
+		location.href = $(this).attr("href");
+	});
+
 	// Rewind button
 	// -----------------------------------------
 	$("#rewind-btn-container button").on('click', function (e) {

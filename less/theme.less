@@ -1375,6 +1375,10 @@ ul.list-archive {
     .home .media-panel-image& {
         height: 140px;
     }
+    .home .movie & {
+        height: 100%;
+        background-color: #333;
+    }
 }
 
 .playmedia {
@@ -1398,32 +1402,38 @@ ul.list-archive {
 // Home page
 // ----------------------------------
 .home {
-    .movie-container {
+    .movie-container, .movie.panel {
         background-color: #333
     }
     .movie {
 
-        width:100%;
+        width: 100%;
         height: 450px;
 
         > iframe {
-
             height: 100%;
             width: 100%;
             border: 0;
+        }
 
+        > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
         }
 
         @media only screen and (max-width: @screen-sm-max) {
 
             position: relative;
-            display: block;
             height: 0;
             padding: 0;
             overflow: hidden;
             padding-bottom: 56.25%;
 
-            > iframe {
+            > iframe, > a {
 
                 position: absolute;
                 top: 0;
@@ -1433,9 +1443,28 @@ ul.list-archive {
             }
 
         }
+    }
 
+    // Chinese homepage movie modal
+    // -----------------------------------
+    #homepage-movie.modal {
+        .modal-body {
+            padding: 0px;
+            background-color: #333;
+            embed {
+                display: block;
+                margin: 0px auto;
+                height: 500px;
+                width: 100%;
+                @media only screen and (max-height: 500px) {
+                    height: 320px;
+                }
+            }
+        }
     }
 }
+
+
 
 // Big panel headings
 // ----------------------------------

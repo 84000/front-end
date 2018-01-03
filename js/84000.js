@@ -7,8 +7,10 @@ jQuery(document).ready(function($) {
 		$.wait = function (text, cancel) {
 			var $body = self==top ? $("body") : window.parent.$("body");
 			if(cancel){
-				$("#wait").remove();
-				$body.removeClass("wait");
+				$("#wait").fadeOut(500, function(){
+					$(this).remove();
+					$body.removeClass("wait");
+				});
 			}
 			else{
 			    if(!$body.hasClass("wait")){
@@ -24,6 +26,12 @@ jQuery(document).ready(function($) {
 			}
 		}
 	}($));
+
+	// Use cache for loading scripts
+	// ---------------------------------
+	$.ajaxSetup({
+		cache: true
+	});
 
 	// Media size
 	// --------------------------------------
@@ -387,6 +395,7 @@ jQuery(document).ready(function($) {
 	// Load Bookmarks
 	// --------------------------------------
 	if($('html').hasClass('screen')){
+		
 		$.getScript( getScriptDomain() + "/js/js-cookies.js" ).done(function( script, textStatus ) {
 		
 			(function ($) { 
@@ -719,6 +728,7 @@ jQuery(document).ready(function($) {
         }
 
         // Is this the first call to the glossary?
+        /*
         if($this.hasClass("glossary-link") && !$(".backlinked").length){
         	// It could take a while...
         	$.wait("Preparing the glossary...");
@@ -732,6 +742,15 @@ jQuery(document).ready(function($) {
         	// Just do it
         	doPopUp();
         }
+        doPopUp();
+        */
+        
+        $.wait("Loading the glossary...");
+    	setTimeout(function(){
+    		doPopUp();
+        	$.wait("", true);
+
+        },100);
 
 	});
 
@@ -786,10 +805,14 @@ jQuery(document).ready(function($) {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("#glossary .glossary-item"),
-	                $allMatchable = $(".glossarize").not("#glossary .glossarize").not("#acknowledgments .glossarize");
+	                $allMatchable = $(".glossarize").not("#glossary .glossarize").not("#acknowledgments .glossarize"),
+	                countWords = function(term){
+                        var words = term.split(' ');
+                        return words.length;
+	                };
 
 	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
-						return +b.getAttribute('data-priority') - +a.getAttribute('data-priority');
+						return +countWords($(b).find(".term").text()) - +countWords($(a).find(".term").text());
 					}),
 	                escapeRegExp = function(stringToGoIntoTheRegex) {
 	                
@@ -914,12 +937,18 @@ jQuery(document).ready(function($) {
 	                },
 	                prepGlossary = function($glossary){
 	                	// First glossarize terms with a higher priority
-                        var priority = parseInt($glossary.data("priority"));
+	                	var term = $glossary.find(".term").text();
+	                	var priority = countWords(term);
+                        //var priority = parseInt($glossary.data("priority"));
+                        var regEx = glossaryRegEx(term);
 
                         var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
-							return $(this).data("priority") > priority;
+                        	var thisTerm = $(this).find(".term").text();
+                        	var thisPriority = countWords(thisTerm);
+							return thisPriority > priority && thisTerm.match(regEx);
 						});
 
+                        /**/
 						$higherPriority.each(function(){
 							var $otherGlossary = $(this);
 							glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
@@ -1030,7 +1059,6 @@ jQuery(document).ready(function($) {
 	     				
 	    			}
 	    		}($));
-	            
 	     		
 	     		// Also implement on showing in pop-up footer:
 	     		// Call prepare event on clicking a glossary link

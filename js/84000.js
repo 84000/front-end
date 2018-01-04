@@ -794,7 +794,7 @@ jQuery(document).ready(function($) {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("#glossary .glossary-item"),
-	                $allMatchable = $(".glossarize").not("#glossary .glossarize").not("#acknowledgments .glossarize"),
+	                $allMatchable = $(".glossarize, .glossarize-complete"),
 	                countWords = function(term){
                         var words = term.split(' ');
                         return words.length;
@@ -863,11 +863,18 @@ jQuery(document).ready(function($) {
 
 				    	var term = $term.text();
 				    	var glossaryId = $glossary.attr("id");
-				    	var regEx = glossaryRegEx(term);
 				        
 				        $matchable.each(function(){
 				        	
-				        	$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
+				        	if($matchable.hasClass('glossarize')){
+				        		var regEx = glossaryRegEx(term);
+				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
+				        	}
+				        	else if($matchable.hasClass('glossarize-complete')){
+				        		var regEx = new RegExp("^(" + escapeRegExp(term.toLowerCase()) + ")$","gi");
+				        		$(this).replaceText(regEx, '<a href="#' + glossaryId + '" class="glossary-link pop-up">$1<\/a>');
+				        	}
+				        	
 				        	
 				        });
 	                },

@@ -1,6 +1,6 @@
 $.noConflict();
 jQuery(document).ready(function($) {
-
+	
 	// Disable page while processing js
 	// -------------------------------------
 	(function ($) { 
@@ -396,7 +396,7 @@ jQuery(document).ready(function($) {
 	// --------------------------------------
 	if($('html').hasClass('screen')){
 		
-		$.getScript( getScriptDomain() + "/js/js-cookies.js" ).done(function( script, textStatus ) {
+		//$.getScript( getScriptDomain() + "/js/js-cookies.js" ).done(function( script, textStatus ) {
 		
 			(function ($) { 
 		    	$.getBookmarks = function () {
@@ -668,7 +668,7 @@ jQuery(document).ready(function($) {
 	    		$.lastLocationOption();
 	    	}
 	    	
-		});
+		//});
 	}
 
 	// Close button for a collapse element
@@ -795,7 +795,7 @@ jQuery(document).ready(function($) {
 
     	if($("#glossary .glossary-item").length){
 
-    		$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
+    		//$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
 
     			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
 				    return function( elem ) {
@@ -924,6 +924,10 @@ jQuery(document).ready(function($) {
                                 }
                                 
                             });
+							
+							var countOccurences = $list.find("li").length;
+							var occurencesDesc = countOccurences == 1 ? "1 passage contains this term" : countOccurences + " passages contain this term";
+							$glossaryItem.find(".occurences h6").text(occurencesDesc);
                             
                             // Append the list to the glossary
                             $glossaryItem.find(".occurences").append($list);
@@ -1067,7 +1071,7 @@ jQuery(document).ready(function($) {
 	               parseGlossary($($(this).attr("href")));
 	           	});
 	     		
-	        });
+	        //});
     	}
          
     }

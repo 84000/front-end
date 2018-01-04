@@ -728,30 +728,19 @@ jQuery(document).ready(function($) {
         }
 
         // Is this the first call to the glossary?
-        /*
-        if($this.hasClass("glossary-link") && !$(".backlinked").length){
-        	// It could take a while...
-        	$.wait("Preparing the glossary...");
-        	setTimeout(function(){
-        		doPopUp();
+        
+        if($this.hasClass("glossary-link")){
+	        $.wait("Loading the glossary...");
+	    	setTimeout(function(){
+	    		doPopUp();
 	        	$.wait("", true);
 
 	        },100);
-        }
-        else {
+	    }
+	    else {
         	// Just do it
         	doPopUp();
         }
-        doPopUp();
-        */
-        
-        $.wait("Loading the glossary...");
-    	setTimeout(function(){
-    		doPopUp();
-        	$.wait("", true);
-
-        },100);
-
 	});
 
 	// Pop-out sidebar

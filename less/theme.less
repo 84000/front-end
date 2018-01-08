@@ -2823,11 +2823,23 @@ ul.responsive-tabs__list{
     border-bottom-right-radius: 4px;
 }
 
+// Screen variations
+// All styles should default to desktop/screen
+// except ...
+// -------------------------------------------
+@media screen {
+    // don't display until it's in the vieport
+    // this speeds up view of long texts.
+    // ---------------------------------------
+    section > .render-in-viewport {
+        display: none;
+    }
+}
+
 
 // Print variations
-// All styles should default to desktop
-// ------------------------------------
-
+// All styles should default to desktop/screen
+// -------------------------------------------
 @media print {
     
     * {

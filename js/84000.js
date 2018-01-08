@@ -87,8 +87,8 @@ jQuery(document).ready(function($) {
 		    if(!this.offset()) return "missing";
 
 		    var elementTop = this.offset().top;
+
 		    var elementBottom = elementTop + this.height();
-		    
 		    var position = "inView";
 		    
 		    if(elementBottom <= docViewTop){
@@ -1072,9 +1072,31 @@ jQuery(document).ready(function($) {
          
     }
 
+    // Show sections as they come into view
+    // -----------------------------------------------------------
+    (function ($) { 
+		$.renderInViewport = function () {
+		    var $element = $('.screen section > .render-in-viewport').first();
+		    var $section = $element.parent();
+		    if($section.length){
+		    	var elementInViewStatus = $section.elementInView();
+		    	var title = $section.find("h3").text();
+		    	//console.log($section.find("h3").text() +" "+ elementInViewStatus);
+		    	if(elementInViewStatus == 'inView'){
+		    		$.wait("Rendering the " + title + "...");
+			    	setTimeout(function(){
+			    		$element.removeClass('render-in-viewport');
+			        	$.wait("", true);
+			        },100);
+				}
+		    }
+	    };
+	}($));
+
     // Glossarize the currently visible elements
 	// -------------------------------------------
 	$(window).scrollEnd(function () {
+		$.renderInViewport();
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 		if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };

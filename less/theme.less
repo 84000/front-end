@@ -1967,8 +1967,11 @@ table.contents-table {
 
             margin-bottom: @line-height-computed;
 
-            .term {
+            .term, h5 {
+                line-height: 20px;
                 margin-top: 0px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid @hr-border;
             }
 
             .alternative {
@@ -2831,8 +2834,10 @@ ul.responsive-tabs__list{
     // don't display until it's in the vieport
     // this speeds up view of long texts.
     // ---------------------------------------
-    section > .render-in-viewport {
-        display: none;
+    section, aside {
+        > .render-in-viewport {
+            display: none;
+        }
     }
 }
 
@@ -2851,6 +2856,10 @@ ul.responsive-tabs__list{
     { 
         size: 210mm 297mm;
         margin: 25mm 15mm 25mm 15mm;  
+    }
+
+    body {
+        font-size: 14pt;
     }
     
     .print-width-override {
@@ -2916,7 +2925,7 @@ ul.responsive-tabs__list{
         text-align: center;
     }
 
-    .environment-warning {
+    .environment-warning, #page-alert {
         display: none;
     }
 

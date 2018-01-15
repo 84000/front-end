@@ -1096,7 +1096,7 @@ jQuery(document).ready(function($) {
     // Glossarize the currently visible elements
 	// -------------------------------------------
 	$(window).scrollEnd(function () {
-		$.renderInViewport();
+		//$.renderInViewport();
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 		if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };

@@ -35,6 +35,13 @@
         <link rel="shortcut icon" href="/favicon/favicon.ico"/>
         <meta name="msapplication-config" content="/favicon/browserconfig.xml"/>
         <meta name="theme-color" content="#ffffff"/>
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/js-cookies.js"></script>
+        <script src="/js/replace-text.min.js"></script>
+        <script src="/js/ie10-viewport-bug-workaround.js"></script>
+        <script src="/js/84000.js" defer="defer"></script>
     </head>
 
     <body id="top">
@@ -276,13 +283,5 @@
             <span class="event-hover"></span>
         </span>
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/84000.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>

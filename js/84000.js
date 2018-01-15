@@ -696,7 +696,7 @@ jQuery(document).ready(function($) {
 
 	// Position blockquote in header
 	// -----------------------------------------
-	$(".panel.main-panel > .panel-body blockquote:first-child").each(function(){
+	$(".panel.main-panel > .panel-img-header+.panel-body blockquote:first-child").each(function(){
 		if(!$("html.xs").length){
 			var $this = $(this);
 			$this.css({'top': -($this.outerHeight()) });

@@ -1887,14 +1887,7 @@ table.contents-table {
         }
 
         .panel-heading {
-
             .text-center();
-            /*
-            background-color: @panel-bg;
-            border-bottom: 1px solid @hr-border;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            */
         }
 
         section, aside {
@@ -1943,12 +1936,14 @@ table.contents-table {
                 text-indent: 0;
                 margin-left: @line-height-computed;
             }
+           
             .line-group {
                 position: relative;
+                /*
                 p {
                     padding-left: @line-height-computed;
                     text-indent: -@line-height-computed;
-                }
+                }*/
                 .line-group {
                     margin-top: (@line-height-computed / 2);
                 }
@@ -2366,6 +2361,17 @@ table.contents-table {
             top: 0px;
             left: -@indent;
             max-width: (@indent - 15);
+        }
+
+        .line-group {
+            a.milestone {
+                left: -(@indent + @line-height-computed);
+            }
+        }
+        .line-group .line-group {
+            a.milestone {
+                left: -(@indent + (@line-height-computed * 2));
+            }
         }
 
         @media only screen and (max-width: @screen-md) {

@@ -1715,6 +1715,10 @@ table.contents-table {
         font-family: @font-family-bold;
     }
 
+    h3 {
+        margin-bottom: @line-height-computed;
+    }
+
     // Type styles 
     // ---------------------------------------------
     p, li, .chapter, .glossary-item, h5 {
@@ -1845,17 +1849,21 @@ table.contents-table {
             #titles {
                 padding: 30px;
                 text-shadow: 1px 2px 3px #dfe0e0;
-                hr {
-                    margin-top: 15px;
-                    margin-bottom: 15px;
-                }
             }
 
             #long-titles {
                 margin-top: 100px;
-                hr {
-                    margin-top: 15px;
+            }
+
+            #titles, #long-titles {
+                h1, h2, h3, h4 {
+                    border-bottom: 1px solid @hr-border;
+                    padding-bottom: 15px;
                     margin-bottom: 15px;
+                    &:last-child {
+                        border-bottom: 0px;
+                        margin-bottom: 0px;
+                    }
                 }
             }
 
@@ -2861,11 +2869,17 @@ ul.responsive-tabs__list{
     @page  
     { 
         size: 210mm 297mm;
-        margin: 25mm 15mm 25mm 15mm;  
+        margin: 20mm 15mm 20mm 15mm;  
     }
 
     body {
-        font-size: 14pt;
+        font-size: 16pt;
+        h3 {
+            font-size: 19pt;
+        }
+        h4 {
+            font-size: inherit;
+        }
     }
     
     .print-width-override {

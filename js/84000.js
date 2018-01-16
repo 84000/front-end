@@ -839,7 +839,7 @@ jQuery(document).ready(function($) {
 	                glossaryRegEx = function(term){
 	                	// Unfortunately, as JS doesn't consider accented characters as "word" characters.
 				    	// Therefore cannot use the \b or \w metacharacters. We have to enumerate all word boundaries ourselves.
-	                	return new RegExp("(^|\\s|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|—|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|es\\W|’s\\W|'s\\W|s’\\W|s'\\W)","gi");
+	                	return new RegExp("(^|\\s|‘|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|—|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|es\\W|’s\\W|'s\\W|s’\\W|s'\\W)","gi");
 	                },
 	                glossaryMarked = function($term, $glossary, $matchable){
 

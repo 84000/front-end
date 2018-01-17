@@ -865,16 +865,15 @@ jQuery(document).ready(function($) {
 				    	var glossaryId = $glossary.attr("id");
 				        
 				        $matchable.each(function(){
-				        	
-				        	if($matchable.hasClass('glossarize')){
+				        	var $this = $(this);
+				        	if($this.hasClass('glossarize')){
 				        		var regEx = glossaryRegEx(term);
-				        		$(this).replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
+				        		$this.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
 				        	}
-				        	else if($matchable.hasClass('glossarize-complete')){
-				        		var regEx = new RegExp("^(" + escapeRegExp(term.toLowerCase()) + ")$","gi");
-				        		$(this).replaceText(regEx, '<a href="#' + glossaryId + '" class="glossary-link pop-up">$1<\/a>');
+				        	else if($this.hasClass('glossarize-complete')){
+				        		var regEx = new RegExp("^(" + escapeRegExp(term) + ")$","gi");
+				        		$this.replaceText(regEx, '<a href="#' + glossaryId + '" class="glossary-link pop-up">$1<\/a>');
 				        	}
-				        	
 				        	
 				        });
 	                },

@@ -136,6 +136,10 @@ hr.no-margin {
     margin-bottom: 0px;
 }
 
+.no-top-margin {
+    margin-top:    0px !important;
+}
+
 table {
     td, th {
         &.nowrap {
@@ -1680,16 +1684,21 @@ ul.list-archive {
 }
 
 table.contents-table {
+    tr {
+        break-inside: auto;
+        page-break-inside: auto;
+    }
     td {
         vertical-align: top;
         padding: 4px 6px 4px 0px;
+        break-inside: auto;
+        page-break-inside: auto;
     }
     tfoot {
         border-top: 1px solid @hr-border;
         td {
             font-style: italic;
             color: @text-muted;
-
         }
     }
 }

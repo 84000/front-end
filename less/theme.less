@@ -1956,11 +1956,9 @@ table.contents-table {
            
             .line-group {
                 position: relative;
-                /*
                 p {
-                    padding-left: @line-height-computed;
-                    text-indent: -@line-height-computed;
-                }*/
+                    text-indent: 0px;
+                }
                 .line-group {
                     margin-top: (@line-height-computed / 2);
                 }
@@ -2384,12 +2382,12 @@ table.contents-table {
             max-width: (@indent - 15);
         }
 
-        .line-group {
+        ul.line-group {
             a.milestone {
                 left: -(@indent + @line-height-computed);
             }
         }
-        .line-group .line-group {
+        ul.line-group ul.line-group {
             a.milestone {
                 left: -(@indent + (@line-height-computed * 2));
             }

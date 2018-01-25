@@ -433,7 +433,7 @@ jQuery(document).ready(function($) {
 		    	    var page = locationSplit[0];
 		    	    var hash = this.attr('href');
 		    	    var pageTitle = $("#title h1").text();
-		    	    var sectionTitle = this.parents("section").find("h3").first().text();
+		    	    var sectionTitle = this.parents("section, aside").find("h3, h4").first().text();
 		    	    var milestoneTitle = this.text();
 		    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
 		    	    return {'page': page, 'hash': hash, 'title': title};
@@ -717,10 +717,20 @@ jQuery(document).ready(function($) {
         var doPopUp = function(){
         	// Trigger pre-events
 	        $this.trigger("prepare");
-
-	        // Copy content to the footer
-	        var $content = $($this.attr("href")).clone();
+	        // The target of the link
+	        var $target = $($this.attr("href"));
+	        // Parse that content
+	        if($target.hasClass('glossarize')){
+	        	parseParagraph($target);
+	        }
+	        $target.find(".glossarize, .glossarize-complete").each(function(){
+	        	parseParagraph($(this));
+	        });
+	        // Get the content from the target
+	        var $content = $target.clone();
+	        // Reset the id
 	        $content.attr("id", "");
+	        // Copy content to the footer
 	        $('#popup-footer .data-container').html($content);
 	        // Show the footer
 			$('#popup-footer').collapse('show');
@@ -794,7 +804,7 @@ jQuery(document).ready(function($) {
     			
 	            var isWorking = false,
 	                $allGlossaries = $("#glossary .glossary-item"),
-	                $allMatchable = $(".glossarize, .glossarize-complete"),
+	                $allMatchable = $(".glossarize-section .glossarize, .glossarize-section .glossarize-complete"),
 	                countWords = function(term){
                         var words = term.split(' ');
                         return words.length;
@@ -1095,7 +1105,7 @@ jQuery(document).ready(function($) {
     // Glossarize the currently visible elements
 	// -------------------------------------------
 	$(window).scrollEnd(function () {
-		//$.renderInViewport();
+		$.renderInViewport();
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 		if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };

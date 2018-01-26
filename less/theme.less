@@ -1953,22 +1953,25 @@ table.contents-table {
                 text-indent: 0;
                 margin-left: @line-height-computed;
             }
+
+            .line-group {
+                > p {
+                    text-indent: 0px;
+                }
+            }
            
-            .line-group > p, .list > .list-item {
+            .list > .list-item {
                 padding-left: @line-height-computed;
-            }
-
-            .line-group > p, .list > .list-item > p {
-                /* No line indent otherwise it gets confused with the group indent */
-                text-indent: 0px;
-            }
-
-            .list > .list-item > p+p {
-                margin-top: 0px;
-            }
-
-            .list > .list-item > h5 {
-                margin-bottom: 3px;
+                > p {
+                    /* No line indent otherwise it gets confused with the group indent */
+                    text-indent: 0px;
+                }
+                > p+p {
+                    margin-top: 0px;
+                }
+                > h5 {
+                    margin-bottom: 3px;
+                }
             }
 
             ul {
@@ -2386,20 +2389,22 @@ table.contents-table {
             max-width: (@indent - 15);
         }
 
-        .line-group > p .line-group > p, .list > .list-item .list > .list-item  {
+        // Milestones inside lists require left adjusting
+        .list > .list-item > * {
             a.milestone {
                 left: -(@indent + @line-height-computed);
+            }
+        }
+        // Double nesting requires more adjusting
+        .list > .list-item .list > .list-item > * {
+            a.milestone {
+                left: -(@indent + (@line-height-computed * 2));
             }
         }
 
         blockquote {
             > a.milestone {
                 top: 11px;
-            }
-            .line-group > p {
-                a.milestone {
-                    left: -(@indent + 27px);
-                }
             }
         }
 

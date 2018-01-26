@@ -1735,10 +1735,6 @@ table.contents-table {
         color: @gray;
     }
 
-    hr {
-        border-top: 1px dotted #dadbdc;
-    }
-
     p {
         a {
             text-decoration: underline;
@@ -2014,30 +2010,33 @@ table.contents-table {
                 }
                 
             }
-
         }
+
         #abbreviations {
-            dl {
-                &:after {
-                    content: "";
-                    display: block;
-                    width: 100%;
-                    clear: both;
-                }
-                dt, dd {
-                    float: left;
-                }
-                dt {
-                    clear: both;
-                    font-weight: normal;
-                }
-                dd {
-                    clear: none;
-                    &:before {
-                        content: '-';
-                        padding: 0px 8px;
+            .table {
+                width: auto;
+                > tbody > tr {
+                    > th {
+                        font-weight: normal;
+                        font-style: italic;
                     }
+                    > th, > td {
+                        border-top: 0px;
+                        color: @gray;
+                    }
+
                 }
+            } 
+        }
+
+        .nested-section {
+            h5 {
+                font-weight: bold;
+            }
+            .nested-section {
+                padding-left: @line-height-computed;
+                border-left: 1px solid @hr-border;
+                margin-bottom: (@line-height-computed * 2);
             }
         }
 

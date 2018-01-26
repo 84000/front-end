@@ -244,7 +244,7 @@ p.form-control {
     margin-right: auto;
 }
 
-// Set a min height for md of greater
+// Set a min height for md or greater
 // -----------------------------------
 @media only screen and (min-width: @screen-md) {
     .min-height-md {
@@ -1954,22 +1954,28 @@ table.contents-table {
                 margin-left: @line-height-computed;
             }
            
-            .line-group {
-                position: relative;
-                p {
-                    text-indent: 0px;
-                }
-                .line-group {
-                    margin-top: (@line-height-computed / 2);
-                }
+            .line-group > p, .list > .list-item {
+                padding-left: @line-height-computed;
             }
+
+            .line-group > p, .list > .list-item > p {
+                /* No line indent otherwise it gets confused with the group indent */
+                text-indent: 0px;
+            }
+
+            .list > .list-item > p+p {
+                margin-top: 0px;
+            }
+
+            .list > .list-item > h5 {
+                margin-bottom: 3px;
+            }
+
             ul {
                 list-style: none;
-                padding-left: @line-height-computed;
                 li {
                     margin-bottom: (@line-height-computed / 2);
                 }
-
             }
         }
 
@@ -2351,9 +2357,7 @@ table.contents-table {
 
     .indent {
 
-        &, p {
-            position: relative;
-        }
+        position: relative;
 
         a.milestone {
 
@@ -2382,14 +2386,20 @@ table.contents-table {
             max-width: (@indent - 15);
         }
 
-        ul.line-group {
+        .line-group > p .line-group > p, .list > .list-item .list > .list-item  {
             a.milestone {
                 left: -(@indent + @line-height-computed);
             }
         }
-        ul.line-group ul.line-group {
-            a.milestone {
-                left: -(@indent + (@line-height-computed * 2));
+
+        blockquote {
+            > a.milestone {
+                top: 11px;
+            }
+            .line-group > p {
+                a.milestone {
+                    left: -(@indent + 27px);
+                }
             }
         }
 

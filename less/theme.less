@@ -1730,7 +1730,7 @@ table.contents-table {
 
     // Type styles 
     // ---------------------------------------------
-    p, li, .chapter, .glossary-item, h5 {
+    p, li, .chapter, .glossary-item, h5, .footnote {
         position: relative;
         color: @gray;
     }
@@ -1921,10 +1921,18 @@ table.contents-table {
                 margin-top: 0px;
             }
 
+
+            br {
+                display: none;
+            }
+
             p {
                 text-align: justify;
                 width: 100%;
                 text-indent: 0;
+                br {
+                    display: block;
+                }
                 .blockquote, &.mantra {
                     text-indent: 0;
                     display: inline-block;
@@ -1941,7 +1949,7 @@ table.contents-table {
                 text-indent: @line-height-computed;
                 margin-top: -(@line-height-computed / 2);
             }
-            h2+p, h3+p, h4+p, p.space, div.space {
+            h2+p, h3+p, h4+p, .line-group, .trailer, .mantra, br+*, .line-group+*, .mantra+*, .nested-section > p:first-child {
                 text-indent: 0;
                 margin-top: @line-height-computed;
             }
@@ -2030,13 +2038,16 @@ table.contents-table {
         }
 
         .nested-section {
-            h5 {
-                font-weight: bold;
-            }
-            .nested-section {
+            .nested-section.margin {
                 padding-left: @line-height-computed;
-                border-left: 1px solid @hr-border;
                 margin-bottom: (@line-height-computed * 2);
+            }
+        }
+
+        .footnote {
+            margin: 0 0 (@line-height-computed / 2);
+            > .line-group {
+                margin-top: (@line-height-computed / 2);
             }
         }
 
@@ -2418,7 +2429,7 @@ table.contents-table {
                 max-width: (@indent-sm - 15);
             }
 
-            p.footnote.indent {
+            .footnote.indent {
                 margin-left: 0px;
                 position: relative;
             }

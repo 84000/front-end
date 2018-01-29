@@ -1952,11 +1952,11 @@ table.contents-table {
                 margin-top: -(@line-height-computed / 2);
             }
             // Space some sections
-            h2+p, h3+p, h4+p, .line-group, .trailer, .mantra, br+*, .line-group+*, .mantra+*, .nested-section > p:first-child {
+            h2+p, h3+p, h4+p, br+*, .line-group, .trailer, .mantra, .line-group+*, .mantra+*, .nested-section > p:first-child {
                 margin-top: @line-height-computed;
             }
             // Remove indent for first paragraph after spaced sections
-            h2+p, h3+p, h4+p, .line-group > p, .trailer > p:first-child, .mantra > p, br+p, .nested-section > p:first-child {
+            h2+p, h3+p, h4+p, br+p, .line-group > p, .trailer, .mantra > p, .nested-section > p:first-child {
                 text-indent: 0;
             }
 

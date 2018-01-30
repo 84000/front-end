@@ -2,3 +2,18 @@
 <FilesMatch ".(css|js|eot|ttf|otf|woff)">
 	Header set Access-Control-Allow-Origin "*"
 </FilesMatch>
+
+<IfModule mod_mime.c>
+	AddType application/javascript .js
+	AddType text/css .css
+	AddType font/ttf .ttf
+	AddType image/png .png
+</IfModule>
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/css application/javascript font/ttf image/png
+	<IfModule mod_setenvif.c>
+		BrowserMatch ^Mozilla/4 gzip-only-text/html
+		BrowserMatch ^Mozilla/4.0[678] no-gzip
+		BrowserMatch bMSIE !no-gzip !gzip-only-text/html
+	</IfModule>
+</IfModule>

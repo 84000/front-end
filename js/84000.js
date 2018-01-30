@@ -1109,7 +1109,7 @@ jQuery(document).ready(function($) {
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 		if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
-	}, 100);
+	}, 600);
 	$(window).scroll();
 
     // Get the href content via ajax and put it in the specified element

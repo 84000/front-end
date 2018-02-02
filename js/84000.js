@@ -174,11 +174,16 @@ jQuery(document).ready(function($) {
     (function ($) { 
 		$.renderInViewport = function () {
 			$('.screen section > .render-in-viewport').each(function(){
-				// Check the visibilty of the visible sibling (the child element is hidden)
+
+				// If there's no preview then we can ignore this one
+				// -------------------------------------------------
 			    var $element = $(this);
 			    var $visible = $element.siblings(".unrendered-preview");
 
 			    if($visible.length){
+
+			    	// Use this to check it's in the viewport (the child element is hidden)
+			    	// --------------------------------------------------------------------
 			    	var elementInViewStatus = $visible.elementInView();
 			    	if(elementInViewStatus == 'topInView'){
 				    	$element.render();
@@ -186,6 +191,7 @@ jQuery(document).ready(function($) {
 					else if(elementInViewStatus == 'below'){
 						return false;
 					}
+
 			    }
 			});
 	    };
@@ -205,12 +211,14 @@ jQuery(document).ready(function($) {
 	    }
 	}($));
 
-    // Create previes for sections
+    // Create previews for unrendered sections
+    // (Check it's hidden / editor mode and print don't hide)
     // -----------------------------------------------------------
-	$('.screen section > .render-in-viewport').each(function(){
-		// Create a preview
+	$('.screen section > .render-in-viewport:hidden').each(function(){
+
 		var $element = $(this);
 	    var $section = $element.parent();
+
 	    if($section.length){
 	    	var $summary = $("<div>", {"class": "unrendered-preview"});
 	    	var $content;
@@ -239,7 +247,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Scroll to an anchor
-	// --------------------------------------
+	// -----------------------------------------
 	(function ($) { 
 		$.scrollToAnchor = function (hash, delay, parent, offset) {
 			if(!legacyLink()) {

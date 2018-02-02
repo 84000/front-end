@@ -2914,7 +2914,6 @@ ul.responsive-tabs__list{
                 bottom: 0em;
                 width:100%;
                 height: 80px;
-                //border-bottom: 34px solid rgba(255, 255, 255, 1);
                 background: -webkit-linear-gradient(
                     rgba(255, 255, 255, 0) 0%,
                     rgba(255, 255, 255, 1) 100%
@@ -2935,16 +2934,14 @@ ul.responsive-tabs__list{
                     rgba(255, 255, 255, 0) 0%,
                     rgba(255, 255, 255, 1) 100%
                 );
-            }/*
-            &:after {
-                content: 'Rendering this section...';
-                position:absolute;
-                bottom: 0px;
-                left: 0px;
-                z-index: 3;
-                color: @text-muted;
-                font-size: @font-size-small;
-            }*/
+            }
+        }
+    }
+    .editor-mode {
+        section, aside {
+            > .render-in-viewport {
+                display: block;
+            }
         }
     }
 

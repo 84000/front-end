@@ -87,17 +87,19 @@ jQuery(document).ready(function($) {
 		    if(!this.offset()) return "missing";
 
 		    var elementTop = this.offset().top;
-
 		    var elementBottom = elementTop + this.height();
 		    var position = "inView";
-		    
-		    if(elementBottom <= docViewTop){
+
+		    if(elementTop > docViewTop && elementTop < docViewBottom){
+		        position = "topInView";
+		    }
+		    else if(elementBottom <= docViewTop){
 		        position = "above";
 		    }
 		    else if(elementTop >= docViewBottom){
 		        position = "below";
 		    }
-
+		    //console.log("elementTop:"+elementTop+",elementBottom:"+elementBottom+",docViewTop:"+docViewTop+",docViewBottom:"+docViewBottom+"="+position);
 		    return position;
 		};
 	}($));
@@ -139,18 +141,121 @@ jQuery(document).ready(function($) {
 		return false;
 	}
 
+	// Make multiple elements the same height
+	// ------------------------------------------
+	(function ($) { 
+		$.matchHeights = function ($element) {
+			if($('html').hasClass('screen') && ($('html').hasClass('md') || $('html').hasClass('lg') || $('html').hasClass('sm'))){
+				var heights = {};
+				$("[data-match-height]").height('auto');
+				// Match to a particular element
+				$("[data-match-height].match-this-height:visible").each(function(){
+					var $this = $(this)
+					heights[$this.data('match-height')] = $this.outerHeight();
+				});
+				// Match to the tallest in the group
+				$element.find("[data-match-height]:not(.match-this-height):visible").each(function(){
+					var $this = $(this)
+					var this_height = $this.outerHeight();
+					var height_group = $this.data('match-height');
+					if(!heights[height_group] || this_height > heights[height_group]){
+						heights[height_group] = this_height;
+					}
+				});
+				$.each(heights, function(group, val) {
+					$("[data-match-height='" + group + "']").height(val + 'px');
+				});
+			}
+		}
+	}($));
+
+	// Show sections as they come into view
+    // -----------------------------------------------------------
+    (function ($) { 
+		$.renderInViewport = function () {
+			$('.screen section > .render-in-viewport').each(function(){
+				// Check the visibilty of the visible sibling (the child element is hidden)
+			    var $element = $(this);
+			    var $visible = $element.siblings(".unrendered-preview");
+
+			    if($visible.length){
+			    	var elementInViewStatus = $visible.elementInView();
+			    	if(elementInViewStatus == 'topInView'){
+				    	$element.render();
+					}
+					else if(elementInViewStatus == 'below'){
+						return false;
+					}
+			    }
+			});
+	    };
+	}($));
+
+	(function ($) { 
+		$.fn.render = function () {
+			var $element = $(this);
+			if($element.hasClass('render-in-viewport')){
+				// render the node
+		    	$element.removeClass('render-in-viewport');
+		    	// delete the preview node
+		    	$element.siblings(".unrendered-preview").remove();
+		    	// match heights on newly visible
+		    	$.matchHeights($element);
+			}
+	    }
+	}($));
+
+    // Create previes for sections
+    // -----------------------------------------------------------
+	$('.screen section > .render-in-viewport').each(function(){
+		// Create a preview
+		var $element = $(this);
+	    var $section = $element.parent();
+	    if($section.length){
+	    	var $summary = $("<div>", {"class": "unrendered-preview"});
+	    	var $content;
+	    	if($section.hasClass('text')){
+	    		$content = $element.find("h4, h5, p, div.list, div.line-group, blockquote, br").slice(0,5).clone();
+	    	}
+	    	else if($section.attr('id') == "abbreviations"){
+	    		$content = $element.find("h5, table").clone();
+	    	}
+	    	else if($section.attr('id') == "notes"){
+	    		$content = $element.find("div.footnote").slice(0,5).clone();
+	    	}
+	    	else if($section.attr('id') == "glossary"){
+	    		$content = $element.find("div.glossary-item").slice(0,5).clone();
+	    	}
+	    	$summary.html($content);
+	    	$summary.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
+	    		$(this).addClass("ignore");
+	    	});
+			$section.append($summary);
+			var summaryHeight = $summary.height();
+			if(summaryHeight > 300){
+				$summary.height(300 + 'px');
+			}
+	    }
+	});
+
 	// Scroll to an anchor
 	// --------------------------------------
 	(function ($) { 
 		$.scrollToAnchor = function (hash, delay, parent, offset) {
 			if(!legacyLink()) {
 				if(!hash) hash = window.location.hash;
-				if(!delay) delay = 0;
-				if(!parent) parent = "html, body";
-				var $hash = $(hash);
-				if(!offset && $hash) offset = $hash.offset();
-				if(offset){
-					$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow");
+				if(hash){
+					if(!delay) delay = 0;
+					if(!parent) parent = "html, body";
+					var $hash = $(hash);
+					var $unrendered = $hash.closest(".render-in-viewport");
+					if($unrendered.length){
+						$unrendered.render();
+					}
+					if(!offset && $hash) offset = $hash.offset();
+					if(offset){
+						$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow");
+					}
 				}
 			}
 		}
@@ -203,16 +308,12 @@ jQuery(document).ready(function($) {
 				// Only if it's not in view
 				$target = $(this.hash);
 
-				//if($this.elementInView() != "inView"){
+				var $buttonContainer = $("#rewind-btn-container");
+				var $button = $buttonContainer.find("button");
 
-					var $buttonContainer = $("#rewind-btn-container");
-					var $button = $buttonContainer.find("button");
-
-					rewindHistory.push($(document).scrollTop());
-					$buttonContainer.removeClass("hidden");
-					$button.pulse();
-
-				//}
+				rewindHistory.push($(document).scrollTop());
+				$buttonContainer.removeClass("hidden");
+				$button.pulse();
 
 			}
 
@@ -351,34 +452,6 @@ jQuery(document).ready(function($) {
 
 		});
 	}
-
-	// Make multiple elements the same height
-	// ------------------------------------------
-	(function ($) { 
-		$.matchHeights = function () {
-			if($('html').hasClass('screen') && ($('html').hasClass('md') || $('html').hasClass('lg') || $('html').hasClass('sm'))){
-				var heights = {};
-				$("[data-match-height]").height('auto');
-				// Match to a particular element
-				$("[data-match-height].match-this-height:visible").each(function(){
-					var $this = $(this)
-					heights[$this.data('match-height')] = $this.outerHeight();
-				});
-				// Match to the tallest in the group
-				$("[data-match-height]:not(.match-this-height):visible").each(function(){
-					var $this = $(this)
-					var this_height = $this.outerHeight();
-					var height_group = $this.data('match-height');
-					if(!heights[height_group] || this_height > heights[height_group]){
-						heights[height_group] = this_height;
-					}
-				});
-				$.each(heights, function(group, val) {
-					$("[data-match-height='" + group + "']").height(val + 'px');
-				});
-			}
-		}
-	}($));
 
 	// Get the location of this script
 	// --------------------------------------
@@ -571,7 +644,7 @@ jQuery(document).ready(function($) {
 				    	}
 				    	// If we scroll down then set a new last location
 				    	var $this = $(this);
-				    	if($this.elementInView() == "inView"){
+				    	if($this.elementInView() == "topInView"){
 				    		Cookies.set('lastLocation', JSON.stringify($this.bookmarkData()), { expires: 31, domain: $.getDomain() });
 				    		return false;
 				    	}
@@ -606,13 +679,7 @@ jQuery(document).ready(function($) {
 		    	        	if(!bookmarked)
 		    	        	{
 		    	        		// Check it's not on screen
-		    	        		var $lastLocation = $(lastLocation.hash);
-		    	        		var inView = false;
-						    	if($lastLocation.elementInView() == "inView"){
-						    		var inView = true;
-						    	}
-
-						    	if(!inView)
+						    	if(['inView', 'topInView'].indexOf($(lastLocation.hash).elementInView()) < 0)
 		    	        		{
 
 		    	        			// Offer some options
@@ -803,8 +870,8 @@ jQuery(document).ready(function($) {
 				});
     			
 	            var isWorking = false,
-	                $allGlossaries = $("#glossary .glossary-item"),
-	                $allMatchable = $(".glossarize-section .glossarize, .glossarize-section .glossarize-complete"),
+	                $allGlossaries = $("#glossary .glossary-item:not(.ignore)"),
+	                $allMatchable = $(".glossarize-section .glossarize:not(.ignore), .glossarize-section .glossarize-complete:not(.ignore)"),
 	                countWords = function(term){
                         var words = term.split(' ');
                         return words.length;
@@ -957,7 +1024,6 @@ jQuery(document).ready(function($) {
 							return thisPriority > priority && thisTerm.match(regEx);
 						});
 
-                        /**/
 						$higherPriority.each(function(){
 							var $otherGlossary = $(this);
 							glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
@@ -1028,7 +1094,7 @@ jQuery(document).ready(function($) {
 
 	     			    	$.showGlossaryLinks();
 	     			    	
-	     					if(elementInViewStatus == 'inView'){
+	     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
 	                            parseParagraph($paragraph);
 	     					}
 	     					else if(elementInViewStatus == 'below'){
@@ -1055,7 +1121,7 @@ jQuery(document).ready(function($) {
 	        			    var $glossaryItem = $(this);
 	     			    	var elementInViewStatus = $glossaryItem.elementInView();
 	     			    	
-	     					if(elementInViewStatus == 'inView'){
+	     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
 	                            parseGlossary($glossaryItem);
 	     					}
 	     					else if(elementInViewStatus == 'below'){
@@ -1081,36 +1147,18 @@ jQuery(document).ready(function($) {
          
     }
 
-    // Show sections as they come into view
-    // -----------------------------------------------------------
-    (function ($) { 
-		$.renderInViewport = function () {
-		    var $element = $('.screen section > .render-in-viewport').first();
-		    var $section = $element.parent();
-		    if($section.length){
-		    	var elementInViewStatus = $section.elementInView();
-		    	var title = $section.find("h3").text();
-		    	//console.log($section.find("h3").text() +" "+ elementInViewStatus);
-		    	if(elementInViewStatus == 'inView'){
-		    		$.wait("Rendering the " + title + "...");
-			    	setTimeout(function(){
-			    		$element.removeClass('render-in-viewport');
-			        	$.wait("", true);
-			        },100);
-				}
-		    }
-	    };
-	}($));
-
     // Glossarize the currently visible elements
 	// -------------------------------------------
 	$(window).scrollEnd(function () {
 		$.renderInViewport();
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
-		if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
-	}, 600);
+	}, 700);
 	$(window).scroll();
+
+	$(window).on("beforeunload", function() { 
+	    if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
+	});
 
     // Get the href content via ajax and put it in the specified element
     // ----------------------------------------------------------------- 
@@ -1166,7 +1214,7 @@ jQuery(document).ready(function($) {
     // Match heights on hidden content
 	//------------------------------------------
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		$.matchHeights();
+		$.matchHeights($(document));
 	});
 
 	// Close temporary alerts
@@ -1253,7 +1301,7 @@ jQuery(document).ready(function($) {
 	//------------------------------------------
 	$(window).on("resize", function(){
 		$.mediaSize();
-		$.matchHeights();
+		$.matchHeights($(document));
 		$.popupFooterHeight();
 	});
 	$(window).resize();

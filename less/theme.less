@@ -1742,6 +1742,10 @@ table.contents-table {
         }
     }
 
+    .text-muted {
+        color: @text-muted;
+    }
+
     // Translation specific styles
     // ---------------------------------------------
     &.translation {
@@ -2683,6 +2687,10 @@ table.contents-table {
         text-align: center;
         line-height: 2;
     }
+    hr {
+        margin-top: @line-height-computed / 2;
+        margin-bottom: @line-height-computed / 2;
+    }
 }
 
 // Pop-out sidebar for contents and bookmarks
@@ -3034,6 +3042,14 @@ ul.responsive-tabs__list{
     }
 
     .reading-room {
+
+        p a.ref {
+            text-decoration: none;
+            &:after {
+                content: "";
+            }
+        }
+
         &.translation {
 
             #title {
@@ -3058,7 +3074,7 @@ ul.responsive-tabs__list{
 
         }
 
-    }    
+    }
 
     .print-logo {
         width: 150px;

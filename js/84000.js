@@ -785,9 +785,10 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         
         var $this = $(this);
+        var popupFooter = $('#popup-footer');
         
         // Hide the footer
-        $('#popup-footer').removeClass('in');
+        popupFooter.removeClass('in');
 
         var doPopUp = function(){
         	// Trigger pre-events
@@ -808,7 +809,7 @@ jQuery(document).ready(function($) {
 	        // Copy content to the footer
 	        $('#popup-footer .data-container').html($content);
 	        // Show the footer
-			$('#popup-footer').collapse('show');
+			popupFooter.collapse('show');
         	
         }
 
@@ -1179,7 +1180,19 @@ jQuery(document).ready(function($) {
         var target = $this.data('ajax-target');
         var $target = $(target);
 
-        if(!$target.is('.loaded')){
+        if(target.indexOf("#popup-footer-source") !== -1){
+        	var popupFooter = $('#popup-footer-source');
+        	popupFooter.removeClass('in');
+        	$.wait("Loading the source text...");
+	    	setTimeout(function(){
+	    		$.get(source, function(data) {
+	        		$(target).html(data);
+	                popupFooter.collapse('show');
+	            });
+	        	$.wait("", true);
+	        },100);
+        }
+        else if(!$target.is('.loaded')){
             $.get(source, function(data) {
                 $target.html(data).collapse('show').addClass('loaded');
             });

@@ -2678,6 +2678,13 @@ table.contents-table {
     }
 }
 
+#popup-footer-source {
+    p {
+        text-align: center;
+        line-height: 2;
+    }
+}
+
 // Pop-out sidebar for contents and bookmarks
 // ------------------------------------------
 .fixed-sidebar {
@@ -2892,9 +2899,11 @@ ul.responsive-tabs__list{
 // except ...
 // -------------------------------------------
 @media screen {
+
     // don't display until it's in the vieport
     // this speeds up view of long texts.
     // ---------------------------------------
+
     section, aside {
         > .render-in-viewport {
             display: none;
@@ -2937,6 +2946,9 @@ ul.responsive-tabs__list{
             }
         }
     }
+
+    // Render everything in editor mode
+    // -------------------------------------
     .editor-mode {
         section, aside {
             > .render-in-viewport {

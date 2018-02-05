@@ -763,7 +763,9 @@ jQuery(document).ready(function($) {
 		$.popupFooterHeight = function () {
 
 			// Footer should not be more than 50% of the viewport
-			$("#popup-footer .fix-height").css({"max-height": ($(window).height() * 0.5) + "px"});
+			$(".fixed-footer .fix-height").each(function(){
+				$(this).css({"max-height": ($(window).height() * 0.5) + "px"});
+			});
 
 		}
 	}($));

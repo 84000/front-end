@@ -1,0 +1,11 @@
+{
+  "name": "84000-fe",
+  "version": "1.7.0",
+  "bootstrapJs": "bootstrap-3.3.7/js",
+  "devDependencies": {
+    "grunt": "~1.0.1",
+    "grunt-contrib-uglify": "~3.3.0",
+    "grunt-contrib-less": "~1.4.1",
+    "grunt-contrib-watch": "~1.0.0"
+  }
+}

@@ -234,16 +234,36 @@ jQuery(document).ready(function($) {
 	    	else if($section.attr('id') == "glossary"){
 	    		$content = $element.find("div.glossary-item").slice(0,5).clone();
 	    	}
-	    	$summary.html($content);
+	    	$summary.append($content);
 	    	$summary.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
 	    		$(this).addClass("ignore");
 	    	});
+
+	    	if(!$element.attr("id")){
+	    		$element.attr("id", $section.attr('id') + "-content")
+	    	}
+
+	    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "render", "title": "Expand this section"});
+	    	$btn = $("<span>", {"class": "btn-round"});
+	    	$icon = $("<i>", {"class": "fa fa-angle-down"});
+	    	$btn.append($icon);
+	    	$link.append($btn);
+
+	    	$summary.append($link);
+	    	
 			$section.append($summary);
 			var summaryHeight = $summary.height();
 			if(summaryHeight > 300){
 				$summary.height(300 + 'px');
 			}
 	    }
+	});
+
+	// Click to render section
+	// -----------------------------------------
+	$(document).on("click", "a.render", function (e) {
+		e.preventDefault();
+		$($(this).attr("href")).render();
 	});
 
 	// Scroll to an anchor
@@ -1161,7 +1181,7 @@ jQuery(document).ready(function($) {
     // Glossarize the currently visible elements
 	// -------------------------------------------
 	$(window).scrollEnd(function () {
-		$.renderInViewport();
+		//$.renderInViewport();
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 	}, 700);

@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
 				};
 			};
 			var media = 'screen';
-			var medias = ['print'];
+			var medias = ['print','screen'];
 			for (var i = medias.length - 1; i >= 0; i--) {
 				if($('#media_test .visible-'+medias[i]+":visible").length){
 					media = medias[i];
@@ -169,7 +169,108 @@ jQuery(document).ready(function($) {
 		}
 	}($));
 
-	// Show sections as they come into view
+	// Render a section that is hidden with .render-in-viewport
+	// --------------------------------------------------------
+	(function ($) { 
+		$.fn.render = function () {
+			var $element = $(this);
+			if($element.hasClass('render-in-viewport')){
+				// render the node
+		    	$element.removeClass('render-in-viewport');
+		    	// delete the preview node
+		    	$element.siblings(".unrendered-preview").remove();
+		    	$element.siblings("a.render").remove();
+
+		    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "preview", "title": "Collapse this section"});
+		    	$btn = $("<span>", {"class": "btn-round"});
+		    	$link.append($btn);
+		    	$element.prepend($link);
+
+		    	// Match heights on newly visible
+		    	$.matchHeights($element);
+
+		    	// Do other scroll events
+		    	$(window).trigger("scroll");
+			}
+	    }
+	}($));
+
+	// Create a preview for a section
+	// The content is hidden with .render-in-viewport
+	// --------------------------------------------------------
+	(function($){
+		$.fn.unrenderedPreview = function (){
+
+			var $element = $(this);
+		    var $section = $element.parent();
+
+		    if($section.length){
+		    	
+		    	var $content;
+
+		    	if($section.hasClass('text')){
+		    		if($element.find("h4, h5, p, .list-item").length > 5){
+		    			$content = $element.find("h4, h5, p, div.list, div.line-group, blockquote, br").slice(0,5).clone();
+		    		}
+		    	}
+		    	else if($section.attr('id') == "abbreviations"){
+		    		if($element.find("h5, table tr").length > 6){
+		    			$content = $element.find("h5, table").clone();
+		    		}
+		    	}
+		    	else if($section.attr('id') == "notes"){
+		    		if($element.find("div.footnote").length > 5){
+		    			$content = $element.find("div.footnote").slice(0,5).clone();
+		    		}
+		    	}
+		    	else if($section.attr('id') == "glossary"){
+		    		if($element.find("div.glossary-item").length > 2){
+		    			$content = $element.find("div.glossary-item").slice(0,2).clone();
+		    		}
+		    	}
+
+		    	if($content){
+
+		    		var $summary = $("<div>", {"class": "unrendered-preview"});
+
+			    	$summary.append($content);
+
+			    	$summary.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
+			    		$(this).addClass("ignore");
+			    	});
+			    	
+			    	$summary.find(".glossary-item .occurences").each(function(){
+			    		$(this).addClass("hidden");
+			    	});
+
+			    	$section.append($summary);
+
+			    	if(!$element.attr("id")){
+			    		$element.attr("id", $section.attr('id') + "-content")
+			    	}
+
+			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "render", "title": "Expand this section"});
+			    	$btn = $("<span>", {"class": "btn-round"});
+			    	$icon = $("<i>", {"class": "fa fa-angle-down"});
+			    	$btn.append($icon);
+			    	$link.append($btn);
+			    	$section.append($link);
+					
+					var summaryHeight = $summary.height();
+					if(summaryHeight > 300){
+						$summary.height(300 + 'px');
+					}
+					$element.addClass('render-in-viewport');
+					$element.find("a.preview").remove();
+		    	}
+		    	else {
+		    		$element.removeClass('render-in-viewport');
+		    	}
+		    }
+		}
+	}($));
+
+	// Render sections as they come into view
     // -----------------------------------------------------------
     (function ($) { 
 		$.renderInViewport = function () {
@@ -197,74 +298,43 @@ jQuery(document).ready(function($) {
 	    };
 	}($));
 
-	(function ($) { 
-		$.fn.render = function () {
-			var $element = $(this);
-			if($element.hasClass('render-in-viewport')){
-				// render the node
-		    	$element.removeClass('render-in-viewport');
-		    	// delete the preview node
-		    	$element.siblings(".unrendered-preview").remove();
-		    	// match heights on newly visible
-		    	$.matchHeights($element);
-			}
-	    }
-	}($));
-
-    // Create previews for unrendered sections
-    // (Check it's hidden / editor mode and print don't hide)
-    // -----------------------------------------------------------
-	$('.screen section > .render-in-viewport:hidden').each(function(){
-
-		var $element = $(this);
-	    var $section = $element.parent();
-
-	    if($section.length){
-	    	var $summary = $("<div>", {"class": "unrendered-preview"});
-	    	var $content;
-	    	if($section.hasClass('text')){
-	    		$content = $element.find("h4, h5, p, div.list, div.line-group, blockquote, br").slice(0,5).clone();
-	    	}
-	    	else if($section.attr('id') == "abbreviations"){
-	    		$content = $element.find("h5, table").clone();
-	    	}
-	    	else if($section.attr('id') == "notes"){
-	    		$content = $element.find("div.footnote").slice(0,5).clone();
-	    	}
-	    	else if($section.attr('id') == "glossary"){
-	    		$content = $element.find("div.glossary-item").slice(0,5).clone();
-	    	}
-	    	$summary.append($content);
-	    	$summary.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
-	    		$(this).addClass("ignore");
-	    	});
-
-	    	if(!$element.attr("id")){
-	    		$element.attr("id", $section.attr('id') + "-content")
-	    	}
-
-	    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "render", "title": "Expand this section"});
-	    	$btn = $("<span>", {"class": "btn-round"});
-	    	$icon = $("<i>", {"class": "fa fa-angle-down"});
-	    	$btn.append($icon);
-	    	$link.append($btn);
-
-	    	$summary.append($link);
-	    	
-			$section.append($summary);
-			var summaryHeight = $summary.height();
-			if(summaryHeight > 300){
-				$summary.height(300 + 'px');
-			}
-	    }
-	});
-
-	// Click to render section
-	// -----------------------------------------
+	// Click to render a section
+	// ------------------------------------------
 	$(document).on("click", "a.render", function (e) {
 		e.preventDefault();
 		$($(this).attr("href")).render();
 	});
+
+	// Click to hide a section and show a preview
+	// -------------------------------------------
+	$(document).on("click", "a.preview", function (e) {
+		e.preventDefault();
+		$($(this).attr("href")).unrenderedPreview();
+	});
+
+	// On load create previews for unrendered sections
+    // -----------------------------------------------------------
+	$('.screen section > .render-in-viewport:hidden').each(function(){
+		$(this).unrenderedPreview();
+	});
+
+	// Flash a button
+	// --------------------------------------
+	(function ($) { 
+		$.fn.pulse = function () {
+			var $button = this;
+			// Let other updates happen
+			setTimeout(function(){
+				// Flash the button
+	    	    $button.addClass("pulse");
+	    	    // Let the transition happen
+	    	    setTimeout(function(){
+	    	    	// Un-flash the button
+	    	    	$button.removeClass("pulse");
+	    	    },750);
+    	    },100);
+		}
+	}($));
 
 	// Scroll to an anchor
 	// -----------------------------------------
@@ -289,51 +359,20 @@ jQuery(document).ready(function($) {
 		}
 	}($));
 
-	// Detect when user stops scrolling
-	// ---------------------------------------
-	(function ($) { 
-		$.fn.scrollEnd = function(callback, timeout) {  
-			var $this = this;       
-			$this.scroll(function(){
-				if ($this.data('scrollTimeout')) {
-					clearTimeout($this.data('scrollTimeout'));
-				}
-				$this.data('scrollTimeout', setTimeout(callback,timeout));
-			});
-		};
-	}($));
-
-	// Flash a button
-	// --------------------------------------
-	(function ($) { 
-		$.fn.pulse = function () {
-			var $button = this;
-			// Let other updates happen
-			setTimeout(function(){
-				// Flash the button
-	    	    $button.addClass("pulse");
-	    	    // Let the transition happen
-	    	    setTimeout(function(){
-	    	    	// Un-flash the button
-	    	    	$button.removeClass("pulse");
-	    	    },750);
-    	    },100);
-		}
-	}($));
-	
-	// Smoothe scroll to an anchor
-	// --------------------------------------
 	var rewindHistory = new Array;
 
 	$(document).on("click",'a.scroll-to-anchor', function() {
+
+		// Check it's on this page
+		// -------------------------------------------
 		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			
 			var $this = $(this);
 
-			// Rewind functionality
 			if($this.not(".pop-up")){
 
-				// Only if it's not in view
+				// Rewind functionality
+				// -------------------------------------------
 				$target = $(this.hash);
 
 				var $buttonContainer = $("#rewind-btn-container");
@@ -345,9 +384,10 @@ jQuery(document).ready(function($) {
 
 			}
 
-			// Mark elements in the text
 			if($this.has("[data-mark]")){
 
+				// Mark elements in the text
+				// -------------------------------------------
 				var selector = $this.data("mark");
 				selector = (this.hash != selector) ? this.hash + " " + selector : selector;
 				var $targets = $(selector);
@@ -366,11 +406,16 @@ jQuery(document).ready(function($) {
 
 			}
 
+			// Smooth scroll to the hash
+			// -------------------------------------------
 			$.scrollToAnchor(this.hash);
 
 			return false;
 		}
 	});
+
+	// Do on loading that page
+	// -------------------------------------------
 	$.scrollToAnchor();
 
 	// Show/hide scroll to top link
@@ -384,7 +429,7 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	// Scroll to top
+	// Scroll to top on clicking long
 	// --------------------------------------
 	$(document).on("click", "a[href='#top']:not(.milestone)", function(e) {
 		$.scrollToAnchor("#top");
@@ -463,9 +508,14 @@ jQuery(document).ready(function($) {
 			return this;
 		};
 	}($));
+
+	// Size image on loading image
+	// --------------------------------------
 	$('.thumbnail img').on("load", function () {
 		$(this).centerWithMargins();
 	});
+	// Size images on loading page
+	// --------------------------------------
 	$('.thumbnail img').centerWithMargins();
 
 	// Lightbox
@@ -493,277 +543,296 @@ jQuery(document).ready(function($) {
 	    return function() { return "http://cached-fe.84000.co"; };
 	})();
 
-	// Load Bookmarks
+	// Bookmarks functionality
 	// --------------------------------------
 	if($('html').hasClass('screen')){
 		
-		//$.getScript( getScriptDomain() + "/js/js-cookies.js" ).done(function( script, textStatus ) {
-		
-			(function ($) { 
-		    	$.getBookmarks = function () {
-		    	
-		    	    // Get current bookmarks as array
-		    	    
-		    	    var bookmarks = Cookies.get('bookmarks');
-		    	    
-		    	    if(bookmarks){
-		    	        bookmarks = JSON.parse(bookmarks);
-		    	    }
-		    			
-		    	    if(!(bookmarks instanceof Object)){
-		    	        bookmarks = new Array();
-		    	    }
-		    	    
-		    	    return bookmarks;
-		    	}
-	    	}($));
+		(function ($) { 
 
-	    	(function ($) { 
-		    	$.getDomain = function () {
-		    		var hostname = window.location.hostname;
-		    		var domain = hostname.split('.').reverse()[1] + "." + hostname.split('.').reverse()[0];
-		    		//console.log(domain);
-		    		return domain;
-		    	}
-		    }($));
-
-	    	(function ($) { 
-		    	$.fn.bookmarkData = function () {
-		    		var location = window.location.href;
-		    	    locationSplit = location.split("#");
-		    	    var page = locationSplit[0];
-		    	    var hash = this.attr('href');
-		    	    var pageTitle = $("#title h1").text();
-		    	    var sectionTitle = this.parents("section, aside").find("h3, h4").first().text();
-		    	    var milestoneTitle = this.text();
-		    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
-		    	    return {'page': page, 'hash': hash, 'title': title};
-		    	}
-	    	}($));
-
-	    	(function ($) { 
-		    	$.bookmark = function (bookmarkData) {
-
-		    		// Get current bookmarks as array
-		    	    var bookmarks = $.getBookmarks();
-		    	    
-		    	    // Check first if it's there already
-		    	    var found = false;
-		    	    for(var i = 0; i < bookmarks.length; i++){
-		    	        if(bookmarks[i].page == bookmarkData.page && bookmarks[i].hash == bookmarkData.hash){
-		    	           found = true;
-		    	        }
-		    	    }
-		    	    // Add bookmark to array
-		    	    if(!found){
-		    	        bookmarks.push(bookmarkData);
-		    	    }
-		    	    
-		    	    // Add array to cookie
-		    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
-		    	    
-		    	    // Reload bookmarks
-		    	    $.loadBookmarks();
-
-		    	    // Flash the button
-		    	    $("#bookmarks-btn-container .badge-notification").pulse();
-		    	}
-	    	}($));
-
-	    	(function ($) { 
-	    		$.loadBookmarks = function () {
-	    			
-	    			// get bookmarks from cookies
-	    			
-		    	    var location = window.location.href;
-		    	    locationSplit = location.split("#");
-		    	    var page = locationSplit[0];
-	    			var bookmarks = $.getBookmarks();
-	    			
-	    			var $tbody = $("table#bookmarks-list tbody");
-	    			var $tfoot = $("table#bookmarks-list tfoot");
-	    			
-	    			$tbody.empty();
-	    			$tfoot.empty();
-
-	    			if(bookmarks.length){
-
-	         			// show them in the list
-	         			for(var i = 0; i < bookmarks.length; i++){
-	         			    
-	         			    var href = bookmarks[i].page + bookmarks[i].hash;
-	         			    var cssClass = (bookmarks[i].page == page) ? "scroll-to-anchor" : "";
-	         			    
-	         			    var $link = $("<a>", {"href": href, "class": cssClass}).text(bookmarks[i].title);
-	         			    var $removeLink = $("<a>", {"href": href, "class": "remove-bookmark", "title": "Remove this bookmark"}).html('<i class="fa fa-minus-circle"></i>');
-	         			    
-							var $trow = $("<tr>");
-							var $tcell1 = $("<td>");
-							var $tcell2 = $("<td>");
-
-							$tcell1.append($link);
-							$tcell2.append($removeLink);
-
-							$trow.append($tcell1);
-							$trow.append($tcell2);
-							$tbody.append($trow);
-	         			}
-
-	         			var $row = $("<tr>").append($("<td>", {"colspan": "2"}).text("Please note that bookmarks are stored as Cookies. Clearing cookies for this site will delete your bookmarks."));
-	         			$tfoot.append($row);
-
-	         		}
-	    			else {
-	    				var $row = $("<tr>").append($("<td>", {"colspan": "2"}).text("You don't have any bookmarks yet. Select milestones on the left of the text to bookmark that passage."));
-	         			$tfoot.append($row);
-	    			}
-	    			
-	    			$('#bookmarks-btn .badge').text(bookmarks.length);
-	    			
-	    		}
-	    	}($));
-	    	$.loadBookmarks();
+			// Get current bookmarks from the cookie
+	    	// --------------------------------------
+	    	$.getBookmarks = function () {
 	    	
-	    	$(document).on("click",'a.milestone', function(e) {
-	    	
-	    	    // Adds a bookmark
+	    	    var bookmarks = Cookies.get('bookmarks');
 	    	    
-	            e.preventDefault();
+	    	    if(bookmarks){
+	    	        bookmarks = JSON.parse(bookmarks);
+	    	    }
+	    			
+	    	    if(!(bookmarks instanceof Object)){
+	    	        bookmarks = new Array();
+	    	    }
 	    	    
-	    	    var bookmarkData = $(this).bookmarkData();
-	    	    
-	    	    $.bookmark(bookmarkData);
+	    	    return bookmarks;
+	    	}
+    	}($));
 
-	    	});
-	    	
-	    	$(document).on("click",'a.remove-bookmark', function(e) {
-	    	   
-	    	    // Removes the bookmark
-	    	    
-	            e.preventDefault();
-	            e.stopPropagation();
-	    	    
-	    	    var href = $(this).attr('href');
+    	(function ($) { 
+
+    		// Get the domain
+	    	// --------------------------------------
+	    	$.getDomain = function () {
+	    		var hostname = window.location.hostname;
+	    		var domain = hostname.split('.').reverse()[1] + "." + hostname.split('.').reverse()[0];
+	    		//console.log(domain);
+	    		return domain;
+	    	}
+	    }($));
+
+    	(function ($) { 
+
+    		// Compile bookmark data object for an element
+	    	// -------------------------------------------
+	    	$.fn.bookmarkData = function () {
+	    		var location = window.location.href;
+	    	    locationSplit = location.split("#");
+	    	    var page = locationSplit[0];
+	    	    var hash = this.attr('href');
+	    	    var pageTitle = $("#title h1").text();
+	    	    var sectionTitle = this.parents("section, aside").find("h3, h4").first().text();
+	    	    var milestoneTitle = this.text();
+	    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
+	    	    return {'page': page, 'hash': hash, 'title': title};
+	    	}
+    	}($));
+
+    	(function ($) { 
+
+    		// Bookmark some bookmarkData
+	    	// -------------------------------------------
+	    	$.bookmark = function (bookmarkData) {
+
 	    	    var bookmarks = $.getBookmarks();
 	    	    
-	    	    // Remove the bookmark
+	    	    // Check if it's there already
+	    	    // -------------------------------------------
+	    	    var found = false;
 	    	    for(var i = 0; i < bookmarks.length; i++){
-	    	        if(bookmarks[i].page + bookmarks[i].hash == href){
-	    	             bookmarks.splice(i, 1);
+	    	        if(bookmarks[i].page == bookmarkData.page && bookmarks[i].hash == bookmarkData.hash){
+	    	           found = true;
 	    	        }
 	    	    }
-	    	    // Set the cookie
+
+	    	    // Add bookmark to array
+	    	    // -------------------------------------------
+	    	    if(!found){
+	    	        bookmarks.push(bookmarkData);
+	    	    }
+	    	    
+	    	    // Add array to cookie
+	    	    // -------------------------------------------
 	    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
-
+	    	    
 	    	    // Reload bookmarks
+	    	    // -------------------------------------------
 	    	    $.loadBookmarks();
-	    	});
 
-    		// Auto-bookmark for next visit
-			// -----------------------------------------
-
-			(function ($) { 
-				$.saveCurrentLocation = function () {
-
-				    $(".translation a.milestone").each(function(index){
-				    	// We are on a translation so remove the lastLocation
-				    	if(index == 0){
-				    		Cookies.remove('lastLocation', { domain: $.getDomain() });
-				    	}
-				    	// If we scroll down then set a new last location
-				    	var $this = $(this);
-				    	if($this.elementInView() == "topInView"){
-				    		Cookies.set('lastLocation', JSON.stringify($this.bookmarkData()), { expires: 31, domain: $.getDomain() });
-				    		return false;
-				    	}
-					});
-
-				}
-			}($));
-
-			(function ($) { 
-	    		$.lastLocationOption = function () {
-	    			
-	    			// get bookmarks from cookies
-	    			
-		    	    var lastLocation = Cookies.get('lastLocation');
-		    	    
-		    	    if(lastLocation){
-
-		    	        lastLocation = JSON.parse(lastLocation);
-
-		    	        if(lastLocation.page){
-
-		    	        	// Check it's not already bookmarked
-		    	        	var bookmarks = $.getBookmarks()
-		    	        	var bookmarked = false;
-		    	        	for (var i = bookmarks.length - 1; i >= 0; i--) {
-		    	        		if(bookmarks[i].page == lastLocation.page && bookmarks[i].hash == lastLocation.hash){
-		    	        			bookmarked = true;
-		    	        			break;
-		    	        		}
-		    	        	}
-
-		    	        	if(!bookmarked)
-		    	        	{
-		    	        		// Check it's not on screen
-						    	if(['inView', 'topInView'].indexOf($(lastLocation.hash).elementInView()) < 0)
-		    	        		{
-
-		    	        			// Offer some options
-				    	        	$alert = $("#page-alert");
-
-				    	        	$alert.find(".container").append(
-				    	        		$("<small>").text("You were reading:")
-				    	        	).append(
-				    	        		$("<br>")
-				    	        	).append(
-				    	        		lastLocation.title
-				    	        	).append(
-				    	        		$("<br>")
-				    	        	).append(
-				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor small"})
-				    	        			.text("go there")
-				    	        			.on("click", function(e){
-									    		$(this).parents("#page-alert").collapse('hide');
-									    	})
-				    	        	).append(
-				    	        		" &bull; "
-				    	        	).append(
-				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
-				    	        			.text("bookmark it")
-				    	        			.on("click", function(e){
-				    	        				e.preventDefault();
-				    	        				$.bookmark(lastLocation);
-									    		$(this).parents("#page-alert").collapse('hide');
-									    	})
-				    	        	).append(
-				    	        		" &bull; "
-				    	        	).append(
-				    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
-				    	        			.text("forget it")
-				    	        			.on("click", function(e){
-				    	        				e.preventDefault();
-									    		$(this).parents("#page-alert").collapse('hide');
-									    	})
-				    	        	);
-
-				    	        	// Only show it once
-									Cookies.remove('lastLocation', { domain: $.getDomain() });
-
-							    	$alert.collapse('show');
-							    }
-		    	        	}
-		    	        }
-		    	    }
-	    		}
-	    	}($));
-
-	    	if($("#page-alert").length){
-	    		$.lastLocationOption();
+	    	    // Flash the button
+	    	    // -------------------------------------------
+	    	    $("#bookmarks-btn-container .badge-notification").pulse();
 	    	}
-	    	
-		//});
+    	}($));
+
+    	(function ($) { 
+
+    		// Load bookmarks into DOM
+	    	// -------------------------------------------
+    		$.loadBookmarks = function () {
+    			
+    			// get bookmarks from cookies
+    			
+	    	    var location = window.location.href;
+	    	    locationSplit = location.split("#");
+	    	    var page = locationSplit[0];
+    			var bookmarks = $.getBookmarks();
+    			
+    			var $tbody = $("table#bookmarks-list tbody");
+    			var $tfoot = $("table#bookmarks-list tfoot");
+    			
+    			$tbody.empty();
+    			$tfoot.empty();
+
+    			if(bookmarks.length){
+
+         			// show them in the list
+         			for(var i = 0; i < bookmarks.length; i++){
+         			    
+         			    var href = bookmarks[i].page + bookmarks[i].hash;
+         			    var cssClass = (bookmarks[i].page == page) ? "scroll-to-anchor" : "";
+         			    
+         			    var $link = $("<a>", {"href": href, "class": cssClass}).text(bookmarks[i].title);
+         			    var $removeLink = $("<a>", {"href": href, "class": "remove-bookmark", "title": "Remove this bookmark"}).html('<i class="fa fa-minus-circle"></i>');
+         			    
+						var $trow = $("<tr>");
+						var $tcell1 = $("<td>");
+						var $tcell2 = $("<td>");
+
+						$tcell1.append($link);
+						$tcell2.append($removeLink);
+
+						$trow.append($tcell1);
+						$trow.append($tcell2);
+						$tbody.append($trow);
+         			}
+
+         			var $row = $("<tr>").append($("<td>", {"colspan": "2"}).text("Please note that bookmarks are stored as Cookies. Clearing cookies for this site will delete your bookmarks."));
+         			$tfoot.append($row);
+
+         		}
+    			else {
+    				var $row = $("<tr>").append($("<td>", {"colspan": "2"}).text("You don't have any bookmarks yet. Select milestones on the left of the text to bookmark that passage."));
+         			$tfoot.append($row);
+    			}
+    			
+    			$('#bookmarks-btn .badge').text(bookmarks.length);
+    			
+    		}
+    	}($));
+
+		// Load bookmarks into DOM on page load
+	    // -------------------------------------------
+    	$.loadBookmarks();
+    	
+
+    	// Add a bookmark on clicking a milestone
+	    // -------------------------------------------
+    	$(document).on("click",'a.milestone', function(e) {
+    	  	
+            e.preventDefault();
+    	    
+    	    $.bookmark($(this).bookmarkData());
+
+    	});
+    	
+    	// Remove a bookmark on clicking a link
+	    // -------------------------------------------
+    	$(document).on("click",'a.remove-bookmark', function(e) {
+    	    
+            e.preventDefault();
+            e.stopPropagation();
+    	    
+    	    var href = $(this).attr('href');
+    	    var bookmarks = $.getBookmarks();
+    	    
+    	    // Remove the bookmark
+    	    for(var i = 0; i < bookmarks.length; i++){
+    	        if(bookmarks[i].page + bookmarks[i].hash == href){
+    	             bookmarks.splice(i, 1);
+    	        }
+    	    }
+    	    // Set the cookie
+    	    Cookies.set('bookmarks', JSON.stringify(bookmarks), { expires: 365, domain: $.getDomain() });
+
+    	    // Reload bookmarks
+    	    $.loadBookmarks();
+    	});
+
+		// Save the location for the next visit
+		// -----------------------------------------
+		(function ($) { 
+			$.saveCurrentLocation = function () {
+
+			    $(".translation a.milestone").each(function(index){
+			    	// We are on a translation so remove the lastLocation
+			    	if(index == 0){
+			    		Cookies.remove('lastLocation', { domain: $.getDomain() });
+			    	}
+			    	// If we scroll down then set a new last location
+			    	var $this = $(this);
+			    	if($this.elementInView() == "topInView"){
+			    		Cookies.set('lastLocation', JSON.stringify($this.bookmarkData()), { expires: 31, domain: $.getDomain() });
+			    		return false;
+			    	}
+				});
+
+			}
+		}($));
+
+		// Show the option to return to the last location
+		// ----------------------------------------------
+		(function ($) { 
+    		$.lastLocationOption = function () {
+    			
+    			// get bookmarks from cookies
+    			
+	    	    var lastLocation = Cookies.get('lastLocation');
+	    	    
+	    	    if(lastLocation){
+
+	    	        lastLocation = JSON.parse(lastLocation);
+
+	    	        if(lastLocation.page){
+
+	    	        	// Check it's not already bookmarked
+	    	        	var bookmarks = $.getBookmarks()
+	    	        	var bookmarked = false;
+	    	        	for (var i = bookmarks.length - 1; i >= 0; i--) {
+	    	        		if(bookmarks[i].page == lastLocation.page && bookmarks[i].hash == lastLocation.hash){
+	    	        			bookmarked = true;
+	    	        			break;
+	    	        		}
+	    	        	}
+
+	    	        	if(!bookmarked)
+	    	        	{
+	    	        		// Check it's not on screen
+					    	if(['inView', 'topInView'].indexOf($(lastLocation.hash).elementInView()) < 0)
+	    	        		{
+
+	    	        			// Offer some options
+			    	        	$alert = $("#page-alert");
+
+			    	        	$alert.find(".container").append(
+			    	        		$("<small>").text("You were reading:")
+			    	        	).append(
+			    	        		$("<br>")
+			    	        	).append(
+			    	        		lastLocation.title
+			    	        	).append(
+			    	        		$("<br>")
+			    	        	).append(
+			    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor small"})
+			    	        			.text("go there")
+			    	        			.on("click", function(e){
+								    		$(this).parents("#page-alert").collapse('hide');
+								    	})
+			    	        	).append(
+			    	        		" &bull; "
+			    	        	).append(
+			    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
+			    	        			.text("bookmark it")
+			    	        			.on("click", function(e){
+			    	        				e.preventDefault();
+			    	        				$.bookmark(lastLocation);
+								    		$(this).parents("#page-alert").collapse('hide');
+								    	})
+			    	        	).append(
+			    	        		" &bull; "
+			    	        	).append(
+			    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
+			    	        			.text("forget it")
+			    	        			.on("click", function(e){
+			    	        				e.preventDefault();
+								    		$(this).parents("#page-alert").collapse('hide');
+								    	})
+			    	        	);
+
+			    	        	// Only show it once
+								Cookies.remove('lastLocation', { domain: $.getDomain() });
+
+						    	$alert.collapse('show');
+						    }
+	    	        	}
+	    	        }
+	    	    }
+    		}
+    	}($));
+		
+		// Show the last location option on loading the page
+		// --------------------------------------------------
+    	if($("#page-alert").length){
+    		$.lastLocationOption();
+    	}
 	}
 
 	// Close button for a collapse element
@@ -777,7 +846,7 @@ jQuery(document).ready(function($) {
         
 	});
 
-	// Set footer max-height
+	// Set pop-up footer max-height
 	// --------------------------------------
 	(function ($) { 
 		$.popupFooterHeight = function () {
@@ -789,16 +858,10 @@ jQuery(document).ready(function($) {
 
 		}
 	}($));
-	$.popupFooterHeight();
 
-	// Position blockquote in header
+	// Set footer max-height on loading the page
 	// -----------------------------------------
-	$(".panel.main-panel > .panel-img-header+.panel-body blockquote:first-child").each(function(){
-		if(!$("html.xs").length){
-			var $this = $(this);
-			$this.css({'top': -($this.outerHeight()) });
-		}
-	});
+	$.popupFooterHeight();
 
 	// Pop-up footer
 	// -----------------------------------------
@@ -876,14 +939,13 @@ jQuery(document).ready(function($) {
 		$sidebar.collapse('toggle');
 	});
 
-	// Close after click
+	// Close sidebar on clicking something in it
 	// -----------------------------------------
 	$(document).on("click",'.fixed-sidebar a:not(.remove-bookmark)', function(e) {
 
 		$(this).parents(".fixed-sidebar ").collapse('hide');
 
 	});
-
 
 	// Find instances of the glossary items in the text 
     // and link them to the glossary.
@@ -892,305 +954,346 @@ jQuery(document).ready(function($) {
 
     	if($("#glossary .glossary-item").length){
 
-    		//$.getScript( getScriptDomain() + "/js/replace-text.min.js" ).done(function( script, textStatus ) {
+    		// Extend contains selector to ignore case
+    		// ----------------------------------------
+			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
+			    return function( elem ) {
+			        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+			    };
+			});
 
-    			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
-				    return function( elem ) {
-				        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-				    };
-				});
-    			
-	            var isWorking = false,
-	                $allGlossaries = $("#glossary .glossary-item:not(.ignore)"),
-	                $allMatchable = $(".glossarize-section .glossarize:not(.ignore), .glossarize-section .glossarize-complete:not(.ignore)"),
-	                countWords = function(term){
-                        var words = term.split(' ');
-                        return words.length;
-	                };
+            var isWorking = false;
 
-	            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
-						return +countWords($(b).find(".term").text()) - +countWords($(a).find(".term").text());
-					}),
-	                escapeRegExp = function(stringToGoIntoTheRegex) {
-	                
-	                    return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-	                    
-	                },
-	                glossarize = function($glossaries, $matchable, callback){
-	                
-						// Highlight instances of the glossary items in each
-						// paragraph with a link to the glossary.
-						// -------------------------------------------------
-						$glossaries.each(function(){
+            // What we are parsing
+            // ------------------------------
+            var $allGlossaries = $("#glossary .glossary-item:not(.ignore)"),
+                $allMatchable = $(".glossarize-section .glossarize:not(.ignore), .glossarize-section .glossarize-complete:not(.ignore)");
 
-						    var $glossary = $(this);
+            var countWords = function(term){
+                var words = term.split(' ');
+                return words.length;
+            };
 
-						    $glossary.find('.term').each(function(){
-						    	if($glossary.data("match") == "marked"){
+            // Prioritise glossary items
+            // ------------------------------
+            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
+				return +countWords($(b).find(".term").text()) - +countWords($(a).find(".term").text());
+			});
 
-						    		// Markup marked glossaries
-						    		glossaryMarked($(this), $glossary, $matchable);
-							    }
-							    else {
+            var escapeRegExp = function(stringToGoIntoTheRegex) {
+                
+	                // Prioritise glossary items
+	            	// ------------------------------
+                    return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                    
+                },
+                glossarize = function($glossaries, $matchable, callback){
+                
+					// Highlight instances of the glossary items in each
+					// paragraph with a link to the glossary.
+					// -------------------------------------------------
+					$glossaries.each(function(){
 
-							    	// Markup matching glossaries
-							    	glossaryMatch($(this), $glossary, $matchable);
+					    var $glossary = $(this);
 
-							    }
-						    });
-						});
-						if(callback){
-						   callback(arguments[3], arguments[4]);
-						}
-	                   
-	                },
-	                glossaryRegEx = function(term){
-	                	// Unfortunately, as JS doesn't consider accented characters as "word" characters.
-				    	// Therefore cannot use the \b or \w metacharacters. We have to enumerate all word boundaries ourselves.
-	                	return new RegExp("(^|\\s|‘|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|—|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|s<|es\\W|es<|’s\\W|’s<|'s\\W|'s<|s’\\W|s’<|s'\\W|s'<)","gi");
-	                },
-	                glossaryMarked = function($term, $glossary, $matchable){
+					    $glossary.find('.term').each(function(){
+					    	if($glossary.data("match") == "marked"){
 
-	                	
-	                	// Glossarise the marked up terms and replace with links
+					    		// Markup marked glossaries
+					    		glossaryMarked($(this), $glossary, $matchable);
+						    }
+						    else {
 
-				    	var glossaryId = $glossary.attr("id");
-				        var regEx = glossaryRegEx($term.text());
-				        
-				        $matchable.find("span.term:contains(" + $term.text() + ")").each(function(spanIndex){
+						    	// Markup matching glossaries
+						    	glossaryMatch($(this), $glossary, $matchable);
 
-				        	var $span = $(this);
-				        	var muteClass = spanIndex > 0 ? 'mute' : '' ;
-				        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link ' + muteClass + ' pop-up">' + $span.text() + '</a>');
-				        	
-				        });
-	                },
-	                glossaryMatch = function($term, $glossary, $matchable){
+						    }
+					    });
+					});
+					if(callback){
+					   callback(arguments[3], arguments[4]);
+					}
+                   
+                },
+                glossaryRegEx = function(term){
 
-	                	// Glossarise any matches in the text
+                	// Unfortunately JS doesn't consider accented characters as "word" characters.
+			    	// Therefore cannot use the \b or \w metacharacters. We have to enumerate all word boundaries ourselves.
+			    	// -----------------------------------------------------------------------------------------------------
+                	return new RegExp("(^|\\s|‘|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|—|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|s<|es\\W|es<|’s\\W|’s<|'s\\W|'s<|s’\\W|s’<|s'\\W|s'<)","gi");
+                },
+                glossaryMarked = function($term, $glossary, $matchable){
 
-				    	var term = $term.text();
-				    	var glossaryId = $glossary.attr("id");
-				        
-				        $matchable.each(function(){
-				        	var $this = $(this);
-				        	if($this.hasClass('glossarize')){
-				        		var regEx = glossaryRegEx(term);
-				        		$this.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-				        	}
-				        	else if($this.hasClass('glossarize-complete')){
-				        		var regEx = new RegExp("^(" + escapeRegExp(term) + ")$","gi");
-				        		$this.replaceText(regEx, '<a href="#' + glossaryId + '" class="glossary-link pop-up">$1<\/a>');
-				        	}
-				        	
-				        });
-	                },
-	                glossaryBackLink = function($glossaries, callback){
-	                
-	                    // Create a list of links in the glossary to its 
-	                    // occurences in the text
-	                    // ----------------------------------------------------
-	                    
-	                    $glossaries.filter(':not(.backlinked)').each(function(){
-	                        
-	                        var $glossaryItem = $(this);
-	                        var glossaryId = $glossaryItem.attr("id");
+                	
+                	// Glossarise the marked up terms and replace with links
+                	// -------------------------------------------------
+			    	var glossaryId = $glossary.attr("id");
+			        var regEx = glossaryRegEx($term.text());
+			        
+			        $matchable.find("span.term:contains(" + $term.text() + ")").each(function(spanIndex){
 
-                        	// Create a list
-                            var $list = $("<ul>", {"class": "list-inline"});
+			        	var $span = $(this);
+			        	var muteClass = spanIndex > 0 ? 'mute' : '' ;
+			        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link ' + muteClass + ' pop-up">' + $span.text() + '</a>');
+			        	
+			        });
+                },
+                glossaryMatch = function($term, $glossary, $matchable){
 
-                            // Find references to this glossary in the text
-                            $allMatchable.has("a[href='#" + glossaryId + "']").each(function(refIndex){
-                            	
-                                var $paragraph = $(this);
-                                var paragraph_id = $paragraph.attr("id");
-                                if(!paragraph_id){
-                                	paragraph_id = $paragraph.parents("[id]").attr("id");
-                                }
+                	// Glossarise any matches in the text
+                	// -------------------------------------------------
+			    	var term = $term.text();
+			    	var glossaryId = $glossary.attr("id");
+			        
+			        $matchable.each(function(){
+			        	var $this = $(this);
+			        	if($this.hasClass('glossarize')){
+			        		var regEx = glossaryRegEx(term);
+			        		$this.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
+			        	}
+			        	else if($this.hasClass('glossarize-complete')){
+			        		var regEx = new RegExp("^(" + escapeRegExp(term) + ")$","gi");
+			        		$this.replaceText(regEx, '<a href="#' + glossaryId + '" class="glossary-link pop-up">$1<\/a>');
+			        	}
+			        	
+			        });
+                },
+                glossaryBackLink = function($glossaries, callback){
+                
+                    // Create a list of links in the glossary to its 
+                    // occurences in the text
+                    // ----------------------------------------------------
+                    $glossaries.filter(':not(.backlinked)').each(function(){
+                        
+                        var $glossaryItem = $(this);
+                        var glossaryId = $glossaryItem.attr("id");
 
-                                if(!$list.find("a[href='#" + paragraph_id + "']").length)
-                                {
-                                	// Create a link to it
-	                                //var title = "In " + $glossaryRef.parents("section").find("h3").text();
-	                                var linkAttributes = {
-	                                	"href": "#" + paragraph_id, 
-	                                	"class": "scroll-to-anchor", 
-	                                	"data-mark": "a[href='#" + glossaryId + "']"
-	                                };
-	                                var $link = $("<a>", linkAttributes).text($list.find("li").length + 1);
-	                                // Create a list item
-	                                var $item = $("<li>");
-	                                // Append the link to the item
-	                                $item.append($link);
-	                                // Append the item to the list
-	                                $list.append($item);
-                                }
-                                
-                            });
-							
-							var countOccurences = $list.find("li").length;
-							var occurencesDesc = countOccurences == 1 ? "1 passage contains this term" : countOccurences + " passages contain this term";
-							$glossaryItem.find(".occurences h6").text(occurencesDesc);
+                    	// Create a list
+                        var $list = $("<ul>", {"class": "list-inline"});
+
+                        // Find references to this glossary in the text
+                        $allMatchable.has("a[href='#" + glossaryId + "']").each(function(refIndex){
+                        	
+                            var $paragraph = $(this);
+                            var paragraph_id = $paragraph.attr("id");
+                            if(!paragraph_id){
+                            	paragraph_id = $paragraph.parents("[id]").attr("id");
+                            }
+
+                            if(!$list.find("a[href='#" + paragraph_id + "']").length)
+                            {
+                            	// Create a link to it
+                                var linkAttributes = {
+                                	"href": "#" + paragraph_id, 
+                                	"class": "scroll-to-anchor", 
+                                	"data-mark": "a[href='#" + glossaryId + "']"
+                                };
+                                var $link = $("<a>", linkAttributes).text($list.find("li").length + 1);
+                                // Create a list item
+                                var $item = $("<li>");
+                                // Append the link to the item
+                                $item.append($link);
+                                // Append the item to the list
+                                $list.append($item);
+                            }
                             
-                            // Append the list to the glossary
-                            $glossaryItem.find(".occurences").append($list);
-	                            
-	                    });
-	                    
-	                    if(callback){
-	                        callback();
-	                    }
-	                    
-	                },
-	                prepGlossary = function($glossary){
-	                	// First glossarize terms with a higher priority
-	                	var term = $glossary.find(".term").text();
-	                	var priority = countWords(term);
-                        //var priority = parseInt($glossary.data("priority"));
-                        var regEx = glossaryRegEx(term);
+                        });
+						
+						var countOccurences = $list.find("li").length;
+						var occurencesDesc = countOccurences == 1 ? "1 passage contains this term" : countOccurences + " passages contain this term";
+						$glossaryItem.find(".occurences h6").text(occurencesDesc);
+                        
+                        // Append the list to the glossary
+                        $glossaryItem.find(".occurences").append($list);
+                            
+                    });
+                    
+                    if(callback){
+                        callback();
+                    }
+                    
+                },
+                prepGlossary = function($glossary){
 
-                        var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
-                        	var thisTerm = $(this).find(".term").text();
-                        	var thisPriority = countWords(thisTerm);
-							return thisPriority > priority && thisTerm.match(regEx);
-						});
+                	// First glossarize terms with a higher priority
+                	// -------------------------------------------------
 
-						$higherPriority.each(function(){
-							var $otherGlossary = $(this);
-							glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
-	                        	isWorking = false;
-                            	$otherGlossary.addClass("backlinked");
-	                        });
-						});
-	                },
-	                parseParagraph = function($paragraph){
-	                
-	                    // Parse a particular paragraph
-	                    // --------------------------------------
-	                    
-	                    if(!isWorking){
-	                        isWorking = true;
-	                        glossarize($allGlossariesPrioritised, $paragraph, function(){ 
-	                        	isWorking = false; 
-	                            $paragraph.addClass("glossarized")
-	                        });
-	                    }
-	                    
-				    },
-				    parseGlossary = function($glossary){
-				        
-	                    // Parse a particular glossary
-	                    // --------------------------------------
-	                    
-	                    if(!isWorking){
-	                        isWorking = true;
-	                        prepGlossary($glossary);
-							glossarize($glossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
-	                        	isWorking = false;
-                            	$glossary.addClass("backlinked");
-	                        });
+                	var term = $glossary.find(".term").text();
+                	var priority = countWords(term);
+                    var regEx = glossaryRegEx(term);
 
-	                    }
-	                    
-				    },
-				    hideTermsTimeout;
+                    var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
+                    	var thisTerm = $(this).find(".term").text();
+                    	var thisPriority = countWords(thisTerm);
+						return thisPriority > priority && thisTerm.match(regEx);
+					});
 
-				(function ($){
-					$.showGlossaryLinks = function(){
+					$higherPriority.each(function(){
+						var $otherGlossary = $(this);
+						glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
+                        	isWorking = false;
+                        	$otherGlossary.addClass("backlinked");
+                        });
+					});
+                },
+                parseParagraph = function($paragraph){
+                
+                    // Parse a particular paragraph
+                    // --------------------------------------
+                    
+                    if(!isWorking){
+                        isWorking = true;
+                        glossarize($allGlossariesPrioritised, $paragraph, function(){ 
+                        	isWorking = false; 
+                            $paragraph.addClass("glossarized")
+                        });
+                    }
+                    
+			    },
+			    parseGlossary = function($glossary){
+			        
+                    // Parse a particular glossary
+                    // --------------------------------------
+                    
+                    if(!isWorking){
+                        isWorking = true;
+                        prepGlossary($glossary);
+						glossarize($glossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
+                        	isWorking = false;
+                        	$glossary.addClass("backlinked");
+                        });
 
-						var $translation = $(".translation");
+                    }
+                    
+			    },
+			    hideTermsTimeout;
 
-				    	$translation.removeClass("mute-glossary");
+			(function ($){
 
-     			    	clearTimeout(hideTermsTimeout);
+				// Show or hide the glossary links using .mute-glossary
+				// ----------------------------------------------------
+				$.showGlossaryLinks = function(){
 
-     			    	hideTermsTimeout = setTimeout(function(){
-     			    		$translation.addClass("mute-glossary");
-     			    	}, 1000);
-				    }
-				}($));
+					var $translation = $(".translation");
 
-				(function ($) { 
-	    			$.glossarizeVisibleParagraphs = function () {
-	    
-	        			// Glossarize paragraphs that have become visible
-	        			// ----------------------------------------------
-	        			
-	        		    if (isWorking) return false;
-	        				
-	        			$allMatchable.filter(':not(.glossarized)').each(function(){
-	        			
-	        			    var $paragraph = $(this);
-	     			    	var elementInViewStatus = $paragraph.elementInView();
+			    	$translation.removeClass("mute-glossary");
 
-	     			    	$.showGlossaryLinks();
-	     			    	
-	     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
-	                            parseParagraph($paragraph);
-	     					}
-	     					else if(elementInViewStatus == 'below'){
-	     					    // This allows us to break on the first
-	     					    // non-visible after a visible.
-	     					    return false;
-	     					}
-	        			    
-	     				});
-	     				
-	    			}
-	    		}($));
-	    		
-	    		(function ($) { 
-	    			$.backlinkVisibleGlossaries = function () {
-	    
-	        			// Back link glossaries that have become visible
-	        			// ---------------------------------------------
-	        			
-	        		    if (isWorking) return false;
+ 			    	clearTimeout(hideTermsTimeout);
 
-	        			$allGlossaries.filter(':not(.backlinked)').each(function(){
-	        			
-	        			    var $glossaryItem = $(this);
-	     			    	var elementInViewStatus = $glossaryItem.elementInView();
-	     			    	
-	     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
-	                            parseGlossary($glossaryItem);
-	     					}
-	     					else if(elementInViewStatus == 'below'){
-	     					    // This allows us to break on the first
-	     					    // non-visible after a visible.
-	     					    return false;
-	     					}
-	        			    
-	     				});
-	     				
-	    			}
-	    		}($));
+ 			    	hideTermsTimeout = setTimeout(function(){
+ 			    		$translation.addClass("mute-glossary");
+ 			    	}, 1000);
+			    }
+			}($));
+
+			(function ($) { 
+
+				// Glossarize paragraphs that have become visible
+        		// ----------------------------------------------
+    			$.glossarizeVisibleParagraphs = function () {
+    
+        			if (isWorking) return false;
+        				
+        			$allMatchable.filter(':not(.glossarized)').each(function(){
+        			
+        			    var $paragraph = $(this);
+     			    	var elementInViewStatus = $paragraph.elementInView();
+
+     			    	$.showGlossaryLinks();
+     			    	
+     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
+                            parseParagraph($paragraph);
+     					}
+     					else if(elementInViewStatus == 'below'){
+     					    // This allows us to break on the first
+     					    // non-visible after a visible.
+     					    return false;
+     					}
+        			    
+     				});
+     				
+    			}
+    		}($));
+    		
+    		(function ($) { 
+
+    			// Back link glossaries that have become visible
+        		// ---------------------------------------------
+    			$.backlinkVisibleGlossaries = function () {
+    
+        			if (isWorking) return false;
+
+        			$allGlossaries.filter(':not(.backlinked)').each(function(){
+        			
+        			    var $glossaryItem = $(this);
+     			    	var elementInViewStatus = $glossaryItem.elementInView();
+     			    	
+     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
+                            parseGlossary($glossaryItem);
+     					}
+     					else if(elementInViewStatus == 'below'){
+     					    // This allows us to break on the first
+     					    // non-visible after a visible.
+     					    return false;
+     					}
+        			    
+     				});
+     				
+    			}
+    		}($));
+     		
+     		// Also implement on showing in pop-up footer:
+     		// Call prepare event on clicking a glossary link
+     		// ----------------------------------------------
+            $(document).on("prepare",'a.glossary-link', function(e) {
+               parseGlossary($($(this).attr("href")));
+           	});
 	     		
-	     		// Also implement on showing in pop-up footer:
-	     		// Call prepare event on clicking a glossary link
-	     		// ----------------------------------------------
-	            $(document).on("prepare",'a.glossary-link', function(e) {
-	               parseGlossary($($(this).attr("href")));
-	           	});
-	     		
-	        //});
     	}
          
     }
 
-    // Glossarize the currently visible elements
+    // Detect when user stops scrolling
+	// ---------------------------------------
+	(function ($) { 
+		$.fn.scrollEnd = function(callback, timeout) {  
+			var $this = this;       
+			$this.scroll(function(){
+				if ($this.data('scrollTimeout')) {
+					clearTimeout($this.data('scrollTimeout'));
+				}
+				$this.data('scrollTimeout', setTimeout(callback, timeout));
+			});
+		};
+	}($));
+
+    
+    // When a user stops scrolling...
 	// -------------------------------------------
 	$(window).scrollEnd(function () {
-		//$.renderInViewport();
+
+		// Render the first visible section
+		// --------------------------------------------
+		// $.renderInViewport();
+
+		// Glossarize the currently visible elements
+		// --------------------------------------------
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
+
 	}, 700);
 	$(window).scroll();
 
+	// On closing the window...
+	// -------------------------------------------
 	$(window).on("beforeunload", function() { 
+
+		// Save the current text/location
+		// -------------------------------------------
 	    if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
 	});
 
+	// Add behaviour...
     // Get the href content via ajax and put it in the specified element
     // ----------------------------------------------------------------- 
     $(document).on("click", "[data-ajax-target]", function(e){
@@ -1225,6 +1328,7 @@ jQuery(document).ready(function($) {
         
     });
 
+    // Add behaviour...
     // Print a page in a link
     // ----------------------------------------------------------------- 
     $(document).on("click", "a.print-href", function(e){
@@ -1248,22 +1352,24 @@ jQuery(document).ready(function($) {
 
 	});
 
+    // Add behaviour...
     // Filter on change
     // ----------------------------------------------------------------- 
     $(document).on("change",".filter-form input, .filter-form select", function(e){
 	    $(this).parents("form").submit();
 	});
 
-    // Match heights on hidden content
-	//------------------------------------------
+    // Add behaviour...
+    // On showing a tab...
+    // ----------------------------------------------
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+		// Match heights on hidden content
+		//------------------------------------------
 		$.matchHeights($(document));
 	});
 
-	// Close temporary alerts
-	// -----------------------------------------
-	$(".alert.alert-temporary").delay(2000).slideUp(400);
-
+	// Add behaviour...
 	// Track some clicks
 	// -----------------------------------------
 	$('a.log-click').on('click', function (e) {
@@ -1272,22 +1378,7 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	// Log an error
-	// ------------------------------------------
-	$(".client-error").each(function(e){
-		$.ajax({
-			url: "/log-error.html",
-			method: "POST",
-			data: {'url' : window.location.href}
-		});
-	});
-
-	// Redirect page
-	// ------------------------------------------
-	$("a.redirect-onload").each(function(e){
-		location.href = $(this).attr("href");
-	});
-
+	// Add behaviour...
 	// Rewind button
 	// -----------------------------------------
 	$("#rewind-btn-container button").on('click', function (e) {
@@ -1301,6 +1392,52 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	// Add behaviour...
+	// Body click event
+	// ------------------------------------------
+	$(document).on("click",'body', function(e) {
+	
+		// Close the footer
+        $('.fixed-footer, .fixed-sidebar').collapse('hide');
+        // show glossary highlights
+        if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
+        
+	});
+
+	// Add behaviour...
+	// Stop propagation to body click
+	// --------------------------------------
+	$(document).on("click",'.fixed-footer, .fixed-footer a, .fixed-sidebar, .fixed-sidebar a', function(e) {
+	
+		e.stopPropagation();
+        
+	});
+
+	// On loading the page...
+	// Close temporary alerts
+	// -----------------------------------------
+	$(".alert.alert-temporary").delay(2000).slideUp(400);
+
+
+	// On loading the page...
+	// Log an error
+	// ------------------------------------------
+	$(".client-error").each(function(e){
+		$.ajax({
+			url: "/log-error.html",
+			method: "POST",
+			data: {'url' : window.location.href}
+		});
+	});
+
+	// On loading the page...
+	// Redirect to a different page
+	// ------------------------------------------
+	$("a.redirect-onload").each(function(e){
+		location.href = $(this).attr("href");
+	});
+
+	// On loading the page...
 	// Replace text on internal references
 	// -----------------------------------------
 	$("a.internal-ref").each(function(index){
@@ -1321,32 +1458,27 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	// Body click event
-	// ------------------------------------------
-	$(document).on("click",'body', function(e) {
-	
-		// Close the footer
-        $('.fixed-footer, .fixed-sidebar').collapse('hide');
-        // show glossary highlights
-        if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
-        
+	// On loading the page...
+	// Position blockquote in header
+	// -----------------------------------------
+	$(".panel.main-panel > .panel-img-header+.panel-body blockquote:first-child").each(function(){
+		if(!$("html.xs").length){
+			var $this = $(this);
+			$this.css({'top': -($this.outerHeight()) });
+		}
 	});
 
-	// Stop propagation to body click
-	// --------------------------------------
-	$(document).on("click",'.fixed-footer, .fixed-footer a, .fixed-sidebar, .fixed-sidebar a', function(e) {
-	
-		e.stopPropagation();
-        
-	});
-
-	// Trigger events on resize
+	// On resize...
 	//------------------------------------------
 	$(window).on("resize", function(){
 		$.mediaSize();
 		$.matchHeights($(document));
 		$.popupFooterHeight();
 	});
+
+	// On loading the page...
+	// Trigger resize events
+	//------------------------------------------
 	$(window).resize();
 
 });

@@ -1,0 +1,227 @@
+
+// ---------------------------------------- //
+// General helper classes
+// ---------------------------------------- //
+
+.foreground {
+    position: relative;
+    z-index: 2;
+}
+
+.relative {
+    position: relative;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+
+a.disabled {
+    .text-muted();
+    pointer-events: none;
+    cursor: none;
+}
+
+.list-indent  {
+    margin-left: 15px;
+}
+
+.ease-all {
+    .transition(.5s ease-in);
+}
+
+a.warning {
+    color: @brand-red;
+}
+
+hr.no-margin {
+    margin-top:    0px;
+    margin-bottom: 0px;
+}
+
+.no-top-margin {
+    margin-top:    0px !important;
+}
+
+table {
+    td, th {
+        &.nowrap {
+            white-space: nowrap;
+        }
+        &.wrap {
+            word-break: break-all;
+        }
+    }
+}
+
+p.date {
+    font-family: @font-family-serif;
+    font-size: @font-size-small;
+    color: @gray-light;
+}
+
+.position-static {
+    position: static;
+}
+
+.match-height-overflow {
+    overflow: auto;
+}
+
+.btn-uppercase {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+// Centered tabs
+// ----------------------------
+.tabs-container-center {
+
+    .text-center();
+
+    .nav-tabs {
+
+        display: inline-block;
+        width: 100%;
+
+        > li {
+            display: inline-block;
+            float: none;
+        }
+
+    }
+
+}
+
+// Vertical align helper
+// ----------------------------------------
+.adjacent-panels {
+
+    display: table;
+
+    &.panel-margin {
+        margin-bottom: @line-height-computed;
+    }
+
+    > span, > a {
+
+        display: table-cell;
+        vertical-align: middle;
+
+        >  .panel {
+            margin-bottom: 0px;
+        }
+
+    }
+}
+.center-vertical {
+
+    .adjacent-panels();
+
+    > span, > a {
+
+        vertical-align: middle;
+        padding-left: 15px;
+
+        &:first-child {
+            padding-left: 0 !important;
+        }
+
+    }
+
+    &.together {
+
+        > span, > a {
+
+            padding-left: 7px;
+
+        }
+    }
+}
+
+// Merge columns
+// ----------------------------------------
+@media (min-width: @screen-sm-min) {
+
+    .sm-center-vertical {
+        .center-vertical();
+    }
+
+}
+
+@media (min-width: @screen-md-min) {
+
+    .col-md-merge-right {
+        padding-right: 0px;
+    }
+
+    .col-md-merge-left {
+        padding-left: 0px;
+    }
+
+    .md-adjacent-panels {
+        .adjacent-panels();
+    }
+
+    .md-center-vertical {
+        .center-vertical();
+    }
+
+    .col-md-pad-top {
+        padding-top: 20px;
+    }
+
+}
+
+// Max width is sm size
+// -----------------------------------
+.max-width-sm {
+    max-width: @screen-sm;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Set a min height for md or greater
+// -----------------------------------
+@media only screen and (min-width: @screen-md) {
+    .min-height-md {
+        min-height: 520px;
+    }
+}
+
+// Dot seperators on inline list
+// -----------------------------------
+.list-inline.inline-dots {
+    margin-bottom: 0px;
+    > li {
+        &:before {
+            content: '·';
+            padding-right: 10px;
+        }
+        &:first-child:before {
+            content: '';
+            padding-right: 0px;
+        }
+    }
+}
+
+// Bar seperators on inline list
+// -----------------------------------
+.list-inline.inline-bars {
+    margin-bottom: 0px;
+    > li {
+        border-left: 1px solid @hr-border;
+        padding-left: 20px;
+        padding-right: 20px;
+        &:first-child {
+            border-left: 0;
+        }
+    }
+}

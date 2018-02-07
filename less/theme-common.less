@@ -1,0 +1,780 @@
+
+// ---------------------------------------- //
+// 84000 theme: common elements
+// ---------------------------------------- //
+
+// Page background
+// ----------------------------------------
+html {
+    background-color: @gray-background-color;
+    height: 100%;
+}
+
+body {
+
+    height: auto!important;
+    background-image: url(/imgs/background-pattern.svg);
+    background-size: 40px 40px;
+    position: relative;
+
+    @media only screen and (max-width: @screen-sm) {
+
+        > .container, .fixed-footer > .container {
+            padding-left: 0px;
+            padding-right: 0px;
+            overflow: hidden;
+        }
+
+    }
+}
+
+// Footer
+// -------------------------------------------
+body > footer {
+    color: @text-muted;
+    text-align: center;
+    padding: 25px 0px 100px 0px;
+    background-color: @gray-background-color;
+    border-top: 5px solid @gray-border-color;
+    font-family: @font-family-sans-serif;
+    font-size: @font-size-small;
+
+}
+
+// Full body panel
+// -------------------------------------------
+body .container > .panel, .panel.main-panel {
+
+    width: 100%;
+
+    > .panel-body {
+
+        padding: 20px 30px 60px 30px;
+        overflow: hidden;
+        position: relative;
+
+        > p:first-child > img:first-child {
+            width: 100%;
+        }
+    }
+
+    > .panel-footer {
+        padding: 20px 30px 20px 30px;
+        overflow: hidden;
+    }
+
+    @media only screen and (max-width: @grid-float-breakpoint) {
+        > .panel-body {
+            padding: 15px 15px 60px 15px;
+        }
+    }
+
+}
+
+// Disable page while processing
+// -------------------------------------------
+body.wait:after{
+    content:'';
+    z-index: 1000;
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color:rgba(255,255,255,.3);
+}
+body.wait > #wait{
+    position:fixed;
+    display:inline-block;
+    text-align:center;
+    z-index: 1001;
+    color: #fff;
+    padding:10px 25px;
+    border-radius:8px;
+    max-width:90%;
+    background-color: @brand-red;
+}
+
+// Brand header & Nav
+// ----------------------------------------
+.tag-line {
+    font-family: @font-family-tag-line;
+    color: @brand-blue;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+// Icons
+// ----------------------------------------
+i.fa-envelope-square {
+    color: @brand-green;
+}
+
+i.fa-facebook-square {
+    color: @brand-blue;
+}
+
+i.fa-twitter-square {
+    color: @brand-orange;
+}
+
+i.fa-youtube-square {
+    color: @brand-red;
+}
+
+i.fa-google-plus-square {
+    color: @brand-red;
+}
+
+// Text
+// -------------------------------------------------
+.text-bo {
+    font-family:"Tibetan" !important;
+}
+
+.text-sa, .text-wy {
+    font-family: @font-family-serif !important;
+}
+
+.text-zh {
+    font-style: normal !important;
+}
+.text-right {
+    text-align: right;
+}
+
+// Badges
+// -------------------------------------------------
+.badge {
+    font-family: @font-family-sans-serif;
+}
+    
+// Navbar
+// --------------------------------------------------
+.navbar {
+
+    border-width: 0 0 5px;
+    margin-bottom: 15px;
+    
+    .container {
+        position: relative;
+    }
+
+    .navbar-collapse.in {
+        overflow: visible;
+    }
+
+    // Brand header - the top panel with the logo
+    // --------------------------------------------------
+    .brand-header {
+
+        background-color: #fff;
+
+        .navbar-brand {
+            height: auto;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .navbar-header {
+
+            width: 100%;
+            margin: 0px;
+            position: relative;
+            
+        }
+
+        .logo {
+
+            width: 200px;
+            img {
+                .img-responsive();
+            }
+            
+        }
+
+        .heading, .tag-line {
+            font-size: 15px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 0px;
+        }
+
+        .nav-button {
+            width: 36px;
+            z-index: 1;
+            position: relative;
+            .affix {
+                top: 20px;
+            }
+        }
+        
+    }
+
+    // Main navigation bar
+    // --------------------------------------------------
+    .navbar-nav {
+
+        > li {
+
+            border-style: solid;
+            border-width: 0px;
+            border-bottom-width: 5px;
+
+            > a {
+
+                font-family: @font-family-bold;
+                font-size: 19px;
+                color: #444;
+                text-transform: uppercase;
+                padding-top: 12px;
+                padding-bottom: 7px; 
+
+                .transition(background-color .5s ease-in);
+
+            }
+
+            &.active {
+                > a {
+                    color: #fff;
+                }
+            }
+
+            &.home{
+                .nav-item-variant(@brand-red);
+            } 
+
+            &.news {
+                .nav-item-variant(@brand-orange);
+            }
+
+            &.reading-room {
+                .nav-item-variant(@brand-blue);
+            }
+
+            &.about {
+                .nav-item-variant(@brand-red);
+            }
+
+            &.resources {
+                .nav-item-variant(@brand-orange);
+            } 
+
+            &.how-to-help {
+                .nav-item-variant(@brand-blue);
+            }
+
+            @media only screen and (max-width: @grid-float-breakpoint) {
+
+                border-bottom-width: 1px;
+                border-left-width: 10px;
+
+                > a {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+            
+            }
+
+            @media only screen and (min-width: @grid-float-breakpoint) {
+
+                > a {
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            
+            }
+
+        }
+        
+    }
+
+    // Social media buttons
+    // --------------------------------------------------
+    #social {
+
+        position: relative;
+
+        > span, > a {
+            padding: 0px;
+            padding-right: 6px;
+            &:last-child {
+                padding-right: 0px;
+            }
+        }
+
+        > span {
+            font-family: @font-family-heading;
+            font-size: @font-size-small;
+            padding-left: 10px;
+        }
+
+        > a {
+            i {
+                font-size: 30px;
+                color: @text-color;
+                .transition(color .3s ease-out);
+            }
+            &:hover > i {
+                color: @brand-orange;
+            }
+        }
+        
+    }
+
+    .navbar-form {
+        position: relative;
+        z-index: 2;
+    }
+
+    // Mobile nav variations
+    // --------------------------------------------------
+    @media only screen and (max-width: @grid-float-breakpoint) {
+
+        border-bottom-width: 1px;
+        border-bottom-color: @panel-inner-border;
+
+        .brand-header {
+            .tag-line {
+                font-size: 13px;
+                line-height: 1.3;
+            }
+        }
+
+        .navbar-nav {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .navbar-brand {
+            padding: 0px;
+            .logo {
+                width: 120px;
+            }
+
+        }
+
+        .navbar-form {
+
+            margin-top: 0px;
+            margin-bottom: 0px;
+            border: 0px;
+            padding: 0px;
+
+            > * {
+
+                border: 0px;
+                border-style: solid;
+                border-left-width: 10px;
+                border-bottom-width: 1px;
+
+            }
+
+            > #language-links {
+                border-color: @brand-red;
+                padding: 12px 20px;
+            }
+
+            > #search-controls {
+                border-color: @brand-orange;
+                padding: 6px 10px;
+                width: 100%;
+            }
+
+        }
+
+        #social {
+            margin-left: -15px;
+            margin-right: -15px;
+            padding: @nav-link-padding;
+            border-left: 10px solid @brand-red;
+        }
+
+    }
+
+    // Destktop nav variations
+    // --------------------------------------------------
+    @media (min-width: @grid-float-breakpoint) {
+        
+        .container {
+            > #navbar {
+                margin-left: -@navbar-padding-horizontal;
+                margin-right: -@navbar-padding-horizontal;
+            }
+        }
+
+        .navbar-nav {
+            > li {
+                margin-bottom: -5px;
+            }
+        }
+
+        .navbar-brand {
+            padding: 30px 0px;
+        }
+
+        .navbar-form {
+            // move the search box in line with the logo
+            position: absolute;
+            top: -120px;
+            right: floor((@grid-gutter-width / 2));
+            > * {
+                text-align: right;
+                margin-bottom: 8px;
+            }
+        }
+
+        #social {
+            padding-top: 6px;
+            .pull-right();
+        }
+
+    }
+    @media only screen and (max-width: @screen-sm) {
+        
+        border-bottom-width: 1px;
+        margin-bottom: 0px;
+
+        #social {
+            > span {
+                position: absolute;
+                top: 5px;
+                padding-left: 0px;
+            }
+            > a {
+                padding-top: 15px; 
+                padding-right: 10px;
+            }
+        }
+    }
+}
+
+// Drop navigation panel
+// -------------------------------------------
+.navbar-default .navbar-nav > li {
+    @media (max-width: @grid-float-breakpoint) {
+        position: relative;
+        > a.dropdown-toggle {
+            > span {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                padding: 10px 16px;
+                .fa {
+                    font-size: 18px;
+                }
+                i.fa-plus {
+                    display: inline-block;
+                }
+                i.fa-minus {
+                    display: none;
+                }
+            }
+        }
+        &.open {
+            background-color: #fff;
+            > a.dropdown-toggle {
+                background-color: #fff;
+                color: @navbar-default-link-active-color;
+                > span {
+                    i.fa-plus {
+                        display: none;
+                    }
+                    i.fa-minus {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+        > .dropdown-menu {
+            position: relative;
+            float: unset;
+            box-shadow: none;
+            border: 0;
+            border-radius: 0;
+            padding-right: 60px;
+            background-color: #fff;
+            > li > a {
+                padding: 5px 15px 5px 20px;
+                &:before { 
+                    content: "";
+                    border-color: transparent;
+                    border-left-color: inherit;
+                    border-style: solid;
+                    border-width: 5px 0 5px 5px;
+                    display: inline-block;
+                    height: 0;
+                    width: 0;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+    @media (min-width: @grid-float-breakpoint) {
+        > .dropdown-toggle > span {
+            display: none;
+        }
+        > .dropdown-menu {
+            margin-top: 4px;
+        }
+    }
+}
+
+// Sharing 
+// -------------------------------------------
+.sharing {
+    i {
+        font-size: 28px;
+        vertical-align: bottom;
+        margin-left: 6px;
+        line-height: .85;
+    }
+}
+
+
+// App style navigation Button
+// ----------------------------------------
+
+.btn-round {
+
+    display: inline-block;
+    width: @btn-round-size;
+    height: @btn-round-size;
+    font-size: @btn-icon-size;
+    line-height: @btn-icon-size;
+    text-align: center;
+    padding: ((@btn-round-size - @btn-icon-size) / 2) 0px;
+    margin-right: 0px;
+    border: 0px;
+    border-radius: (@btn-round-size / 2);
+    position: relative;
+    color: #fff;
+    background-color: @brand-blue;
+    .transition(.75s ease-out);
+
+    button& {
+        background: @brand-blue;
+    }
+
+    &.sml {
+        width: @btn-round-size-sm;
+        height: @btn-round-size-sm;
+        padding: ((@btn-round-size-sm - @btn-icon-size) / 2) 0px;
+    }
+
+    &:hover {
+        color: #fff;
+        background-color: @brand-blue-dark;
+    }
+
+    &.disabled {
+        color: #e5e5e5;
+        background-color: @btn-link-disabled-color;
+    }
+
+    &.pulse {
+        background-color: @brand-red-alert;
+        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
+    }
+
+    &.red {
+        background: @brand-red;
+        &:hover {
+            background-color: darken(@brand-red, 10%);
+        }
+    }
+
+    &.white-red {
+        background: #fff;
+        color: @brand-red;
+        &:hover {
+            color: @brand-red;
+        }
+    }
+
+    .badge {
+        position: absolute;
+        right: -8px;
+        top: -10px;
+        z-index: 6;
+        color: #fff;
+        background-color: @brand-red-alert !important;
+    }
+
+}
+
+.btn-round-text {
+    font-family: @font-family-sans-serif;
+    font-size: @font-size-small;
+    line-height: 1em;
+}
+
+// Fixed positions for buttons
+// ---------------------------------------------
+
+.fixed-btn-container {
+
+    position: fixed;
+    right: @button-spacing-right;
+    top: @button-spacing-top;
+    z-index: 7;
+
+    .btn-round {
+        z-index: 5;
+        display: block;
+    }
+
+    &#navigation-btn-container {
+        top: @button-spacing-top;
+    }
+    &#bookmarks-btn-container {
+        top: ((@btn-round-size + @button-spacing-top) + @button-spacing-top);
+    }
+    &#rewind-btn-container {
+        top: (((@btn-round-size + @button-spacing-top) * 3) + @button-spacing-top);
+    }
+    &#link-to-top-container {
+        top: auto;
+        bottom: @button-spacing-top;
+    }
+    &.close-btn-container  {
+        position: absolute;
+        top: -(@btn-round-size / 2);
+        z-index: 8;
+    }
+    &.close-btn-container.right  {
+        position: fixed;
+        top: @button-spacing-top;
+    }
+
+    @media only screen and (max-width: @screen-sm) {
+        
+        &#navigation-btn-container {
+            top: auto;
+            bottom: 15px;
+            right: @button-spacing-top;
+        }
+        &#bookmarks-btn-container {
+            top: auto;
+            bottom: 15px;
+            right: (((@btn-round-size + @button-spacing-top) * 1) + @button-spacing-top);
+        }
+        &#rewind-btn-container {
+            top: auto;
+            bottom: 15px;
+            right: (((@btn-round-size + @button-spacing-top) * 3) + @button-spacing-top);
+        }
+        &#link-to-top-container {
+            top: auto;
+            bottom: 15px;
+            right: @button-spacing-top;
+            
+        }
+        &.close-btn-container.right  {
+            position: fixed;
+            top: @button-spacing-top;
+            right: @button-spacing-top;
+            z-index: 8;
+        }
+    }
+
+}
+
+// Link to top button
+// ---------------------------------
+a#link-to-top {
+    .opacity(0);
+    &.in {
+        .opacity(1);
+    }
+}
+
+
+// Print variations
+// All styles should default to desktop/screen
+// -------------------------------------------
+@media print {
+    
+    * {
+       -webkit-transition: none !important;
+       transition: none !important;
+    }
+
+    @page  
+    { 
+        size: 210mm 297mm;
+        margin: 20mm 15mm 20mm 15mm;  
+    }
+
+    html {
+        width: 1000px;
+    }
+
+    body {
+        font-size: 16pt;
+        blockquote {
+            font-size: 16pt;
+        }
+        h3 {
+            font-size: 19pt;
+        }
+        h4 {
+            font-size: inherit;
+        }
+    }
+    
+    .container {
+        width:100%;
+    }
+
+    .print-width-override {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        float: none !important;
+    }
+
+    .print-height-override {
+        height: auto !important;
+    }
+    
+    .panel {
+        border:0px;
+    }
+
+    .panel > .panel-heading {
+        border:0px;
+    }
+
+    .page {
+
+        margin-top: 300px !important;
+        break-before: always;
+        page-break-before: always;
+
+        &.page-first {
+            break-before: avoid;
+            page-break-before: avoid;
+        }
+
+    }
+
+    .well {
+        border-color: @gray-lighter;
+    }
+
+    .print-logo {
+        width: 150px;
+        margin-top: 100px;
+        display: inline-block;
+    }
+
+    .text-center p {
+        text-align: center;
+    }
+
+}

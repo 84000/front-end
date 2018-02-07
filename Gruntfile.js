@@ -23,14 +23,22 @@ module.exports = function(grunt) {
       }
     },
     less: {
-  		development: {
+  		wordpress: {
   			options: {
-  		    	compress: true
-  		    },
+  		    compress: true
+  		  },
   			files: {
-  				'css/84000.css': 'less/bootstrap.less'
+  				'css/84000-wordpress.css': 'less/bootstrap-wordpress.less'
   			}
-  		}
+  		},
+      readingRoom: {
+        options: {
+          compress: true
+        },
+        files: {
+          'css/84000-reading-room.css': 'less/bootstrap-reading-room.less'
+        }
+      }
     },
     watch: {
       scripts: {
@@ -39,7 +47,7 @@ module.exports = function(grunt) {
       },
       less: {
         files: 'less/**/*.less',
-        tasks: 'less'
+        tasks: ['less:wordpress', 'less:readingRoom']
       }
     }
   });
@@ -48,6 +56,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['uglify', 'less:development', 'watch']);
+  grunt.registerTask('default', ['uglify', 'less:wordpress', 'less:readingRoom', 'watch']);
 
 };

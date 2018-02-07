@@ -5,10 +5,11 @@ Thanks to:
 * [Bootstrap](http://getbootstrap.com/)
 * [Font Awesome](https://fontawesome.com/)
 * [jQuery](https://jquery.com/)
+* [Grunt Js](https://gruntjs.com/)
 * [Lightbox](http://lokeshdhakar.com/projects/lightbox2/)
 * [JavaScript Cookie](https://github.com/js-cookie/js-cookie)
-* [jQuery replaceText](http://benalman.com/projects/jquery-replacetext-plugin/)
-* [Chris Fynn](https://sites.google.com/site/chrisfynn2/home/fonts/ddc-uchen)
+* [Ben Alman - jQuery replaceText](https://github.com/cowboy/jquery-replacetext)
+* [Chris Fynn - Tibetan font](https://sites.google.com/site/chrisfynn2/home/fonts/ddc-uchen)
 
 
 Also thanks to BrowserStack for sponsoring us with an open source license.

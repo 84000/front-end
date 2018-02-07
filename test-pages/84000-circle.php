@@ -2,8 +2,8 @@
 
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
-            <div class="panel panel-default foreground">
-                        
+            <div class="panel main-panel panel-default foreground">
+                
                 <div class="panel-img-header thumbnail">
                     <img src="/imgs/10.png" data-max-horizontal-crop="200" data-max-vertical-crop="200">
                     <h1 class="bg-blue">84000 Circle</h1>

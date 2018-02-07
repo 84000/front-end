@@ -110,17 +110,6 @@ article {
         background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.65);
     }
 
-    @media (max-width: @screen-sm) {
-
-        h1 {
-            padding: 5px 10px;
-        }
-
-        blockquote {
-            line-height: 1;
-        }
-    }
-
     @media only screen and (max-width: @screen-sm-max) {
 
         height: 0;
@@ -133,7 +122,7 @@ article {
 
 @media only screen and (min-width: @screen-sm) {
 
-    .panel-img-header+.panel-body {
+    .panel.main-panel .panel-img-header+.panel-body {
 
         overflow: visible;
 
@@ -149,7 +138,9 @@ article {
             border: 0px;
             margin: 0px;
             padding: 20px 30px;
-            color: #fff;
+            &, p {
+            	color: #fff;
+            }
             footer {
                 color: #ddd;
             }

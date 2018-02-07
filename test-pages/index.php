@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="84000 is a non-profit global initiative to translate the words of the Buddha and make them available to everyone.">
         <title>84000 | Translating the Words of the Buddha</title>
-        <link href="/css/84000.css" rel="stylesheet">
+        <link href="/css/84000-wordpress.css" rel="stylesheet">
         <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
         <link href="/js/lightbox2-master/src/css/lightbox.css" rel="stylesheet">
         <!--[if lt IE 9]>
@@ -36,12 +36,6 @@
         <meta name="msapplication-config" content="/favicon/browserconfig.xml"/>
         <meta name="theme-color" content="#ffffff"/>
 
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/js-cookies.js"></script>
-        <script src="/js/replace-text.min.js"></script>
-        <script src="/js/ie10-viewport-bug-workaround.js"></script>
-        <script src="/js/84000.js" defer="defer"></script>
     </head>
 
     <body id="top">
@@ -282,6 +276,19 @@
             <span class="visible-desktop"></span>
             <span class="event-hover"></span>
         </span>
+
+        <script type="text/javascript">
+            function downloadJSAtOnload() {
+                var element = document.createElement("script");
+                element.src = "/js/84000-fe.min.js";
+                document.body.appendChild(element);
+            }
+            if (window.addEventListener)
+                window.addEventListener("load", downloadJSAtOnload, false);
+            else if (window.attachEvent)
+                window.attachEvent("onload", downloadJSAtOnload);
+            else window.onload = downloadJSAtOnload;
+        </script>
 
     </body>
 </html>

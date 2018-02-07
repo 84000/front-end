@@ -1,12 +1,12 @@
 <div class="container home">
 
-    <div class="md-adjacent-panels">
-        <span class="md-three-quarter-width foreground">
+    <div class="md-adjacent-panels panel-margin">
+        <span class="md-three-quarter-width foreground movie-container">
             <div class="panel panel-default movie">
                 <iframe src="http://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720" allowfullscreen></iframe>
             </div>
         </span>
-        <span class="md-quarter-width col-md-pad-top">
+        <span class="md-quarter-width">
             <?php 
 
                 include("sponsor-stats.php");
@@ -79,9 +79,9 @@
                     <div class="row">
 
                         <div class="col-md-4 col-sm-6">
-                            <div class="media-panel">
+                            <div class="media-panel" data-match-height="post-preview">
                                 <div class="media-panel-heading">Events</div>
-                                <div class="media-panel-image">
+                                <div class="media-panel-image thumbnail">
                                     <a href="#">
                                         <img src="/imgs/resounding.jpg">
                                     </a>
@@ -96,9 +96,9 @@
                         </div>
 
                         <div class="col-md-4 col-sm-6">
-                            <div class="media-panel">
+                            <div class="media-panel" data-match-height="post-preview">
                                 <div class="media-panel-heading">Announcement</div>
-                                <div class="media-panel-image">
+                                <div class="media-panel-image thumbnail">
                                     <a href="#">
                                         <img src="/imgs/rinpoche.jpg">
                                     </a>
@@ -113,9 +113,9 @@
                         </div>
 
                         <div class="col-md-4 col-sm-6">
-                            <div class="media-panel">
+                            <div class="media-panel" data-match-height="post-preview">
                                 <div class="media-panel-heading">Events</div>
-                                <div class="media-panel-image">
+                                <div class="media-panel-image thumbnail">
                                     <a href="#">
                                         <img src="/imgs/resounding.jpg">
                                     </a>
@@ -130,9 +130,9 @@
                         </div>
 
                         <div class="col-md-4 col-sm-6">
-                            <div class="media-panel">
+                            <div class="media-panel" data-match-height="post-preview">
                                 <div class="media-panel-heading">Announcement</div>
-                                <div class="media-panel-image">
+                                <div class="media-panel-image thumbnail">
                                     <a href="#">
                                         <img src="/imgs/rinpoche.jpg">
                                     </a>
@@ -147,9 +147,9 @@
                         </div>
 
                         <div class="col-md-4 col-sm-6">
-                            <div class="media-panel">
+                            <div class="media-panel" data-match-height="post-preview">
                                 <div class="media-panel-heading">Events</div>
-                                <div class="media-panel-image">
+                                <div class="media-panel-image thumbnail">
                                     <a href="#">
                                         <img src="/imgs/resounding.jpg">
                                     </a>
@@ -164,9 +164,9 @@
                         </div>
 
                         <div class="col-md-4 col-sm-6">
-                            <div class="media-panel">
+                            <div class="media-panel" data-match-height="post-preview">
                                 <div class="media-panel-heading">Announcement</div>
-                                <div class="media-panel-image">
+                                <div class="media-panel-image thumbnail">
                                     <a href="#">
                                         <img src="/imgs/rinpoche.jpg">
                                     </a>

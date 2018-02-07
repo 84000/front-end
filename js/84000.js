@@ -208,10 +208,17 @@ jQuery(document).ready(function($) {
 		    	
 		    	var $content;
 
+		    	//Don't preview things that are very short
+		    	// --------------------------------------
 		    	if($section.hasClass('text')){
-		    		if($element.find("h4, h5, p, .list-item").length > 5){
-		    			$content = $element.find("h4, h5, p, div.list, div.line-group, blockquote, br").slice(0,5).clone();
-		    		}
+		    		$content = $element.find("h4, h5, p, div.list, div.line-group, blockquote, br").slice(0,5).clone();
+		    		var contentWordCount = 0;
+			    	$content.each(function(){
+						contentWordCount += $(this).text().length;
+					});
+					if(contentWordCount < 1000){
+						$content = "";
+					}
 		    	}
 		    	else if($section.attr('id') == "abbreviations"){
 		    		if($element.find("h5, table tr").length > 6){

@@ -635,21 +635,24 @@ table.contents-table {
             }
         }
 
-        // Indent the first line of a paragraph
         // Negate the spacing with a negative margin
         p+p {
-            text-indent: @line-height-computed;
             margin-top: -(@line-height-computed / 2);
         }
         // Space some sections
         h2+p, h3+p, h4+p, br+*, .line-group, .trailer, .mantra, .line-group+*, .mantra+*, .nested-section + .nested-section > p:first-child {
             margin-top: @line-height-computed;
         }
+
+        // Indent the first line of a paragraph
+        p+p {
+            text-indent: @line-height-computed;
+        }
         // Remove indent for first paragraph after spaced sections
-        h2+p, h3+p, h4+p, br+p, .line-group > p, .trailer, .mantra > p, .nested-section > p:first-child {
+        h2+p, h3+p, h4+p, br+p, .line-group > p, .trailer, .nested-section > p:first-child {
             text-indent: 0;
         }
-
+        
         blockquote {
             // Remove the margin
             > .line-group, > .mantra {
@@ -1067,7 +1070,8 @@ table.contents-table {
             top: -10px;
             right: -@btn-round-size;
             .btn-round {
-                color: @brand-red;
+                border-color: @gray-border-color;
+                color: @gray-border-color;
                 &:before {
                     content: '\00d7';
                 }

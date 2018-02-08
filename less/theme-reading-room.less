@@ -650,8 +650,13 @@ table.contents-table {
             text-indent: @line-height-computed;
         }
         // Remove indent for first paragraph after spaced sections
-        h2+p, h3+p, h4+p, br+p, .line-group > p, .trailer, .nested-section > p:first-child {
+        h2+p, h3+p, h4+p, br+p, .trailer, .nested-section > p:first-child {
             text-indent: 0;
+        }
+        // Hanging indent 
+        .line-group > p {
+            padding-left: @line-height-computed;
+            text-indent: -@line-height-computed;
         }
         
         blockquote {

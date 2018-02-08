@@ -1053,7 +1053,6 @@ jQuery(document).ready(function($) {
                 	return new RegExp("(^|\\s|‘|'|“|:|;|\"|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|—|’\\W|'\\W|”|\"|\\)|\\]|<|s\\W|s<|es\\W|es<|’s\\W|’s<|'s\\W|'s<|s’\\W|s’<|s'\\W|s'<)","gi");
                 },
                 glossaryMarked = function($term, $glossary, $matchable){
-
                 	
                 	// Glossarise the marked up terms and replace with links
                 	// -------------------------------------------------

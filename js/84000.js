@@ -205,42 +205,59 @@ jQuery(document).ready(function($) {
 		    var $section = $element.parent();
 
 		    if($section.length){
-		    	
-		    	var $content;
+
+		    	var $previewContent;
 
 		    	//Don't preview things that are very short
 		    	// --------------------------------------
-		    	if($section.hasClass('text')){
-		    		$content = $element.find("h4, h5, p, div.list, div.line-group, blockquote, br").slice(0,5).clone();
-		    		var contentWordCount = 0;
-			    	$content.each(function(){
-						contentWordCount += $(this).text().length;
-					});
-					if(contentWordCount < 1000){
-						$content = "";
-					}
-		    	}
-		    	else if($section.attr('id') == "abbreviations"){
+
+		    	if($section.attr('id') == "abbreviations"){
 		    		if($element.find("h5, table tr").length > 6){
-		    			$content = $element.find("h5, table").clone();
+		    			$previewContent = $element.find("h5, table").clone();
 		    		}
 		    	}
 		    	else if($section.attr('id') == "notes"){
 		    		if($element.find("div.footnote").length > 5){
-		    			$content = $element.find("div.footnote").slice(0,5).clone();
+		    			$previewContent = $element.find("div.footnote").slice(0,5).clone();
 		    		}
 		    	}
 		    	else if($section.attr('id') == "glossary"){
 		    		if($element.find("div.glossary-item").length > 2){
-		    			$content = $element.find("div.glossary-item").slice(0,2).clone();
+		    			$previewContent = $element.find("div.glossary-item").slice(0,2).clone();
+		    		}
+		    	}
+		    	else {
+
+		    		// Add children until there's x characters in the preview
+		    		// ------------------------------------------------------
+		    		$previewContent = $();
+		    		var longSection = false;
+		    		var previewHTML = "";
+		    		var child;
+		    		
+		    		$element.children().each(function(){
+		    			$child = $(this).clone();
+		    			previewHTML += $child.html();
+		    			$previewContent = $previewContent.add($child);
+		    			if(previewHTML.length > 1000){
+		    				longSection = true;
+		    				return false;
+		    			}
+		    		});
+
+		    		if(!longSection){
+		    			$previewContent = "";
 		    		}
 		    	}
 
-		    	if($content){
+		    	if($previewContent){
+
+		    		// Add a preview to the DOM
+		    		// ----------------------------------
 
 		    		var $summary = $("<div>", {"class": "unrendered-preview"});
 
-			    	$summary.append($content);
+			    	$summary.append($previewContent);
 
 			    	$summary.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
 			    		$(this).addClass("ignore");
@@ -268,9 +285,15 @@ jQuery(document).ready(function($) {
 						$summary.height(300 + 'px');
 					}
 					$element.addClass('render-in-viewport');
+
+					// Remove the button that triggered this
+		    		// -------------------------------------
 					$element.find("a.preview").remove();
 		    	}
 		    	else {
+
+		    		// The content is short, just show it
+		    		// ----------------------------------
 		    		$element.removeClass('render-in-viewport');
 		    	}
 		    }

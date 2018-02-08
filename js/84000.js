@@ -1063,8 +1063,7 @@ jQuery(document).ready(function($) {
 			        $matchable.find("span.term:contains(" + $term.text() + ")").each(function(spanIndex){
 
 			        	var $span = $(this);
-			        	var muteClass = spanIndex > 0 ? 'mute' : '' ;
-			        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link ' + muteClass + ' pop-up">' + $span.text() + '</a>');
+			        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link pop-up">' + $span.html().replace('glossarize', '') + '</a>');
 			        	
 			        });
                 },

@@ -1007,7 +1007,7 @@ jQuery(document).ready(function($) {
             // Prioritise glossary items
             // ------------------------------
             var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
-				return +countWords($(b).find(".term").text()) - +countWords($(a).find(".term").text());
+				return +countWords($(b).find(".term").first().text()) - +countWords($(a).find(".term").first().text());
 			});
 
             var escapeRegExp = function(stringToGoIntoTheRegex) {
@@ -1158,6 +1158,7 @@ jQuery(document).ready(function($) {
 
 					$higherPriority.each(function(){
 						var $otherGlossary = $(this);
+
 						glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
                         	isWorking = false;
                         	$otherGlossary.addClass("backlinked");
@@ -1295,7 +1296,6 @@ jQuery(document).ready(function($) {
 		};
 	}($));
 
-    
     // When a user stops scrolling...
 	// -------------------------------------------
 	$(window).scrollEnd(function () {
@@ -1306,8 +1306,8 @@ jQuery(document).ready(function($) {
 
 		// Glossarize the currently visible elements
 		// --------------------------------------------
-		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
+		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
 
 	}, 700);
 	$(window).scroll();

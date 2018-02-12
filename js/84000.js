@@ -369,7 +369,7 @@ jQuery(document).ready(function($) {
 	// Scroll to an anchor
 	// -----------------------------------------
 	(function ($) { 
-		$.scrollToAnchor = function (hash, delay, parent, offset) {
+		$.scrollToAnchor = function (hash, delay, parent, offset, callback) {
 			if(!legacyLink()) {
 				if(!hash) hash = window.location.hash;
 				if(hash){
@@ -382,7 +382,17 @@ jQuery(document).ready(function($) {
 					}
 					if(!offset && $hash) offset = $hash.offset();
 					if(offset){
-						$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow");
+						$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow", callback);
+					}
+					else {
+						if(callback){
+							callback();
+						}
+					}
+				}
+				else {
+					if(callback){
+						callback();
 					}
 				}
 			}
@@ -444,10 +454,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	// Do on loading that page
-	// -------------------------------------------
-	$.scrollToAnchor();
-
 	// Show/hide scroll to top link
 	// --------------------------------------
 	$(window).scroll(function () {
@@ -459,25 +465,27 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	// Scroll to top on clicking long
+	// Add behaviour...
+	// Scroll to top
 	// --------------------------------------
 	$(document).on("click", "a[href='#top']:not(.milestone)", function(e) {
 		$.scrollToAnchor("#top");
 		return false;
 	});
 
+	// Add behaviour...
 	// Cancel empty hash links
 	// --------------------------------------
 	$(document).on("click", "a[href='#']", function(e) {
 		return false;
 	});
 
-	// Nav dropdown - only on desktop
-	// --------------------------------------
+	// Add behaviour...
+	// Nav dropdown - only with hover
+	// ---------------------------------------
 	$(document).on("mouseover", "html.hover .dropdown-toggle-container", function(e) {
 		$(this).addClass("open");
 	});
-
 	$(document).on("mouseout", "html.hover .dropdown-toggle-container.open", function(e) {
 		$(this).removeClass("open");
 	});
@@ -857,12 +865,6 @@ jQuery(document).ready(function($) {
 	    	    }
     		}
     	}($));
-		
-		// Show the last location option on loading the page
-		// --------------------------------------------------
-    	if($("#page-alert").length){
-    		$.lastLocationOption();
-    	}
 	}
 
 	// Close button for a collapse element
@@ -904,6 +906,7 @@ jQuery(document).ready(function($) {
         
         // Hide the footer
         popupFooter.removeClass('in');
+        $("#page-alert").removeClass('in');
 
         var doPopUp = function(){
         	// Trigger pre-events
@@ -1442,28 +1445,28 @@ jQuery(document).ready(function($) {
 	});
 
 	// On loading the page...
-	// Close temporary alerts
-	// -----------------------------------------
-	$(".alert.alert-temporary").delay(2000).slideUp(400);
-
-
-	// On loading the page...
-	// Log an error
-	// ------------------------------------------
-	$(".client-error").each(function(e){
-		$.ajax({
-			url: "/log-error.html",
-			method: "POST",
-			data: {'url' : window.location.href}
-		});
-	});
-
-	// On loading the page...
 	// Redirect to a different page
 	// ------------------------------------------
 	$("a.redirect-onload").each(function(e){
 		location.href = $(this).attr("href");
 	});
+
+	// On loading the page...
+	// Scroll to the hash location
+	// -------------------------------------------
+	$.scrollToAnchor(window.location.hash, 0, null, null, function(){
+		
+		// Show the last location option on loading the page
+		// --------------------------------------------------
+    	if($("#page-alert").length){
+    		$.lastLocationOption();
+    	}
+	});
+
+	// On loading the page...
+	// Close temporary alerts
+	// -----------------------------------------
+	$(".alert.alert-temporary").delay(2000).slideUp(400);
 
 	// On loading the page...
 	// Replace text on internal references
@@ -1494,6 +1497,17 @@ jQuery(document).ready(function($) {
 			var $this = $(this);
 			$this.css({'top': -($this.outerHeight()) });
 		}
+	});
+
+	// On loading the page...
+	// Log an error
+	// ------------------------------------------
+	$(".client-error").each(function(e){
+		$.ajax({
+			url: "/log-error.html",
+			method: "POST",
+			data: {'url' : window.location.href}
+		});
 	});
 
 	// On resize...

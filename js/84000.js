@@ -1407,8 +1407,9 @@ jQuery(document).ready(function($) {
 	// Track some clicks
 	// -----------------------------------------
 	$('a.log-click').on('click', function (e) {
+		console.log(this.pathname + this.hash);
 		if (typeof ga === "function") { 
-		    ga('send', 'pageview', $(this).attr('href'));
+		    ga('send', 'pageview', this.pathname + this.hash);
 		}
 	});
 

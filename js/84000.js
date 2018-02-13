@@ -276,7 +276,7 @@ jQuery(document).ready(function($) {
 			    		$element.attr("id", $section.attr('id') + "-content")
 			    	}
 
-			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "render", "title": "Expand this section"});
+			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "render log-click", "title": "Expand this section"});
 			    	$btn = $("<span>", {"class": "btn-round"});
 			    	$icon = $("<i>", {"class": "fa fa-angle-down"});
 			    	$btn.append($icon);

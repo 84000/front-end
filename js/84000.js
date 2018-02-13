@@ -183,8 +183,11 @@ jQuery(document).ready(function($) {
 
 		    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "preview", "title": "Collapse this section"});
 		    	$btn = $("<span>", {"class": "btn-round"});
-		    	$link.append($btn);
+		    	$icon = $("<i>", {"class": "fa fa-times"});
+		    	$btn.append($icon);
+		    	$link.hide().append($btn);
 		    	$element.prepend($link);
+		    	$link.fadeIn(500);
 
 		    	// Match heights on newly visible
 		    	$.matchHeights($element);

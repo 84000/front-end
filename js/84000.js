@@ -1465,7 +1465,7 @@ jQuery(document).ready(function($) {
 		
 		// Show the last location option on loading the page
 		// --------------------------------------------------
-    	if($("#page-alert").length){
+    	if($("#page-alert").length && typeof $.lastLocationOption === 'function'){
     		$.lastLocationOption();
     	}
 	});

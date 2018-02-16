@@ -231,23 +231,26 @@ jQuery(document).ready(function($) {
 		    	}
 		    	else {
 
-		    		// Add children until there's x characters in the preview
+		    		// Add nodes until there's x characters in the preview
 		    		// ------------------------------------------------------
 		    		$previewContent = $();
 		    		var longSection = false;
 		    		var previewHTML = "";
 		    		var child;
 		    		
-		    		$element.children().each(function(){
+		    		$element.children().each(function(index){
 		    			$child = $(this).clone();
 		    			previewHTML += $child.html();
 		    			$previewContent = $previewContent.add($child);
-		    			if(previewHTML.length > 1000){
+
+		    			if(previewHTML.length > 1500){
 		    				longSection = true;
 		    				return false;
 		    			}
 		    		});
 
+		    		// If it's not very long cancel the preview
+		    		// --------------------------------------------------
 		    		if(!longSection){
 		    			$previewContent = "";
 		    		}
@@ -258,19 +261,19 @@ jQuery(document).ready(function($) {
 		    		// Add a preview to the DOM
 		    		// ----------------------------------
 
-		    		var $summary = $("<div>", {"class": "unrendered-preview"});
+		    		var $preview = $("<div>", {"class": "unrendered-preview"});
 
-			    	$summary.append($previewContent);
+			    	$preview.append($previewContent);
 
-			    	$summary.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
+			    	$preview.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
 			    		$(this).addClass("ignore");
 			    	});
 			    	
-			    	$summary.find(".glossary-item .occurences").each(function(){
+			    	$preview.find(".glossary-item .occurences").each(function(){
 			    		$(this).addClass("hidden");
 			    	});
 
-			    	$section.append($summary);
+			    	$section.append($preview);
 
 			    	if(!$element.attr("id")){
 			    		$element.attr("id", $section.attr('id') + "-content")
@@ -283,10 +286,10 @@ jQuery(document).ready(function($) {
 			    	$link.append($btn);
 			    	$section.append($link);
 					
-					var summaryHeight = $summary.height();
-					if(summaryHeight > 300){
-						$summary.height(300 + 'px');
-					}
+					var previewHeight = $preview.height();
+					var previewLimit = 350;
+					$preview.height(((previewHeight < previewLimit ? previewHeight : previewLimit) - 50) + 'px');
+
 					$element.addClass('render-in-viewport');
 
 					// Remove the button that triggered this

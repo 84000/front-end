@@ -260,9 +260,10 @@
             </div>
         </div>
 
-        <footer>
-            <div class="container">
-                Copyright © 2011 84000: Translating the Words of the Buddha - All Rights Reserved | <a href="#">Contact Us</a>
+        <footer xmlns="http://www.w3.org/1999/xhtml" class="hidden-print">
+            <div class="container" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                Copyright © 2011-2018 <span itemprop="name">84000: Translating the Words of the Buddha</span> - All Rights Reserved
+                <br/>Contact: <a href="mailto:info@84000.co" itemprop="email">info@84000.co</a> | Website: <a href="http://84000.co" itemprop="url">http://84000.co</a>
             </div>
         </footer>
 

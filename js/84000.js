@@ -1397,6 +1397,50 @@ jQuery(document).ready(function($) {
 	});
 
     // Add behaviour...
+    // Set selected text on mouseup
+    // ----------------------------------------------------------------- 
+	$(document).on("mouseup", "[data-mouseup-set-input]", function() {
+		var selection = '';
+		if (window.getSelection) {
+	        selection = window.getSelection();
+	    } else if (document.getSelection) {
+	        selection = document.getSelection();
+	    } else if (document.selection) {
+	        selection = document.selection.createRange().text;
+	    }
+	    $($(this).data("mouseup-set-input")).val(selection);
+    });
+
+    // Add behaviour...
+    // Submit form on mouseup
+    // ----------------------------------------------------------------- 
+	$(document).on("mouseup", "[data-mouseup-submit]", function() {
+	    $($(this).data("mouseup-submit")).submit();
+    });
+
+    // Add behaviour...
+    // Highlight on load
+    // ----------------------------------------------------------------- 
+	$("[data-onload-highlight]").each(function() {
+
+		var $this = $(this);
+		var $text = $($this.data("onload-highlight"));
+		var textHtml = $text.html();
+		var term = $this.val();
+		
+		if(term){
+			term = term.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
+			var pattern = new RegExp("("+term+")", "gi");
+
+			textHtml = textHtml.replace(pattern, "<mark>$1</mark>");
+			textHtml = textHtml.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+
+			$text.html(textHtml);
+		}
+
+    });
+
+    // Add behaviour...
     // On showing a tab...
     // ----------------------------------------------
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

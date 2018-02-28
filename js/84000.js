@@ -117,7 +117,7 @@ jQuery(document).ready(function($) {
 		if(window.location.hash && window.location.pathname == '/'){
 			var hash = window.location.hash;
 			var hashSplit = hash.split('/');
-			var pageId = hashSplit[0].replace('#','');
+			var pageId = hashSplit[0] == "#!ReadingRoom" ? hashSplit[1] : hashSplit[0].replace('#','');
 			var pageIdSplit = pageId.split('-');
 			var pageUri = '';
 			if(pageIdSplit[0] == 'section' && pageIdSplit.length == 2){
@@ -134,6 +134,7 @@ jQuery(document).ready(function($) {
 			}
 			if(pageUri){
 				location.href = pageUri;
+				return true;
 			}
 		}
 		// If not redirecting then return false

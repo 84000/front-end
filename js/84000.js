@@ -167,7 +167,7 @@ jQuery(document).ready(function($) {
 				return true;
 			}
 		}
-		
+
 		// If not redirecting then return false
 		// ------------------------------------
 		return false;
@@ -409,24 +409,34 @@ jQuery(document).ready(function($) {
 	(function ($) { 
 		$.scrollToAnchor = function (hash, delay, parent, offset, callback) {
 			if(!legacyLink()) {
-				var $hash;
+				var $target;
 				if(!hash) hash = window.location.hash;
-				if(hash) $hash = $(hash);
-				if($hash){
+				if(hash) $target = $(hash);
+				if($target){
 					if(!delay) delay = 0;
 					if(!parent) parent = "html, body";
-					var $unrendered = $hash.closest(".render-in-viewport");
-					if($unrendered.length){
-						$unrendered.render();
+					var $unrendered = $target.closest(".render-in-viewport");
+					var scrollToAnchorScroll = function(){
+						if(!offset) offset = $target.offset();
+						if(offset){
+							$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow", callback);
+						}
+						else {
+							if(callback){
+								callback();
+							}
+						}
 					}
-					if(!offset) offset = $hash.offset();
-					if(offset){
-						$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow", callback);
+					if($unrendered.length){
+						$.wait("Rendering this section...");
+				    	setTimeout(function(){
+				    		$unrendered.render();
+				    		$.wait("", true);
+				    		scrollToAnchorScroll();
+				        },100);
 					}
 					else {
-						if(callback){
-							callback();
-						}
+						scrollToAnchorScroll();
 					}
 				}
 				else {
@@ -1101,7 +1111,7 @@ jQuery(document).ready(function($) {
 			    	var glossaryId = $glossary.attr("id");
 			        var regEx = glossaryRegEx($term.text());
 			        
-			        $matchable.find("span.term:contains(" + $term.text() + ")").each(function(spanIndex){
+			        $matchable.find("span.term").filter(function(){ return $(this).text().toLowerCase() == $term.text().toLowerCase(); }).each(function(spanIndex){
 
 			        	var $span = $(this);
 			        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link pop-up">' + $span.html().replace('glossarize', '') + '</a>');
@@ -1487,7 +1497,7 @@ jQuery(document).ready(function($) {
 	// Track some clicks
 	// -----------------------------------------
 	$('a.log-click').on('click', function (e) {
-		console.log(this.pathname + this.hash);
+		//console.log(this.pathname + this.hash);
 		if (typeof ga === "function") { 
 		    ga('send', 'pageview', this.pathname + this.hash);
 		}
@@ -1540,6 +1550,7 @@ jQuery(document).ready(function($) {
 	// -------------------------------------------
 	$.scrollToAnchor(window.location.hash, 0, null, null, function(){
 		
+		// Add callback...
 		// Show the last location option on loading the page
 		// --------------------------------------------------
     	if($("#page-alert").length && typeof $.lastLocationOption === 'function'){

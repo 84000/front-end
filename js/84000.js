@@ -111,32 +111,63 @@ jQuery(document).ready(function($) {
 	// ---------------------------------------
 	
 	function legacyLink(){
+
 		// A hash in the root indicates a link to 
 		// the old reading room.
 		// --------------------------------------
-		if(window.location.hash && window.location.pathname == '/'){
+		// Test cases:
+		// /old-app/#!ReadingRoom/UT22084-051-004/0
+		// /#UT22084-044-005/title
+		// /#UT22084-044-005/introduction
+		// /#!ReadingRoom/UT22084-046-001/0
+		// /#section-O1JC114941JC12924
+		// /#lobby
+		// /#ReadingRoom.html
+		// /#translatedTextList
+		// /#download-request/UT22084-062-012
+		// /#download/UT22084-062-012
+
+		if(
+			window.location.hash 							// Has a hash
+			&& (
+				window.location.pathname == '/' 			// It is in the url root
+				|| window.location.pathname == '/old-app/'	// It is directed to the old, old app
+			)
+		){
 			var hash = window.location.hash;
 			var hashSplit = hash.split('/');
-			var pageId = hashSplit[0] == "#!ReadingRoom" ? hashSplit[1] : hashSplit[0].replace('#','');
-			var pageIdSplit = pageId.split('-');
-			var pageUri = '';
-			if(pageIdSplit[0] == 'section' && pageIdSplit.length == 2){
-				pageUri = '/section/' + pageIdSplit[1] + '.html';
-			}
-			else if (pageIdSplit[0] == "translatedTextList"){
-				pageUri = '/section/all-translated.html';
-			}
-			else{
-				pageUri = '/translation/' + pageId + '.html';
-			}
-			if(hashSplit.length == 2 && hashSplit[1] != 'title'){
-				pageUri += '#' + hashSplit[1];
-			}
+			var pageId = "";
+			var pageIdSplit = [];
+			var pageUri = "";
+			for (var i = hashSplit.length - 1; i >= 0; i--) {
+				if(hashSplit[i].toLowerCase().indexOf("translatedtextlist") > -1){
+					pageUri = '/section/all-translated.html';
+					break;
+				}
+				if(hashSplit[i].toLowerCase().indexOf("ut22") > -1){
+					pageId = hashSplit[i].replace('#','');
+					pageUri = '/translation/' + pageId + '.html';
+					if(hashSplit.length == 2 && hashSplit[1] !== pageId){
+						pageUri += '#' + hashSplit[1];
+					}
+					break;
+				}
+				if(hashSplit[i].toLowerCase().indexOf("o1jc") > -1){
+					pageId = hashSplit[i].replace('#','');
+					pageIdSplit = pageId.split('-');
+					if(pageIdSplit.length == 2 ){
+						pageUri = '/section/' + pageIdSplit[1] + '.html';
+					}
+					break;
+				}
+			};
+
 			if(pageUri){
 				location.href = pageUri;
 				return true;
 			}
 		}
+		
 		// If not redirecting then return false
 		// ------------------------------------
 		return false;
@@ -378,16 +409,17 @@ jQuery(document).ready(function($) {
 	(function ($) { 
 		$.scrollToAnchor = function (hash, delay, parent, offset, callback) {
 			if(!legacyLink()) {
+				var $hash;
 				if(!hash) hash = window.location.hash;
-				if(hash){
+				if(hash) $hash = $(hash);
+				if($hash){
 					if(!delay) delay = 0;
 					if(!parent) parent = "html, body";
-					var $hash = $(hash);
 					var $unrendered = $hash.closest(".render-in-viewport");
 					if($unrendered.length){
 						$unrendered.render();
 					}
-					if(!offset && $hash) offset = $hash.offset();
+					if(!offset) offset = $hash.offset();
 					if(offset){
 						$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow", callback);
 					}

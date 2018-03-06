@@ -81,13 +81,17 @@ p {
 
 #popup-footer-source {
     p {
-        text-align: center;
         line-height: 2;
         padding: 0px 10px;
     }
     hr {
         margin-top: @line-height-computed / 2;
         margin-bottom: @line-height-computed / 2;
+    }
+    .footer {
+        .text-muted();
+        text-align: center;
+        font-size: @font-size-small;
     }
 }
 

@@ -946,7 +946,7 @@ jQuery(document).ready(function($) {
 
 	// Pop-up footer
 	// -----------------------------------------
-	$(document).on("click",'a.pop-up', function(e) {
+	$(document).on("click",'.translation a.pop-up', function(e) {
 	
         e.preventDefault();
         
@@ -1182,6 +1182,10 @@ jQuery(document).ready(function($) {
 						var countOccurences = $list.find("li").length;
 						var occurencesDesc = countOccurences == 1 ? "1 passage contains this term" : countOccurences + " passages contain this term";
 						$glossaryItem.find(".occurences h6").text(occurencesDesc);
+
+						if(!countOccurences){
+							$glossaryItem.addClass('no-occurences');
+						}
                         
                         // Append the list to the glossary
                         $glossaryItem.find(".occurences").append($list);
@@ -1243,7 +1247,6 @@ jQuery(document).ready(function($) {
                         	isWorking = false;
                         	$glossary.addClass("backlinked");
                         });
-
                     }
                     
 			    },
@@ -1328,6 +1331,17 @@ jQuery(document).ready(function($) {
      		// ----------------------------------------------
             $(document).on("prepare",'a.glossary-link', function(e) {
                parseGlossary($($(this).attr("href")));
+           	});
+
+           	// Add behaviour for translation memory glossary links
+           	// ---------------------------------------------------
+           	$(document).on("click", "#translation-memory a.glossary-link", function(e) {
+               e.preventDefault();
+               var $tu = $($(this).attr('href'));
+               $("#remember-translation-form [name='tuid']").val($tu.data("tuid"));
+               $("#remember-translation-form [name='source']").val($tu.find('.source').text());
+               $("#remember-translation-form [name='translation']").val($tu.find('.translated').text());
+
            	});
 	     		
     	}
@@ -1452,6 +1466,9 @@ jQuery(document).ready(function($) {
 	        selection = document.selection.createRange().text;
 	    }
 	    $($(this).data("mouseup-set-input")).val(selection);
+    });
+    $(document).on("mouseup", "[data-mouseup-clear-input]", function() {
+		$($(this).data("mouseup-clear-input")).val('');
     });
 
     // Add behaviour...

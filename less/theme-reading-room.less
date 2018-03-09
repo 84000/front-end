@@ -1379,6 +1379,51 @@ table.contents-table {
         }
     }
 
+    #translation-memory {
+        form {
+            margin-bottom: @line-height-computed / 2;
+            .clearfix();
+        }
+        .text {
+            
+            .text {
+                color: #aaa;
+            }
+            .start-ref, .end-ref {
+                content: '';
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+                background-color: @brand-orange;
+                margin-right: 5px;
+            }
+            .start-ref ~ .text {
+                color: @text-color;
+            }
+            .end-ref ~ .text {
+                color: #aaa;
+            }
+        }
+        textarea.form-control {
+            font-size: 1.8em;
+        }
+        .glossary-link {
+            color: inherit;
+            text-decoration: none;
+            background-color: @state-warning-bg;
+        }
+        .glossary-item {
+            padding-top: @line-height-computed / 2;
+            border-top: 1px solid @hr-border;
+            display: none;
+            &.no-occurences {
+                display: block;
+            }
+
+        }
+    }
+
     .tab-content {
         margin-top: 15px;
     }

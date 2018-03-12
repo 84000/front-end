@@ -1555,6 +1555,12 @@ jQuery(document).ready(function($) {
         
 	});
 
+	$(document).on("click", '.text-to-speech', function(e){
+		var text = $("#summary").children(":not(.milestone)").text();
+		//console.log(text);
+		responsiveVoice.speak(text);
+	});
+
 	// On loading the page...
 	// Redirect to a different page
 	// ------------------------------------------

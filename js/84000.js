@@ -1555,10 +1555,11 @@ jQuery(document).ready(function($) {
         
 	});
 
+	$.fn.ignore = function(sel){
+		return this.clone().find(sel||">*").remove().end();
+	};
 	$(document).on("click", '.text-to-speech', function(e){
-		var text = $("#summary").children(":not(.milestone)").text();
-		//console.log(text);
-		responsiveVoice.speak(text);
+		responsiveVoice.speak($("#summary p").ignore('.milestone').text());
 	});
 
 	// On loading the page...

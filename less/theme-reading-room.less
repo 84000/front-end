@@ -641,13 +641,16 @@ table.contents-table {
             }
             .blockquote, &.mantra {
                 text-indent: 0;
+            }
+            .blockquote {
+                border-left: 5px solid @blockquote-border-color;
                 display: inline-block;
                 padding: 3px @line-height-computed;
                 padding-right: 0px;
                 font-size: @blockquote-font-size;
             }
-            .blockquote {
-                border-left: 5px solid @blockquote-border-color;
+            &.mantra {
+                padding: 0px @line-height-computed;
             }
         }
 
@@ -656,7 +659,7 @@ table.contents-table {
             margin-top: -(@line-height-computed / 2);
         }
         // Space some sections
-        h2+p, h3+p, h4+p, br+*, .line-group, .trailer, .mantra, .line-group+*, .mantra+*, .nested-section + .nested-section > p:first-child {
+        h2+p, h3+p, h4+p, br+*, .line-group, .trailer, .line-group+*, .mantra+*, .nested-section + .nested-section > p:first-child {
             margin-top: @line-height-computed;
         }
 
@@ -665,7 +668,7 @@ table.contents-table {
             text-indent: @line-height-computed;
         }
         // Remove indent for first paragraph after spaced sections
-        h2+p, h3+p, h4+p, br+p, .trailer, .nested-section > p:first-child, .footnote-number {
+        h2+p, h3+p, h4+p, br+p, .line-group+p, .mantra+p, .trailer, .nested-section > p:first-child, .footnote-number {
             text-indent: 0;
         }
         // Hanging indent 
@@ -1177,7 +1180,7 @@ table.contents-table {
         // Adjusted for Text to speech
         // --------------------------------------
         #link-to-top-container {
-            right: (((@btn-round-size + @button-spacing-top) * 3) + @button-spacing-top);
+            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
         }
 
         section, aside{

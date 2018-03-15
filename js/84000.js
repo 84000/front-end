@@ -1559,12 +1559,14 @@ jQuery(document).ready(function($) {
 	// Proof-of-concept!!!
 	// Text to speech
 	// --------------------------------------
+	// <script src="//vws.responsivevoice.com/v/e?key=nXM8DugR"/>
+	/*
 	$.fn.ignore = function(sel){
 		return this.clone().find(sel||">*").remove().end();
 	};
 	$(document).on("click", '.text-to-speech', function(e){
 		responsiveVoice.speak($("#summary p").ignore('.milestone').text());
-	});
+	});*/
 
 	// On loading the page...
 	// Redirect to a different page

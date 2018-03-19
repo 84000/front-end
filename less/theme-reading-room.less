@@ -1389,25 +1389,28 @@ table.contents-table {
             margin-bottom: @line-height-computed / 2;
             .clearfix();
         }
-        .text {
-            
-            .text {
-                color: #aaa;
+        .text-overlay {
+            position: relative;
+            .text.divided {
+                position: relative;
+                span.section {
+                    background-color: #fff;
+                    color: #aaa;
+                    padding: 3px 0px;
+                    &.selected {
+                        background-color: #fff;
+                        color: @text-color;
+                    }
+                }
             }
-            .start-ref, .end-ref {
-                content: '';
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                border-radius: 5px;
-                background-color: @brand-orange;
-                margin-right: 5px;
-            }
-            .start-ref ~ .text {
-                color: @text-color;
-            }
-            .end-ref ~ .text {
-                color: #aaa;
+            .text.plain {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
+                z-index: 1;
+                background-color: transparent;
+                color: transparent;
             }
         }
         textarea.form-control {
@@ -1416,7 +1419,8 @@ table.contents-table {
         .glossary-link {
             color: inherit;
             text-decoration: none;
-            background-color: @state-warning-bg;
+            background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.5);
+            color: darken(@brand-orange, 20%);
         }
         .glossary-item {
             padding-top: @line-height-computed / 2;

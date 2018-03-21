@@ -946,7 +946,7 @@ jQuery(document).ready(function($) {
 
 	// Pop-up footer
 	// -----------------------------------------
-	$(document).on("click",'.translation a.pop-up', function(e) {
+	$(document).on("click",'a.pop-up', function(e) {
 	
         e.preventDefault();
         
@@ -1182,10 +1182,6 @@ jQuery(document).ready(function($) {
 						var countOccurences = $list.find("li").length;
 						var occurencesDesc = countOccurences == 1 ? "1 passage contains this term" : countOccurences + " passages contain this term";
 						$glossaryItem.find(".occurences h6").text(occurencesDesc);
-
-						if(!countOccurences){
-							$glossaryItem.addClass('no-occurences');
-						}
                         
                         // Append the list to the glossary
                         $glossaryItem.find(".occurences").append($list);
@@ -1332,17 +1328,6 @@ jQuery(document).ready(function($) {
             $(document).on("prepare",'a.glossary-link', function(e) {
                parseGlossary($($(this).attr("href")));
            	});
-
-           	// Add behaviour for translation memory glossary links
-           	// ---------------------------------------------------
-           	$(document).on("click", "#translation-memory a.glossary-link", function(e) {
-               e.preventDefault();
-               var $tu = $($(this).attr('href'));
-               $("#remember-translation-form [name='tuid']").val($tu.data("tuid"));
-               $("#remember-translation-form [name='source']").val($tu.find('.source').text());
-               $("#remember-translation-form [name='translation']").val($tu.find('.translated').text());
-
-           	});
 	     		
     	}
          
@@ -1481,24 +1466,58 @@ jQuery(document).ready(function($) {
     // Add behaviour...
     // Highlight on load
     // ----------------------------------------------------------------- 
-	$("[data-onload-highlight]").each(function() {
+    (function ($) { 
+		$.fn.replaceMatchesWithThis = function ($replacement) {
+			var $target = $(this);
+			var targetHtml = $target.html();
+			updatedTargetHtml = targetHtml.replace($replacement.text(), $replacement[0].outerHTML);
+			$target.html(updatedTargetHtml);
+			return targetHtml != updatedTargetHtml;
+		}
+	}($));
 
-		var $this = $(this);
-		var $text = $($this.data("onload-highlight"));
-		var textHtml = $text.html();
-		var term = $this.val();
+	$("[data-onload-replace-translation]").each(function() {
+
+		var $termLink = $(this);
+		var $translation = $($termLink.data("onload-replace-translation"));
 		
-		if(term){
-			term = term.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
-			var pattern = new RegExp("("+term+")", "gi");
-
-			textHtml = textHtml.replace(pattern, "<mark>$1</mark>");
-			textHtml = textHtml.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
-
-			$text.html(textHtml);
+		if($termLink.text()){
+			if($translation.replaceMatchesWithThis($termLink)){
+				$($termLink.attr('href')).addClass("marked");
+			}
 		}
 
     });
+
+	$(document).on("click", "[data-onclick-replace-source]", function(e) {
+
+    	e.preventDefault();
+		var $this = $(this);
+		var $translationUnit = $($this.attr('href'));
+		var sourceTerm = $translationUnit.find(".source").text();
+		var $source = $($this.data("onclick-replace-source"));
+		$source.html($source.text());
+		
+		if(sourceTerm){
+			var $sourceTermMark = $("<span>", {"class": "mark"}).text(sourceTerm);
+			$source.replaceMatchesWithThis($sourceTermMark);
+		}
+
+    });
+
+	// Add behaviour for translation memory glossary links
+	// ---------------------------------------------------
+	$(document).on("click", "[data-onclick-set]", function(e) {
+
+		e.preventDefault();
+		var set = $(this).data("onclick-set");
+		var keys = Object.keys(set);
+		for(var i=0; i<keys.length; i++){
+			var target = keys[i];
+			var source = set[target];
+			$(target).val($(source).text());
+		}
+	});
 
     // Add behaviour...
     // On showing a tab...

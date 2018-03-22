@@ -1463,9 +1463,10 @@ jQuery(document).ready(function($) {
 	    $($(this).data("mouseup-submit")).submit();
     });
 
+
     // Add behaviour...
-    // Highlight on load
-    // ----------------------------------------------------------------- 
+    // Replace matches in text.
+    // ------------------------------------------------------------------
     (function ($) { 
 		$.fn.replaceMatchesWithThis = function ($replacement) {
 			var $target = $(this);
@@ -1476,47 +1477,64 @@ jQuery(document).ready(function($) {
 		}
 	}($));
 
-	$("[data-onload-replace-translation]").each(function() {
+    // Add behaviour...
+    // Highlight on load
+    // ----------------------------------------------------------------- 
+	$("[data-onload-replace]").each(function() {
 
-		var $termLink = $(this);
-		var $translation = $($termLink.data("onload-replace-translation"));
-		
-		if($termLink.text()){
-			if($translation.replaceMatchesWithThis($termLink)){
-				$($termLink.attr('href')).addClass("marked");
+		var $this = $(this);
+		var values = $this.data("onload-replace");
+		var keys = Object.keys(values);
+		for(var i=0; i<keys.length; i++){
+			var $target = $(keys[i]);
+			var $value = $(values[keys[i]]);
+			if($value.text()){
+				if($target.replaceMatchesWithThis($value)){
+					$($value.attr('href')).addClass("replaced");
+				}
 			}
 		}
 
     });
 
-	$(document).on("click", "[data-onclick-replace-source]", function(e) {
+	// Add behaviour...
+	// Highlight on click
+	// ---------------------------------------------------
+	$(document).on("click", "[data-onclick-mark]", function(e) {
 
     	e.preventDefault();
-		var $this = $(this);
-		var $translationUnit = $($this.attr('href'));
-		var sourceTerm = $translationUnit.find(".source").text();
-		var $source = $($this.data("onclick-replace-source"));
-		$source.html($source.text());
-		
-		if(sourceTerm){
-			var $sourceTermMark = $("<span>", {"class": "mark"}).text(sourceTerm);
-			$source.replaceMatchesWithThis($sourceTermMark);
+    	var $this = $(this);
+		var values = $this.data("onclick-mark");
+		var keys = Object.keys(values);
+
+		for(var i=0; i<keys.length; i++){
+			var $target = $(keys[i]);
+			var $value = $(values[keys[i]]);
+			$target.html($target.text());
+			if($value.text()){
+				var $valueMark = $("<span>", {"class": "mark"}).text($value.text());
+				if($target.replaceMatchesWithThis($valueMark)){
+					$($value.attr('href')).addClass("marked");
+				}
+			}
 		}
 
     });
 
-	// Add behaviour for translation memory glossary links
+	// Add behaviour...
+	// Set on click
 	// ---------------------------------------------------
 	$(document).on("click", "[data-onclick-set]", function(e) {
 
 		e.preventDefault();
-		var set = $(this).data("onclick-set");
-		var keys = Object.keys(set);
+		var values = $(this).data("onclick-set");
+		var keys = Object.keys(values);
 		for(var i=0; i<keys.length; i++){
-			var target = keys[i];
-			var source = set[target];
-			$(target).val($(source).text());
+			var $target = $(keys[i]);
+			var $value = $(values[keys[i]]);
+			$target.val($value.text());
 		}
+
 	});
 
     // Add behaviour...

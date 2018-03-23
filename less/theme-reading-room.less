@@ -1432,15 +1432,16 @@ table.contents-table {
         }
         textarea.form-control {
             font-size: 1.4em;
-            &.text-bo {
-                font-size: 1.4em;
-            }
         }
         .mark {
             text-decoration: none;
             background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.5);
             color: darken(@brand-orange, 20%);
             .box-shadow(none);
+            &:nth-child(even) {
+                background-color: rgba(red(@brand-green), green(@brand-green), blue(@brand-green), 0.5);
+                color: darken(@brand-green, 20%);
+            }
         }
         .unit {
             padding-top: @line-height-computed / 2;

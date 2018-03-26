@@ -1471,7 +1471,9 @@ jQuery(document).ready(function($) {
 		$.fn.replaceMatchesWithThis = function ($replacement) {
 			var $target = $(this);
 			var targetHtml = $target.html();
-			updatedTargetHtml = targetHtml.replace($replacement.text(), $replacement[0].outerHTML);
+			var regEx = new RegExp($replacement.text(),"gi");
+			console.log(regEx);
+			updatedTargetHtml = targetHtml.replace(regEx, $replacement[0].outerHTML);
 			$target.html(updatedTargetHtml);
 			return targetHtml != updatedTargetHtml;
 		}

@@ -1438,7 +1438,9 @@ table.contents-table {
             background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.5);
             color: darken(@brand-orange, 20%);
             .box-shadow(none);
-            &:nth-child(even) {
+        }
+        #source-text {
+            .mark:nth-child(even) {
                 background-color: rgba(red(@brand-green), green(@brand-green), blue(@brand-green), 0.5);
                 color: darken(@brand-green, 20%);
             }

@@ -1399,6 +1399,7 @@ jQuery(document).ready(function($) {
         else if(!$target.is('.loaded')){
             $.get(source, function(data) {
                 $target.html(data).collapse('show').addClass('loaded');
+                $("a.internal-ref").trigger("prepare");
             });
         }
         else{
@@ -1635,11 +1636,13 @@ jQuery(document).ready(function($) {
 	// On loading the page...
 	// Replace text on internal references
 	// -----------------------------------------
-	$("a.internal-ref").each(function(index){
+	$(document).on("prepare", "a.internal-ref", function(e){
 		var $this = $(this);
 		var text = $this.text();
 		if(!text){
-			var $target = $($this.attr('href'));
+			var href = $this.attr('href');
+			var hrefSplit = href.split("-");
+			var $target = $(href);
 			if($target.hasClass("milestone")){
 				text = $target.text();
 			}
@@ -1649,9 +1652,16 @@ jQuery(document).ready(function($) {
 			else if($target.find(".milestone").length) {
 				text = $target.find(".milestone").first().text();
 			}
+			else if(hrefSplit.length == 4 && hrefSplit[0] == "#UT22084"){
+				var url = "/translation/" + hrefSplit.slice(0, 3).join("-").replace("#", '') + ".html" + href;
+				$this.attr('href', url);
+				text = href;
+			}
 			$this.text(text);
 		}
 	});
+	$("a.internal-ref").trigger("prepare");
+	
 
 	// On loading the page...
 	// Position blockquote in header

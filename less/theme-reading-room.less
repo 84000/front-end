@@ -80,7 +80,7 @@ p {
 }
 
 #popup-footer-source {
-    p {
+    p.text-bo {
         line-height: 2;
         padding: 0px 10px;
     }
@@ -92,6 +92,17 @@ p {
         .text-muted();
         text-align: center;
         font-size: @font-size-small;
+        a.info {
+            color: @text-muted;
+            margin-left: 8px;
+            vertical-align: sub;
+            i {
+                font-size: 20px;
+            }
+            &:hover {
+                color: @brand-red;
+            }
+        }
     }
 }
 

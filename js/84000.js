@@ -1684,6 +1684,20 @@ jQuery(document).ready(function($) {
 		});
 	});
 
+	// On loading the page...
+	// Initialise popovers
+	// ------------------------------------------
+	$(document).on("click", '[data-toggle="popover"]', function(e){
+		e.preventDefault();
+		var options = {
+			title : function () {return $($(this).attr("href") + " .title").text();},
+			content: function () {return $($(this).attr("href") + " .content").html();},
+			html: true,
+			container: $(this).data("container")
+		};
+		$(this).popover(options).popover("show");
+	});
+
 	// On resize...
 	//------------------------------------------
 	$(window).on("resize", function(){

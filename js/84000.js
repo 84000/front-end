@@ -1472,8 +1472,7 @@ jQuery(document).ready(function($) {
 		$.fn.replaceMatchesWithThis = function ($replacement) {
 			var $target = $(this);
 			var targetHtml = $target.html();
-			var regEx = new RegExp($replacement.text(),"gi");
-			console.log(regEx);
+			var regEx = new RegExp($replacement.text(),"i");
 			updatedTargetHtml = targetHtml.replace(regEx, $replacement[0].outerHTML);
 			$target.html(updatedTargetHtml);
 			return targetHtml != updatedTargetHtml;
@@ -1530,7 +1529,8 @@ jQuery(document).ready(function($) {
 	$(document).on("click", "[data-onclick-set]", function(e) {
 
 		e.preventDefault();
-		var values = $(this).data("onclick-set");
+		var $this = $(this);
+		var values = $this.data("onclick-set");
 		var keys = Object.keys(values);
 		for(var i=0; i<keys.length; i++){
 			var $target = $(keys[i]);
@@ -1538,6 +1538,21 @@ jQuery(document).ready(function($) {
 			$target.val($value.text());
 		}
 
+	});
+
+	// Add behaviour...
+	// Bold on click
+	// ---------------------------------------------------
+	$(document).on("click", "[data-onclick-bold]", function(e) {
+
+		e.preventDefault();
+		var targets = $(this).data("onclick-bold");
+		$(".mark.bold").removeClass("bold");
+		for(var i=0; i<targets.length; i++){
+			var $target = $(targets[i]);
+			$target.addClass("bold");
+		};
+		
 	});
 
     // Add behaviour...

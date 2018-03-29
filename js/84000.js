@@ -1468,11 +1468,15 @@ jQuery(document).ready(function($) {
     // Add behaviour...
     // Replace matches in text.
     // ------------------------------------------------------------------
+    
+    RegExp.escape= function(s) {
+	    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+	};
     (function ($) { 
 		$.fn.replaceMatchesWithThis = function ($replacement) {
 			var $target = $(this);
 			var targetHtml = $target.html();
-			var regEx = new RegExp($replacement.text(),"i");
+			var regEx = new RegExp(RegExp.escape($replacement.text()),"i");
 			updatedTargetHtml = targetHtml.replace(regEx, $replacement[0].outerHTML);
 			$target.html(updatedTargetHtml);
 			return targetHtml != updatedTargetHtml;

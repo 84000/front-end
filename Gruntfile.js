@@ -18,6 +18,7 @@ module.exports = function(grunt) {
         	'<%= pkg.bootstrapJs %>/modal.js',
           '<%= pkg.bootstrapJs %>/tooltip.js',
           '<%= pkg.bootstrapJs %>/popover.js',
+          '<%= pkg.bootstrapJs %>/affix.js',
         	'js/84000.js',
         	'js/ie10-viewport-bug-workaround.js'
        	],

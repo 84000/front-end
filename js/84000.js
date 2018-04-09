@@ -1717,6 +1717,17 @@ jQuery(document).ready(function($) {
 		$(this).popover(options).popover("show");
 	});
 
+	$("#milestone-list [data-spy='affix']").affix({
+		offset: {
+			top: function () {
+		    	return $("#milestone-list").offset().top;
+		    },
+			bottom: function () {
+		    	return (this.bottom = $('body > footer').outerHeight(true) + 20);
+		    }
+		}
+	})
+
 	// On resize...
 	//------------------------------------------
 	$(window).on("resize", function(){

@@ -23,26 +23,17 @@ h1 {
     font-family: @font-family-bold;
 }
 
-h3 {
+h3, .milestone-h3 {
     margin-bottom: @line-height-computed;
 }
 
 // Type styles 
 // ---------------------------------------------
-p, li, .chapter, .glossary-item, h5, .footnote {
-    position: relative;
-    color: @gray;
-}
-
 p {
     a {
         text-decoration: underline;
         font-weight: inherit;
     }
-}
-
-.text-muted {
-    color: @text-muted;
 }
 
 // Pop-up footer for notes and glossary
@@ -80,6 +71,9 @@ p {
 }
 
 #popup-footer-source {
+    .title {
+        margin: (@line-height-computed / 2) 0px;
+    }
     p.text-bo {
         line-height: 2;
         padding: 0px 10px;
@@ -103,6 +97,9 @@ p {
                 color: @brand-red;
             }
         }
+    }
+    .popover-title {
+        margin: 0px;
     }
 }
 
@@ -132,7 +129,7 @@ p {
 
     h4 {
         margin-top: 0px !important;
-        margin-bottom: 6px;
+        margin-bottom: 6px !important;
     }
 
     table.contents-table {
@@ -181,6 +178,14 @@ p {
         background-color: @brand-red-alert;
         .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
     }
+}
+
+// Danger well
+// ----------------------------------
+.well.well-danger {
+    color: #ffffff;
+    border-color: darken(@brand-red, 10%);
+    background-color: @brand-red;
 }
 
 // Big panel headings
@@ -403,36 +408,11 @@ table.contents-table {
     }
 }
 
-/* Different styles for the editors */
-.editor-mode {
-    &.reading-room.translation {
-        a.footnote-link, a.glossary-link {
-            color: inherit;
-            border-bottom-color: @brand-red-alert !important;
-        }
-        .glossary-item .alternative {
-            display: block;
-            color: @brand-orange;
-        }
-    }
-}
-
-.environment-warning {
-    position: fixed;
-    z-index: 9;
-    top: 0px;
-    left: 0px;
-    background-color: rgba(red(@brand-green),green(@brand-green),blue(@brand-green),.7);
-    color: #fff;
-    padding: 2px 7px;
-    font-size: @font-size-small;
-    font-family: @font-family-sans-serif;
-    border-bottom-right-radius: 4px;
-}
-
 // Translation specific styles
 // ---------------------------------------------
 .translation {
+
+    color: @gray;
 
     // Title variations 
     // ---------------------------------------------
@@ -455,15 +435,23 @@ table.contents-table {
         color: @brand-red;
     }
 
-    h4 {
-        margin-bottom: @line-height-computed;
-        margin-top: 75px;
+    h2, .milestone-h2, h3, .milestone-h3, h4, .milestone-h4 {
+        margin-top: @line-height-computed;
     }
 
+    .section-label {
+        font-weight: bold;
+        margin-top: @line-height-computed;
+    }
+
+    // Milestones for titles
+    // ---------------------------------------------
+    .milestone-h2, .milestone-h3, .milestone-h4 {
+        display: block;
+    }
 
     // Text classes 
     // ---------------------------------------------
-
     .name {
         font-weight: bold;
         font-style: italic;
@@ -480,12 +468,27 @@ table.contents-table {
             font-style: normal;
         }
     }
-    .section-label {
-        font-weight: bold;
-    }
     .mark {
         padding: 0px;
         .box-shadow(0px 0px 0px 2px @state-warning-bg);
+    }
+
+    // Layout
+    // ------------------------------------------
+    .panel-heading {
+        .text-center();
+    }
+
+    section, aside {
+
+        margin-top: 70px;
+        margin-bottom: 70px;
+        position: relative;
+
+        > div {
+            .clearfix();
+        }
+
     }
 
     // Link styles 
@@ -508,7 +511,7 @@ table.contents-table {
         }
     }
 
-    // Don't show the glossary links 
+    // Glossary links
     // ---------------------------------------------
     &.mute-glossary {
         a.glossary-link {
@@ -518,22 +521,34 @@ table.contents-table {
         }
     }
 
-    // General
-    // ------------------------------------------
-    .panel-heading {
-        .text-center();
-    }
-
-    section, aside {
-
-        margin-top: 70px;
-        margin-bottom: 70px;
-
-        > div {
-            .clearfix();
+    // Gutter system
+    // --------------------------------
+    .rw { // row
+        display: block;
+        padding-left: @text-gtr-width;
+        overflow: auto;
+        .rw{
+            margin-left: -@text-gtr-width;
         }
-
+        .rw-heading {
+            overflow: auto;
+        }
+        .gtr{
+            display: block;
+            float: left;
+            margin-left: -@text-gtr-width;
+            overflow-wrap: break-word;
+            .milestone {
+                width: (@text-gtr-width - @panel-body-padding);
+                display: block;
+                overflow: auto;
+                overflow-wrap: break-word;
+                position: relative;
+                z-index: 2;
+            }
+        }
     }
+    
 
     // Title section
     // ---------------------------------------------
@@ -602,11 +617,12 @@ table.contents-table {
             margin-bottom: 30px;
         }
 
-        .license {
-            text-align: center;
+        #license {
+            margin-top: @line-height-computed;
             img {
                 display: inline-block;
                 width: auto;
+                margin-bottom: (@line-height-computed / 2);
             }
         }
 
@@ -637,6 +653,7 @@ table.contents-table {
 
         h4+h2 {
             margin-top: 0px;
+            margin-bottom: @line-height-computed;
         }
 
         br {
@@ -646,78 +663,93 @@ table.contents-table {
         p {
             text-align: justify;
             width: 100%;
-            text-indent: 0;
+            margin-bottom: 0;
+            text-indent: @line-height-computed;
             br {
                 display: block;
             }
-            .blockquote, &.mantra {
-                text-indent: 0;
-            }
-            .blockquote {
-                border-left: 5px solid @blockquote-border-color;
-                display: inline-block;
-                padding: 3px @line-height-computed;
-                padding-right: 0px;
-                font-size: @blockquote-font-size;
-            }
             &.mantra {
+                text-indent: 0;
                 padding: 0px @line-height-computed;
             }
         }
 
-        // Negate the spacing with a negative margin
-        p+p {
-            margin-top: -(@line-height-computed / 2);
-        }
         // Space some sections
-        h2+p, h3+p, h4+p, br+*, .line-group, .trailer, .line-group+*, .mantra+*, .nested-section + .nested-section > p:first-child {
+        h2+p, // paragraph after a header
+        h3+p, 
+        h4+p, 
+        br+*, // paragraph after a break
+        .space, // element marked as space
+        .space+*, // element after element marked as space
+        .space-after+* // element after element marked as space-after
+        {
             margin-top: @line-height-computed;
         }
-
-        // Indent the first line of a paragraph
-        p+p {
-            text-indent: @line-height-computed;
+        .list .space-after+* {
+            margin-top: @line-height-computed/ 2;
         }
+
         // Remove indent for first paragraph after spaced sections
-        h2+p, h3+p, h4+p, br+p, .line-group+p, .mantra+p, .trailer, .nested-section > p:first-child, .footnote-number {
+        .rw:first-child p, 
+        .rw.first-child p, 
+        h2+.rw p, 
+        h3+.rw p, 
+        h4+.rw p, 
+        br+.rw p,
+        .space p, // A paragraph in a spaced section 
+        .space+.rw p, // The paragraph after a spaced section
+        .space-after+.rw p, // The paragraph after a spaced section
+        .footnote-number {
             text-indent: 0;
         }
+
         // Hanging indent 
-        .line-group > p {
-            padding-left: @line-height-computed;
-            text-indent: -@line-height-computed;
+        .line-group {
+            .line {
+                padding-left: @line-height-computed;
+                text-indent: -@line-height-computed;
+            }
         }
         
         blockquote {
-            // Remove the margin
-            > .line-group, > .mantra {
-                margin-top: 0;
+
+            padding: 0;
+            margin-bottom: 0;
+            margin-left: -5px;
+
+            p {
+                padding-left: @line-height-computed;
             }
+            .line-group .line {
+                padding-left: (@line-height-computed * 2);
+            }
+
         }
 
-        p.indent {
-            text-indent: 0;
-            margin-left: @line-height-computed;
-        }
-       
-        .list > .list-item {
-            padding-left: @line-height-computed;
-            > p {
-                /* No line indent otherwise it gets confused with the group indent */
-                text-indent: 0px;
-            }
-            > p+p {
+        .list {
+            p, .section-label {
                 margin-top: 0px;
+                margin-bottom: @line-height-computed/ 2;
             }
-            > h5 {
-                margin-bottom: 3px;
-            }
-        }
-
-        ul {
-            list-style: none;
-            li {
-                margin-bottom: (@line-height-computed / 2);
+            .list-item {
+                p, .section-label {
+                    padding-left: @line-height-computed;
+                }
+                .list-item {
+                    p, .section-label {
+                        padding-left: (@line-height-computed * 2);
+                    }
+                    .list-item {
+                        p, .section-label {
+                            padding-left: (@line-height-computed * 3);
+                        }
+                        .list-item {
+                            p, .section-label {
+                                padding-left: (@line-height-computed * 4);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -750,7 +782,7 @@ table.contents-table {
 
         .occurences {
             h6 {
-                margin-top: 0px;
+                margin-top: 4px;
             }
             ul {
                 > li {
@@ -772,12 +804,12 @@ table.contents-table {
                 > th {
                     font-weight: normal;
                     font-style: italic;
+                    padding-left: 0;
                 }
                 > th, > td {
                     border-top: 0px;
                     color: @gray;
                 }
-
             }
         } 
     }
@@ -791,15 +823,6 @@ table.contents-table {
         }
     }
 
-    // Nested sections
-    // --------------------------------------------
-    .nested-section {
-        .nested-section.margin {
-            padding-left: @line-height-computed;
-            margin-bottom: (@line-height-computed * 2);
-        }
-    }
-
     // Footnotes
     // --------------------------------------------
     .footnote {
@@ -809,60 +832,18 @@ table.contents-table {
         }
     }
 
-	// Indent texts to display milestones
-	// ------------------------------------
-
-	.indent {
-
-	    position: relative;
-
-	    a.milestone {
-
-	        text-decoration: none;
-	        text-indent: 0;
-	        font-weight: normal;
-	        font-style: normal;
-
-	        &:hover {
-	            text-decoration: underline;
-	        }
-
-	    }
-
-	    margin-left: @indent;
-	    margin-right: @indent;
-
-	    .indent {
-	        margin-right: 0px;
-	    }
-
-	    a.milestone, a.footnote-number {
-	        position: absolute;
-	        top: 0px;
-	        left: -@indent;
-	        max-width: (@indent - 15);
-	    }
-
-	    // Milestones inside lists require left adjusting
-	    .list > .list-item > * {
-	        a.milestone {
-	            left: -(@indent + @line-height-computed);
-	        }
-	    }
-	    // Double nesting requires more adjusting
-	    .list > .list-item .list > .list-item > * {
-	        a.milestone {
-	            left: -(@indent + (@line-height-computed * 2));
-	        }
-	    }
-
-	    blockquote {
-	        > a.milestone {
-	            top: 11px;
-	        }
-	    }
-
-	}
+    // Nested sections
+    // --------------------------------------------
+    .nested-section {
+        .section-label {
+            font-size: @font-size-h4;
+        }
+        .nested-section {
+            .section-label {
+                font-size: @font-size-h5;
+            }
+        }
+    }
 
 }
 
@@ -935,7 +916,7 @@ table.contents-table {
             text-transform: uppercase;
             font-weight: bold;
             font-family: @font-family-heading;
-            font-size: 15px;
+            font-size: @font-size-base;
 
             .checkbox {
                 margin: 0px;
@@ -1041,6 +1022,21 @@ table.contents-table {
 
 }
 
+// Different styles for the editors
+// ---------------------------------------------
+.editor-mode {
+    &.reading-room.translation {
+        a.footnote-link, a.glossary-link {
+            color: inherit;
+            border-bottom-color: @brand-red-alert !important;
+        }
+        .glossary-item .alternative {
+            display: block;
+            color: @brand-orange;
+        }
+    }
+}
+
 // Screen variations
 // All styles should default to desktop/screen
 // except ...
@@ -1056,8 +1052,10 @@ table.contents-table {
 
         > .unrendered-preview {
             .fade-out(80px);
-            a.milestone {
-                display: none;
+            a {
+                border-bottom: 0 !important;
+                color: inherit !important;
+                text-decoration: none !important;
             }
         }
 
@@ -1065,12 +1063,14 @@ table.contents-table {
             position: absolute;
             z-index: 4;
             text-align: center;
+            margin-top: 0px !important; // in case it occurs after a .space
         }
 
         a.render {
             bottom: -(@btn-round-size / 2);
             left: 0px;
             right: 0px;
+            margin-left: @text-gtr-width;
             .btn-round {
                 background-color: #fff;
                 border: 1px solid @brand-red;
@@ -1082,7 +1082,7 @@ table.contents-table {
         
         a.preview {
             position: absolute;
-            top: -10px;
+            top: -@btn-round-size;
             right: -@btn-round-size;
             .btn-round {
                 background-color: #ccc;
@@ -1107,15 +1107,20 @@ table.contents-table {
 }
 
 // Print variations
-// All styles should default to desktop/screen
-// -------------------------------------------
+// All styles should default to .screen.desktop
+// --------------------------------------------
 @media print {
-	p a.ref {
-        text-decoration: none;
-        &:after {
-            content: "";
+
+	p {
+        // Don't show link text for source links
+        // ---------------------------------------
+        a.ref {
+            text-decoration: none;
+            &:after {
+                content: "";
+            }
         }
-    }
+    } 
 
     .translation {
 
@@ -1138,15 +1143,15 @@ table.contents-table {
                 font-size: 12pt;
             }
         }
+        a.ref[href]:after {
+            content: "";
+        }
     }
 
     .unrendered-preview, a.render, a.preview {
         display: none;
     }
 
-    .environment-warning, #page-alert {
-        display: none;
-    }
 }
 
 // Small viewport variations
@@ -1156,7 +1161,7 @@ table.contents-table {
     .translation {
 
         p {
-            font-size: 16px;
+            font-size: @font-size-base;
             text-align: left;
         }
 
@@ -1190,6 +1195,28 @@ table.contents-table {
             p {
                 text-align: left;
             }
+        }
+
+        .rw { // row
+            padding-left: @text-gtr-width-sm;
+            .rw {
+                margin-left: -@text-gtr-width-sm;
+            }
+            .gtr{
+                margin-left: -@text-gtr-width-sm;
+                .milestone {
+                    width: (@text-gtr-width-sm - @panel-body-padding);
+                }
+            }
+            .rw-heading {
+                > * {
+                    text-align: left;
+                }
+            }
+        }
+
+        a.render {
+            margin-left: @text-gtr-width-sm;
         }
 
         // Adjusted for Text to speech
@@ -1232,7 +1259,7 @@ table.contents-table {
         #title {
             table.table-stats {
                 td {
-                    font-size: 12px;
+                    font-size: @font-size-small;
                     padding: 3px 5px;
                 }
             }
@@ -1281,7 +1308,7 @@ table.contents-table {
             }
         }
 
-        h2, h3 {
+        h2, h3, .milestone-h3 {
             margin-top: (@line-height-computed / 2);
         }
 
@@ -1291,33 +1318,6 @@ table.contents-table {
             margin-bottom: 70px;
 
         }
-
-        .indent {
-
-        	margin-left: @indent-sm;
-	        margin-right: 0px;
-
-	        a.milestone {
-	            top: 0px;
-	            left: -@indent-sm;
-	            max-width: (@indent-sm - 15);
-	        }
-
-	        .footnote.indent {
-	            margin-left: 0px;
-	            position: relative;
-	        }
-
-	        a.footnote-number {
-	            position: static;
-	            margin-right: 8px;
-	        }
-
-	        h1, h2, h3, h4 {
-	            margin-right: @indent-sm;
-	        }
-        }
-
         
     }
 
@@ -1338,43 +1338,6 @@ table.contents-table {
     }
 }
 
-// Tests page
-// --------------------------------------
-.tests {
-
-    .table th.test,  .table td.test{
-        text-align: center;
-        .fa {
-            margin: -3px;
-        }
-    }
-
-    .fa {
-        font-size: 24px;
-    }
-
-    .fa-check-circle {
-        color: lighten(@brand-green, 20%);
-    }
-
-    .fa-times-circle {
-        color: lighten(@brand-red, 10%);
-    }
-
-    .fixed-footer {
-        h3:first-child {
-            margin-top: 0px;
-        }
-    }
-
-    .debug {
-        color: @gray;
-        background-color: #eee;
-    }
-
-}
-
-
 // Utilities page
 // ----------------------------------------
 .utilities {
@@ -1390,7 +1353,7 @@ table.contents-table {
 
     label {
         font-family: @font-family-serif;
-        font-size: 15px;
+        font-size: @font-size-base;
     }
 
     a.center-vertical {
@@ -1491,11 +1454,7 @@ table.contents-table {
     }
 
     .table {
-        td {
-            .fa {
-                font-size: 28px;
-            }
-        }
+        
         tr.header {
             td {
                 color: @brand-red;
@@ -1508,6 +1467,14 @@ table.contents-table {
                 border: 0px;
                 font-family: @font-family-sans-serif;
                 color: @text-muted;
+            }
+        }
+
+        &.table-icons {
+            td {
+                .fa {
+                    font-size: 28px;
+                }
             }
         }
 
@@ -1615,6 +1582,50 @@ table.contents-table {
             .pull-right();
         }
 
+    }
+
+    #sponsors-table {
+        li > i {
+            width: 22px;
+            text-align: center;
+            margin-right: 6px;
+        }
+    }
+
+}
+
+// Tests page
+// --------------------------------------
+.tests {
+
+    .table th.test,  .table td.test{
+        text-align: center;
+        .fa {
+            margin: -3px;
+        }
+    }
+
+    .fa {
+        font-size: 24px;
+    }
+
+    .fa-check-circle {
+        color: lighten(@brand-green, 20%);
+    }
+
+    .fa-times-circle {
+        color: lighten(@brand-red, 10%);
+    }
+
+    .fixed-footer {
+        h3:first-child {
+            margin-top: 0px;
+        }
+    }
+
+    .debug {
+        color: @gray;
+        background-color: #eee;
     }
 
 }

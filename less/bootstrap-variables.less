@@ -6,6 +6,7 @@
 // --------------------------------------------------
 @brand-blue: rgb(86, 110, 144);
 @brand-blue-dark: rgb(0, 60, 87);
+@brand-blue-light: rgb(129, 162, 208);
 @brand-orange: rgb(183, 108, 30);
 @brand-red: rgb(117, 45, 40);
 @brand-green: rgb(77, 98, 83);
@@ -69,15 +70,15 @@
 @font-family-base:        	@font-family-serif;
 
 @font-size-base:          16px;
-@font-size-large:         ceil((@font-size-base * 1.25)); // ~18px
-@font-size-small:         ceil((@font-size-base * 0.8)); // ~12px
+@font-size-large:         1.25em;//ceil((@font-size-base * 1.25)); // ~18px
+@font-size-small:         ceil((@font-size-base * 0.85)); // ~12px
 
-@font-size-h1:            floor((@font-size-base * 1.7)); // ~36px
-@font-size-h2:            floor((@font-size-base * 1.5)); // ~30px
-@font-size-h3:            ceil((@font-size-base * 1.25)); // ~24px
-@font-size-h4:            ceil((@font-size-base * 1.1)); // ~18px
-@font-size-h5:            @font-size-base;
-@font-size-h6:            ceil((@font-size-base * 0.85)); // ~12px
+@font-size-h1:            1.7em;//floor((@font-size-base * 1.7)); // ~36px
+@font-size-h2:            1.5em;//floor((@font-size-base * 1.5)); // ~30px
+@font-size-h3:            1.25em;//ceil((@font-size-base * 1.25)); // ~24px
+@font-size-h4:            1.1em;//ceil((@font-size-base * 1.1)); // ~18px
+@font-size-h5:            1em;//@font-size-base;
+@font-size-h6:            .85em;//ceil((@font-size-base * 0.85)); // ~12px
 
 //** Unit-less `line-height` for use in components like buttons.
 @line-height-base:        1.4; // 20/14
@@ -558,14 +559,14 @@
 //** Popover body background color
 @popover-bg:                          #fff;
 //** Popover maximum width
-@popover-max-width:                   276px;
+@popover-max-width:                   320px;
 //** Popover border color
 @popover-border-color:                rgba(0,0,0,.2);
 //** Popover fallback border color
-@popover-fallback-border-color:       #ccc;
+@popover-fallback-border-color:       @hr-border;//#ccc;
 
 //** Popover title background color
-@popover-title-bg:                    darken(@popover-bg, 3%);
+@popover-title-bg:                    #fff;//darken(@popover-bg, 3%);
 
 //** Popover arrow width
 @popover-arrow-width:                 10px;
@@ -781,7 +782,7 @@
 //##
 
 @well-bg:                     lighten(@brand-orange, 50%);
-@well-border:                 darken(@well-bg, 10%);
+@well-border:                 lighten(@brand-orange, 30%);
 
 
 //== Badges

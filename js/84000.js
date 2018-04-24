@@ -204,29 +204,41 @@ jQuery(document).ready(function($) {
 	// Render a section that is hidden with .render-in-viewport
 	// --------------------------------------------------------
 	(function ($) { 
-		$.fn.render = function () {
+		$.fn.render = function (callback) {
 			var $element = $(this);
-			if($element.hasClass('render-in-viewport')){
-				// render the node
-		    	$element.removeClass('render-in-viewport');
-		    	// delete the preview node
-		    	$element.siblings(".unrendered-preview").remove();
-		    	$element.siblings("a.render").remove();
+			$.wait("Rendering this section...");
+	    	setTimeout(function(){
+	    		if($element.hasClass('render-in-viewport')){
 
-		    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "preview", "title": "Collapse this section"});
-		    	$btn = $("<span>", {"class": "btn-round"});
-		    	$icon = $("<i>", {"class": "fa fa-times"});
-		    	$btn.append($icon);
-		    	$link.hide().append($btn);
-		    	$element.prepend($link);
-		    	$link.fadeIn(500);
+					// render the node
+			    	$element.removeClass('render-in-viewport');
 
-		    	// Match heights on newly visible
-		    	$.matchHeights($element);
+			    	// delete the preview node
+			    	$element.siblings(".unrendered-preview").remove();
+			    	$element.siblings("a.render").remove();
 
-		    	// Do other scroll events
-		    	$(window).trigger("scroll");
-			}
+			    	// add an option to collapse it again
+			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "preview", "title": "Collapse this section"});
+			    	$btn = $("<span>", {"class": "btn-round"});
+			    	$icon = $("<i>", {"class": "fa fa-times"});
+			    	$btn.append($icon);
+			    	$link.hide().append($btn);
+			    	$element.append($link);
+			    	$link.fadeIn(500);
+
+			    	// Match heights on newly visible
+			    	$.matchHeights($element);
+
+			    	// Do other scroll events
+			    	$(window).trigger("scroll");
+
+			    	// Do other callbacks
+			    	if(callback){
+			    		callback();
+			    	}
+				}
+	    		$.wait("", true);
+	        },100);
 	    }
 	}($));
 
@@ -246,12 +258,7 @@ jQuery(document).ready(function($) {
 		    	//Don't preview things that are very short
 		    	// --------------------------------------
 
-		    	if($section.attr('id') == "abbreviations"){
-		    		if($element.find("h5, table tr").length > 6){
-		    			$previewContent = $element.find("h5, table").clone();
-		    		}
-		    	}
-		    	else if($section.attr('id') == "notes"){
+		    	if($section.attr('id') == "notes"){
 		    		if($element.find("div.footnote").length > 5){
 		    			$previewContent = $element.find("div.footnote").slice(0,5).clone();
 		    		}
@@ -265,6 +272,7 @@ jQuery(document).ready(function($) {
 
 		    		// Add nodes until there's x characters in the preview
 		    		// ------------------------------------------------------
+
 		    		$previewContent = $();
 		    		var longSection = false;
 		    		var previewHTML = "";
@@ -272,10 +280,10 @@ jQuery(document).ready(function($) {
 		    		
 		    		$element.children().each(function(index){
 		    			$child = $(this).clone();
-		    			previewHTML += $child.html();
+		    			previewHTML += $child.html().replace(/<\/?[^>]+(>|$)/g, "");
 		    			$previewContent = $previewContent.add($child);
 
-		    			if(previewHTML.length > 1500){
+		    			if(previewHTML.length > 700){
 		    				longSection = true;
 		    				return false;
 		    			}
@@ -296,13 +304,17 @@ jQuery(document).ready(function($) {
 		    		var $preview = $("<div>", {"class": "unrendered-preview"});
 
 			    	$preview.append($previewContent);
-
+			    	
 			    	$preview.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
 			    		$(this).addClass("ignore");
 			    	});
 			    	
 			    	$preview.find(".glossary-item .occurences").each(function(){
 			    		$(this).addClass("hidden");
+			    	});
+
+			    	$preview.find("[id]").each(function(){
+			    		$(this).attr("id", '');
 			    	});
 
 			    	$section.append($preview);
@@ -340,6 +352,7 @@ jQuery(document).ready(function($) {
 
 	// Render sections as they come into view
     // -----------------------------------------------------------
+    /*
     (function ($) { 
 		$.renderInViewport = function () {
 			$('.screen section > .render-in-viewport').each(function(){
@@ -364,7 +377,7 @@ jQuery(document).ready(function($) {
 			    }
 			});
 	    };
-	}($));
+	}($));*/
 
 	// Click to render a section
 	// ------------------------------------------
@@ -408,7 +421,7 @@ jQuery(document).ready(function($) {
 	// -----------------------------------------
 	(function ($) { 
 		$.scrollToAnchor = function (hash, delay, parent, offset, callback) {
-			if(!legacyLink()) {
+			if(!legacyLink() && $("html.screen").length) {
 				var $target;
 				if(!hash) hash = window.location.hash;
 				if(hash) $target = $(hash);
@@ -428,12 +441,9 @@ jQuery(document).ready(function($) {
 						}
 					}
 					if($unrendered.length){
-						$.wait("Rendering this section...");
-				    	setTimeout(function(){
-				    		$unrendered.render();
-				    		$.wait("", true);
-				    		scrollToAnchorScroll();
-				        },100);
+						$unrendered.render(function(){
+							scrollToAnchorScroll();
+						});
 					}
 					else {
 						scrollToAnchorScroll();
@@ -921,6 +931,7 @@ jQuery(document).ready(function($) {
 	$(document).on("click",'.collapse .close', function(e) {
 	
         e.preventDefault();
+        e.stopPropagation();
         
 		// Close the footer
         $(this).parents('.collapse').collapse('hide');
@@ -949,14 +960,14 @@ jQuery(document).ready(function($) {
 	$(document).on("click",'a.pop-up', function(e) {
 	
         e.preventDefault();
+        e.stopPropagation();
         
         var $this = $(this);
-        var popupFooter = $('#popup-footer');
-        
-        // Hide the footer
-        popupFooter.removeClass('in');
-        $("#page-alert").removeClass('in');
+        var $popupFooter = $('#popup-footer');
 
+        $('.collapse').not($popupFooter).collapse('hide');
+        $popupFooter.removeClass('in');
+        
         var doPopUp = function(){
         	// Trigger pre-events
 	        $this.trigger("prepare");
@@ -976,7 +987,7 @@ jQuery(document).ready(function($) {
 	        // Copy content to the footer
 	        $('#popup-footer .data-container').html($content);
 	        // Show the footer
-			popupFooter.collapse('show');
+			$popupFooter.collapse('show');
         	
         }
 
@@ -1001,14 +1012,17 @@ jQuery(document).ready(function($) {
 	$(document).on("click",'a.show-sidebar', function(e) {
 	
         e.preventDefault();
+        e.stopPropagation();
+
         var selector = $(this).attr('href');
 
         var $sidebar = $(selector);
-        
-        $('.fixed-footer, .fixed-sidebar').not(selector).collapse('hide');
+
+        $('.collapse').not($sidebar).collapse('hide');
+        $sidebar.removeClass('in');
         
         if(selector == "#contents-sidebar" &&  !$sidebar.hasClass("loaded")){
-        	var $toc = $("#contents > table");
+        	var $toc = $("#contents  .contents-table");
         	$sidebar.find(".data-container").html($toc.clone());
         	$sidebar.addClass("loaded");
         }
@@ -1378,6 +1392,7 @@ jQuery(document).ready(function($) {
     $(document).on("click", "[data-ajax-target]", function(e){
         
         e.preventDefault();
+        e.stopPropagation();
         
         var $this = $(this);
         var source = $this.attr('href');
@@ -1385,13 +1400,14 @@ jQuery(document).ready(function($) {
         var $target = $(target);
 
         if(target.indexOf("#popup-footer-source") !== -1){
-        	var popupFooter = $('#popup-footer-source');
-        	popupFooter.removeClass('in');
+        	var $popupFooter = $('#popup-footer-source');
+        	$('.collapse').not($popupFooter).collapse('hide');
+        	$popupFooter.removeClass('in');
         	$.wait("Loading the source text...");
 	    	setTimeout(function(){
 	    		$.get(source, function(data) {
 	        		$(target).html(data);
-	                popupFooter.collapse('show');
+	                $popupFooter.collapse('show');
 	            });
 	        	$.wait("", true);
 	        },100);
@@ -1598,8 +1614,9 @@ jQuery(document).ready(function($) {
 	// ------------------------------------------
 	$(document).on("click",'body', function(e) {
 	
-		// Close the footer
-        $('.fixed-footer, .fixed-sidebar').collapse('hide');
+		// Close things
+        $('.collapse').collapse('hide');
+
         // show glossary highlights
         if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
         

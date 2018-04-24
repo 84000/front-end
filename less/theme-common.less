@@ -28,6 +28,11 @@ body {
     }
 }
 
+a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
 // Footer
 // -------------------------------------------
 body > footer {
@@ -133,11 +138,9 @@ i.fa-google-plus-square {
     font-family:"Tibetan" !important;
     line-height: 2em;
 }
-
 .text-sa, .text-wy {
     font-family: @font-family-serif !important;
 }
-
 .text-zh {
     font-style: normal !important;
 }
@@ -149,6 +152,21 @@ i.fa-google-plus-square {
 // -------------------------------------------------
 .badge {
     font-family: @font-family-sans-serif;
+}
+
+// Debug for environment
+// -------------------------------------------------
+.environment-warning {
+    position: fixed;
+    z-index: 9;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(red(@brand-green),green(@brand-green),blue(@brand-green),.7);
+    color: #fff;
+    padding: 2px 7px;
+    font-size: @font-size-small;
+    font-family: @font-family-sans-serif;
+    border-bottom-right-radius: 4px;
 }
     
 // Navbar
@@ -780,8 +798,8 @@ a#link-to-top {
 
     }
 
-    .well {
-        border-color: @gray-lighter;
+    .well, .alert {
+        border-color: @gray-light !important;
     }
 
     .print-logo {
@@ -792,6 +810,10 @@ a#link-to-top {
 
     .text-center p {
         text-align: center;
+    }
+
+    .environment-warning, #page-alert {
+        display: none;
     }
 
 }

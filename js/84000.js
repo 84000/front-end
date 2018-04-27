@@ -476,8 +476,12 @@ jQuery(document).ready(function($) {
 
 				var $buttonContainer = $("#rewind-btn-container");
 				var $button = $buttonContainer.find("button");
-
-				rewindHistory.push($(document).scrollTop());
+				var currentLocation = $.currentLocation();
+				
+				if(currentLocation !== undefined && 'hash' in currentLocation){
+					//console.log("rewindHistory.push: " + currentLocation.hash);
+					rewindHistory.push(currentLocation.hash);
+				}
 				$buttonContainer.removeClass("hidden");
 				$button.pulse();
 
@@ -522,14 +526,6 @@ jQuery(document).ready(function($) {
 		else if($(document).scrollTop() < 200){
 			$("#link-to-top").removeClass("in");
 		}
-	});
-
-	// Add behaviour...
-	// Scroll to top
-	// --------------------------------------
-	$(document).on("click", "a[href='#top']:not(.milestone)", function(e) {
-		$.scrollToAnchor("#top");
-		return false;
 	});
 
 	// Add behaviour...
@@ -682,9 +678,12 @@ jQuery(document).ready(function($) {
 	    	// -------------------------------------------
 	    	$.fn.bookmarkData = function () {
 	    		var location = window.location.href;
-	    	    locationSplit = location.split("#");
+	    	    var locationSplit = location.split("#");
 	    	    var page = locationSplit[0];
-	    	    var hash = this.attr('href');
+	    	    var href = this.attr('href');
+	    	    var hrefSplit = href.split("#");
+	    	    var targetId = hrefSplit[hrefSplit.length - 1];
+	    	    var hash = targetId ? "#" + targetId : "#top";
 	    	    var pageTitle = $("#title h1").text();
 	    	    var sectionTitle = this.parents("section, aside").find("h3, h4").first().text();
 	    	    var milestoneTitle = this.text();
@@ -827,21 +826,33 @@ jQuery(document).ready(function($) {
 		// Save the location for the next visit
 		// -----------------------------------------
 		(function ($) { 
-			$.saveCurrentLocation = function () {
+			$.currentLocation = function () {
 
-			    $(".translation a.milestone").each(function(index){
-			    	// We are on a translation so remove the lastLocation
-			    	if(index == 0){
-			    		Cookies.remove('lastLocation', { domain: $.getDomain() });
-			    	}
-			    	// If we scroll down then set a new last location
+				var currentLocation;
+
+			    $(".translation :not(.unrendered-preview, render-in-viewport) a.milestone:visible").each(function(index){
+			    	
 			    	var $this = $(this);
 			    	if($this.elementInView() == "topInView"){
-			    		Cookies.set('lastLocation', JSON.stringify($this.bookmarkData()), { expires: 31, domain: $.getDomain() });
-			    		return false;
+			    		currentLocation = $this.bookmarkData();
+			    		return false; // Exit the loop
 			    	}
 				});
 
+				return currentLocation;
+			}
+		}($));
+
+		(function ($) { 
+			$.saveCurrentLocation = function () {
+
+				var currentLocation = $.currentLocation();
+				if(currentLocation !== undefined && 'hash' in currentLocation){
+
+					Cookies.remove('lastLocation', { domain: $.getDomain() });
+
+			    	Cookies.set('lastLocation', JSON.stringify(currentLocation), { expires: 31, domain: $.getDomain() });
+				}
 			}
 		}($));
 
@@ -1600,8 +1611,9 @@ jQuery(document).ready(function($) {
 	$("#rewind-btn-container button").on('click', function (e) {
 		var $button = $(this);
 		if(rewindHistory.length){
-			var target = rewindHistory.pop();
-			$("html, body").animate({ scrollTop: target}, "slow");
+			var lastLocation = rewindHistory.pop();
+			//console.log("lastLocation: " + lastLocation);
+			$.scrollToAnchor(lastLocation);
 			if(!rewindHistory.length){
 				$button.parents("#rewind-btn-container").addClass("hidden");
 			}

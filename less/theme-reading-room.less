@@ -676,30 +676,28 @@ table.contents-table {
         }
 
         // Space some sections
-        h2+p, // paragraph after a header
-        h3+p, 
-        h4+p, 
+        h2+*, // paragraph after a header
+        h3+*, 
+        h4+*, 
         br+*, // paragraph after a break
         .space, // element marked as space
         .space+*, // element after element marked as space
-        .space-after+* // element after element marked as space-after
+        .space-after+*, // element after element marked as space-after
+        .milestone-space 
         {
             margin-top: @line-height-computed;
         }
-        .list .space-after+* {
-            margin-top: @line-height-computed/ 2;
-        }
 
         // Remove indent for first paragraph after spaced sections
-        .rw:first-child p, 
-        .rw.first-child p, 
-        h2+.rw p, 
-        h3+.rw p, 
-        h4+.rw p, 
-        br+.rw p,
-        .space p, // A paragraph in a spaced section 
-        .space+.rw p, // The paragraph after a spaced section
-        .space-after+.rw p, // The paragraph after a spaced section
+        .rw:first-child > p, 
+        .rw.first-child > p, 
+        h2+.rw > p, 
+        h3+.rw > p, 
+        h4+.rw > p, 
+        br+.rw > p,
+        .space > p, // A paragraph in a spaced section 
+        .space+.rw > p, // The paragraph after a spaced section
+        .space-after+.rw > p, // The paragraph after a spaced section
         .footnote-number {
             text-indent: 0;
         }
@@ -729,8 +727,8 @@ table.contents-table {
 
         .list {
             p, .section-label {
-                margin-top: 0px;
-                margin-bottom: 5px;
+                margin-top: 0;
+                margin-bottom: 0;
             }
             .list-item {
                 p, .section-label {
@@ -805,6 +803,7 @@ table.contents-table {
     #abbreviations {
         .table {
             width: auto;
+            margin-bottom: (@line-height-computed / 2);
             > tbody > tr {
                 > th {
                     font-weight: normal;

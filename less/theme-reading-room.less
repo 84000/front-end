@@ -6,70 +6,28 @@
 // General styles
 // ---------------------------------
 
-body {
-    line-height: 1.6;
-}
 
 // Title variations 
 // ---------------------------------------------
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h2, h3, h4, h5, h6,
+.h2, .h3, .h4, .h5, .h6 {
     color: @text-color;
-    font-family: @font-family-heading;
-}
-
-h1 {
-    color: @brand-red;
-    font-family: @font-family-bold;
 }
 
 h3, .milestone-h3 {
     margin-bottom: @line-height-computed;
 }
 
-// Type styles 
+// Danger well for tantra warnings
+// ----------------------------------
+.well.well-danger {
+    color: #ffffff;
+    border-color: darken(@brand-red, 10%);
+    background-color: @brand-red;
+}
+
+// Source text pop-up
 // ---------------------------------------------
-p {
-    a {
-        text-decoration: underline;
-        font-weight: inherit;
-    }
-}
-
-// Pop-up footer for notes and glossary
-// ------------------------------------
-.fixed-footer {
-
-    position:fixed;
-    bottom:0px;
-    left:0px;
-    right: 0px;
-    background-color: #fff;
-    border-top: 1px solid @hr-border;
-    z-index: 5;
-
-    .container {
-        position: relative;
-        > .panel {
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-top: (@line-height-computed / 2);
-            padding-bottom: @line-height-computed;
-            > .panel-body {
-                padding-bottom: 0px;
-                padding-top: 0px;
-            }
-        }
-    }
-    .fix-height {
-        overflow: auto;
-        min-height: 70px;
-    }
-    .glossary-item {
-        margin-bottom: 0px;
-    }
-}
-
 #popup-footer-source {
     .title {
         margin: (@line-height-computed / 2) 0px;
@@ -103,289 +61,6 @@ p {
     }
 }
 
-// Pop-out sidebar for contents and bookmarks
-// ------------------------------------------
-.fixed-sidebar {
-
-    position:fixed;
-    bottom:0px;
-    top:0px;
-    right: 0px;
-    background-color: #fff;
-    border-left: 1px solid @hr-border;
-    height: 100%;
-    overflow: auto;
-    z-index: 9;
-
-    .container {
-        position: relative;
-        padding: 20px;
-    }
-
-    .fix-width {
-        overflow: auto;
-        margin-right: 70px;
-    }
-
-    h4 {
-        margin-top: 0px !important;
-        margin-bottom: 6px !important;
-    }
-
-    table.contents-table {
-        margin-bottom: 20px;
-    }
-
-}
-
-@media only screen and (max-width: @screen-sm) {
-    .fixed-footer {
-        .container {
-            position: relative;
-            > .panel {
-                .box-shadow(none);
-            }
-        }
-    }
-    .fixed-sidebar {
-        .fix-width {
-            margin-right: 50px;
-        }
-    }
-    
-}
-
-// Remove bookmark button
-// ---------------------------------
-.remove-bookmark {
-    color: @brand-red-alert !important;
-    &:hover {
-        color: darken(@brand-red-alert, 15%) !important;
-    }
-}
-
-// Notification badge
-// --------------------------------------------
-.badge-notification {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    line-height: 12px;
-    padding: 6px 0px;
-    z-index: 10;
-    .transition(.75s ease-out);
-    &.pulse {
-        background-color: @brand-red-alert;
-        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
-    }
-}
-
-// Danger well
-// ----------------------------------
-.well.well-danger {
-    color: #ffffff;
-    border-color: darken(@brand-red, 10%);
-    background-color: @brand-red;
-}
-
-// Big panel headings
-// ----------------------------------
-.panel-heading {
-
-    width: 100%;
-
-    .bookmark-button {
-
-        text-align: right;
-
-        a {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border-radius: 15px;
-            font-size: @font-size-large;
-            line-height: 20px;
-            padding: 5px 0px;
-            text-align: center;
-            background-color: @brand-red;
-            color: #fff;
-            .transition(.25s ease-in);
-            &:hover {
-                background-color: #fff;
-                color: @brand-red;
-            }
-        }
-    }
-
-    .breadcrumb {
-        margin-bottom: 0px;
-        padding: 0px;
-        > li + li:before {
-            padding: 0 5px 0 10px;
-        }
-        a {
-            text-decoration: underline;
-        }
-    }
-
-}
-
-.panel-default {
-    .panel-heading-bold {
-
-        width: 100%;
-        background-color: @brand-red;
-        padding: @panel-heading-padding;
-        //line-height: 23px;
-
-        &, a, li {
-            color: #fff;
-        }
-
-        .title {
-            font-size: @font-size-large;
-            font-family: @font-family-bold;
-        }
-
-        .label {
-            margin-left: 8px;
-        }
-
-    }
-
-    .panel-heading-danger {
-        background-color: @brand-red-alert;
-    }
-
-    @media only screen and (max-width: @screen-sm) {
-        margin: 0px;
-        border-bottom: 1px solid @gray-border-color;
-        .box-shadow(none);
-        //padding-bottom: 40px;
-    }
-}
-
-
-// A panel for a section of a canon
-// --------------------------------------------
-.section-panel {
-
-    display: block;
-    margin: 20px 0px;
-    padding: 10px;
-    text-align: center;
-    background: 
-        url(/imgs/ornament/title-ornament.svg) no-repeat top center, 
-        url(/imgs/ornament/title-corner-top-left.svg) no-repeat top left, 
-        url(/imgs/ornament/title-corner-top-right.svg) no-repeat top right, 
-        url(/imgs/ornament/title-corner-bottom-left.svg) no-repeat bottom left, 
-        url(/imgs/ornament/title-corner-bottom-right.svg) no-repeat bottom right, 
-        url(/imgs/ornament/title-top.svg) repeat-x top center, 
-        url(/imgs/ornament/title-top.svg) repeat-x bottom center, 
-        url(/imgs/ornament/title-sides.svg) repeat-y top left, 
-        url(/imgs/ornament/title-sides.svg) repeat-y top right;
-    background-size: 50px, 18px, 18px, 18px, 18px, 50px, 50px, 6px, 6px;
-    background-color: #fff;
-
-    .block-link:hover {
-
-        text-decoration: none;
-
-        h3 {
-            text-decoration: underline;
-        }
-    }
-
-    > div {
-        .clearfix();
-    }
-
-    .title {
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-        color: @brand-blue;
-        border-bottom: 1px solid @panel-inner-border;
-    }
-
-    h3.title {
-        font-weight: bold;
-        margin-top: 15px;
-    }
-
-    .notes {
-
-        color: @text-muted;
-        font-size: @font-size-small;
-
-    }
-
-    .footer {
-
-        margin: 0px -10px -10px -10px;
-        padding: 0px;
-        background-color: #fff;
-        font-family: @font-family-sans-serif;
-        font-size: @font-size-small;
-
-        > table {
-
-            background-color: @brand-orange;
-            color: #fff;
-            border-bottom-right-radius: 10px;
-            border-bottom-left-radius: 10px;
-            margin-bottom: 0px;
-
-            th {
-                text-align: left;
-                padding-left: 10px;
-                font-weight: normal;
-            }
-            td {
-                text-align: right;
-            }
-
-            th, td {
-                border-color: darken(@brand-orange, 10%);
-                line-height: 1.1;
-            }
-
-        }
-    }
-
-    &.pseudo-section {
-        .footer {
-            > table {
-                background-color: #dedede;
-                th, td {
-                    border-color: darken(#dedede, 10%);
-                    color: @text-color;
-                }
-            }
-        }
-    }
-        
-}
-
-// Header Alert
-// ---------------------------------------------
-#page-alert {
-    background-color: @brand-green;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    z-index: 7;
-    .text-center();
-    padding: 10px 15px 25px 15px;
-    &, a {
-        color: #fff;
-    }
-    .close {
-        background-color: #fff;
-        color: @brand-green;
-        box-shadow: 0px 0px 4px @brand-green;
-    }
-}
-
 // Contents table
 // ---------------------------------------------
 table.contents-table {
@@ -394,7 +69,7 @@ table.contents-table {
         page-break-inside: auto;
     }
     td {
-        vertical-align: top;
+        //vertical-align: top;
         padding: 4px 6px 4px 0px;
         break-inside: auto;
         page-break-inside: auto;
@@ -406,6 +81,12 @@ table.contents-table {
             color: @text-muted;
         }
     }
+}
+.fixed-sidebar {
+    table.contents-table {
+        margin-bottom: 20px;
+    }
+
 }
 
 // Translation specific styles
@@ -439,6 +120,13 @@ table.contents-table {
         margin-top: @line-height-computed;
     }
 
+    .trailer {
+        font-style: italic;
+        .ref, .footnote-link {
+            font-style: normal;
+        }
+    }
+
     .section-label {
         font-weight: bold;
         margin-top: @line-height-computed;
@@ -449,29 +137,6 @@ table.contents-table {
     // ---------------------------------------------
     .milestone-h2, .milestone-h3, .milestone-h4 {
         display: block;
-    }
-
-    // Text classes 
-    // ---------------------------------------------
-    .name {
-        font-weight: bold;
-        font-style: italic;
-    }
-    .title {
-        font-style: italic;
-    }
-    .foreign {
-        font-style: italic;
-    }
-    .trailer {
-        font-style: italic;
-        .ref, .footnote-link {
-            font-style: normal;
-        }
-    }
-    .mark {
-        padding: 0px;
-        .box-shadow(0px 0px 0px 2px @state-warning-bg);
     }
 
     // Layout
@@ -851,181 +516,6 @@ table.contents-table {
 
 }
 
-// Reading room section
-// ---------------------------------------------
-.section {
-
-    #title {
-
-        text-align: center;
-        margin-bottom: 25px;
-
-        p {
-            color: @text-muted;
-        }
-
-        hr {
-            margin-top: 16px;
-            margin-bottom: 16px;
-        }
-
-        .logo {
-            margin-top: 30px;
-            width: 160px;
-        }
-
-        table.table-stats {
-
-            width: auto;
-            background-color: @brand-orange;
-            border-radius: 3px;
-            margin: 0px auto;
-            padding: 3px;
-
-            td {
-                border-top: 0px;
-                color: #fff;
-                border-left: 1px solid rgba(255, 255, 255, 0.2);
-                text-align: center;
-                font-family: @font-family-sans-serif;
-                font-size: @font-size-small;
-                padding: 6px 10px;
-                vertical-align: middle;
-            }
-        }
-
-    }
-
-    .nav-tabs {
-        margin-bottom: 15px;
-    }
-
-    #sections {
-        margin-bottom: 20px;
-    }
-
-    h2 {
-        color: @text-muted;
-    }
-
-    .text-list {
-
-        margin-top: 15px;
-        margin-left: 15px;
-        margin-right: 15px;
-
-        .table-headers {
-
-            color: @brand-orange;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-family: @font-family-heading;
-            font-size: @font-size-base;
-
-            .checkbox {
-                margin: 0px;
-                label {
-                    text-transform: none;
-                    min-height: 0px;
-                }
-            }
-        }
-
-        > .row {
-            padding-top: 10px;
-            padding-bottom: 10px;
-
-            hr {
-                margin-top:    10px;
-                margin-bottom: 10px;
-            }
-        }
-
-        > .row:nth-child(odd) {
-
-            background-color: @well-bg;
-            border: 1px solid @well-border;
-            border-radius: 0px;
-
-            hr {
-                border-color: @well-border;
-            }
-
-            .well {
-                background-color: #fff;
-            }
-            
-        }
-
-        h4 {
-            margin-top: 4px;
-        }
-
-        .title-en, a.title {
-            font-weight: bold;
-        }
-
-
-        a:visited {
-            color: lighten(@link-color, 15%);
-        }
-
-        a.summary-link {
-
-            display: block;
-            color: @brand-orange;
-            font-size: @font-size-small;
-
-            i {
-                .transition(.25s linear);
-            }
-
-            &.collapsed {
-                i {
-                    .rotate(-90deg);
-                }
-            }
-        }
-
-        .summary-detail {
-
-            .well {
-                margin-top: (@line-height-computed / 2);
-            }
-
-            h5:first-child {
-                margin-top: 0px;
-            }
-        }
-    }
-
-    .breadcrumb {
-        display: inline;
-        margin-bottom: 0px;
-        padding: 0px;
-        padding-left: 8px;
-    }
-
-    .translation-options {
-        .list-unstyled();
-        > li {
-            margin-bottom: 10px;
-        }
-        i {
-            width: 26px;
-            text-align: left;
-        }
-    }
-
-    .panel-heading-bold {
-        .btn-round {
-            margin-top: -5px;
-            margin-bottom: -5px;
-        }
-    }
-
-}
-
 // Different styles for the editors
 // ---------------------------------------------
 .editor-mode {
@@ -1237,39 +727,6 @@ table.contents-table {
 	    }
     }
 
-    .section {
-        .panel-heading-bold {
-            .btn-round {
-                margin-top: 2px;
-                margin-bottom: 2px;
-            }
-        }
-        .panel-heading.center-vertical {
-            > * {
-                display: block;
-                margin-top: 8px;
-                width: 100%;
-                float: left;
-                padding-left: 0px;
-                .pull-right {
-                    .pull-left();
-                }
-            }
-            > *:first-child {
-                margin-top: 0px;
-            }
-        }
-
-        #title {
-            table.table-stats {
-                td {
-                    font-size: @font-size-small;
-                    padding: 3px 5px;
-                }
-            }
-        }
-    }
-
     .nav-controls {
         position: fixed;
         bottom: 0px;
@@ -1324,23 +781,8 @@ table.contents-table {
         }
         
     }
-
-    .section {
-        .text-list {
-
-            // Shift the status to next to the toh
-            .row {
-                position: relative;
-            }
-
-            .translation-status {
-                position: absolute;
-                top: 10px;
-                right: 15px;
-            }
-        }
-    }
 }
+
 
 // Utilities page
 // ----------------------------------------
@@ -1358,15 +800,7 @@ table.contents-table {
     label {
         font-family: @font-family-serif;
         font-size: @font-size-base;
-    }
-
-    a.center-vertical {
-        > span {
-            padding-left: 5px;
-        }
-        i {
-            font-size: 30px;
-        }
+        line-height: 1.1;
     }
 
     #translation-search {
@@ -1436,10 +870,6 @@ table.contents-table {
         }
     }
 
-    .tab-content {
-        margin-top: 15px;
-    }
-
     .search-result {
 
         padding-top: 15px;
@@ -1485,6 +915,7 @@ table.contents-table {
         &.progress {
             border-spacing: 2px;
             border-collapse: separate;
+            margin-top: @line-height-computed;
             tr {
                 > td {
                     border-top-width: 0px;
@@ -1499,30 +930,29 @@ table.contents-table {
                 }
                 &.total {
                     > td:first-child  {
-                        border-left-color: @label-danger-bg;
+                        border-left-color: @gray;
+                    }
+                }
+                &.published {
+                    > td:first-child  {
+                        border-left-color: @brand-green;
                     }
                 }
                 &.translated {
                     > td:first-child  {
-                        border-left-color: @label-success-bg;
+                        border-left-color: @brand-blue;
                     }
                 }
-                &.in-progress {
+                &.in-translation {
                     > td:first-child  {
-                        border-left-color: @label-warning-bg;
+                        border-left-color: @brand-orange;
                     }
                 }
                 &.sponsored {
                     > td:first-child  {
-                        border-left-color: @label-info-bg;
+                        border-left-color: @brand-red;
                     }
                 }
-                &.commissioned {
-                    > td:first-child  {
-                        border-left-color: @label-primary-bg;
-                    }
-                }
-                
             }
             
         }
@@ -1573,7 +1003,7 @@ table.contents-table {
 
         .glossary-item {
             .title {
-                margin-top:16px;
+                //margin-top:16px;
                 margin-bottom:8px;
             }
         }

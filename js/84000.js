@@ -1424,9 +1424,13 @@ jQuery(document).ready(function($) {
 	        },100);
         }
         else if(!$target.is('.loaded')){
-            $.get(source, function(data) {
-                $target.html(data).collapse('show').addClass('loaded');
-            });
+        	$.wait("Loading content...");
+        	setTimeout(function(){
+	    		$.get(source, function(data) {
+	                $target.html(data).collapse('show').addClass('loaded');
+	            });
+	        	$.wait("", true);
+	        },100);
         }
         else{
             $target.collapse('toggle');

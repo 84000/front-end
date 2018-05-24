@@ -3,6 +3,9 @@
 // Styles relevant to the Wordpress theme
 // ---------------------------------------- //
 
+// Title variations 
+// ---------------------------------------------
+
 // Read more link
 // -----------------------------------------
 p  a.read-more {
@@ -144,6 +147,7 @@ article {
             }
             footer {
                 color: #ddd;
+                margin-top: 3px;
             }
         }
     }
@@ -187,10 +191,10 @@ table#translation-stats {
     }
 }
 
-#progress-stats {
+.about-stats {
     margin-top: 5px;
     margin-bottom: 30px;
-    > div {
+    .stat {
         margin-bottom: 24px;
         .heading {
             font-family: @font-family-bold;
@@ -206,6 +210,16 @@ table#translation-stats {
                 font-size: 34px;
                 font-family: @font-family-stats;
             }
+        }
+        padding-left: 15px;
+        &.published {
+            border-left: 5px solid @brand-green;
+        }
+        &.translated {
+            border-left: 5px solid @brand-blue;
+        }
+        &.commissioned {
+            border-left: 5px solid @brand-orange;
         }
     }
 }
@@ -429,8 +443,6 @@ ul.list-archive {
     }
 }
 
-
-
 ul.responsive-tabs__list{
     margin-bottom: 0;
     padding-left: 0; // Override default ul/ol
@@ -575,3 +587,245 @@ ul.responsive-tabs__list{
         padding-left: 10px;
     }
 }
+
+// Reading room section
+// ---------------------------------------------
+.section {
+
+    h2, h3, h4, h5, h6,
+    .h2, .h3, .h4, .h5, .h6 {
+        color: @text-color;
+    }
+
+    #title {
+
+        text-align: center;
+        margin-bottom: 25px;
+
+        h1 {
+            color: @brand-red;
+            font-family: @font-family-bold;
+        }
+
+        p {
+            color: @text-muted;
+        }
+
+        hr {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            margin-top: 30px;
+            width: 160px;
+        }
+
+        table.table-stats {
+
+            width: auto;
+            background-color: @brand-orange;
+            border-radius: 3px;
+            margin: 0px auto;
+            padding: 3px;
+
+            td {
+                border-top: 0px;
+                color: #fff;
+                border-left: 1px solid rgba(255, 255, 255, 0.2);
+                text-align: center;
+                font-family: @font-family-sans-serif;
+                font-size: @font-size-small;
+                padding: 6px 10px;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    #sections {
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: @text-muted;
+    }
+
+    .breadcrumb {
+        display: inline;
+        margin-bottom: 0px;
+        padding: 0px;
+        padding-left: 8px;
+    }
+
+    .translation-options {
+        .list-unstyled();
+        > li {
+            margin-bottom: 10px;
+        }
+        i {
+            width: 26px;
+            text-align: left;
+        }
+    }
+
+    .panel-heading-bold {
+        .btn-round {
+            margin-top: -5px;
+            margin-bottom: -5px;
+        }
+    }
+
+}
+
+// Alternating list
+// ---------------------------
+.text-list {
+
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    .table-headers {
+
+        color: @brand-orange;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-family: @font-family-heading;
+        font-size: @font-size-base;
+
+        .checkbox {
+            margin: 0px;
+            label {
+                text-transform: none;
+                min-height: 0px;
+            }
+        }
+    }
+
+    > .row {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        hr {
+            margin-top:    10px;
+            margin-bottom: 10px;
+        }
+    }
+
+    > .row:nth-child(odd) {
+
+        background-color: @well-bg;
+        border: 1px solid @well-border;
+        border-radius: 0px;
+
+        hr {
+            border-color: @well-border;
+        }
+
+        .well {
+            background-color: #fff;
+        }
+        
+    }
+
+    h4 {
+        margin-top: 4px;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .title-en, a.title {
+        font-weight: bold;
+    }
+
+
+    a:visited {
+        color: lighten(@link-color, 15%);
+    }
+
+    a.summary-link {
+
+        display: block;
+        color: @brand-orange;
+        font-size: @font-size-small;
+
+        i {
+            .transition(.25s linear);
+        }
+
+        &.collapsed {
+            i {
+                .rotate(-90deg);
+            }
+        }
+    }
+
+    .summary-detail {
+
+        .well {
+            margin-top: (@line-height-computed / 2);
+        }
+
+        h4:first-child {
+            margin-top: 0px;
+        }
+    }
+}
+
+// Small viewport variations
+// --------------------------------------------
+@media only screen and (max-width: @screen-sm) {
+
+    .section {
+        .panel-heading-bold {
+            .btn-round {
+                margin-top: 2px;
+                margin-bottom: 2px;
+            }
+        }
+        .panel-heading.center-vertical {
+            > * {
+                display: block;
+                margin-top: 8px;
+                width: 100%;
+                float: left;
+                padding-left: 0px;
+                .pull-right {
+                    .pull-left();
+                }
+            }
+            > *:first-child {
+                margin-top: 0px;
+            }
+        }
+
+        #title {
+            table.table-stats {
+                td {
+                    font-size: @font-size-small;
+                    padding: 3px 5px;
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and (max-width: @screen-md) {
+    .section {
+        .text-list {
+
+            // Shift the status to next to the toh
+            .row {
+                position: relative;
+            }
+
+            .translation-status {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+            }
+        }
+    }
+}
+

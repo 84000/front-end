@@ -16,6 +16,7 @@ body {
     background-image: url(/imgs/background-pattern.svg);
     background-size: 40px 40px;
     position: relative;
+    line-height: 1.6;
 
     @media only screen and (max-width: @screen-sm) {
 
@@ -28,10 +29,26 @@ body {
     }
 }
 
+// Title variations 
+// ---------------------------------------------
+h1, .h1 {
+    color: @brand-red;
+    font-family: @font-family-bold;
+}
+
+// Link styles 
+// ---------------------------------------------
 a {
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+p {
+    a {
+        text-decoration: underline;
+        font-weight: inherit;
+    }
+}
+
 
 // Footer
 // -------------------------------------------
@@ -100,6 +117,36 @@ body.wait > #wait{
     background-color: @brand-red;
 }
 
+// Text classes 
+// ---------------------------------------------
+.name {
+    font-weight: bold;
+    font-style: italic;
+}
+.title {
+    font-style: italic;
+}
+.foreign {
+    font-style: italic;
+}
+.text-bo {
+    font-family:"Tibetan" !important;
+    line-height: 2em;
+}
+.text-sa, .text-wy {
+    font-family: @font-family-serif !important;
+}
+.text-zh {
+    font-style: normal !important;
+}
+.text-right {
+    text-align: right;
+}
+.mark {
+    padding: 0px;
+    .box-shadow(0px 0px 0px 2px @state-warning-bg);
+}
+
 // Brand header & Nav
 // ----------------------------------------
 .tag-line {
@@ -132,26 +179,26 @@ i.fa-google-plus-square {
     color: @brand-red;
 }
 
-// Text
-// -------------------------------------------------
-.text-bo {
-    font-family:"Tibetan" !important;
-    line-height: 2em;
-}
-.text-sa, .text-wy {
-    font-family: @font-family-serif !important;
-}
-.text-zh {
-    font-style: normal !important;
-}
-.text-right {
-    text-align: right;
-}
-
 // Badges
 // -------------------------------------------------
 .badge {
     font-family: @font-family-sans-serif;
+}
+
+// Notification badge
+// --------------------------------------------
+.badge-notification {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 6px 0px;
+    z-index: 10;
+    .transition(.75s ease-out);
+    &.pulse {
+        background-color: @brand-red-alert;
+        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
+    }
 }
 
 // Debug for environment
@@ -542,6 +589,13 @@ i.fa-google-plus-square {
     }
 }
 
+// Nav tabs 
+// -------------------------------------------
+.nav-tabs {
+    margin-bottom: 15px;
+}
+
+
 // Sharing 
 // -------------------------------------------
 .sharing {
@@ -724,6 +778,300 @@ a#link-to-top {
     }
 }
 
+
+// Big panel headings
+// ----------------------------------
+.panel-heading {
+
+    width: 100%;
+
+    .bookmark-button {
+
+        text-align: right;
+
+        a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            font-size: @font-size-large;
+            line-height: 20px;
+            padding: 5px 0px;
+            text-align: center;
+            background-color: @brand-red;
+            color: #fff;
+            .transition(.25s ease-in);
+            &:hover {
+                background-color: #fff;
+                color: @brand-red;
+            }
+        }
+    }
+
+    .breadcrumb {
+        margin-bottom: 0px;
+        padding: 0px;
+        > li + li:before {
+            padding: 0 5px 0 10px;
+        }
+        a {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+.panel-default {
+    .panel-heading-bold {
+
+        width: 100%;
+        background-color: @brand-red;
+        padding: @panel-heading-padding;
+        //line-height: 23px;
+
+        &, a, li {
+            color: #fff;
+        }
+
+        .title {
+            font-size: @font-size-large;
+            font-family: @font-family-bold;
+            font-style: normal;
+        }
+
+        .label {
+            margin-left: 8px;
+        }
+
+    }
+
+    .panel-heading-danger {
+        background-color: @brand-red-alert;
+    }
+
+    @media only screen and (max-width: @screen-sm) {
+        margin: 0px;
+        border-bottom: 1px solid @gray-border-color;
+        .box-shadow(none);
+        //padding-bottom: 40px;
+    }
+}
+
+
+// Pop-up footer for notes and glossary
+// ------------------------------------
+.fixed-footer {
+
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right: 0px;
+    background-color: #fff;
+    border-top: 1px solid @hr-border;
+    z-index: 5;
+
+    .container {
+        position: relative;
+        > .panel {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: (@line-height-computed / 2);
+            padding-bottom: @line-height-computed;
+            > .panel-body {
+                padding-bottom: 0px;
+                padding-top: 0px;
+            }
+        }
+    }
+    .fix-height {
+        overflow: auto;
+        min-height: 70px;
+    }
+    .glossary-item {
+        margin-bottom: 0px;
+    }
+}
+
+
+
+// Pop-out sidebar for contents and bookmarks
+// ------------------------------------------
+.fixed-sidebar {
+
+    position:fixed;
+    bottom:0px;
+    top:0px;
+    right: 0px;
+    background-color: #fff;
+    border-left: 1px solid @hr-border;
+    height: 100%;
+    overflow: auto;
+    z-index: 9;
+
+    .container {
+        position: relative;
+        padding: 20px;
+    }
+
+    .fix-width {
+        overflow: auto;
+        margin-right: 70px;
+    }
+
+    h4 {
+        margin-top: 0px !important;
+        margin-bottom: 6px !important;
+    }
+
+}
+
+@media only screen and (max-width: @screen-sm) {
+    .fixed-footer {
+        .container {
+            position: relative;
+            > .panel {
+                .box-shadow(none);
+            }
+        }
+    }
+    .fixed-sidebar {
+        .fix-width {
+            margin-right: 50px;
+        }
+    }
+    
+}
+
+// Remove bookmark button
+// ---------------------------------
+.remove-bookmark {
+    color: @brand-red-alert !important;
+    &:hover {
+        color: darken(@brand-red-alert, 15%) !important;
+    }
+}
+
+// A panel for a section of a canon
+// --------------------------------------------
+.section-panel {
+
+    display: block;
+    margin: 20px 0px;
+    padding: 10px;
+    text-align: center;
+    background: 
+        url(/imgs/ornament/title-ornament.svg) no-repeat top center, 
+        url(/imgs/ornament/title-corner-top-left.svg) no-repeat top left, 
+        url(/imgs/ornament/title-corner-top-right.svg) no-repeat top right, 
+        url(/imgs/ornament/title-corner-bottom-left.svg) no-repeat bottom left, 
+        url(/imgs/ornament/title-corner-bottom-right.svg) no-repeat bottom right, 
+        url(/imgs/ornament/title-top.svg) repeat-x top center, 
+        url(/imgs/ornament/title-top.svg) repeat-x bottom center, 
+        url(/imgs/ornament/title-sides.svg) repeat-y top left, 
+        url(/imgs/ornament/title-sides.svg) repeat-y top right;
+    background-size: 50px, 18px, 18px, 18px, 18px, 50px, 50px, 6px, 6px;
+    background-color: #fff;
+
+    .block-link:hover {
+
+        text-decoration: none;
+
+        h3 {
+            text-decoration: underline;
+        }
+    }
+
+    > div {
+        .clearfix();
+    }
+
+    a > * {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        color: @brand-blue;
+        border-bottom: 1px solid @panel-inner-border;
+    }
+
+    a > h3 {
+        font-weight: bold;
+        margin-top: 15px;
+        color: @brand-blue;
+    }
+
+    .notes {
+
+        color: @text-muted;
+        font-size: @font-size-small;
+        margin-bottom: 0px;
+        border-bottom: 0px;
+    }
+
+    .footer {
+
+        margin: 0px -10px -10px -10px;
+        padding: 0px;
+        background-color: #fff;
+        font-family: @font-family-sans-serif;
+        font-size: @font-size-small;
+
+        > table {
+
+            background-color: @brand-orange;
+            color: #fff;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            margin-bottom: 0px;
+
+            th {
+                text-align: left;
+                padding-left: 10px;
+                font-weight: normal;
+            }
+            td {
+                text-align: right;
+            }
+
+            th, td {
+                border-color: darken(@brand-orange, 10%);
+                line-height: 1.1;
+            }
+
+        }
+    }
+
+    &.pseudo-section {
+        .footer {
+            > table {
+                background-color: #dedede;
+                th, td {
+                    border-color: darken(#dedede, 10%);
+                    color: @text-color;
+                }
+            }
+        }
+    }
+        
+}
+
+// Header Alert
+// ---------------------------------------------
+#page-alert {
+    background-color: @brand-green;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 7;
+    .text-center();
+    padding: 10px 15px 25px 15px;
+    &, a {
+        color: #fff;
+    }
+    .close {
+        background-color: #fff;
+        color: @brand-green;
+        box-shadow: 0px 0px 4px @brand-green;
+    }
+}
 
 // Print variations
 // All styles should default to desktop/screen

@@ -65,6 +65,7 @@ h3, .milestone-h3 {
 // ---------------------------------------------
 table.contents-table {
     tr {
+        vertical-align: top;
         break-inside: auto;
         page-break-inside: auto;
     }
@@ -519,7 +520,7 @@ table.contents-table {
 // Different styles for the editors
 // ---------------------------------------------
 .editor-mode {
-    &.reading-room.translation {
+    &.translation {
         a.footnote-link, a.glossary-link {
             color: inherit;
             border-bottom-color: @brand-red-alert !important;
@@ -637,7 +638,7 @@ table.contents-table {
                 font-size: 12pt;
             }
         }
-        a.ref[href]:after {
+        a.ref[href]:after, .visible-print-block a:after {
             content: "";
         }
     }
@@ -819,6 +820,9 @@ table.contents-table {
                 padding-left: 7px;
             }
         }
+        .fa-cloud-download {
+            font-size: 30px;
+        }
         .text-overlay {
             position: relative;
             .text.divided {
@@ -899,8 +903,6 @@ table.contents-table {
             td {
                 padding-top: 0px;
                 border: 0px;
-                font-family: @font-family-sans-serif;
-                color: @text-muted;
             }
         }
 

@@ -61,35 +61,6 @@ h3, .milestone-h3 {
     }
 }
 
-// Contents table
-// ---------------------------------------------
-table.contents-table {
-    tr {
-        vertical-align: top;
-        break-inside: auto;
-        page-break-inside: auto;
-    }
-    td {
-        //vertical-align: top;
-        padding: 4px 6px 4px 0px;
-        break-inside: auto;
-        page-break-inside: auto;
-    }
-    tfoot {
-        border-top: 1px solid @hr-border;
-        td {
-            font-style: italic;
-            color: @text-muted;
-        }
-    }
-}
-.fixed-sidebar {
-    table.contents-table {
-        margin-bottom: 20px;
-    }
-
-}
-
 // Translation specific styles
 // ---------------------------------------------
 .translation {
@@ -917,7 +888,6 @@ table.contents-table {
         &.progress {
             border-spacing: 2px;
             border-collapse: separate;
-            margin-top: @line-height-computed;
             tr {
                 > td {
                     border-top-width: 0px;

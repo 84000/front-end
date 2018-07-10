@@ -17,6 +17,12 @@ label, .label {
     }
 }
 
+.radio,
+.checkbox {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .btn {
     font-family: @font-family-heading;
     font-size: @font-size-small;
@@ -113,5 +119,13 @@ mark, .mark {
 .event-hover {
   @media (hover: hover) {
     .responsive-visibility();
+  }
+}
+
+ul,
+ol {
+  ul,
+  ol {
+    margin-bottom: (@line-height-computed / 2);
   }
 }

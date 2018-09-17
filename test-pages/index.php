@@ -19,14 +19,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="84000 is a non-profit global initiative to translate the words of the Buddha and make them available to everyone.">
         <title>84000 | Translating the Words of the Buddha</title>
-        <link href="/css/84000-wordpress.css" rel="stylesheet">
+        <link href="/css/84000-comms.css" rel="stylesheet">
         <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
         <link href="/js/lightbox2-master/src/css/lightbox.css" rel="stylesheet">
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>

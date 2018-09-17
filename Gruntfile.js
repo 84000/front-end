@@ -19,6 +19,7 @@ module.exports = function(grunt) {
           '<%= pkg.bootstrapJs %>/tooltip.js',
           '<%= pkg.bootstrapJs %>/popover.js',
           '<%= pkg.bootstrapJs %>/affix.js',
+          '<%= pkg.bootstrapJs %>/dropdown.js',
         	'js/84000.js',
         	'js/ie10-viewport-bug-workaround.js'
        	],
@@ -26,12 +27,12 @@ module.exports = function(grunt) {
       }
     },
     less: {
-  		wordpress: {
+  		comms: {
   			options: {
   		    compress: true
   		  },
   			files: {
-  				'css/84000-wordpress.css': 'less/bootstrap-wordpress.less'
+  				'css/84000-comms.css': 'less/bootstrap-comms.less'
   			}
   		},
       readingRoom: {
@@ -50,7 +51,7 @@ module.exports = function(grunt) {
       },
       less: {
         files: 'less/**/*.less',
-        tasks: ['less:wordpress', 'less:readingRoom']
+        tasks: ['less:comms', 'less:readingRoom']
       }
     }
   });
@@ -59,6 +60,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['uglify', 'less:wordpress', 'less:readingRoom', 'watch']);
+  grunt.registerTask('default', ['uglify', 'less:comms', 'less:readingRoom', 'watch']);
 
 };

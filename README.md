@@ -10,6 +10,7 @@ Thanks to:
 * [JavaScript Cookie](https://github.com/js-cookie/js-cookie)
 * [Ben Alman - jQuery replaceText](https://github.com/cowboy/jquery-replacetext)
 * [Chris Fynn - Tibetan font](https://sites.google.com/site/chrisfynn2/home/fonts/ddc-uchen)
+* [John Smith - IndUni font](http://bombay.indology.info/)
 
 
 Also thanks to BrowserStack for sponsoring us with an open source license.

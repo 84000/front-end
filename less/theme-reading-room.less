@@ -59,6 +59,7 @@ h3, .milestone-h3 {
     .popover-title {
         margin: 0px;
     }
+    
 }
 
 // Translation specific styles
@@ -229,7 +230,7 @@ h3, .milestone-h3 {
         }
 
         #long-titles {
-            margin-bottom: 120px;
+            margin: 0px 30px 120px 30px;
             .clearfix();
         }
 
@@ -503,75 +504,6 @@ h3, .milestone-h3 {
     }
 }
 
-// Screen variations
-// All styles should default to desktop/screen
-// except ...
-// -------------------------------------------
-
-@media screen {
-
-    section, aside {
-
-        > .render-in-viewport {
-            display: none;
-        }
-
-        > .unrendered-preview {
-            .fade-out(80px);
-            a {
-                border-bottom: 0 !important;
-                color: inherit !important;
-                text-decoration: none !important;
-            }
-        }
-
-        a.render, a.preview {
-            position: absolute;
-            z-index: 4;
-            text-align: center;
-            margin-top: 0px !important; // in case it occurs after a .space
-        }
-
-        a.render {
-            bottom: -(@btn-round-size / 2);
-            left: 0px;
-            right: 0px;
-            margin-left: @text-gtr-width;
-            .btn-round {
-                background-color: #fff;
-                border: 1px solid @brand-red;
-                i {
-                    color: @brand-red;
-                }
-            }
-        }
-        
-        a.preview {
-            position: absolute;
-            top: -@btn-round-size;
-            right: -@btn-round-size;
-            .btn-round {
-                background-color: #ccc;
-                i {
-                    color: #fff;
-                }
-            }
-        }
-
-    }
-
-    // Render everything in editor mode
-    // -------------------------------------
-    .editor-mode {
-        section, aside {
-            > .render-in-viewport {
-                display: block;
-            }
-        }
-    }
-
-}
-
 // Print variations
 // All styles should default to .screen.desktop
 // --------------------------------------------
@@ -611,6 +543,10 @@ h3, .milestone-h3 {
         }
         a.ref[href]:after, .visible-print-block a:after {
             content: "";
+        }
+        a.footnote-number {
+            text-decoration: none;
+            border-bottom: 1px dashed lighten(@link-color, 20%);
         }
     }
 
@@ -760,6 +696,10 @@ h3, .milestone-h3 {
 // ----------------------------------------
 .utilities {
 
+    .control-label {
+        text-align: left;
+    }
+
     fieldset {
         border-color: @legend-border-color;
     }
@@ -767,12 +707,6 @@ h3, .milestone-h3 {
     legend {
         color: @legend-color;
         padding: 8px;
-    }
-
-    label {
-        font-family: @font-family-serif;
-        font-size: @font-size-base;
-        line-height: 1.1;
     }
 
     #translation-search {
@@ -827,11 +761,9 @@ h3, .milestone-h3 {
         .mark {
             text-decoration: none;
             background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.5);
-            color: darken(@brand-orange, 20%);
             .box-shadow(none);
             &.bold {
                 background-color: rgba(red(@brand-green), green(@brand-green), blue(@brand-green), 0.5);
-                color: darken(@brand-green, 20%);
             }
         }
         .unit {
@@ -845,33 +777,16 @@ h3, .milestone-h3 {
         }
     }
 
-    .search-result {
-
-        padding-top: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid @hr-border;
-
-        &:last-child {
-            border-bottom: 0px;
-        }
-
-        .translation {
-            padding-left: 15px;
-            border-left: 5px solid @hr-border;
-        }
-
-    }
-
     .table {
         
         tr.header {
-            td {
+            > td {
                 color: @brand-red;
                 font-weight: bold;
             }
         }
         tr.sub {
-            td {
+            > td {
                 padding-top: 0px;
                 border: 0px;
             }
@@ -930,73 +845,102 @@ h3, .milestone-h3 {
         }
     }
 
-    #cumulative-glossary {
+    .col-items, .col-nav {
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding-left: floor((@grid-gutter-width / 2));
+        padding-right: floor((@grid-gutter-width / 2))
+    }
+
+    .col-items {
+        width: 95%;
+        > * {
+            margin-left: 40px;
+            position: relative;
+        }
+        a.marker {
+            position: absolute;
+            left: -40px;
+            top: 8px;
+            color: #fff;
+            background-color: #aaa;
+            text-decoration:none;
+            padding: 1px 8px;
+            border-radius:4px;
+            font-family: @font-family-heading
+        }
+    }
+    .col-nav {
+        width: 5%;
+    }
+
+    .div-list {
 
         position: relative;
 
-        .col-items, .col-nav {
-            float: left;
+        .item {
+            border-top: 1px solid @hr-border;
+            padding: (@line-height-computed / 2) 0px;
             position: relative;
-            min-height: 1px;
-            padding-left: floor((@grid-gutter-width / 2));
-            padding-right: floor((@grid-gutter-width / 2))
-        }
-
-        .col-items {
-            width: 95%;
-        }
-        .col-nav {
-            width: 5%;
-        }
-
-        #milestone-list .affix {
-            top: 20px;
-        }
-
-        .glossary-term {
-
-            border-bottom: 1px solid @hr-border;
-            margin-bottom: (@line-height-computed / 2);
-            margin-left: 40px;
-            position: relative;
-
-             a.milestone {
-                position: absolute;
-                left: -40px;
-                top: 0px;
-                color: #fff;
-                background-color: #aaa;
-                text-decoration:none;
-                padding: 1px 8px;
-                border-radius:4px;
+            &:first-child {
+                border-top: 0px;
+                .filter-form {
+                    margin-top: -(@line-height-computed / 2);
+                }
             }
-
-        }
-
-        .glossary-item {
-            .title {
-                //margin-top:16px;
-                margin-bottom:8px;
+            .name {
+                display: block;
+            }
+            .name + .row {
+                margin-top: (@line-height-computed / 2);
+            }
+            ul {
+                margin-bottom: 0px;
             }
         }
+    }
 
-        > .row {
-            margin-bottom: 15px;
+    .pull-quote {
+        border-left: 5px solid @brand-red;
+        padding-left: floor((@grid-gutter-width / 2));
+        margin-bottom: (@line-height-computed / 2);
+        .title {
+            line-height: 1.2em;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
+        p {
+            font-size: @font-size-small;
+        }
+    }
+
+    #letters-nav .affix {
+        top: 20px;
+    }
+
+    #cumulative-glossary {
+
         .download-link {
             padding: @nav-link-padding;
             .pull-right();
         }
 
+        .glossary-item {
+            ul {
+                list-style-type: circle;
+                margin-top: 2px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .nav-pills {
+            margin-bottom: 8px;
+        }
+
     }
 
-    #sponsors-table {
-        li > i {
-            width: 22px;
-            text-align: center;
-            margin-right: 6px;
-        }
-    }
+    
 
 }
 
@@ -1008,11 +952,8 @@ h3, .milestone-h3 {
         text-align: center;
         .fa {
             margin: -3px;
+            font-size: 24px;
         }
-    }
-
-    .fa {
-        font-size: 24px;
     }
 
     .fa-check-circle {

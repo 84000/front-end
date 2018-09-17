@@ -1,6 +1,6 @@
 
 // ---------------------------------------- //
-// Styles relevant to the Wordpress theme
+// Styles relevant to the Comms site theme
 // ---------------------------------------- //
 
 // Title variations 
@@ -222,14 +222,20 @@ table#translation-stats {
             }
         }
         padding-left: 15px;
-        &.published {
+        &.green {
             border-left: 5px solid @brand-green;
         }
-        &.translated {
+        &.blue {
             border-left: 5px solid @brand-blue;
         }
-        &.commissioned {
+        &.orange {
             border-left: 5px solid @brand-orange;
+        }
+        &.red {
+            border-left: 5px solid @brand-red;
+        }
+        &.gray {
+            border-left: 5px solid @brand-gray;
         }
     }
 }
@@ -664,12 +670,15 @@ ul.responsive-tabs__list{
     .translation-options {
         .list-unstyled();
         > li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         i {
             width: 26px;
             text-align: left;
         }
+    }
+    .translation-status {
+         margin-bottom: 8px;
     }
 
     .panel-heading-bold {
@@ -685,6 +694,37 @@ ul.responsive-tabs__list{
         }
         p {
             text-align: justify;
+        }
+    }
+
+    #search-container
+    {
+        form {
+            margin-bottom: @line-height-computed;
+        }
+        .search-result {
+            position: relative;
+            .row {
+                margin-bottom: 12px;
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
+            .search-match {
+                display: block;
+                border-left: 1px solid #ddd;
+                padding-left: 15px;
+                text-decoration: none;
+                &:hover {
+                    background-color: #eee;
+                }
+            }
+            a.render {
+                bottom: 10px;
+            }
+        }
+        a.preview {
+            top: 6px;
         }
     }
 
@@ -753,18 +793,19 @@ ul.responsive-tabs__list{
 
     .list-item {
             
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
 
         hr {
-            margin-top:    10px;
-            margin-bottom: 10px;
+            margin-top:    8px;
+            margin-bottom: 8px;
         }
 
         h4 {
-            margin-top: 4px;
+            margin-top: 0px;
             margin-bottom: 8px;
             color: @text-color;
+            font-weight: bold;
         }
 
         .title-en, a.title {
@@ -798,15 +839,6 @@ ul.responsive-tabs__list{
         color: @brand-orange;
         font-size: @font-size-small;
 
-        i {
-            .transition(.25s linear);
-        }
-
-        &.collapsed {
-            i {
-                .rotate(-90deg);
-            }
-        }
     }
 
     .summary-detail {
@@ -819,6 +851,7 @@ ul.responsive-tabs__list{
             margin-top: 0px;
         }
     }
+
 }
 
 // Small viewport variations
@@ -882,4 +915,3 @@ ul.responsive-tabs__list{
         }
     }
 }
-

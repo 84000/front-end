@@ -63,6 +63,10 @@ hr.no-margin {
     .box-shadow(none);
 }
 
+.margin-top-sm {
+    margin-top: 5px;
+}
+
 table {
     td, th {
         &.nowrap {
@@ -147,6 +151,10 @@ p.date {
             padding-left: 0 !important;
         }
 
+        &.nowrap {
+            white-space: nowrap;
+        }
+
     }
 
     &.together {
@@ -165,6 +173,46 @@ a.center-vertical {
     > i {
         font-size: 30px;
     }
+}
+.top-vertical {
+
+    .adjacent-panels();
+    width: 100%;
+
+    > span, > a {
+
+        vertical-align: top;
+        padding-left: 15px;
+
+        &:first-child {
+            padding-left: 0 !important;
+        }
+
+        &:last-child {
+            text-align: right;
+        }
+
+    }
+}
+
+.break {
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+
+}
+
+span.nowrap {
+    white-space: pre;
 }
 
 // Merge columns
@@ -197,6 +245,10 @@ a.center-vertical {
 
     .col-md-pad-top {
         padding-top: 20px;
+    }
+
+    .text-md-right {
+        text-align: right;
     }
 
 }

@@ -7,10 +7,15 @@ jQuery(document).ready(function($) {
 		$.wait = function (text, cancel) {
 			var $body = self==top ? $("body") : window.parent.$("body");
 			if(cancel){
-				$("#wait").fadeOut(500, function(){
-					$(this).remove();
+				if($("#wait").length){
+					$("#wait").fadeOut(500, function(){
+						$(this).remove();
+						$body.removeClass("wait");
+					});
+				}
+				else {
 					$body.removeClass("wait");
-				});
+				}
 			}
 			else{
 			    if(!$body.hasClass("wait")){
@@ -26,6 +31,7 @@ jQuery(document).ready(function($) {
 			}
 		}
 	}($));
+	$.wait("", true);
 
 	// Use cache for loading scripts
 	// ---------------------------------
@@ -421,14 +427,20 @@ jQuery(document).ready(function($) {
 	// -----------------------------------------
 	(function ($) { 
 		$.scrollToAnchor = function (hash, delay, parent, offset, callback) {
+
 			if(!legacyLink() && $("html.screen").length) {
+
 				var $target;
 				if(!hash) hash = window.location.hash;
 				if(hash) $target = $(hash);
+
 				if($target){
+
+					// Compile the scroll function, with callback.
+					// -------------------------------------------
 					if(!delay) delay = 0;
 					if(!parent) parent = "html, body";
-					var $unrendered = $target.closest(".render-in-viewport");
+
 					var scrollToAnchorScroll = function(){
 						if(!offset) offset = $target.offset();
 						if(offset){
@@ -440,14 +452,34 @@ jQuery(document).ready(function($) {
 							}
 						}
 					}
-					if($unrendered.length){
+
+					// The content may be hidden. Show it first.
+					// -----------------------------------------
+					var $collapsed = $target.closest(".collapse");
+					var $unrendered = $target.closest(".render-in-viewport");
+					var $tabbed = $('[href="#'+$target.closest(".tab-pane").attr('id')+'"]');
+					
+					if($collapsed.length){
+						$collapsed.on('shown.bs.collapse', function () {
+							scrollToAnchorScroll();
+						});
+						$collapsed.collapse('show');
+					}
+					else if($unrendered.length){
 						$unrendered.render(function(){
 							scrollToAnchorScroll();
 						});
 					}
+					else if($tabbed.length){
+						$tabbed.on('shown.bs.tab', function () {
+							scrollToAnchorScroll();
+						});
+						$tabbed.tab('show');
+					}
 					else {
 						scrollToAnchorScroll();
 					}
+
 				}
 				else {
 					if(callback){
@@ -1417,7 +1449,7 @@ jQuery(document).ready(function($) {
         	$.wait("Loading the source text...");
 	    	setTimeout(function(){
 	    		$.get(source, function(data) {
-	        		$(target).html(data);
+	        		$(target).html($(data).find('.ajax-data > *'));
 	                $popupFooter.collapse('show');
 	            });
 	        	$.wait("", true);
@@ -1488,6 +1520,16 @@ jQuery(document).ready(function($) {
     });
 
     // Add behaviour...
+    // Submit form on click
+    // ----------------------------------------------------------------- 
+    $(document).on("click","form .on-click-submit", function(e){
+    	e.preventDefault();
+    	var $this = $(this);
+    	var $form = $this.parents("form");
+	    $form.attr("action", $this.attr("href")).find('input[type="submit"]').click();
+	});
+
+    // Add behaviour...
     // Submit form on mouseup
     // ----------------------------------------------------------------- 
 	$(document).on("mouseup", "[data-mouseup-submit]", function() {
@@ -1542,7 +1584,6 @@ jQuery(document).ready(function($) {
     	var $this = $(this);
 		var values = $this.data("onclick-mark");
 		var keys = Object.keys(values);
-
 		for(var i=0; i<keys.length; i++){
 			var $target = $(keys[i]);
 			var $value = $(values[keys[i]]);
@@ -1670,7 +1711,6 @@ jQuery(document).ready(function($) {
 	// Scroll to the hash location
 	// -------------------------------------------
 	$.scrollToAnchor(window.location.hash, 0, null, null, function(){
-		
 		// Add callback...
 		// Show the last location option on loading the page
 		// --------------------------------------------------
@@ -1720,10 +1760,12 @@ jQuery(document).ready(function($) {
 		$(this).popover(options).popover("show");
 	});
 
-	$("#milestone-list [data-spy='affix']").affix({
+	// Affix nav
+	// ------------------------------------------
+	$("#letters-nav [data-spy='affix']").affix({
 		offset: {
 			top: function () {
-		    	return $("#milestone-list").offset().top;
+		    	return $("#letters-nav").offset().top;
 		    },
 			bottom: function () {
 		    	return (this.bottom = $('body > footer').outerHeight(true) + 20);

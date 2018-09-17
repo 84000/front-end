@@ -125,6 +125,9 @@ body.wait > #wait{
 }
 .title {
     font-style: italic;
+    .label {
+        font-style: normal;
+    }
 }
 .foreign {
     font-style: italic;
@@ -142,8 +145,16 @@ body.wait > #wait{
 .text-right {
     text-align: right;
 }
+.small-plain {
+    font-family: @font-family-heading;
+    font-size: @font-size-small;
+}
+.underline {
+    text-decoration: underline;
+}
 .mark {
     padding: 0px;
+    color: #000;
     .box-shadow(0px 0px 0px 2px @state-warning-bg);
 }
 
@@ -177,6 +188,17 @@ i.fa-youtube-square {
 
 i.fa-google-plus-square {
     color: @brand-red;
+}
+
+a {
+    i.fa-chevron-down {
+        .transition(.25s linear);
+    }
+    &.collapsed {
+        i.fa-chevron-down {
+            .rotate(-90deg);
+        }
+    }
 }
 
 // Badges
@@ -214,6 +236,14 @@ i.fa-google-plus-square {
     font-size: @font-size-small;
     font-family: @font-family-sans-serif;
     border-bottom-right-radius: 4px;
+}
+
+// Indent with a left border
+// -------------------------------------------------
+span.indent {
+    border-left: 1px solid @table-border-color;
+    padding-left: @grid-gutter-width / 2;
+    display: inline-block;
 }
     
 // Navbar
@@ -393,6 +423,13 @@ i.fa-google-plus-square {
     .navbar-form {
         position: relative;
         z-index: 2;
+
+        > #search-controls {
+            button {
+                padding: 7px 12px;
+                height: 36px;
+            }
+        }
     }
 
     // Mobile nav variations
@@ -447,6 +484,10 @@ i.fa-google-plus-square {
                 border-color: @brand-orange;
                 padding: 6px 10px;
                 width: 100%;
+                .dropdown-menu {
+                    left: auto;
+                    right: 0;
+                }
             }
 
         }
@@ -657,6 +698,13 @@ i.fa-google-plus-square {
         background: @brand-red;
         &:hover {
             background-color: darken(@brand-red, 10%);
+        }
+    }
+
+    &.green {
+        background: @brand-green;
+        &:hover {
+            background-color: darken(@brand-green, 10%);
         }
     }
 
@@ -919,6 +967,7 @@ a#link-to-top {
     }
 
     h4 {
+        color: @text-color;
         margin-top: 0px !important;
         margin-bottom: 6px !important;
     }
@@ -1109,6 +1158,99 @@ table.contents-table {
 .fixed-sidebar {
     table.contents-table {
         margin-bottom: 20px;
+    }
+
+}
+
+.search-result {
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid @hr-border;
+
+    &:last-child {
+        border-bottom: 0px;
+    }
+
+    .title {
+        font-size: @font-size-h3;
+        line-height: 1.3em;
+        padding-bottom: 8px;
+    }
+
+    .translation {
+        padding-left: 15px;
+        border-left: 5px solid @hr-border;
+    }
+
+}
+
+
+// Screen variations
+// All styles should default to desktop/screen
+// except ...
+// -------------------------------------------
+
+@media screen {
+
+    section, aside {
+
+        > .render-in-viewport {
+            display: none;
+        }
+
+        > .unrendered-preview {
+            .fade-out(80px);
+            a {
+                border-bottom: 0 !important;
+                color: inherit !important;
+                text-decoration: none !important;
+            }
+        }
+
+        a.render, a.preview {
+            position: absolute;
+            z-index: 4;
+            text-align: center;
+            margin-top: 0px !important; // in case it occurs after a .space
+        }
+
+        a.render {
+            bottom: -(@btn-round-size / 2);
+            left: 0px;
+            right: 0px;
+            margin-left: @text-gtr-width;
+            .btn-round {
+                background-color: #fff;
+                border: 1px solid @brand-red;
+                i {
+                    color: @brand-red;
+                }
+            }
+        }
+        
+        a.preview {
+            position: absolute;
+            top: -@btn-round-size;
+            right: -@btn-round-size;
+            .btn-round {
+                background-color: #ccc;
+                i {
+                    color: #fff;
+                }
+            }
+        }
+
+    }
+
+    // Render everything in editor mode
+    // -------------------------------------
+    .editor-mode {
+        section, aside {
+            > .render-in-viewport {
+                display: block;
+            }
+        }
     }
 
 }

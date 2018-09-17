@@ -2,19 +2,31 @@
 // ---------------------------------------- //
 // General variations from bootstrap
 // ---------------------------------------- //
+.container .container {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+}
 
 p {
     a {
         font-weight: bold;
     }
+    &:last-child {
+        margin-bottom: 0px;
+    }
 }
 
 label, .label {
     font-weight: normal;
+    font-family: @font-family-heading;
     &.label-lg {
         font-size: 1em;
         padding: .2em .5em;
     }
+}
+.label + .label, a + .label {
+    margin-left: 5px;
 }
 
 .radio,
@@ -25,14 +37,18 @@ label, .label {
 
 .btn {
     font-family: @font-family-heading;
-    font-size: @font-size-small;
+    font-size: 13px;
     padding: 8px 12px;
     text-transform: uppercase;
     white-space: normal;
     .transition(.5s ease-in);
     i {
         font-size: @btn-icon-size;
-        display: block;
+        display: inline-block;
+    }
+    .caret {
+        display: inline-block;
+        margin-left: 10px;
     }
 }
 
@@ -44,6 +60,10 @@ label, .label {
 
 p.form-control {
     height: auto;
+}
+
+fieldset {
+    margin-bottom: @form-group-margin-bottom;
 }
 
 .close {
@@ -59,6 +79,10 @@ p.form-control {
 
 .breadcrumb > li > a {
     white-space: nowrap;
+}
+
+.dropdown-menu>li>a {
+    padding: 5px 20px;
 }
 
 // Panel variations
@@ -128,4 +152,16 @@ ol {
   ol {
     margin-bottom: (@line-height-computed / 2);
   }
+}
+
+.well{
+    hr {
+        border-top-color: @well-border;
+    }
+} 
+
+@media print {
+    a.printable[href]:after {
+        content: "";
+    }
 }

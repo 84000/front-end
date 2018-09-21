@@ -314,14 +314,14 @@ h3, .milestone-h3 {
         }
 
         // Space some sections
-        h2+*, // paragraph after a header
+        h2+*,               // paragraph after a header
         h3+*, 
         h4+*, 
-        br+*, // paragraph after a break
-        .space, // element marked as space
-        .space+*, // element after element marked as space
-        .space-after+*, // element after element marked as space-after
-        .milestone-space 
+        br+*,               // paragraph after a break
+        .space,             // element marked as space
+        .space+*,           // element after element marked as space
+        .space-after+*,     // element after element marked as space-after
+        .milestone-space    // class to apply space to milestones too
         {
             margin-top: @line-height-computed;
         }
@@ -333,9 +333,11 @@ h3, .milestone-h3 {
         h3+.rw > p, 
         h4+.rw > p, 
         br+.rw > p,
-        .space > p, // A paragraph in a spaced section 
-        .space+.rw > p, // The paragraph after a spaced section
-        .space-after+.rw > p, // The paragraph after a spaced section
+        .space > p,             // A paragraph in a spaced section 
+        .space+.rw > p,         // The paragraph after a spaced section
+        .space-after+.rw > p,   // The paragraph after a spaced section
+        .rw-heading+.rw > p,    // The paragraph after a row heading
+        .rw-label+.rw > p,      // The paragraph after a row label
         .footnote-number {
             text-indent: 0;
         }
@@ -364,28 +366,46 @@ h3, .milestone-h3 {
         }
 
         .list {
+
+            // Cancel vertical spacing on list content, apply to list item instead
+            // -------------------------------------------------------------------
             p, .section-label {
                 margin-top: 0;
                 margin-bottom: 0;
             }
-            .list-item {
+
+            // Bullet lists have horizontal spacing
+            // --------------------------------------------------
+            &.list-bullet > .rw > .list-item {
+                margin-top: (@line-height-computed / 2);
                 p, .section-label {
                     padding-left: @line-height-computed;
                 }
-                .list-item {
+                .list-bullet > .rw > .list-item {
                     p, .section-label {
                         padding-left: (@line-height-computed * 2);
                     }
-                    .list-item {
+                    .list-bullet > .rw > .list-item {
                         p, .section-label {
                             padding-left: (@line-height-computed * 3);
                         }
-                        .list-item {
+                        .list-bullet > .rw > .list-item {
                             p, .section-label {
                                 padding-left: (@line-height-computed * 4);
                             }
                         }
                     }
+                }
+            }
+
+            // Section lists have vertical spacing
+            // --------------------------------------------------
+            &.list-section {
+                > .rw {
+                    margin-top: @line-height-computed;
+                }
+                 > .rw.first-child , > .rw.rw-heading + .rw {
+                    margin-top: 0;
                 }
             }
         }

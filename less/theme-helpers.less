@@ -44,6 +44,28 @@ a.disabled {
 
 a.warning {
     color: @brand-red;
+    padding: @padding-base-vertical;
+    border-radius: @border-radius-base;
+    text-decoration: none;
+    font-size: 14px;
+    vertical-align: bottom;
+    &:hover {
+        text-decoration: underline;
+    }
+    i {
+        font-size: 22px;
+        vertical-align: middle;
+    }
+}
+
+.modal-content {
+    &, p, .modal-title {
+        text-align: left !important;
+        color: initial !important;
+    }
+    p {
+        line-height: initial !important;
+    }
 }
 
 hr.no-margin {

@@ -201,6 +201,16 @@ a {
     }
 }
 
+// Danger well for tantra warnings
+// ----------------------------------
+.well.well-danger {
+    &, p {
+        color: #ffffff !important;
+    }
+    border-color: darken(@brand-red, 10%);
+    background-color: @brand-red;
+}
+
 // Badges
 // -------------------------------------------------
 .badge {
@@ -1039,13 +1049,6 @@ a#link-to-top {
             border-bottom: 1px solid @panel-inner-border;
         }
 
-    }
-
-    .warning {
-        i {
-            font-size: 22px;
-            vertical-align: bottom;
-        }
     }
 
     > div {

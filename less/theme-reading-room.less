@@ -368,48 +368,57 @@ h3, .milestone-h3 {
 
             // Bullet lists have horizontal spacing
             // --------------------------------------------------
-            &.list-bullet > .rw > .list-item {
-                margin-top: (@line-height-computed / 3);
-                p, .section-label {
-                    padding-left: @line-height-computed;
+            &.list-bullet > .rw {
+                .milestone {
+                    margin-top: 5px;
                 }
-                .list-bullet > .rw > .list-item {
+                > .list-item {
+                    margin-top: 5px;
+
                     p, .section-label {
-                        padding-left: (@line-height-computed * 2);
+                        padding-left: @line-height-computed;
                     }
                     .list-bullet > .rw > .list-item {
                         p, .section-label {
-                            padding-left: (@line-height-computed * 3);
+                            padding-left: (@line-height-computed * 2);
                         }
                         .list-bullet > .rw > .list-item {
                             p, .section-label {
-                                padding-left: (@line-height-computed * 4);
+                                padding-left: (@line-height-computed * 3);
                             }
                             .list-bullet > .rw > .list-item {
                                 p, .section-label {
-                                    padding-left: (@line-height-computed * 5);
+                                    padding-left: (@line-height-computed * 4);
                                 }
                                 .list-bullet > .rw > .list-item {
                                     p, .section-label {
-                                        padding-left: (@line-height-computed * 6);
+                                        padding-left: (@line-height-computed * 5);
+                                    }
+                                    .list-bullet > .rw > .list-item {
+                                        p, .section-label {
+                                            padding-left: (@line-height-computed * 6);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
+            } 
 
             // Section lists have vertical spacing
             // --------------------------------------------------
             &.list-section {
-                p, .section-label {
-                    padding-left: @line-height-computed / 2;
-                }
                 > .rw {
                     margin-top: @line-height-computed;
+                    // Try out indent on section list too.
+                    > .list-item {
+                        p, .section-label {
+                            padding-left: @line-height-computed / 2;
+                        }
+                    }
                 }
-                 > .rw.first-child , > .rw.rw-heading + .rw {
+                > .rw.first-child , > .rw.rw-heading + .rw {
                     margin-top: 0;
                 }
             }
@@ -441,6 +450,11 @@ h3, .milestone-h3 {
 
         .alternative {
             display: none;
+        }
+
+        hr {
+            margin-top: @line-height-computed / 2;
+            margin-bottom: @line-height-computed / 2;
         }
 
         .occurences {

@@ -748,9 +748,31 @@ h3, .milestone-h3 {
         padding: 8px;
     }
 
-    #translation-search {
-        .source {
-            margin-top: @line-height-computed / 2;
+    .text-overlay {
+        position: relative;
+        .text.divided {
+            position: relative;
+            span.section {
+                background-color: #fff;
+                color: #aaa;
+                padding: 3px 0px;
+                &.selected {
+                    background-color: #fff;
+                    color: @text-color;
+                }
+            }
+        }
+        .text.plain {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            z-index: 1;
+            background-color: transparent;
+            color: transparent;
+        }
+        .text-bo {
+            font-size: 14px;
         }
     }
 
@@ -767,33 +789,7 @@ h3, .milestone-h3 {
         .fa-cloud-download {
             font-size: 30px;
         }
-        .text-overlay {
-            position: relative;
-            .text.divided {
-                position: relative;
-                span.section {
-                    background-color: #fff;
-                    color: #aaa;
-                    padding: 3px 0px;
-                    &.selected {
-                        background-color: #fff;
-                        color: @text-color;
-                    }
-                }
-            }
-            .text.plain {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                right: 0px;
-                z-index: 1;
-                background-color: transparent;
-                color: transparent;
-            }
-            .text-bo {
-                font-size: 14px;
-            }
-        }
+        
         textarea.form-control {
             font-size: 1.4em;
         }

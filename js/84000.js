@@ -1561,7 +1561,7 @@ jQuery(document).ready(function($) {
 	}($));
 
     // Add behaviour...
-    // Highlight on load
+    // Replace on load
     // ----------------------------------------------------------------- 
 	$("[data-onload-replace]").each(function() {
 
@@ -1580,8 +1580,22 @@ jQuery(document).ready(function($) {
 
     });
 
+    // Add behaviour...
+    // Mark on load
+    // ----------------------------------------------------------------- 
+	$("[data-onload-mark]").each(function() {
+
+		var $this = $(this);
+		var $target = $($this.data("onload-mark"));
+		var text = $this.val();
+		if(text){
+			$target.replaceMatchesWithThis($("<span>", {"class": "mark"}).text(text));
+		}
+
+    });
+
 	// Add behaviour...
-	// Highlight on click
+	// Mark on click
 	// ---------------------------------------------------
 	$(document).on("click", "[data-onclick-mark]", function(e) {
 

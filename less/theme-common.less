@@ -135,6 +135,7 @@ body.wait > #wait{
 .text-bo {
     font-family:"Tibetan" !important;
     line-height: 2em;
+    font-style: normal !important;
 }
 .text-sa, .text-wy {
     font-family: @font-family-serif !important;
@@ -1123,6 +1124,21 @@ a#link-to-top {
         }
     }
         
+}
+
+.list {
+    &.list-bullet {
+        .list-item {
+            margin-top: 5px;
+            padding-left: @line-height-computed;
+        }
+    }
+    &.list-section {
+        .list-item {
+            margin-top: @line-height-computed;
+            padding-left: @line-height-computed / 2;
+        }
+    }
 }
 
 // Header Alert

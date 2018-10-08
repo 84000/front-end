@@ -610,16 +610,17 @@ ul.responsive-tabs__list{
     .title {
 
         text-align: center;
-        font-style: normal;
         margin-bottom: 25px;
 
         h1 {
             color: @brand-red;
             font-family: @font-family-bold;
+            font-style: normal;
         }
 
         p {
             color: @text-muted;
+            font-style: normal;
         }
 
         hr {
@@ -725,7 +726,7 @@ ul.responsive-tabs__list{
         border-top: 1px solid @table-border-color;
     }
 
-    .list-section {
+    .list-grouping {
 
         &.border {
             /*
@@ -809,6 +810,11 @@ ul.responsive-tabs__list{
         h4:first-child {
             margin-top: 0px;
         }
+
+        ul > li {
+            margin-bottom: 5px;
+        }
+
     }
 
 }

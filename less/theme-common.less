@@ -710,8 +710,8 @@ span.indent {
     }
 
     &.pulse {
-        background-color: @brand-red-alert;
-        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
+        background-color: #fff;
+        color: @brand-blue;
     }
 
     &.red {
@@ -776,6 +776,9 @@ span.indent {
     &#bookmarks-btn-container {
         top: (((@btn-round-size + @button-spacing-top) * 1) + @button-spacing-top);
     }
+    &#donate-btn-container {
+        top: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
+    }
     /*
     &#tts-btn-container {
         top: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
@@ -810,6 +813,11 @@ span.indent {
             top: auto;
             bottom: 15px;
             right: (((@btn-round-size + @button-spacing-top) * 1) + @button-spacing-top);
+        }
+        &#donate-btn-container {
+            top: auto;
+            bottom: 15px;
+            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
         }
         /*
         &#tts-btn-container {

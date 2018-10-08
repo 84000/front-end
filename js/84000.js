@@ -1779,6 +1779,17 @@ jQuery(document).ready(function($) {
 		$(this).popover(options).popover("show");
 	});
 
+	// On loading the page...
+	// Flash a button
+	// ------------------------------------------
+	$('[data-onload-pulse]').each(function(e){
+		var $this = $(this);
+		setInterval(function(){
+			$this.pulse();
+		}, $this.data('onload-pulse'));
+		
+	});
+
 	// Affix nav
 	// ------------------------------------------
 	$("#letters-nav [data-spy='affix']").affix({
@@ -1790,7 +1801,7 @@ jQuery(document).ready(function($) {
 		    	return (this.bottom = $('body > footer').outerHeight(true) + 20);
 		    }
 		}
-	})
+	});
 
 	// On resize...
 	//------------------------------------------

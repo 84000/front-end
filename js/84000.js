@@ -462,7 +462,7 @@ jQuery(document).ready(function($) {
 					// -----------------------------------------
 					var $collapsed = $target.closest(".collapse");
 					var $unrendered = $target.closest(".render-in-viewport");
-					var $tabbed = $('[href="#'+$target.closest(".tab-pane").attr('id')+'"]');
+					var $tabbed = $target.closest(".tab-pane").length ? $('[href="#'+$target.closest(".tab-pane").attr('id')+'"]') : new Array ;
 					
 					if($collapsed.length){
 						$collapsed.on('shown.bs.collapse', function () {

@@ -721,7 +721,7 @@ jQuery(document).ready(function($) {
 	    	    var hrefSplit = href.split("#");
 	    	    var targetId = hrefSplit[hrefSplit.length - 1];
 	    	    var hash = targetId ? "#" + targetId : "#top";
-	    	    var pageTitle = $("#title h1").text();
+	    	    var pageTitle = $("#front-matter h1").text();
 	    	    var sectionTitle = this.parents("section, aside").find("h3, h4").first().text();
 	    	    var milestoneTitle = this.text();
 	    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");

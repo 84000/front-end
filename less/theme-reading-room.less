@@ -183,7 +183,7 @@ h3, .milestone-h3 {
 
     // Title section
     // ---------------------------------------------
-    #title {
+    #front-matter {
 
         .text-center();
 
@@ -249,7 +249,6 @@ h3, .milestone-h3 {
         }
 
         #license {
-            margin-top: @line-height-computed;
             img {
                 display: inline-block;
                 width: auto;
@@ -412,9 +411,7 @@ h3, .milestone-h3 {
                     margin-top: @line-height-computed;
                     // Try out indent on section list too.
                     > .list-item {
-                        p, .section-label {
-                            padding-left: @line-height-computed / 2;
-                        }
+                        margin-top: 0;
                     }
                 }
                 > .rw.first-child , > .rw.rw-heading + .rw {
@@ -693,7 +690,7 @@ h3, .milestone-h3 {
 
     .translation {
 
-        #title {
+        #front-matter {
 
             margin-top: 15px;
             margin-bottom: 30px;

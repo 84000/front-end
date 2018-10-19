@@ -180,7 +180,6 @@ h3, .milestone-h3 {
         }
     }
     
-
     // Title section
     // ---------------------------------------------
     #front-matter {
@@ -340,6 +339,58 @@ h3, .milestone-h3 {
                 text-indent: -@line-height-computed;
             }
         }
+
+        .heading-chapter {
+            h4 {
+                color: @text-color;
+                text-transform: uppercase;
+            }
+        }
+
+        .heading-section {
+            display: table;
+            margin: 0px auto;
+            h4 {
+                color: @text-color;
+                margin-bottom: 0px;
+                display: table-cell;
+            }
+            &:before {
+                padding-right: 10px;
+                display: table-cell;
+                text-align: right;
+            }
+            &:after {
+                padding-left: 10px;
+                display: table-cell;
+                text-align: left;
+            }
+            &.nesting-1 {
+                &:before, &:after  {
+                    content: '·';
+                }
+            } 
+            &.nesting-2 {
+                &:before, &:after  {
+                    content: '··';
+                }
+            } 
+            &.nesting-3 {
+                &:before, &:after  {
+                    content: '···';
+                }
+            } 
+            &.nesting-4 {
+                &:before, &:after  {
+                    content: '····';
+                }
+            } 
+            &.nesting-5 {
+                &:before, &:after  {
+                    content: '·····';
+                }
+            } 
+        } 
         
         blockquote {
 
@@ -367,39 +418,42 @@ h3, .milestone-h3 {
 
             // Bullet lists have horizontal spacing
             // --------------------------------------------------
-            &.list-bullet > .rw {
-                .milestone {
-                    margin-top: 5px;
-                }
-                > .list-item {
-                    margin-top: 5px;
-                    p, .section-label {
-                        padding-left: @line-height-computed;
+            &.list-bullet{
+                 > .rw {
+                    .milestone {
+                        margin-top: 5px;
                     }
-                    .list-bullet > .rw > .list-item {
+                    > .list-item {
+                        margin-top: 5px;
+                        padding-left: 0px;
                         p, .section-label {
-                            padding-left: (@line-height-computed * 2);
+                            padding-left: @line-height-computed;
                         }
-                        .list-bullet > .rw > .list-item {
-                            p, .section-label {
-                                padding-left: (@line-height-computed * 3);
-                            }
-                            .list-bullet > .rw > .list-item {
-                                p, .section-label {
-                                    padding-left: (@line-height-computed * 4);
-                                }
-                                .list-bullet > .rw > .list-item {
-                                    p, .section-label {
-                                        padding-left: (@line-height-computed * 5);
-                                    }
-                                    .list-bullet > .rw > .list-item {
-                                        p, .section-label {
-                                            padding-left: (@line-height-computed * 6);
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    }
+                }
+                &.nesting-1 > .rw > .list-item {
+                    p, .section-label {
+                        padding-left: (@line-height-computed * 2);
+                    }
+                }
+                &.nesting-2 > .rw > .list-item {
+                    p, .section-label {
+                        padding-left: (@line-height-computed * 3);
+                    }
+                }
+                &.nesting-3 > .rw > .list-item {
+                    p, .section-label {
+                        padding-left: (@line-height-computed * 4);
+                    }
+                }
+                &.nesting-4 > .rw > .list-item {
+                    p, .section-label {
+                        padding-left: (@line-height-computed * 5);
+                    }
+                }
+                &.nesting-5 > .rw > .list-item {
+                    p, .section-label {
+                        padding-left: (@line-height-computed * 6);
                     }
                 }
             } 

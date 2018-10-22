@@ -28,6 +28,10 @@
     text-transform: uppercase;
 }
 
+.monospace {
+    font-family: @font-family-monospace;
+}
+
 a.disabled {
     .text-muted();
     pointer-events: none;
@@ -122,6 +126,24 @@ p.date {
 .btn-uppercase {
     text-transform: uppercase;
     font-size: 14px;
+}
+
+// Hide/show content in collapse links
+// -----------------------------------
+.collapsed-show {
+    display: none;
+}
+.collapsed-hide {
+    display: inline-block;
+    color: @brand-red;
+}
+.collapsed {
+    .collapsed-show {
+        display: inline-block;
+    }
+    .collapsed-hide {
+        display: none;
+    }
 }
 
 // Centered tabs

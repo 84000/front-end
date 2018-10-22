@@ -143,6 +143,9 @@ body.wait > #wait{
 .text-zh {
     font-style: normal !important;
 }
+.text-left {
+    text-align: left;
+}
 .text-right {
     text-align: right;
 }
@@ -994,10 +997,13 @@ a#link-to-top {
         margin-right: 70px;
     }
 
+    h2, h4 {
+        margin-top: 0px !important;
+        text-align: left !important;
+    }
+
     h4 {
         color: @text-color;
-        margin-top: 0px !important;
-        margin-bottom: 6px !important;
     }
 
 }
@@ -1176,12 +1182,23 @@ table.contents-table {
         vertical-align: top;
         break-inside: auto;
         page-break-inside: auto;
-    }
-    td {
-        //vertical-align: top;
-        padding: 4px 6px 4px 0px;
-        break-inside: auto;
-        page-break-inside: auto;
+        &.sub {
+            > td {
+                padding-top: 3px;
+            }
+        }
+        td {
+            //vertical-align: top;
+            padding: 14px 10px 0px 0px;
+            line-height: 1.3em;
+            break-inside: auto;
+            page-break-inside: auto;
+        }
+        &:first-child {
+            td {
+                padding-top: 0px;
+            }
+        }
     }
     tfoot {
         border-top: 1px solid @hr-border;
@@ -1190,12 +1207,9 @@ table.contents-table {
             color: @text-muted;
         }
     }
-}
-.fixed-sidebar {
-    table.contents-table {
-        margin-bottom: 20px;
+    table {
+        margin-top: 6px;
     }
-
 }
 
 #search-container
@@ -1219,6 +1233,7 @@ table.contents-table {
             padding: 2px 12px;
             margin-top: 15px;
             text-decoration: none;
+            color: @text-color;
             &:hover {
                 background-color: #eee;
                 border-left-color: transparent;

@@ -1073,6 +1073,13 @@ jQuery(document).ready(function($) {
         	var $toc = $("#contents  .contents-table");
         	$sidebar.find(".data-container").html($toc.clone());
         	$sidebar.addClass("loaded");
+        	$sidebar.find('[data-toggle="collapse"]').each(function(){
+        		var $this = $(this);
+        		var href = $this.attr('href');
+        		var $target = $sidebar.find(href);
+        		$this.attr('href', href.replace('#', '#sidebar-'));
+        		$target.attr('id', href.replace('#', 'sidebar-'));
+        	});
         }
 
         $('.lg ' + selector + ' .container').width(($(window).width() * 0.35) - 40);
@@ -1085,7 +1092,7 @@ jQuery(document).ready(function($) {
 
 	// Close sidebar on clicking something in it
 	// -----------------------------------------
-	$(document).on("click",'.fixed-sidebar a:not(.remove-bookmark)', function(e) {
+	$(document).on("click",'.fixed-sidebar a:not(.remove-bookmark, [data-toggle="collapse"])', function(e) {
 
 		$(this).parents(".fixed-sidebar ").collapse('hide');
 

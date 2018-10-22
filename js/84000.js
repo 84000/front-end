@@ -1078,6 +1078,7 @@ jQuery(document).ready(function($) {
         		var href = $this.attr('href');
         		var $target = $sidebar.find(href);
         		$this.attr('href', href.replace('#', '#sidebar-'));
+        		$this.attr('aria-controls', href.replace('#', 'sidebar-'));
         		$target.attr('id', href.replace('#', 'sidebar-'));
         	});
         }
@@ -1506,6 +1507,36 @@ jQuery(document).ready(function($) {
 
 	});
 
+	// Add behaviour...
+    // Show the print preview
+    // ----------------------------------------------------------------- 
+    $(document).on("click", "a.print-preview", function(e){
+
+    	e.preventDefault();
+    	window.print();
+
+	});
+
+    // Add behaviour...
+    // Before showing the print preview
+    // ----------------------------------------------------------------- 
+	var beforePrintFunc = function() {
+
+		// Un-collapse divs
+		// -----------------------------
+	    $('.collapse.print-expand').each(function(){
+    		$(this).attr('style', '');
+    	});
+	}
+	// Add listener for chrome
+	// -----------------------------
+	window.matchMedia('print').addListener(function(mql) {
+	    if (mql.matches) {
+	        beforePrintFunc();
+	    }
+	});
+	window.onbeforeprint = beforePrintFunc;
+
     // Add behaviour...
     // Filter on change
     // ----------------------------------------------------------------- 
@@ -1707,7 +1738,7 @@ jQuery(document).ready(function($) {
 	// Add behaviour...
 	// Stop propagation to body click
 	// --------------------------------------
-	$(document).on("click",'.fixed-footer, .fixed-footer a, .fixed-sidebar, .fixed-sidebar a', function(e) {
+	$(document).on("click",'.collapse a', function(e) {
 	
 		e.stopPropagation();
         

@@ -1188,20 +1188,20 @@ table.contents-table {
             }
         }
         td {
-            //vertical-align: top;
             padding: 14px 10px 0px 0px;
             line-height: 1.3em;
             break-inside: auto;
             page-break-inside: auto;
         }
-        &:first-child {
+    }
+    tbody {
+        tr:first-child {
             td {
                 padding-top: 0px;
             }
         }
     }
     tfoot {
-        border-top: 1px solid @hr-border;
         td {
             font-style: italic;
             color: @text-muted;
@@ -1209,6 +1209,9 @@ table.contents-table {
     }
     table {
         margin-top: 6px;
+    }
+    img.icon {
+        width: 22px;
     }
 }
 
@@ -1394,6 +1397,12 @@ table.contents-table {
 
     .well, .alert {
         border-color: @gray-light !important;
+    }
+    .well.well-danger {
+        &, p {
+            color: @text-color !important;
+        }
+        background-color: #fff;
     }
 
     .print-logo {

@@ -132,6 +132,7 @@ p.date {
 // -----------------------------------
 .collapsed-show {
     display: none;
+    color: @brand-green;
 }
 .collapsed-hide {
     display: inline-block;
@@ -145,6 +146,18 @@ p.date {
         display: none;
     }
 }
+
+@media print {
+    .collapsed {
+        .collapsed-show, .collapsed-hide {
+            display: none;
+        }
+    }
+    .collapse.print-expand {
+        display: block;
+    }
+}
+
 
 // Centered tabs
 // ----------------------------

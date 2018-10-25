@@ -1738,7 +1738,7 @@ jQuery(document).ready(function($) {
 	// Add behaviour...
 	// Stop propagation to body click
 	// --------------------------------------
-	$(document).on("click",'.collapse a', function(e) {
+	$(document).on("click",'.collapse', function(e) {
 	
 		e.stopPropagation();
         

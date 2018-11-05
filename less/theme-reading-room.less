@@ -991,6 +991,11 @@ h3, .milestone-h3 {
                     margin-top: -(@line-height-computed / 2);
                 }
             }
+            &.item-first {
+                margin-top: 15px;
+                padding-top: (@line-height-computed / 2);
+                border-top: 1px solid @hr-border;
+            }
             .name {
                 display: block;
             }
@@ -1027,7 +1032,7 @@ h3, .milestone-h3 {
             padding: @nav-link-padding;
             .pull-right();
         }
-
+        
         .glossary-item {
             margin-top: 10px;
             ul {
@@ -1037,9 +1042,6 @@ h3, .milestone-h3 {
             }
         }
 
-        .nav-pills {
-            margin-bottom: 8px;
-        }
     }
 }
 

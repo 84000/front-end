@@ -545,9 +545,11 @@ h3, .milestone-h3 {
     // Abbreviations
     // --------------------------------------------
     #abbreviations {
+        h5 {
+            margin-top: @line-height-computed;
+        }
         .table {
             width: auto;
-            margin-bottom: (@line-height-computed / 2);
             > tbody > tr {
                 > th {
                     font-weight: normal;
@@ -559,7 +561,10 @@ h3, .milestone-h3 {
                     color: @gray;
                 }
             }
-        } 
+        }
+        h5, .table, p {
+            margin-bottom: (@line-height-computed / 2);
+        }
     }
 
     // Bibliography

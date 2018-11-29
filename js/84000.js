@@ -1744,6 +1744,45 @@ jQuery(document).ready(function($) {
         
 	});
 
+	// Add behaviour
+	// Initialise popovers
+	// ------------------------------------------
+	$(document).on("click", '[data-toggle="popover"]', function(e){
+		e.preventDefault();
+		var options = {
+			title : function () {return $($(this).attr("href") + " .title").text();},
+			content: function () {return $($(this).attr("href") + " .content").html();},
+			html: true,
+			container: $(this).data("container")
+		};
+		$(this).popover(options).popover("show");
+	});
+
+	// Add behaviour
+	// Option to propagate new form controls
+	// ------------------------------------------
+	$(document).on("click", '.add-nodes-container a.add-nodes', function(e){
+		e.preventDefault();
+		var $container = $(this).parents('.add-nodes-container');
+		var $groups = $container.find('.add-nodes-group');
+		var groups_count = $groups.length;
+		var $new_group = $groups.first().clone();
+		$new_group.find("input, select, textarea").each(function(){
+			var $control = $(this);
+			var name_split = $control.attr('name').split('-');
+			$control.attr('name', name_split.slice(0, name.length - 1).join('-') + '-' + parseInt(groups_count + 1));
+			if($control[0].tagName == 'select'){
+				$control.selectedValue = '';
+			}
+			else {
+				$control.val("");
+			}
+			
+		});
+		$new_group.insertAfter($groups.last());
+		
+	});
+
 	// Add behaviour...
 	// Proof-of-concept!!!
 	// Text to speech
@@ -1801,20 +1840,6 @@ jQuery(document).ready(function($) {
 			method: "POST",
 			data: {'url' : window.location.href}
 		});
-	});
-
-	// On loading the page...
-	// Initialise popovers
-	// ------------------------------------------
-	$(document).on("click", '[data-toggle="popover"]', function(e){
-		e.preventDefault();
-		var options = {
-			title : function () {return $($(this).attr("href") + " .title").text();},
-			content: function () {return $($(this).attr("href") + " .content").html();},
-			html: true,
-			container: $(this).data("container")
-		};
-		$(this).popover(options).popover("show");
 	});
 
 	// On loading the page...

@@ -16,12 +16,16 @@
     font-style: italic;
 }
 
+.line-through {
+    text-decoration: line-through;
+}
+
 .text-bold {
     font-weight: bold;
 }
 
 .text-muted {
-    color: @text-muted;
+    color: @text-muted !important;
 }
 
 .uppercase {
@@ -36,6 +40,9 @@ a.disabled {
     .text-muted();
     pointer-events: none;
     cursor: none;
+}
+a.text-color {
+    color: @text-color;
 }
 
 .list-indent  {
@@ -63,39 +70,34 @@ a.warning {
     }
 }
 
-.modal-content {
-    &, p, .modal-title {
-        text-align: left !important;
-        color: initial !important;
-    }
-    p {
-        line-height: initial !important;
-    }
-}
-
-hr.no-margin {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
 .no-top-margin {
     margin-top: 0px !important;
-}
-
-.bottom-margin {
-    margin-bottom: 20px;
 }
 
 .no-bottom-margin {
     margin-bottom: 0px !important;
 }
 
-.no-shadow {
-    .box-shadow(none);
+.bottom-margin {
+    margin-bottom: 20px;
 }
 
 .margin-top-sm {
     margin-top: 5px;
+}
+
+.no-shadow {
+    .box-shadow(none);
+}
+
+hr.sml-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+hr.no-margin {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 table {
@@ -144,6 +146,16 @@ p.date {
     }
     .collapsed-hide {
         display: none;
+    }
+}
+
+.modal-content {
+    &, p, .modal-title {
+        text-align: left !important;
+        color: initial !important;
+    }
+    p {
+        line-height: initial !important;
     }
 }
 
@@ -242,7 +254,6 @@ a.center-vertical {
 .top-vertical {
 
     .adjacent-panels();
-    width: 100%;
 
     > span, > a {
 
@@ -257,6 +268,9 @@ a.center-vertical {
             text-align: right;
         }
 
+    }
+    &.full-width {
+        width: 100%;
     }
 }
 
@@ -334,34 +348,40 @@ span.nowrap {
     }
 }
 
-// Dot seperators on inline list
+// nline list
 // -----------------------------------
-.list-inline.inline-dots {
-    display: inline-block;
-    margin-bottom: 0px;
+.list-inline {
     > li {
+        padding-right: 5px;
         &:before {
-            content: '·';
-            padding-right: 10px;
+            padding-right: 5px;
         }
         &:first-child:before {
-            content: '';
             padding-right: 0px;
         }
     }
-}
-
-// Bar seperators on inline list
-// -----------------------------------
-.list-inline.inline-bars {
-    display: inline-block;
-    margin-bottom: 0px;
-    > li {
-        border-left: 1px solid @hr-border;
-        padding-left: 20px;
-        padding-right: 20px;
-        &:first-child {
-            border-left: 0;
+    // Dot seperators
+    // -----------------------------------
+    &.inline-dots {
+        > li {
+            &:before {
+                content: '·';
+            }
+            &:first-child:before {
+                content: '';
+            }
+        }
+    }
+    // Bar seperators
+    // -----------------------------------
+    &.inline-bars {
+         > li {
+            &:before {
+                content: '|';
+            }
+            &:first-child:before {
+                content: '';
+            }
         }
     }
 }

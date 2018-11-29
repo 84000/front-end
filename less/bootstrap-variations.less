@@ -17,6 +17,11 @@ p {
     }
 }
 
+hr {
+    margin-top: @vertical-spacing;
+    margin-bottom: @vertical-spacing;
+}
+
 label, .label {
     font-weight: normal;
     font-family: @font-family-heading;
@@ -53,8 +58,12 @@ label, .label {
     }
 }
 
+.form-control {
+    padding: @padding-base-vertical @padding-base-vertical + 2;
+}
+
 .form-inline {
-    label, .form-control, .form-group > a {
+    label, .form-control, .form-group > a, .checkbox {
         margin-right: 5px;
     }
 }
@@ -65,6 +74,13 @@ p.form-control {
 
 fieldset {
     margin-bottom: @form-group-margin-bottom;
+}
+
+mark, .mark {
+    padding: 0px;
+    color: #000;
+    background-color: #ffeb3b;
+    .box-shadow(0px 0px 0px 2px #ffeb3b);
 }
 
 .close {

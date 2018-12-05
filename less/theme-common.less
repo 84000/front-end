@@ -18,7 +18,7 @@ body {
     position: relative;
     line-height: 1.6;
 
-    @media only screen and (max-width: @screen-sm) {
+    @media only screen and (max-width: @screen-md) {
 
         > .container, .fixed-footer > .container {
             padding-left: 0px;
@@ -801,7 +801,7 @@ span.indent {
         top: @button-spacing-top;
     }
 
-    @media only screen and (max-width: @screen-sm) {
+    @media only screen and (max-width: @screen-md) {
         
         // Adjusted for Text to speech
         // --------------------------------------
@@ -1284,7 +1284,6 @@ table.contents-table {
             bottom: -(@btn-round-size / 2);
             left: 0px;
             right: 0px;
-            margin-left: @text-gtr-width;
             .btn-round {
                 background-color: #fff;
                 border: 1px solid @brand-red;
@@ -1296,8 +1295,8 @@ table.contents-table {
         
         a.preview {
             position: absolute;
-            top: -@btn-round-size;
-            right: -@btn-round-size;
+            top: 0px;
+            right: 0px;
             .btn-round {
                 background-color: #ccc;
                 i {

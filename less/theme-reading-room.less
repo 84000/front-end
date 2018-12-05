@@ -81,8 +81,12 @@ h3, .milestone-h3 {
         color: @brand-red;
     }
 
-    h2, .milestone-h2, h3, .milestone-h3, h4, .milestone-h4 {
+    h2, h3, h4, {
         margin-top: @line-height-computed;
+    }
+
+    .milestone-h2, .milestone-h3, .milestone-h4 {
+        margin-top: @line-height-computed + 5px;
     }
 
     .trailer {
@@ -157,14 +161,16 @@ h3, .milestone-h3 {
     .rw { // row
         display: block;
         padding-left: @text-gtr-width;
+        padding-right: @text-gtr-width;
         overflow: auto;
-        .rw{
+        .rw {
             margin-left: -@text-gtr-width;
+            margin-right: -@text-gtr-width;
         }
         .rw-heading {
             overflow: auto;
         }
-        .gtr{
+        .gtr {
             display: block;
             float: left;
             margin-left: -@text-gtr-width;
@@ -545,6 +551,12 @@ h3, .milestone-h3 {
     // Abbreviations
     // --------------------------------------------
     #abbreviations {
+        .nested-section {
+            margin-bottom: @line-height-computed;
+            .section-label {
+                text-align: center;
+            }
+        }
         h5 {
             margin-top: @line-height-computed;
         }
@@ -712,8 +724,10 @@ h3, .milestone-h3 {
 
         .rw { // row
             padding-left: @text-gtr-width-sm;
+            padding-right: 0px;
             .rw {
                 margin-left: -@text-gtr-width-sm;
+                margin-right: 0px;
             }
             .gtr{
                 margin-left: -@text-gtr-width-sm;
@@ -728,36 +742,7 @@ h3, .milestone-h3 {
             }
         }
 
-        a.render {
-            margin-left: @text-gtr-width-sm;
-        }
-
-        // Adjusted for Text to speech
-        // --------------------------------------
-        #link-to-top-container {
-            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
-        }
-
-        section, aside{
-	    	a.preview {
-	            top: -@btn-round-size;
-	            right: 0px;
-	        }
-	    }
     }
-
-    .nav-controls {
-        position: fixed;
-        bottom: 0px;
-        top: auto;
-        left: 0px;
-        right: 0px;
-        height:70px;
-        background-color: #fff;
-        border-top: 1px solid @hr-border;
-        z-index: 5
-    }
-
 }
 
 // Medium viewport variations
@@ -788,17 +773,47 @@ h3, .milestone-h3 {
             }
         }
 
-        h2, h3, .milestone-h3 {
+        h2, h3, h4 {
             margin-top: (@line-height-computed / 2);
         }
 
-        .download-options {
+        .milestone-h2, .milestone-h3, .milestone-h4 {
+            margin-top: (@line-height-computed / 2) + 5px;
+        }
 
+        .rw { // row
+            padding-right: 0px;
+            .rw {
+                margin-right: 0px;
+            }
+            .rw-heading {
+                padding-right: @text-gtr-width;
+            }
+        }
+
+        .download-options {
             margin-top: 0px;
             margin-bottom: 70px;
+        }
 
+        // Adjusted for Text to speech
+        // --------------------------------------
+        #link-to-top-container {
+            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
         }
         
+    }
+
+    .nav-controls {
+        position: fixed;
+        bottom: 0px;
+        top: auto;
+        left: 0px;
+        right: 0px;
+        height:70px;
+        background-color: #fff;
+        border-top: 1px solid @hr-border;
+        z-index: 5
     }
 }
 

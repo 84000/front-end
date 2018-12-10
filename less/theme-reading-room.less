@@ -161,11 +161,11 @@ h3, .milestone-h3 {
     .rw { // row
         display: block;
         padding-left: @text-gtr-width;
-        padding-right: @text-gtr-width;
+        padding-right: @text-gtr-width-right;
         overflow: auto;
         .rw {
             margin-left: -@text-gtr-width;
-            margin-right: -@text-gtr-width;
+            margin-right: -@text-gtr-width-right;
         }
         .rw-heading {
             overflow: auto;
@@ -679,6 +679,79 @@ h3, .milestone-h3 {
 
 }
 
+
+// Medium viewport variations
+// --------------------------------------------
+@media only screen and (max-width: @screen-md) {
+
+    .translation {
+
+        #front-matter {
+
+            margin-top: 15px;
+            margin-bottom: 30px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding: 15px;
+
+            .page-first {
+                margin-top: 0px;
+            }
+
+            .page > * {
+                margin-top: 0px;
+                margin-bottom: 30px;
+            }
+
+            #titles {
+                margin-top: 0px;
+            }
+        }
+
+        h2, h3, h4 {
+            margin-top: (@line-height-computed / 2);
+        }
+
+        .milestone-h2, .milestone-h3, .milestone-h4 {
+            margin-top: (@line-height-computed / 2) + 5px;
+        }
+
+        .rw { // row
+            padding-right: @text-gtr-width-sm-right;
+            .rw {
+                margin-right: 0px;
+            }
+            .rw-heading {
+                padding-right: @text-gtr-width;
+            }
+        }
+
+        .download-options {
+            margin-top: 0px;
+            margin-bottom: 70px;
+        }
+
+        // Adjusted for Text to speech
+        // --------------------------------------
+        #link-to-top-container {
+            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
+        }
+        
+    }
+
+    .nav-controls {
+        position: fixed;
+        bottom: 0px;
+        top: auto;
+        left: 0px;
+        right: 0px;
+        height:70px;
+        background-color: #fff;
+        border-top: 1px solid @hr-border;
+        z-index: 5
+    }
+}
+
 // Small viewport variations
 // --------------------------------------------
 @media only screen and (max-width: @screen-sm) {
@@ -724,10 +797,10 @@ h3, .milestone-h3 {
 
         .rw { // row
             padding-left: @text-gtr-width-sm;
-            padding-right: 0px;
+            padding-right: @text-gtr-width-sm-right;
             .rw {
                 margin-left: -@text-gtr-width-sm;
-                margin-right: 0px;
+                margin-right: -@text-gtr-width-sm-right;
             }
             .gtr{
                 margin-left: -@text-gtr-width-sm;
@@ -736,6 +809,7 @@ h3, .milestone-h3 {
                 }
             }
             .rw-heading {
+                padding-left: 0px;
                 > * {
                     text-align: left;
                 }
@@ -744,79 +818,6 @@ h3, .milestone-h3 {
 
     }
 }
-
-// Medium viewport variations
-// --------------------------------------------
-@media only screen and (max-width: @screen-md) {
-
-    .translation {
-
-        #front-matter {
-
-            margin-top: 15px;
-            margin-bottom: 30px;
-            margin-left: 0px;
-            margin-right: 0px;
-            padding: 15px;
-
-            .page-first {
-                margin-top: 0px;
-            }
-
-            .page > * {
-                margin-top: 0px;
-                margin-bottom: 30px;
-            }
-
-            #titles {
-                margin-top: 0px;
-            }
-        }
-
-        h2, h3, h4 {
-            margin-top: (@line-height-computed / 2);
-        }
-
-        .milestone-h2, .milestone-h3, .milestone-h4 {
-            margin-top: (@line-height-computed / 2) + 5px;
-        }
-
-        .rw { // row
-            padding-right: 0px;
-            .rw {
-                margin-right: 0px;
-            }
-            .rw-heading {
-                padding-right: @text-gtr-width;
-            }
-        }
-
-        .download-options {
-            margin-top: 0px;
-            margin-bottom: 70px;
-        }
-
-        // Adjusted for Text to speech
-        // --------------------------------------
-        #link-to-top-container {
-            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
-        }
-        
-    }
-
-    .nav-controls {
-        position: fixed;
-        bottom: 0px;
-        top: auto;
-        left: 0px;
-        right: 0px;
-        height:70px;
-        background-color: #fff;
-        border-top: 1px solid @hr-border;
-        z-index: 5
-    }
-}
-
 
 // Utilities page
 // ----------------------------------------

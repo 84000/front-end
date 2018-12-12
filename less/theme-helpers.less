@@ -90,6 +90,26 @@ a.warning {
     .box-shadow(none);
 }
 
+.break {
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+
+}
+
+span.nowrap, a.nowrap {
+    white-space: pre;
+}
+
 hr.sml-margin {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -272,26 +292,6 @@ a.center-vertical {
     &.full-width {
         width: 100%;
     }
-}
-
-.break {
-
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-
-    -ms-word-break: break-all;
-    word-break: break-all;
-    word-break: break-word;
-
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-
-}
-
-span.nowrap {
-    white-space: pre;
 }
 
 // Merge columns

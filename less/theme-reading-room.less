@@ -288,6 +288,9 @@ h3, .milestone-h3 {
 
         h4+h2 {
             margin-top: 0px;
+        }
+
+        h2 {
             margin-bottom: @line-height-computed;
         }
 
@@ -309,32 +312,44 @@ h3, .milestone-h3 {
             }
         }
 
-        // Space some sections
-        h2+*,               // paragraph after a header
-        h3+*, 
-        h4+*, 
-        br+*,               // paragraph after a break
-        .space,             // element marked as space
-        .space+*,           // element after element marked as space
-        .space-after+*,     // element after element marked as space-after
-        .milestone-space    // class to apply space to milestones too
+        // Add a space
+        br+*,
+        .rw-chapter-title+.rw,          // after a chapter title
+        .rw-section-head+.rw,           // after a section head
+        .rw-chapter-head+.rw,           // after a chapter head
+        .rw-list-section+.rw,           // after a section list
+        .rw-list-bullet+.rw,            // after a bullet list
+        .rw-line-group,                 // before a line group
+        .rw-line-group+.rw,             // after a line group
+        .rw-blockquote,                 // before a blockquote
+        .rw-blockquote+.rw,             // after a blockquote
+        .rw-mantra,                     // before a mantra
+        .rw-mantra+.rw,                 // after a mantra
+        .rw-trailer                     // before a trailer
         {
             margin-top: @line-height-computed;
+            // cancel the indent after a space
+            > p {
+                text-indent: 0;
+            }
         }
 
-        // Remove indent for first paragraph after spaced sections
-        .rw:first-child > p, 
-        .rw.first-child > p, 
-        h2+.rw > p, 
-        h3+.rw > p, 
-        h4+.rw > p, 
-        br+.rw > p,
-        .space > p,             // A paragraph in a spaced section 
-        .space+.rw > p,         // The paragraph after a spaced section
-        .space-after+.rw > p,   // The paragraph after a spaced section
-        .rw-heading+.rw > p,    // The paragraph after a row heading
-        .rw-label+.rw > p,      // The paragraph after a row label
-        .footnote-number {
+        // Add a double space
+        .rw-section-head                // before a section head
+        {
+            margin-top: @line-height-computed * 2;
+            // cancel the indent after a space
+            > p {
+                text-indent: 0;
+            }
+        }
+
+        // cancel the indent in other cases
+        .rw:first-child > p,        // first paragraph (pseudo-class)
+        .rw.first-child > p,        // first paragraph (class)
+        .rw.rw-label+.rw > p,       // after a label
+        .rw.rw-list-head +.rw > p,  // after a list head
+        .footnote-number {                      // footnote number
             text-indent: 0;
         }
 
@@ -360,7 +375,6 @@ h3, .milestone-h3 {
                 color: @text-color;
                 margin-bottom: 0px;
                 display: table-cell;
-                padding-top: 22px;
                 font-size: @font-size-h4;
             }
             &:before {
@@ -416,18 +430,17 @@ h3, .milestone-h3 {
         } 
         
         blockquote {
-
             padding: 0;
             margin-bottom: 0;
-            margin-left: -5px;
-
             p {
                 padding-left: @line-height-computed;
+            }
+            > .rw {
+                margin-top: 0px;
             }
             .line-group .line {
                 padding-left: (@line-height-computed * 2);
             }
-
         }
 
         .list {
@@ -441,41 +454,41 @@ h3, .milestone-h3 {
 
             // Bullet lists have horizontal spacing
             // --------------------------------------------------
-            &.list-bullet{
-                 > .rw {
-                    .milestone {
-                        margin-top: 5px;
-                    }
+            &.list-bullet {
+                 > .rw-list-item {
+                    margin-top: 5px;
                     > .list-item {
-                        margin-top: 5px;
+                        margin-top: 0px;
                         padding-left: 0px;
-                        p, .section-label {
-                            padding-left: @line-height-computed;
-                        }
+                        > .rw {
+                            > p, > .section-label {
+                                padding-left: @line-height-computed;
+                            }
+                        } 
                     }
                 }
-                &.nesting-1 > .rw > .list-item {
-                    p, .section-label {
+                &.nesting-1 > .rw > .list-item > .rw {
+                    > p, > .section-label {
                         padding-left: (@line-height-computed * 2);
                     }
                 }
-                &.nesting-2 > .rw > .list-item {
-                    p, .section-label {
+                &.nesting-2 > .rw > .list-item > .rw {
+                    > p, > .section-label {
                         padding-left: (@line-height-computed * 3);
                     }
                 }
-                &.nesting-3 > .rw > .list-item {
-                    p, .section-label {
+                &.nesting-3 > .rw > .list-item > .rw {
+                    > p, > .section-label {
                         padding-left: (@line-height-computed * 4);
                     }
                 }
-                &.nesting-4 > .rw > .list-item {
-                    p, .section-label {
+                &.nesting-4 > .rw > .list-item > .rw {
+                    > p, > .section-label {
                         padding-left: (@line-height-computed * 5);
                     }
                 }
-                &.nesting-5 > .rw > .list-item {
-                    p, .section-label {
+                &.nesting-5 > .rw > .list-item > .rw {
+                    > p, > .section-label {
                         padding-left: (@line-height-computed * 6);
                     }
                 }
@@ -483,20 +496,41 @@ h3, .milestone-h3 {
 
             // Section lists have vertical spacing
             // --------------------------------------------------
+            /**/
             &.list-section {
-                > .rw {
+                > .rw-list-item {
                     margin-top: @line-height-computed;
-                    // Try out indent on section list too.
                     > .list-item {
-                        margin-top: 0;
+                        margin-top: 0px;
                     }
                 }
+                /*
                 > .rw.first-child , > .rw.rw-heading + .rw {
                     margin-top: 0;
-                }
+                }*/
             }
         }
     }
+
+    // Nested sections
+    // --------------------------------------------
+    .nested-section {
+        float: left;
+        width: 100%;
+        .section-label {
+            font-size: @font-size-h4;
+        }
+        .nested-section {
+            .section-label {
+                font-size: @font-size-h5;
+            }
+        }
+    }
+    /*
+    .nested-section+.nested-section {
+        margin-top: @line-height-computed;
+    }
+    */
 
     // Glossary items
     // --------------------------------------------
@@ -552,7 +586,7 @@ h3, .milestone-h3 {
     // --------------------------------------------
     #abbreviations {
         .nested-section {
-            margin-bottom: @line-height-computed;
+            margin-bottom: (@line-height-computed / 2);
             .section-label {
                 text-align: center;
             }
@@ -594,19 +628,6 @@ h3, .milestone-h3 {
         margin-bottom: (@line-height-computed / 2);
         > .line-group {
             margin-top: (@line-height-computed / 2);
-        }
-    }
-
-    // Nested sections
-    // --------------------------------------------
-    .nested-section {
-        .section-label {
-            font-size: @font-size-h4;
-        }
-        .nested-section {
-            .section-label {
-                font-size: @font-size-h5;
-            }
         }
     }
 

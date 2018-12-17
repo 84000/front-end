@@ -143,18 +143,9 @@ body.wait > #wait{
 .text-zh {
     font-style: normal !important;
 }
-.text-left {
-    text-align: left;
-}
-.text-right {
-    text-align: right;
-}
 .small-plain {
     font-family: @font-family-heading;
     font-size: @font-size-small;
-}
-.underline {
-    text-decoration: underline;
 }
 .small-caps {
     font-family: 'small-caps' !important;
@@ -658,6 +649,15 @@ span.indent {
 // -------------------------------------------
 .nav-tabs {
     margin-bottom: @vertical-spacing;
+    &.active-tab-refresh {
+        > li.active a:after {
+            content: "\f021";
+            .fa-icon();
+            padding-left: 5px;
+            color: @link-color;
+            cursor: pointer;
+        }
+    }
 }
 
 
@@ -1253,6 +1253,13 @@ table.contents-table {
     }
 }
 
+.collapse-one-line {
+    height: @line-height-computed;
+    overflow: hidden;
+    &:hover {
+        height: auto;
+    }
+}
 
 // Screen variations
 // All styles should default to desktop/screen
@@ -1344,6 +1351,9 @@ table.contents-table {
 
     body {
         font-size: 16pt;
+        .print-small-font {
+            font-size: 12pt;
+        }
         blockquote {
             font-size: 16pt;
         }
@@ -1417,6 +1427,11 @@ table.contents-table {
 
     .environment-warning, #page-alert {
         display: none;
+    }
+
+    select.form-control {
+        padding: 0px;
+        border: 0px;
     }
 
 }

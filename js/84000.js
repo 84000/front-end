@@ -1433,9 +1433,27 @@ jQuery(document).ready(function($) {
 	}, 700);
 	$(window).scroll();
 
+	// Note unsaved changes to a form
+	// -------------------------------------------
+	$(document).on("change", "form.form-update input, form.form-update select, form.form-update textarea", function(e){
+		$(this).addClass("unsaved-changes");
+	});
+
+	// Don't inhibit the window unload if it's a submit
+	// ------------------------------------------------
+	$(document).on("click", "form.form-update *[type='submit']", function(e){
+		$(this).parents("form.form-update").find(".unsaved-changes").removeClass("unsaved-changes");
+	});
+
 	// On closing the window...
 	// -------------------------------------------
-	$(window).on("beforeunload", function() { 
+	$(window).on("beforeunload", function(e) { 
+
+		// Check for unsaved changes on a form
+		// -------------------------------------------
+		if($("form .unsaved-changes").length){
+			return "You have some unsaved changes";
+		}
 
 		// Save the current text/location
 		// -------------------------------------------

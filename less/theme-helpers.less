@@ -32,6 +32,18 @@
     text-transform: uppercase;
 }
 
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
 .monospace {
     font-family: @font-family-monospace;
 }
@@ -284,13 +296,12 @@ a.center-vertical {
             padding-left: 0 !important;
         }
 
-        &:last-child {
-            text-align: right;
-        }
-
     }
     &.full-width {
         width: 100%;
+        > span:last-child, > a:last-child {
+            text-align: right;
+        }
     }
 }
 

@@ -941,7 +941,12 @@ h3, .milestone-h3 {
                 border: 0px;
             }
         }
-
+        tr.border-top {
+            > td {
+                padding-top: 5px;
+                border-top: 1px solid @table-border-color;
+            }
+        }
         &.table-icons {
             td {
                 .fa {

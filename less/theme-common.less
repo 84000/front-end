@@ -1256,8 +1256,12 @@ table.contents-table {
 .collapse-one-line {
     height: @line-height-computed;
     overflow: hidden;
+    cursor: pointer;
     &:hover {
         height: auto;
+    }
+    &.small {
+        padding-top: 5px;
     }
 }
 

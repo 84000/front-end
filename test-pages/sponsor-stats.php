@@ -21,7 +21,7 @@
             </tbody>
         </table>
         <div class="text-center">
-            <a href="?template=sponsor-page" class="btn btn-primary">Sponsor a page now</a>
+            <a href="/test-pages/?template=sponsor-page" class="btn btn-primary">Sponsor a page now</a>
         </div>
     </div>
 </div>

@@ -18,3 +18,11 @@
 		BrowserMatch bMSIE !no-gzip !gzip-only-text/html
 	</IfModule>
 </IfModule>
+
+RewriteEngine on
+
+RewriteRule ^/?test-pages/news.* /test-pages/?template=news [NC]
+RewriteRule ^/?test-pages/category.* /test-pages/?template=news [NC]
+RewriteRule ^/?test-pages/about.* /test-pages/?template=about [NC]
+RewriteRule ^/?test-pages/resources.* /test-pages/?template=resources [NC]
+RewriteRule ^/?test-pages/how-you-can-help.* /test-pages/?template=sponsor-sutra [NC]

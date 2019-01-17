@@ -14,119 +14,119 @@
                     
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="?template=post" class="thumbnail">
+                            <a href="/test-pages/?template=post" class="thumbnail">
                                 <img src="/imgs/Rooster-v1t-224x112.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <a href="?template=post" class="title">
+                            <a href="/test-pages/?template=post" class="title">
                                 <h4>Happy Losar 2017!</h4>
                             </a>
                             <p>
                                 On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                <br><a href="?template=post">Read more</a>
+                                <br><a href="/test-pages/?template=post">Read more</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="?template=post" class="thumbnail">
+                            <a href="/test-pages/?template=post" class="thumbnail">
                                 <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <a href="?template=post" class="title">
+                            <a href="/test-pages/?template=post" class="title">
                                 <h4>Happy Losar 2017!</h4>
                             </a>
                             <p>
                                 On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                <br><a href="?template=post">Read more</a>
+                                <br><a href="/test-pages/?template=post">Read more</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="?template=post" class="thumbnail">
+                            <a href="/test-pages/?template=post" class="thumbnail">
                                 <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <a href="?template=post" class="title">
+                            <a href="/test-pages/?template=post" class="title">
                                 <h4>Happy Losar 2017!</h4>
                             </a>
                             <p>
                                 On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                <br><a href="?template=post">Read more</a>
+                                <br><a href="/test-pages/?template=post">Read more</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="?template=post" class="thumbnail">
+                            <a href="/test-pages/?template=post" class="thumbnail">
                                 <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <a href="?template=post" class="title">
+                            <a href="/test-pages/?template=post" class="title">
                                 <h4>Happy Losar 2017!</h4>
                             </a>
                             <p>
                                 On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                <br><a href="?template=post">Read more</a>
+                                <br><a href="/test-pages/?template=post">Read more</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="?template=post" class="thumbnail">
+                            <a href="/test-pages/?template=post" class="thumbnail">
                                 <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <a href="?template=post" class="title">
+                            <a href="/test-pages/?template=post" class="title">
                                 <h4>Happy Losar 2017!</h4>
                             </a>
                             <p>
                                 On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                <br><a href="?template=post">Read more</a>
+                                <br><a href="/test-pages/?template=post">Read more</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="?template=post" class="thumbnail">
+                            <a href="/test-pages/?template=post" class="thumbnail">
                                 <img src="/imgs/IMG_9449-224x112.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <a href="?template=post" class="title">
+                            <a href="/test-pages/?template=post" class="title">
                                 <h4>Happy Losar 2017!</h4>
                             </a>
                             <p>
                                 On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                <br><a href="?template=post">Read more</a>
+                                <br><a href="/test-pages/?template=post">Read more</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="?template=post" class="thumbnail">
+                            <a href="/test-pages/?template=post" class="thumbnail">
                                 <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <a href="?template=post" class="title">
+                            <a href="/test-pages/?template=post" class="title">
                                 <h4>Happy Losar 2017!</h4>
                             </a>
                             <p>
                                 On this auspicious occasion of the Tibetan New Year, we offer some words of reflection from “The Questions of Naga King Sagara.”
-                                <br><a href="?template=post">Read more</a>
+                                <br><a href="/test-pages/?template=post">Read more</a>
                             </p>
                         </div>
                     </div>

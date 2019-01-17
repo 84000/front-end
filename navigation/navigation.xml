@@ -3,7 +3,7 @@
         <item class="home" url="http://84000.co/">
             <label>Home</label>
         </item>
-        <item class="news" url="#">
+        <item class="news" url="#news">
             <label>News</label>
             <item url="http://84000.co/news">
                 <label>All News</label>
@@ -24,9 +24,9 @@
                 <label>Newsletters</label>
             </item>
         </item>
-        <item class="reading-room" url="#">
+        <item class="reading-room" url="#reading-room">
             <label>Reading Room</label>
-            <item url="http://read.84000.co">
+            <item url="http://read.84000.co/section/lobby.html">
                 <label>The Lobby</label>
             </item>
             <item url="http://read.84000.co/section/all-translated.html">
@@ -36,7 +36,7 @@
                 <label>Search The Reading Room</label>
             </item>
         </item>
-        <item class="about" url="#">
+        <item class="about" url="#about">
             <label>About</label>
             <item url="http://84000.co/about/vision">
                 <label>Vision</label>
@@ -84,7 +84,7 @@
                 <label>Privacy Policy</label>
             </item>
         </item>
-        <item class="resources" url="#">
+        <item class="resources" url="#resources">
             <label>Resources</label>
             <item url="http://84000.co/resources/translator-training">
                 <label>Translator Training</label>
@@ -105,7 +105,7 @@
                 <label>Other Resources</label>
             </item>
         </item>
-        <item class="how-to-help" url="#">
+        <item class="how-to-help" url="#how-to-help">
             <label>How You Can Help</label>
             <item url="http://84000.co/how-you-can-help/donate">
                 <label>Donate</label>
@@ -125,7 +125,7 @@
         <item class="home" url="http://84000.co/ch">
             <label>首頁</label>
         </item>
-        <item class="news" url="#">
+        <item class="news" url="#ch-news">
             <label>最新訊息</label>
             <item url="http://84000.co/ch-news">
                 <label>最新訊息</label>
@@ -149,7 +149,7 @@
         <item class="reading-room" url="http://read.84000.co/?lang=zh">
             <label>雲端藏經閣</label>
         </item>
-        <item class="about" url="#">
+        <item class="about" url="#ch-about">
             <label>關於我們</label>
             <item url="http://84000.co/ch-about/ch-about-vision">
                 <label>百年願景</label>
@@ -185,7 +185,7 @@
                 <label>聯繫方式</label>
             </item>
         </item>
-        <item class="resources" url="#">
+        <item class="resources" url="#ch-resources">
             <label>資源</label>
             <item url="http://84000.co/ch-resources/ch-resources-training">
                 <label>翻譯培訓</label>
@@ -197,7 +197,7 @@
                 <label>經典迴響</label>
             </item>
         </item>
-        <item class="how-to-help" url="#">
+        <item class="how-to-help" url="#ch-howhelp">
             <label>如何參與</label>
             <item url="http://84000.co/ch-howhelp/donate">
                 <label>如何護持</label>

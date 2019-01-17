@@ -17,6 +17,9 @@
                         <xsl:when test="m:item">
                             <xsl:attribute name="class">
                                 <xsl:choose>
+                                    <xsl:when test="@url = $active-url">
+                                        <xsl:value-of select="concat(@class,' dropdown-toggle-container', ' active')"/>
+                                    </xsl:when>
                                     <xsl:when test="m:item[@url = $active-url]">
                                         <xsl:value-of select="concat(@class,' dropdown-toggle-container', ' active')"/>
                                     </xsl:when>

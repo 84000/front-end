@@ -148,13 +148,13 @@
         </item>
         <item class="reading-room" url="#reading-room">
             <label>雲端藏經閣</label>
-            <item url="http://read.84000.co/section/lobby.html">
+            <item url="http://read.84000.co/section/lobby.html?lang=zh">
                 <label>The Lobby (ch)</label>
             </item>
-            <item url="http://read.84000.co/section/all-translated.html">
+            <item url="http://read.84000.co/section/all-translated.html?lang=zh">
                 <label>All Translated Texts (ch)</label>
             </item>
-            <item url="http://read.84000.co/search.html">
+            <item url="http://read.84000.co/search.html?lang=zh">
                 <label>Search The Reading Room (ch)</label>
             </item>
         </item>

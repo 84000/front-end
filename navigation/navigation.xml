@@ -146,8 +146,17 @@
                 <label>電子通訊</label>
             </item>
         </item>
-        <item class="reading-room" url="http://read.84000.co/?lang=zh">
+        <item class="reading-room" url="#reading-room">
             <label>雲端藏經閣</label>
+            <item url="http://read.84000.co/section/lobby.html">
+                <label>The Lobby (ch)</label>
+            </item>
+            <item url="http://read.84000.co/section/all-translated.html">
+                <label>All Translated Texts (ch)</label>
+            </item>
+            <item url="http://read.84000.co/search.html">
+                <label>Search The Reading Room (ch)</label>
+            </item>
         </item>
         <item class="about" url="#ch-about">
             <label>關於我們</label>

@@ -2,10 +2,10 @@
 
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
-            <div class="panel panel-default foreground">
+            <div class="panel panel-default panel-resources foreground">
                 <div class="panel-img-header thumbnail">
                     <img src="/imgs/text7.jpg">
-                    <h1 class="bg-orange">Tools</h1>
+                    <h1>Tools</h1>
                 </div>
                 <div class="panel-body">
                     <h2>Tools and Resources for 84000’s Translators</h2>

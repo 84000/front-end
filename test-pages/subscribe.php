@@ -2,11 +2,11 @@
 
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
-            <div class="panel panel-default foreground">
+            <div class="panel panel-default panel-how-to-help foreground">
 
                 <div class="panel-img-header thumbnail">
                     <img src="/imgs/Tree_offwhite.jpg" data-max-horizontal-crop="100" data-max-vertical-crop="80">
-                    <h1 class="bg-blue">Subscribe to our newsletter</h1>
+                    <h1>Subscribe to our newsletter</h1>
                 </div>
                 
                 <div class="panel-body">

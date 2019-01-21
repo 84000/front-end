@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
 
-            <div class="panel panel-default main-panel foreground">
+            <div class="panel panel-default panel-about main-panel foreground">
                 <div class="panel-img-header thumbnail">
 
-                    <h1 class="bg-red">Vision</h1>
+                    <h1>Vision</h1>
                     <img src="/imgs/Photo-27-10-13-7-37-58-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
 
                 </div>

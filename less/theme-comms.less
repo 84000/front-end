@@ -103,15 +103,27 @@ article {
         font-weight: normal;
     }
 
-    .bg-red {
-        background-color: rgba(red(@brand-red), green(@brand-red), blue(@brand-red), 0.65);
+    .panel-home & , .panel-about & {
+        h1 {
+            background-color: rgba(red(@brand-red), green(@brand-red), blue(@brand-red), 0.65);
+        }
     }
-    .bg-blue {
-        background-color: rgba(red(@brand-blue), green(@brand-blue), blue(@brand-blue), 0.65);
+    .panel-news & , .panel-how-to-help & {
+        h1 {
+            background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.65);
+        }
     }
-    .bg-orange {
-        background-color: rgba(red(@brand-orange), green(@brand-orange), blue(@brand-orange), 0.65);
+    .panel-reading-room & {
+        h1 {
+            background-color: rgba(red(@brand-blue), green(@brand-blue), blue(@brand-blue), 0.65);
+        }
     }
+    .panel-resources & {
+        h1 {
+            background-color: rgba(red(@brand-green), green(@brand-green), blue(@brand-green), 0.65);
+        }
+    }
+    
 
     @media only screen and (max-width: @screen-sm-max) {
 

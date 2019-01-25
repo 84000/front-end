@@ -1597,6 +1597,24 @@ jQuery(document).ready(function($) {
 	    $($(this).data("mouseup-submit")).submit();
     });
 
+	// Add behaviour...
+    // Show only the first line of content
+    // ----------------------------------------------------------------- 
+    $(".collapse-one-line").each(function() {
+    	var $this = $(this);
+    	$this.data("collapse-one-line-height", $this.height()).addClass('one-line');
+    });
+    $(document).on("mouseover", ".collapse-one-line", function(e){
+    	e.preventDefault();
+    	var $this = $(this);
+    	$this.height($this.data('collapse-one-line-height')).removeClass('one-line');
+    });
+    $(document).on("mouseout", ".collapse-one-line", function(e){
+    	e.preventDefault();
+    	var $this = $(this);
+    	$this.addClass('one-line').css({"height" : ""});
+    });
+
 
     // Add behaviour...
     // Replace matches in text.

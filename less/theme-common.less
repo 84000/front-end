@@ -1253,18 +1253,6 @@ table.contents-table {
     }
 }
 
-.collapse-one-line {
-    height: @line-height-computed;
-    overflow: hidden;
-    cursor: pointer;
-    &:hover {
-        height: auto;
-    }
-    &.small {
-        padding-top: 5px;
-    }
-}
-
 // Screen variations
 // All styles should default to desktop/screen
 // except ...
@@ -1319,6 +1307,18 @@ table.contents-table {
             }
         }
 
+    }
+
+    .collapse-one-line {
+        overflow: hidden;
+        cursor: pointer;
+        .transition(height .25s linear);
+        &.one-line {
+            height: @line-height-computed;
+        }
+        &.small {
+            padding-top: 5px;
+        }
     }
 
     // Render everything in editor mode
@@ -1387,11 +1387,15 @@ table.contents-table {
     .print-height-override {
         height: auto !important;
     }
+
+    .print-no-margin {
+        margin: 0px !important;
+    }
     
     .panel {
         border:0px;
     }
-
+    
     .panel > .panel-heading {
         border:0px;
     }

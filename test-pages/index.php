@@ -17,7 +17,7 @@
     $processor->setParameter('', 'local-comms-url', '/test-pages');
     $processor->setParameter('', 'local-reading-room-url', 'http://read.84000-translate.org');
     $processor->setParameter('', 'local-front-end-url', '');
-    $processor->setParameter('', 'default-search-form-action', 'comms');
+    $processor->setParameter('', 'default-search-form-target', 'comms');
 
     // Get the xml - header
     $headerXML = new DOMDocument;

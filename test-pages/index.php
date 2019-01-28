@@ -10,6 +10,7 @@
     $processor = new XSLTProcessor;
     $processor->importStyleSheet($xsl);
 
+    // Set local parameters
     $processor->setParameter('', 'lang', isset($_GET['lang']) && $_GET['lang'] == 'zh' ? 'zh' : 'en' );
     $active_url = 'http://84000.co' . substr($_SERVER['REQUEST_URI'], strlen('/test-pages'));
     $processor->setParameter('', 'active-url', $active_url);
@@ -18,10 +19,11 @@
     $processor->setParameter('', 'local-front-end-url', '');
     $processor->setParameter('', 'default-search-form-action', 'comms');
 
-    // Get the xml
+    // Get the xml - header
     $headerXML = new DOMDocument;
     $headerXML->load('../xslt/84000-header.xml');
 
+    // Get the xml - footer
     $footerXML = new DOMDocument;
     $footerXML->load('../xslt/84000-footer.xml');
 
@@ -56,15 +58,18 @@
 
     <body id="top">
 
-        <?php
-                        
-            echo $processor->transformToXML($headerXML);
+<?php
+    
+    // Output header
+    echo $processor->transformToXML($headerXML);
 
-            include($content_template . ".php");
-                        
-            echo $processor->transformToXML($footerXML);
+    // Include content
+    include($content_template . ".php");
+    
+    // Output footer
+    echo $processor->transformToXML($footerXML);
 
-        ?>
+?>
 
         <script type="text/javascript">
             function downloadJSAtOnload() {

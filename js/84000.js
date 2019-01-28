@@ -463,11 +463,14 @@ jQuery(document).ready(function($) {
 					var $collapsed = $target.closest(".collapse");
 					var $unrendered = $target.closest(".render-in-viewport");
 					var $tabbed = $target.closest(".tab-pane").length ? $('[href="#'+$target.closest(".tab-pane").attr('id')+'"]') : new Array ;
-					
+
 					if($collapsed.length){
 						$collapsed.on('shown.bs.collapse', function () {
 							scrollToAnchorScroll();
 						});
+						// Close sibling panels
+						$collapsed.parents('.panel-group').find(".collapse.in").collapse('hide');
+						// Show this panel
 						$collapsed.collapse('show');
 					}
 					else if($unrendered.length){
@@ -1619,7 +1622,6 @@ jQuery(document).ready(function($) {
     // Add behaviour...
     // Replace matches in text.
     // ------------------------------------------------------------------
-    
     RegExp.escape= function(s) {
 	    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 	};

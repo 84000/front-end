@@ -1,5 +1,25 @@
-<navigation xmlns="http://read.84000.co/ns/1.0">
-    <language xml:lang="en">
+<eft-header xmlns="http://read.84000.co/ns/1.0">
+    <translation id="tag-line">
+        <text xml:lang="en">Translating the words of the Buddha</text>
+        <text xml:lang="zh">八萬四千 • 佛典傳譯</text>
+    </translation>
+    <translation id="placeholder-search">
+        <text xml:lang="en">Search...</text>
+        <text xml:lang="zh">Search... (ch)</text>
+    </translation>
+    <translation id="button-search-reading-room">
+        <text xml:lang="en">Search the Reading Room</text>
+        <text xml:lang="zh">Search the Reading Room (ch)</text>
+    </translation>
+    <translation id="button-search-comms">
+        <text xml:lang="en">Search the Website</text>
+        <text xml:lang="zh">Search the Website (ch)</text>
+    </translation>
+    <translation id="label-social-icons">
+        <text xml:lang="en">Follow our work:</text>
+        <text xml:lang="zh"/>
+    </translation>
+    <navigation xml:lang="en">
         <item class="home" url="http://84000.co/">
             <label>Home</label>
         </item>
@@ -117,8 +137,8 @@
                 <label>FAQ</label>
             </item>
         </item>
-    </language>
-    <language xml:lang="zh">
+    </navigation>
+    <navigation xml:lang="zh">
         <item class="home" url="http://84000.co/ch">
             <label>首頁</label>
         </item>
@@ -206,5 +226,24 @@
                 <label>常見問題</label>
             </item>
         </item>
-    </language>
-</navigation>
+    </navigation>
+    <social xml:lang="en">
+        <item url="mailto:info@84000.co" icon-class="fa fa-envelope-square">
+            <label>Send us an email</label>
+        </item>
+        <item url="http://www.facebook.com/Translate84000" icon-class="fa fa-facebook-square">
+            <label>Follow us on Facebook</label>
+        </item>
+        <item url="https://twitter.com/Translate84000" icon-class="fa fa-twitter-square">
+            <label>Follow us on Twitter</label>
+        </item>
+        <item url="http://www.youtube.com/Translate84000" icon-class="fa fa-youtube-square">
+            <label>Subscribe to our Youtube channel</label>
+        </item>
+    </social>
+    <social xml:lang="zh">
+        <item url="mailto:info@84000.co" icon-class="fa fa-envelope-square">
+            <label>Send us an email (ch)</label>
+        </item>
+    </social>
+</eft-header>

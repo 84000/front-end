@@ -204,12 +204,46 @@
                         
                         <!-- Language switch -->
                         <div id="language-links">
-                            <a href="?lang=en">
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:choose>
+                                        <xsl:when test="$lang = 'en'">
+                                            <xsl:value-of select="'#'"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:choose>
+                                                <xsl:when test="$active-url = '#reading-room' or starts-with($active-url, 'http://read.84000.co')">
+                                                    <xsl:value-of select="'?lang=en'"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select="$local-comms-url"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
                                 <xsl:value-of select="'English'"/>
                             </a>
                             <xsl:value-of select="' | '"/>
-                            <a href="?lang=zh">
-                                 <xsl:value-of select="'中文'"/>
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:choose>
+                                        <xsl:when test="$lang = 'zh'">
+                                            <xsl:value-of select="'#'"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:choose>
+                                                <xsl:when test="$active-url = '#reading-room' or starts-with($active-url, 'http://read.84000.co')">
+                                                    <xsl:value-of select="'?lang=zh'"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select="concat($local-comms-url, '/ch')"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                                <xsl:value-of select="'中文'"/>
                             </a>
                         </div>
                         

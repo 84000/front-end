@@ -20,10 +20,14 @@
 </IfModule>
 
 RewriteEngine on
-
+RewriteRule ^/?test-pages/ch$ /test-pages/?lang=zh [NC]
 RewriteRule ^/?test-pages/news.* /test-pages/?template=news [NC]
+RewriteRule ^/?test-pages/ch-news$ /test-pages/?template=news&lang=zh [NC]
 RewriteRule ^/?test-pages/category.* /test-pages/?template=news [NC]
 RewriteRule ^/?test-pages/about.* /test-pages/?template=about [NC]
+RewriteRule ^/?test-pages/ch-about* /test-pages/?template=about&lang=zh [NC]
 RewriteRule ^/?test-pages/resources.* /test-pages/?template=resources [NC]
+RewriteRule ^/?test-pages/ch-resources* /test-pages/?template=resources&lang=zh [NC]
 RewriteRule ^/?test-pages/how-you-can-help/spread-the-word.* /test-pages/?template=subscribe [NC]
 RewriteRule ^/?test-pages/how-you-can-help.* /test-pages/?template=sponsor-sutra [NC]
+RewriteRule ^/?test-pages/ch-howhelp* /test-pages/?template=sponsor-sutra&lang=zh [NC]

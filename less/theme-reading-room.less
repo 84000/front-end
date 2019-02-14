@@ -746,7 +746,7 @@ h3, .milestone-h3 {
         .rw { // row
             padding-right: @text-gtr-width-sm-right;
             .rw {
-                margin-right: 0px;
+                margin-right: -@text-gtr-width-sm-right;
             }
             .rw-heading {
                 padding-right: @text-gtr-width;
@@ -823,10 +823,10 @@ h3, .milestone-h3 {
 
         .rw { // row
             padding-left: @text-gtr-width-sm;
-            padding-right: @text-gtr-width-sm-right;
+            padding-right: 0px;
             .rw {
                 margin-left: -@text-gtr-width-sm;
-                margin-right: -@text-gtr-width-sm-right;
+                margin-right: 0px;
             }
             .gtr{
                 margin-left: -@text-gtr-width-sm;
@@ -836,6 +836,7 @@ h3, .milestone-h3 {
             }
             .rw-heading {
                 padding-left: 0px;
+                padding-right: 0px;
                 > * {
                     text-align: left;
                 }

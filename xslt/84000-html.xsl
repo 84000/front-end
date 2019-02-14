@@ -207,18 +207,11 @@
                             <a>
                                 <xsl:attribute name="href">
                                     <xsl:choose>
-                                        <xsl:when test="$lang = 'en'">
-                                            <xsl:value-of select="'#'"/>
+                                        <xsl:when test="$active-url = '#reading-room' or starts-with($active-url, 'http://read.84000.co')">
+                                            <xsl:value-of select="'?lang=en'"/>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:choose>
-                                                <xsl:when test="$active-url = '#reading-room' or starts-with($active-url, 'http://read.84000.co')">
-                                                    <xsl:value-of select="'?lang=en'"/>
-                                                </xsl:when>
-                                                <xsl:otherwise>
-                                                    <xsl:value-of select="$local-comms-url"/>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
+                                            <xsl:value-of select="$local-comms-url"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:attribute>
@@ -228,18 +221,11 @@
                             <a>
                                 <xsl:attribute name="href">
                                     <xsl:choose>
-                                        <xsl:when test="$lang = 'zh'">
-                                            <xsl:value-of select="'#'"/>
+                                        <xsl:when test="$active-url = '#reading-room' or starts-with($active-url, 'http://read.84000.co')">
+                                            <xsl:value-of select="'?lang=zh'"/>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:choose>
-                                                <xsl:when test="$active-url = '#reading-room' or starts-with($active-url, 'http://read.84000.co')">
-                                                    <xsl:value-of select="'?lang=zh'"/>
-                                                </xsl:when>
-                                                <xsl:otherwise>
-                                                    <xsl:value-of select="concat($local-comms-url, '/ch')"/>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
+                                            <xsl:value-of select="concat($local-comms-url, '/ch')"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:attribute>
@@ -269,7 +255,9 @@
                                     </xsl:when>
                                 </xsl:choose>
                                 <xsl:attribute name="href">
-                                    <xsl:value-of select="@url"/>
+                                    <xsl:call-template name="local-url">
+                                        <xsl:with-param name="url" select="@url"/>
+                                    </xsl:call-template>
                                 </xsl:attribute>
                                 <xsl:attribute name="title">
                                     <xsl:value-of select="m:label/text()"/>

@@ -1704,8 +1704,14 @@ jQuery(document).ready(function($) {
 		var keys = Object.keys(values);
 		for(var i=0; i<keys.length; i++){
 			var $target = $(keys[i]);
-			var $value = $(values[keys[i]]);
-			$target.val($value.text());
+			if($target.is(':checkbox')) {
+				$target.attr('checked', !$target.prop('checked'))
+			}
+			else {
+				var $value = $(values[keys[i]]);
+				$target.val($value.text());
+			}
+			
 		}
 
 	});

@@ -341,7 +341,7 @@ h3, .milestone-h3 {
         }
 
         // Add a double space
-        .rw-section-head                // before a section head
+        .rw-chapter-head, .rw-section-head // before a section head
         {
             margin-top: @line-height-computed * 2;
             // cancel the indent after a space
@@ -382,6 +382,7 @@ h3, .milestone-h3 {
                 margin-bottom: 0px;
                 display: table-cell;
                 font-size: @font-size-h4;
+                text-align: center;
             }
             &:before {
                 padding-right: 10px;
@@ -795,26 +796,6 @@ h3, .milestone-h3 {
             }
         }
 
-        #abbreviations {
-            dl {
-                &:after {
-                    display: none;
-                }
-                dt, dd {
-                    float: none;
-                }
-                dt {
-                    clear: none;
-                }
-                dd {
-                    clear: none;
-                    &:before {
-                        display: none;
-                    }
-                }
-            }
-        }
-
         .text {
             p {
                 text-align: left;
@@ -837,7 +818,34 @@ h3, .milestone-h3 {
             .rw-heading {
                 padding-left: 0px;
                 padding-right: 0px;
+                margin-left: 0px;
+                margin-right: 0px;
                 > * {
+                    text-align: left;
+                }
+            }
+        }
+
+        #abbreviations {
+            dl {
+                &:after {
+                    display: none;
+                }
+                dt, dd {
+                    float: none;
+                }
+                dt {
+                    clear: none;
+                }
+                dd {
+                    clear: none;
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+            .nested-section {
+                .section-label {
                     text-align: left;
                 }
             }
@@ -939,6 +947,8 @@ h3, .milestone-h3 {
             > td {
                 color: @brand-red;
                 font-weight: bold;
+                padding-top: floor(@table-cell-padding * 3);
+                border-bottom: 2px solid @table-border-color;
             }
         }
         tr.sub {

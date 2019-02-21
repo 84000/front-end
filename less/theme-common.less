@@ -204,6 +204,12 @@ a {
     background-color: @brand-red;
 }
 
+// Background off-white
+// ----------------------------------
+.bg-off-white {
+    background-color: #e5e5e5;
+}
+
 // Badges
 // -------------------------------------------------
 .badge {
@@ -443,6 +449,7 @@ span.indent {
             button {
                 padding: 7px 12px;
                 height: 36px;
+                width: 60px;
             }
         }
     }
@@ -1164,7 +1171,7 @@ a#link-to-top {
     position: fixed;
     bottom: 0px;
     width: 100%;
-    z-index: 7;
+    z-index: 8;
     .text-center();
     padding: 10px 15px 25px 15px;
     &, a {
@@ -1318,7 +1325,7 @@ table.contents-table {
             height: @line-height-computed;
         }
         &.small {
-            padding-top: 5px;
+            padding-top: 3px;
         }
     }
 
@@ -1449,6 +1456,10 @@ table.contents-table {
     select.form-control {
         padding: 0px;
         border: 0px;
+        font-size: inherit;
+    }
+    label {
+        font-family: inherit;
     }
 
 }

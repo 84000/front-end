@@ -527,7 +527,7 @@ span.indent {
     // Destktop nav variations
     // --------------------------------------------------
     @media (min-width: @grid-float-breakpoint) {
-        
+
         .container {
             > #navbar {
                 margin-left: -@navbar-padding-horizontal;
@@ -562,11 +562,15 @@ span.indent {
         }
 
     }
+
+    @media only screen and (max-width: @screen-md) {
+        margin-bottom: 0px;
+    }
+
     @media only screen and (max-width: @screen-sm) {
         
         border-bottom-width: 1px;
-        margin-bottom: 0px;
-
+        
         #social {
             > span {
                 position: absolute;
@@ -579,6 +583,7 @@ span.indent {
             }
         }
     }
+
 }
 
 // Drop navigation panel
@@ -925,6 +930,7 @@ a#link-to-top {
             font-family: @font-family-bold;
             font-style: normal;
             text-align: left;
+            line-height: 1;
         }
 
         .label {

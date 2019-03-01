@@ -4,7 +4,7 @@
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default panel-how-to-help foreground">
                 
-                <div class="panel-img-header thumbnail">
+                <div class="panel-img-header has-img thumbnail">
                     <img src="/imgs/text15.jpg" data-max-horizontal-crop="500" data-max-vertical-crop="100">
                     <h1>Sponsor a Sutra</h1>
                 </div>

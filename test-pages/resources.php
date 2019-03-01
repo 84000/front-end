@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default panel-resources foreground">
-                <div class="panel-img-header thumbnail">
+                <div class="panel-img-header has-img thumbnail">
                     <img src="/imgs/text7.jpg">
                     <h1>Tools</h1>
                 </div>

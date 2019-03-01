@@ -4,7 +4,7 @@
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default panel-how-to-help main-panel foreground">
                 
-                <div class="panel-img-header thumbnail">
+                <div class="panel-img-header has-img thumbnail">
                     <img src="/imgs/10.png" data-max-horizontal-crop="200" data-max-vertical-crop="200">
                     <h1>84000 Circle</h1>
                 </div>

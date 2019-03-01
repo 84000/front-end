@@ -5,7 +5,7 @@
 
             <div class="panel panel-default panel-news listing-panel foreground">
 
-                <div class="panel-img-header thumbnail">
+                <div class="panel-img-header has-img thumbnail">
                     <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
                     <h1>All News</h1>
                 </div>

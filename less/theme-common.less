@@ -205,6 +205,17 @@ a {
     background-color: @brand-red;
 }
 
+// Modal variation
+// ----------------------------------
+.modal.warning {
+    .modal-header {
+        background-color: @brand-red;
+        .modal-title, .close {
+            color: #fff !important;
+        }
+    }
+}
+
 // Background off-white
 // ----------------------------------
 .bg-off-white {
@@ -931,6 +942,7 @@ a#link-to-top {
             font-style: normal;
             text-align: left;
             line-height: 1;
+            margin-bottom: 0px;
         }
 
         .label {

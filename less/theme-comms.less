@@ -677,6 +677,22 @@ ul.responsive-tabs__list{
     margin: 0.5em 0 0.5em 1em;
 }
 
+// Floated panel
+// ---------------------------------------------
+.floated-media {
+    width: 420px;
+    max-width: 100%;
+    &.pull-left {
+        margin: 0px 15px 15px 0px;
+    }
+    &.pull-right {
+        margin: 15px 0px 15px 0px;
+    }
+    @media only screen and (max-width: @screen-xs) {
+        width: 100%;
+    }
+}
+
 // Reading room section
 // ---------------------------------------------
 .section {

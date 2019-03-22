@@ -434,7 +434,17 @@
         <xsl:param name="translation-id"/>
         <xsl:param name="lang" select="'en'"/>
         <xsl:param name="text-node" select="true()"/>
-        <xsl:variable name="text" select="m:translation[@id = $translation-id]/m:text[@xml:lang = $lang]/text()"/>
+        <xsl:variable name="translation" select="m:translation[@id = $translation-id]"/>
+        <xsl:variable name="text">
+            <xsl:choose>
+                <xsl:when test="$translation/m:text[@xml:lang = $lang]">
+                    <xsl:value-of select="$translation/m:text[@xml:lang = $lang]/text()"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$translation/m:text[@xml:lang = 'en']/text()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:if test="$text">
             <xsl:choose>
                 <xsl:when test="$text-node">

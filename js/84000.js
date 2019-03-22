@@ -1476,6 +1476,10 @@ jQuery(document).ready(function($) {
         var target = $this.data('ajax-target');
         var $target = $(target);
 
+        if($target.is('.replace')){
+        	$target.html("").removeClass('loaded');
+        }
+
         if(target.indexOf("#popup-footer-source") !== -1){
         	var $popupFooter = $('#popup-footer-source');
         	$('.collapse').not($popupFooter).collapse('hide');

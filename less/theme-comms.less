@@ -1117,6 +1117,42 @@ ul.responsive-tabs__list{
     } 
 }
 
+// Endorsements
+// --------------------------------------------
+.endorsement {
+    margin-bottom: 40px;
+    .thumbnail.letter {
+        height:240px;
+        img {
+            -webkit-filter: grayscale(1);
+            filter: grayscale(1);
+        }
+    }
+    
+    .portrait-container {
+        
+        position: relative;
+        margin-bottom: 15px;
+        > h3 {
+            margin-top: 7px;
+            line-height: 1.2;
+        }
+        > div {
+            font-size: @font-size-small;
+        }
+        > ul {
+            margin-bottom: 0px;
+            font-size: @font-size-small;
+        }
+        .thumbnail {
+            width:100px;
+            height:100px;
+            border-radius:50px;
+            margin-top: 15px;
+        }
+    }
+}
+
 // Small viewport variations
 // --------------------------------------------
 @media only screen and (max-width: @screen-sm) {

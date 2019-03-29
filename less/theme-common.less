@@ -23,7 +23,7 @@ body {
         > .container, .fixed-footer > .container {
             padding-left: 0px;
             padding-right: 0px;
-            overflow: hidden;
+            //overflow: hidden;
         }
 
     }
@@ -510,12 +510,12 @@ span.indent {
             }
 
             > #language-links {
-                border-color: @brand-red;
+                border-color: @brand-green;
                 padding: 12px 20px;
             }
 
             > #search-controls {
-                border-color: @brand-orange;
+                border-color: @brand-blue;
                 padding: 6px 10px;
                 width: 100%;
                 .dropdown-menu {
@@ -600,6 +600,7 @@ span.indent {
 // Drop navigation panel
 // -------------------------------------------
 .navbar-default .navbar-nav > li {
+
     @media (max-width: @grid-float-breakpoint) {
         position: relative;
         > a.dropdown-toggle {
@@ -683,7 +684,6 @@ span.indent {
         }
     }
 }
-
 
 // Sharing 
 // -------------------------------------------
@@ -769,7 +769,7 @@ span.indent {
         right: -8px;
         top: -10px;
         z-index: 6;
-        color: #fff;
+        color: #fff !important;
         background-color: @brand-red-alert !important;
     }
 
@@ -796,23 +796,17 @@ span.indent {
         display: block;
     }
 
-    // Adjusted for Text to speech
-    // --------------------------------------
     &#navigation-btn-container {
         top: @button-spacing-top;
     }
     &#bookmarks-btn-container {
         top: (((@btn-round-size + @button-spacing-top) * 1) + @button-spacing-top);
     }
-    &#donate-btn-container {
+    &#link-to-trans-top-container {
         top: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
     }
-    /*
-    &#tts-btn-container {
-        top: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
-    }*/
     &#rewind-btn-container {
-        top: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
+        top: (((@btn-round-size + @button-spacing-top) * 3) + @button-spacing-top);
     }
     &#link-to-top-container {
         top: auto;
@@ -828,40 +822,42 @@ span.indent {
         top: @button-spacing-top;
     }
 
-    @media only screen and (max-width: @screen-md) {
-        
-        // Adjusted for Text to speech
-        // --------------------------------------
+}
+
+@media only screen and (max-width: @screen-md) {
+    
+    .nav-controls {
+        position: fixed;
+        bottom: 0px;
+        top: auto;
+        left: 0px;
+        right: 0px;
+        height:70px;
+        background-color: #fff;
+        border-top: 1px solid @hr-border;
+        z-index: 5
+    }
+
+    .fixed-btn-container {
+
+        top: auto !important;
+        bottom: 15px !important;
+
         &#navigation-btn-container {
-            top: auto;
-            bottom: 15px;
             right: @button-spacing-top;
         }
         &#bookmarks-btn-container {
-            top: auto;
-            bottom: 15px;
             right: (((@btn-round-size + @button-spacing-top) * 1) + @button-spacing-top);
         }
-        &#donate-btn-container {
-            top: auto;
-            bottom: 15px;
+        &#link-to-trans-top-container {
             right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
-        }
-        /*
-        &#tts-btn-container {
-            top: auto;
-            bottom: 15px;
-            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
-        }*/
-        &#link-to-top-container {
-            top: auto;
-            bottom: 15px;
-            right: @button-spacing-top; // Position overriden in theme-reading-room
         }
         &#rewind-btn-container {
-            top: auto;
-            bottom: 15px;
             right: (((@btn-round-size + @button-spacing-top) * 3) + @button-spacing-top);
+        }
+        &#link-to-top-container {
+            
+            right: @button-spacing-top; // Position overriden in theme-reading-room
         }
         &.close-btn-container.right  {
             position: fixed;
@@ -870,12 +866,11 @@ span.indent {
             z-index: 8;
         }
     }
-
 }
 
 // Link to top button
 // ---------------------------------
-a#link-to-top {
+a.link-to-top {
     .opacity(0);
     &.in {
         .opacity(1);
@@ -926,38 +921,37 @@ a#link-to-top {
 }
 
 .panel-default {
-    .panel-heading-bold {
+    .panel-heading {
 
-        width: 100%;
-        background-color: @brand-red;
-        padding: @panel-heading-padding;
+        &.bold {
+            width: 100%;
+            padding: @panel-heading-padding;
+            font-weight: normal;
+            background-color: @brand-red;
+            border-bottom: 0px;
 
-        &.tall {
-            padding-top: 15px;
-            padding-bottom: 15px;
+            &, a, li, .title, .panel-title {
+                color: #fff;
+            }
+
+            .title {
+                font-size: @font-size-large;
+                font-family: @font-family-bold;
+                //font-style: normal;
+                text-align: left;
+                line-height: 1;
+                margin: 0px;
+            }
+
+            .label {
+                margin-left: 8px;
+            }
         }
 
-        &, a, li {
-            color: #fff;
+        &.danger {
+            background-color: @brand-red-alert;
         }
 
-        .title {
-            font-size: @font-size-large;
-            font-family: @font-family-bold;
-            font-style: normal;
-            text-align: left;
-            line-height: 1;
-            margin-bottom: 0px;
-        }
-
-        .label {
-            margin-left: 8px;
-        }
-
-    }
-
-    .panel-heading-danger {
-        background-color: @brand-red-alert;
     }
 
     @media only screen and (max-width: @screen-sm) {

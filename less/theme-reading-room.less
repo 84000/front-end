@@ -637,6 +637,12 @@ h3, .milestone-h3 {
         }
     }
 
+    // Hide this on a translation - we have another
+    // --------------------------------------------
+    #link-to-top-container {
+        display: none;
+    }
+
 }
 
 // Different styles for the editors
@@ -757,26 +763,9 @@ h3, .milestone-h3 {
             margin-top: 0px;
             margin-bottom: 70px;
         }
-
-        // Adjusted for Text to speech
-        // --------------------------------------
-        #link-to-top-container {
-            right: (((@btn-round-size + @button-spacing-top) * 2) + @button-spacing-top);
-        }
         
     }
-
-    .nav-controls {
-        position: fixed;
-        bottom: 0px;
-        top: auto;
-        left: 0px;
-        right: 0px;
-        height:70px;
-        background-color: #fff;
-        border-top: 1px solid @hr-border;
-        z-index: 5
-    }
+    
 }
 
 // Small viewport variations

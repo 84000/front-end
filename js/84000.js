@@ -229,7 +229,7 @@ jQuery(document).ready(function($) {
 			    	$element.siblings("a.render").remove();
 
 			    	// add an option to collapse it again
-			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "preview", "title": "Collapse this section"});
+			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "preview show-on-scroll", "title": "Collapse this section"});
 			    	$btn = $("<span>", {"class": "btn-round"});
 			    	$icon = $("<i>", {"class": "fa fa-times"});
 			    	$btn.append($icon);
@@ -561,10 +561,10 @@ jQuery(document).ready(function($) {
 	// --------------------------------------
 	$(window).scroll(function () {
 		if($(document).scrollTop() > 200){
-			$("#link-to-top").addClass("in");
+			$(".link-to-top").addClass("in");
 		}
 		else if($(document).scrollTop() < 200){
-			$("#link-to-top").removeClass("in");
+			$(".link-to-top").removeClass("in");
 		}
 	});
 
@@ -765,6 +765,7 @@ jQuery(document).ready(function($) {
 
 	    	    // Flash the button
 	    	    // -------------------------------------------
+	    	    $(window).scroll();
 	    	    $("#bookmarks-btn-container .badge-notification").pulse();
 	    	}
     	}($));
@@ -1066,8 +1067,8 @@ jQuery(document).ready(function($) {
         e.stopPropagation();
 
         var selector = $(this).attr('href');
-
         var $sidebar = $(selector);
+        var h_padding = (20 * 2);
 
         $('.collapse').not($sidebar).collapse('hide');
         $sidebar.removeClass('in');
@@ -1086,10 +1087,10 @@ jQuery(document).ready(function($) {
         	});
         }
 
-        $('.lg ' + selector + ' .container').width(($(window).width() * 0.35) - 40);
-        $('.md ' + selector + ' .container').width(($(window).width() * 0.6) - 40);
-        $('.sm ' + selector + ' .container').width(($(window).width() * 0.75) - 40);
-        $('.xs ' + selector + ' .container').width(($(window).width()) - 40);
+        $('.lg ' + selector + ' .container').width(parseInt($(window).width() * 0.35) - h_padding);
+        $('.md ' + selector + ' .container').width(parseInt($(window).width() * 0.6) - h_padding);
+        $('.sm ' + selector + ' .container').width(parseInt($(window).width() * 0.75) - h_padding);
+        $('.xs ' + selector + ' .container').width(parseInt($(window).width()) - h_padding);
 
 		$sidebar.collapse('toggle');
 	});
@@ -1410,7 +1411,7 @@ jQuery(document).ready(function($) {
 	// ---------------------------------------
 	(function ($) { 
 		$.fn.scrollEnd = function(callback, timeout) {  
-			var $this = this;       
+			var $this = this;
 			$this.scroll(function(){
 				if ($this.data('scrollTimeout')) {
 					clearTimeout($this.data('scrollTimeout'));
@@ -1419,6 +1420,7 @@ jQuery(document).ready(function($) {
 			});
 		};
 	}($));
+
 
     // When a user stops scrolling...
 	// -------------------------------------------
@@ -1432,8 +1434,27 @@ jQuery(document).ready(function($) {
 		// --------------------------------------------
 		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
 		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
-
+		
 	}, 700);
+
+	// Add behaviour...
+	// Window scroll, fade in controls
+	// -------------------------------------------
+	$(window).on('scroll', function(){
+		var $this = $(this) ;
+		// Clear any existing timeout
+		if($this.data('showOnScroll')){
+			clearTimeout($this.data('showOnScroll'));
+		}
+		// Set new time out to hide again
+		$this.data('showOnScroll', setTimeout(function() { $('.show-on-scroll').fadeOut(); }, 3600));
+		// Show what's marked to show
+		$this.on('scroll', function(){ $('.show-on-scroll').fadeIn(); });
+	});
+
+	// On load...
+	// Trigger scroll behaviour
+	// -------------------------------------------
 	$(window).scroll();
 
 	// Note unsaved changes to a form

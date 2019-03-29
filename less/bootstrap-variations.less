@@ -117,11 +117,14 @@ mark, .mark {
 .panel {
     border-width: 0px;
     .box-shadow(0 6px 12px rgba(0,0,0,.175));
+    .bordered {
+        border-width: 1px;
+    }
 }
 
 .panel-title {
     font-family: @font-family-bold;
-    color: #444;
+    //color: #444;
     text-transform: uppercase;
 }
 
@@ -172,7 +175,7 @@ mark, .mark {
 }
 
 .event-hover {
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     .responsive-visibility();
   }
 }

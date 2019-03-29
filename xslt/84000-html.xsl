@@ -73,7 +73,12 @@
                                             </xsl:choose>
                                         </xsl:attribute>
                                         <!-- Main nav -->
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <xsl:attribute name="href">
+                                                <xsl:call-template name="local-url">
+                                                    <xsl:with-param name="url" select="@url"/>
+                                                </xsl:call-template>
+                                            </xsl:attribute>
                                             <xsl:value-of select="m:label"/>
                                             <span>
                                                 <i class="fa fa-plus"/>
@@ -386,7 +391,7 @@
         <!-- Link to top of page -->
         <div class="hidden-print">
             <div id="link-to-top-container" class="fixed-btn-container">
-                <a href="#top" id="link-to-top" class="btn-round scroll-to-anchor">
+                <a href="#top" class="btn-round scroll-to-anchor link-to-top">
                     <xsl:attribute name="title">
                         <xsl:call-template name="translation">
                             <xsl:with-param name="translation-id" select="'top-link-title'"/>

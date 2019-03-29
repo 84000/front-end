@@ -23,6 +23,7 @@ RewriteEngine on
 RewriteRule ^/?test-pages/ch$ /test-pages/?lang=zh [NC]
 RewriteRule ^/?test-pages/news.* /test-pages/?template=news [NC]
 RewriteRule ^/?test-pages/ch-news$ /test-pages/?template=news&lang=zh [NC]
+RewriteRule ^/?test-pages/category/announcements.* /test-pages/?template=announcements [NC]
 RewriteRule ^/?test-pages/category.* /test-pages/?template=news [NC]
 RewriteRule ^/?test-pages/about.* /test-pages/?template=about [NC]
 RewriteRule ^/?test-pages/ch-about* /test-pages/?template=about&lang=zh [NC]

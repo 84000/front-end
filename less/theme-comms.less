@@ -1101,6 +1101,20 @@ ul.responsive-tabs__list{
 
 }
 
+/* Fix to old sponsors table mess in WP */
+.table {
+    > tbody {
+        > tr {
+            > td {
+                h4:first-child {
+                    margin-top: -2px;
+                    line-height: 1.4;
+                }
+            }
+        }
+    }
+}
+
 // Small viewport variations
 // --------------------------------------------
 @media only screen and (max-width: @screen-sm) {

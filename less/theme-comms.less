@@ -178,6 +178,18 @@ article {
 
 }
 
+// Staggered blockquotes
+// ----------------------------------------------
+
+blockquote.offset:nth-child(odd) {
+    margin-right: 20%;
+}
+blockquote.offset:nth-child(even) {
+    margin-left: 20%;
+}
+
+
+
 @media only screen and (min-width: @screen-sm) {
 
     .panel.main-panel .panel-img-header.has-img+.panel-body {

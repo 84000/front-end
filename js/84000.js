@@ -1924,10 +1924,11 @@ jQuery(document).ready(function($) {
 
 	// Affix nav
 	// ------------------------------------------
-	$("#letters-nav [data-spy='affix']").affix({
+	$("#affix-nav [data-spy='affix']").width($("#affix-nav [data-spy='affix']").width());
+	$("#affix-nav [data-spy='affix']").affix({
 		offset: {
 			top: function () {
-		    	return $("#letters-nav").offset().top;
+		    	return $('#affix-nav').offset().top;
 		    },
 			bottom: function () {
 		    	return (this.bottom = $('body > footer').outerHeight(true) + 20);

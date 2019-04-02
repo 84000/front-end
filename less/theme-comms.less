@@ -183,13 +183,26 @@ article {
 blockquote.offset {
     margin-bottom: 40px;
 }
-blockquote.offset:nth-child(odd) {
-    margin-right: 10%;
+blockquote.offset:nth-child(4n+1) {
+    border-color: @brand-red;
+    margin-left: 0%;
+    margin-right: 21%;
 }
-blockquote.offset:nth-child(even) {
-    margin-left: 10%;
+blockquote.offset:nth-child(4n+2) {
+    border-color: @brand-orange;
+    margin-left: 14%;
+    margin-right: 7%;
 }
-
+blockquote.offset:nth-child(4n+3) {
+    border-color: @brand-green;
+    margin-left: 7%;
+    margin-right: 14%;
+}
+blockquote.offset:nth-child(4n+4) {
+    border-color: @brand-blue;
+    margin-left: 21%;
+    margin-right: 0%;
+}
 
 @media only screen and (min-width: @screen-sm) {
 

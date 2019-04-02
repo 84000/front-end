@@ -267,7 +267,7 @@ table#translation-stats {
     margin-top: 5px;
     margin-bottom: 30px;
     .stat {
-        margin-bottom: 24px;
+        margin-bottom: (@line-height-computed / 2);
         .heading {
             font-family: @font-family-bold;
             text-transform: uppercase;
@@ -276,10 +276,10 @@ table#translation-stats {
         }
         .data {
             color: @text-muted;
-            line-height: 34px;
-            font-size: 22px;
+            font-size: 18px;
             span {
                 font-size: 34px;
+                line-height: 34px;
                 font-family: @font-family-stats;
             }
         }

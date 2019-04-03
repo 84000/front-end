@@ -932,39 +932,36 @@ jQuery(document).ready(function($) {
 			    	        	$alert = $("#page-alert");
 
 			    	        	$alert.find(".container").append(
-			    	        		$("<small>").text("You were reading:")
-			    	        	).append(
-			    	        		$("<br>")
-			    	        	).append(
-			    	        		lastLocation.title
-			    	        	).append(
-			    	        		$("<br>")
-			    	        	).append(
-			    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor small"})
-			    	        			.text("go there")
-			    	        			.on("click", function(e){
-								    		$(this).parents("#page-alert").collapse('hide');
-								    	})
-			    	        	).append(
-			    	        		" &bull; "
-			    	        	).append(
-			    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
-			    	        			.text("bookmark it")
-			    	        			.on("click", function(e){
-			    	        				e.preventDefault();
-			    	        				$.bookmark(lastLocation);
-								    		$(this).parents("#page-alert").collapse('hide');
-								    	})
-			    	        	).append(
-			    	        		" &bull; "
-			    	        	).append(
-			    	        		$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
-			    	        			.text("forget it")
-			    	        			.on("click", function(e){
-			    	        				e.preventDefault();
-								    		$(this).parents("#page-alert").collapse('hide');
-								    	})
-			    	        	);
+				    	        		$("<div>", {"class": "small"}).text("You were reading:")
+				    	        	).append(
+				    	        		$("<div>").text(lastLocation.title)
+				    	        	).append(
+				    	        		$("<ul>", {"class": "list-inline inline-dots no-bottom-margin"})
+					    	        		.append($("<li>").append(
+					    	        			$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "scroll-to-anchor small"})
+						    	        			.text("go there")
+						    	        			.on("click", function(e){
+											    		$(this).parents("#page-alert").collapse('hide');
+											    	})
+					    	        		))
+					    	        		.append($("<li>").append(
+					    	        			$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
+						    	        			.text("bookmark it")
+						    	        			.on("click", function(e){
+						    	        				e.preventDefault();
+						    	        				$.bookmark(lastLocation);
+											    		$(this).parents("#page-alert").collapse('hide');
+											    	})
+					    	        		))
+					    	        		.append($("<li>").append(
+					    	        			$("<a>", {"href": lastLocation.page + lastLocation.hash, "class": "small"})
+						    	        			.text("forget it")
+						    	        			.on("click", function(e){
+						    	        				e.preventDefault();
+											    		$(this).parents("#page-alert").collapse('hide');
+											    	})
+					    	        		))
+				    	        	);
 
 			    	        	// Only show it once
 								Cookies.remove('lastLocation', { domain: $.getDomain() });

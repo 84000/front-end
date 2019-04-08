@@ -1096,7 +1096,7 @@ jQuery(document).ready(function($) {
 	// -----------------------------------------
 	$(document).on("click",'.fixed-sidebar a:not(.remove-bookmark, [data-toggle="collapse"])', function(e) {
 
-		$(this).parents(".fixed-sidebar ").collapse('hide');
+		$(this).parents(".fixed-sidebar").collapse('hide');
 
 	});
 

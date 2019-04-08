@@ -1143,8 +1143,39 @@ ul.responsive-tabs__list{
                 }
             }
         }
-    } 
+    }
 }
+
+// About / Team list group
+// ------------------------------------
+#about-team {
+    .list-group-item {
+        a .list-group-item-heading {
+            color: @brand-warning;
+        }
+        a.collapsed .list-group-item-heading {
+            color: @list-group-link-heading-color;
+        }
+        a:focus {
+            text-decoration: none;
+        }
+        h3 {
+            margin-bottom: 0px;
+        }
+        small {
+            color: #666;
+            font-style: italic;
+        }
+
+    }
+    div.collapse {
+        @media print {
+            display: block;
+            height: auto;
+        }
+    }
+}
+
 
 // Endorsements
 // --------------------------------------------

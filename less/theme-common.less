@@ -75,13 +75,8 @@ body .container > .panel, .panel.main-panel {
         overflow: hidden;
         position: relative;
         
-
         > p:first-child > img:first-child {
             width: 100%;
-        }
-
-        @media only screen and (min-width: @screen-sm) {
-            font-size: 1.25em;
         }
 
     }
@@ -97,7 +92,6 @@ body .container > .panel, .panel.main-panel {
             padding: 15px 25px 60px 25px;
         }
     }
-
 
 }
 
@@ -1392,6 +1386,12 @@ table.contents-table {
         a.preview {
             top: -@btn-round-size;
         }
+    }
+}
+
+@media only screen and (min-width: @screen-sm) {
+    .panel.main-panel {
+        font-size: 1.25em;
     }
 }
 

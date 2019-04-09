@@ -23,7 +23,7 @@ body {
         > .container, .fixed-footer > .container {
             padding-left: 0px;
             padding-right: 0px;
-            //overflow: hidden;
+            overflow-x: hidden;
         }
 
     }
@@ -74,11 +74,16 @@ body .container > .panel, .panel.main-panel {
         padding: 20px 30px 60px 30px;
         overflow: hidden;
         position: relative;
-        font-size: 1.25em;
+        
 
         > p:first-child > img:first-child {
             width: 100%;
         }
+
+        @media only screen and (min-width: @screen-sm) {
+            font-size: 1.25em;
+        }
+
     }
 
     > .panel-footer {
@@ -87,10 +92,12 @@ body .container > .panel, .panel.main-panel {
     }
 
     @media only screen and (max-width: @grid-float-breakpoint) {
+        margin-bottom: 0px;
         > .panel-body {
             padding: 15px 15px 60px 15px;
         }
     }
+
 
 }
 

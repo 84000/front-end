@@ -647,6 +647,7 @@ jQuery(document).ready(function($) {
 	$('.thumbnail img').on("load", function () {
 		$(this).centerWithMargins();
 	});
+	
 	// Size images on loading page
 	// --------------------------------------
 	$('.thumbnail img').centerWithMargins();

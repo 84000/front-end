@@ -1108,6 +1108,11 @@ a.link-to-top {
             border-bottom: 1px solid @panel-inner-border;
         }
 
+        > *:last-child {
+            margin-bottom: 0px;
+            border-bottom: 0px;
+        }
+
     }
 
     > div {
@@ -1124,8 +1129,6 @@ a.link-to-top {
 
         color: @text-muted;
         font-size: @font-size-small;
-        margin-bottom: 0px;
-        border-bottom: 0px;
     }
 
     .footer {

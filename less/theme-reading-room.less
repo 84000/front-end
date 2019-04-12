@@ -184,7 +184,7 @@ h3, .milestone-h3 {
             }
         }
     }
-    
+
     // Title section
     // ---------------------------------------------
     #front-matter {
@@ -317,8 +317,21 @@ h3, .milestone-h3 {
             padding-left: @line-height-computed;
         }
 
+        // Data table 
+        // ---------------------------------------------
+        .table {
+            margin-bottom: 0px;
+        }
+        .table-responsive {
+            margin-bottom: (@line-height-computed / 2);
+            border-bottom: 1px solid @table-border-color;
+        }
+        .table-label {
+            margin-top: 0px;
+        }
+
         // Add a space
-        br+*,
+        br+*,                           // after a br
         .rw-chapter-title+.rw,          // after a chapter title
         .rw-section-head+.rw,           // after a section head
         .rw-chapter-head+.rw,           // after a chapter head
@@ -330,6 +343,8 @@ h3, .milestone-h3 {
         .rw-blockquote+.rw,             // after a blockquote
         .rw-mantra,                     // before a mantra
         .rw-mantra+.rw,                 // after a mantra
+        .rw-table,                      // before a table
+        .rw-table+.rw,                  // after a table
         .rw-trailer                     // before a trailer
         {
             margin-top: @line-height-computed;

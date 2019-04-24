@@ -317,19 +317,6 @@ h3, .milestone-h3 {
             padding-left: @line-height-computed;
         }
 
-        // Data table 
-        // ---------------------------------------------
-        .table {
-            margin-bottom: 0px;
-        }
-        .table-responsive {
-            margin-bottom: (@line-height-computed / 2);
-            border-bottom: 1px solid @table-border-color;
-        }
-        .table-label {
-            margin-top: 0px;
-        }
-
         // Add a space
         br+*,                           // after a br
         .rw-chapter-title+.rw,          // after a chapter title
@@ -552,6 +539,27 @@ h3, .milestone-h3 {
         margin-top: @line-height-computed;
     }
     */
+
+    // Data table 
+    // ---------------------------------------------
+    .table {
+        margin-bottom: 0px;
+    }
+    .table-responsive {
+        margin-bottom: (@line-height-computed / 2);
+        border-bottom: 1px solid @table-border-color;
+    }
+    .table-label {
+        margin-top: 0px;
+    }
+    ul.table-as-list {
+        padding-left: 0;
+        list-style: none;
+        ul.table-as-list {
+            padding-left: 40px;
+            list-style: disc;
+        }
+    }
 
     // Glossary items
     // --------------------------------------------

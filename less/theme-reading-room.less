@@ -450,73 +450,75 @@ h3, .milestone-h3 {
                 padding-left: (@line-height-computed * 2);
             }
         }
+    }
 
-        .list {
+    // List types
+    // --------------------------------------------------
+    .list {
 
-            // Cancel vertical spacing on list content, apply to list item instead
-            // -------------------------------------------------------------------
-            p, .section-label {
+        // Cancel vertical spacing on list content, apply to list item instead
+        // -------------------------------------------------------------------
+        p, .section-label {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        // Bullet lists have horizontal spacing
+        // --------------------------------------------------
+        &.list-bullet {
+             > .rw-list-item {
+                margin-top: 5px;
+                > .list-item {
+                    margin-top: 0px;
+                    padding-left: 0px;
+                    > .rw {
+                        > p, > .section-label {
+                            padding-left: @line-height-computed;
+                        }
+                    } 
+                }
+            }
+            &.nesting-1 > .rw > .list-item > .rw {
+                > p, > .section-label {
+                    padding-left: (@line-height-computed * 2);
+                }
+            }
+            &.nesting-2 > .rw > .list-item > .rw {
+                > p, > .section-label {
+                    padding-left: (@line-height-computed * 3);
+                }
+            }
+            &.nesting-3 > .rw > .list-item > .rw {
+                > p, > .section-label {
+                    padding-left: (@line-height-computed * 4);
+                }
+            }
+            &.nesting-4 > .rw > .list-item > .rw {
+                > p, > .section-label {
+                    padding-left: (@line-height-computed * 5);
+                }
+            }
+            &.nesting-5 > .rw > .list-item > .rw {
+                > p, > .section-label {
+                    padding-left: (@line-height-computed * 6);
+                }
+            }
+        } 
+
+        // Section lists have vertical spacing
+        // --------------------------------------------------
+        /**/
+        &.list-section {
+            > .rw-list-item {
+                margin-top: @line-height-computed;
+                > .list-item {
+                    margin-top: 0px;
+                }
+            }
+            /*
+            > .rw.first-child , > .rw.rw-heading + .rw {
                 margin-top: 0;
-                margin-bottom: 0;
-            }
-
-            // Bullet lists have horizontal spacing
-            // --------------------------------------------------
-            &.list-bullet {
-                 > .rw-list-item {
-                    margin-top: 5px;
-                    > .list-item {
-                        margin-top: 0px;
-                        padding-left: 0px;
-                        > .rw {
-                            > p, > .section-label {
-                                padding-left: @line-height-computed;
-                            }
-                        } 
-                    }
-                }
-                &.nesting-1 > .rw > .list-item > .rw {
-                    > p, > .section-label {
-                        padding-left: (@line-height-computed * 2);
-                    }
-                }
-                &.nesting-2 > .rw > .list-item > .rw {
-                    > p, > .section-label {
-                        padding-left: (@line-height-computed * 3);
-                    }
-                }
-                &.nesting-3 > .rw > .list-item > .rw {
-                    > p, > .section-label {
-                        padding-left: (@line-height-computed * 4);
-                    }
-                }
-                &.nesting-4 > .rw > .list-item > .rw {
-                    > p, > .section-label {
-                        padding-left: (@line-height-computed * 5);
-                    }
-                }
-                &.nesting-5 > .rw > .list-item > .rw {
-                    > p, > .section-label {
-                        padding-left: (@line-height-computed * 6);
-                    }
-                }
-            } 
-
-            // Section lists have vertical spacing
-            // --------------------------------------------------
-            /**/
-            &.list-section {
-                > .rw-list-item {
-                    margin-top: @line-height-computed;
-                    > .list-item {
-                        margin-top: 0px;
-                    }
-                }
-                /*
-                > .rw.first-child , > .rw.rw-heading + .rw {
-                    margin-top: 0;
-                }*/
-            }
+            }*/
         }
     }
 
@@ -552,13 +554,24 @@ h3, .milestone-h3 {
     .table-label {
         margin-top: 0px;
     }
-    ul.table-as-list {
-        padding-left: 0;
-        list-style: none;
-        ul.table-as-list {
-            padding-left: 40px;
-            list-style: disc;
+    .table-as-list {
+        .section-label {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            .row-label {
+                font-style: normal;
+            }
         }
+        .row-label {
+            font-style: italic;
+        }
+        p {
+            text-indent: 0;
+            margin-bottom: (@line-height-computed / 2);
+        }
+    }
+    .table-notes {
+        font-style: italic;
     }
 
     // Glossary items

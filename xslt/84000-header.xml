@@ -124,8 +124,14 @@
         </item>        
         <item class="how-to-help" url="#how-to-help">
             <label>How You Can Help</label>
-            <item url="http://84000.co/how-you-can-help/donate">
-                <label>Donate</label>
+            <item url="http://84000.co/how-you-can-help/sponsor-page">
+                <label>Sponsor a Page</label>
+            </item>
+            <item url="http://84000.co/how-you-can-help/sponsor-sutra">
+                <label>Sponsor a Sūtra</label>
+            </item>
+            <item url="http://84000.co/how-you-can-help/become-donor">
+                <label>Become a Donor</label>
             </item>
             <item url="http://84000.co/how-you-can-help/shop-n-give">
                 <label>Shop and Give</label>
@@ -219,8 +225,14 @@
         </item>
         <item class="how-to-help" url="#ch-howhelp">
             <label>如何參與</label>
-            <item url="http://84000.co/ch-howhelp/donate">
-                <label>如何護持</label>
+            <item url="http://84000.co/ch-how-you-can-help/sponsor-page">
+                <label>贊助一頁佛經</label>
+            </item>
+            <item url="http://84000.co/ch-how-you-can-help/sponsor-sutra">
+                <label>贊助一部佛典</label>
+            </item>
+            <item url="http://84000.co/ch-how-you-can-help/become-donor">
+                <label>八萬四千緣</label>
             </item>
             <item url="http://84000.co/ch-howhelp/faq">
                 <label>常見問題</label>

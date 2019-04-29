@@ -585,7 +585,9 @@ jQuery(document).ready(function($) {
 		$(this).removeClass("open");
 	});
 
+/*
 	// Image sizing
+	// DEPRECATED in favour of object-fit property
 	// --------------------------------------
 	(function ($) { 
 		$.fn.centerWithMargins = function () {
@@ -642,7 +644,6 @@ jQuery(document).ready(function($) {
 		};
 	}($));
 
-/*
 	// Size image on loading image
 	// --------------------------------------
 	$('.thumbnail img').on("load", function () {

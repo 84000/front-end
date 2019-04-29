@@ -642,6 +642,7 @@ jQuery(document).ready(function($) {
 		};
 	}($));
 
+/*
 	// Size image on loading image
 	// --------------------------------------
 	$('.thumbnail img').on("load", function () {
@@ -651,7 +652,7 @@ jQuery(document).ready(function($) {
 	// Size images on loading page
 	// --------------------------------------
 	$('.thumbnail img').centerWithMargins();
-
+*/
 	// Lightbox
 	// -------------------------------------------------------
 	if($('html').hasClass('screen') && $('[data-lightbox="slideshow"]').length) {

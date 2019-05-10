@@ -34,3 +34,4 @@ RewriteRule ^/?test-pages/ch-resources* /test-pages/?template=resources&lang=zh 
 RewriteRule ^/?test-pages/how-you-can-help/spread-the-word.* /test-pages/?template=subscribe [NC]
 RewriteRule ^/?test-pages/how-you-can-help.* /test-pages/?template=sponsor-sutra [NC]
 RewriteRule ^/?test-pages/ch-howhelp* /test-pages/?template=sponsor-sutra&lang=zh [NC]
+RewriteRule ^(wp-content/uploads/.*) http://trans84000.staging.wpengine.com/$1 [NC]

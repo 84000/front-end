@@ -284,7 +284,7 @@ p.date {
         margin-bottom: @line-height-computed;
     }
 
-    > span, > a {
+    > * {
 
         display: table-cell;
         vertical-align: middle;
@@ -299,7 +299,7 @@ p.date {
 
     .adjacent-panels();
 
-    > span, > a {
+    > * {
 
         vertical-align: middle;
         padding-left: 15px;
@@ -315,7 +315,7 @@ p.date {
     }
 
     &.together {
-        > span, > a {
+        > * {
             padding-left: 7px;
         }
     }
@@ -324,7 +324,7 @@ p.date {
     }
 }
 a.center-vertical {
-    > span {
+    > * {
         padding-left: 5px;
     }
     > i {
@@ -338,7 +338,7 @@ a.center-vertical {
 
     .adjacent-panels();
 
-    > span, > a {
+    > * {
 
         vertical-align: top;
         padding-left: 15px;
@@ -349,8 +349,10 @@ a.center-vertical {
 
     }
     &.full-width {
+
         width: 100%;
-        > span:last-child, > a:last-child {
+        
+        > *:last-child {
             text-align: right;
         }
     }

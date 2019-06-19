@@ -82,7 +82,7 @@ article {
 }
 
 
-// Panel body 
+// Panels 
 // -------------------------------------------
 .panel-body {
 
@@ -90,6 +90,21 @@ article {
         margin-top:  (@line-height-computed / 2);
     }
 
+    &.no-padding {
+        padding: 0px;
+    }
+
+}
+.panel-heading {
+    a {
+        color: inherit;
+    }
+}
+.panel-danger {
+    .label-default {
+        background-color: #fff;
+        color: @brand-red;
+    }
 }
 
 // Image as panel header
@@ -251,9 +266,15 @@ table#translation-stats {
                 font-size: 44px;
                 line-height: 44px;
                 font-family: @font-family-stats;
-                text-align: right;
+                text-align: center;
                 width: 120px;
                 letter-spacing: -1px;
+            }
+            > td:first-child {
+                text-align: right;
+            }
+            > td:last-child {
+                text-align: left;
             }
             > th {
                 vertical-align: middle;
@@ -1030,9 +1051,7 @@ ul.responsive-tabs__list{
 // ---------------------------
 .text-list {
 
-    margin-top: 15px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 15px;
 
     .table-headers {
 

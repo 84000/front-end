@@ -1,18 +1,18 @@
 <div class="container home">
 
     <div class="md-adjacent-panels panel-margin">
-        <span class="md-three-quarter-width foreground movie-container">
+        <div class="md-three-quarter-width foreground movie-container">
             <div class="panel panel-default movie">
                 <iframe src="http://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720" allowfullscreen></iframe>
             </div>
-        </span>
-        <span class="md-quarter-width">
+        </div>
+        <div class="md-quarter-width">
             <?php 
 
                 include("sponsor-stats.php");
 
             ?>
-        </span>
+        </div>
     </div>
 
     <div class="row">

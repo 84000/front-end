@@ -21,7 +21,7 @@
                             <p>For more information on the UVA’s Department of Religious Studies, please visit: <a href="#">www.?</a>.</p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/University_of_Virginia_1819_logo-700x700.png" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/University_of_Virginia_1819_logo-700x700.png" alt="partner logo" /></div>
                         </div>
                     </div>
                     <div class="row bottom-margin">
@@ -34,7 +34,7 @@
                             <p>For more information on Rangjung Yeshe Institute, please visit: <a href="#">www.ryi.org</a>.</p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/Rangjung_Yeshe_Institute_Logo.jpg" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/Rangjung_Yeshe_Institute_Logo.jpg" alt="partner logo"/></div>
                         </div>
                     </div>
                     <div class="row bottom-margin">
@@ -46,7 +46,7 @@
                             <p>To read more about the degree programme at the University of Vienna, please visit: <a href="#">www.?</a></p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/vienna.jpg" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/vienna.jpg" alt="partner logo"/></div>
                         </div>
                     </div>
                     <div class="row bottom-margin">
@@ -58,7 +58,7 @@
                             <p>To read more about the University of Leiden, please visit: <a href="#">www.?</a></p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/UniversiteitLeidenLogo.jpg" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/UniversiteitLeidenLogo.jpg" alt="partner logo"/></div>
                         </div>
                     </div>
                     <hr />
@@ -76,7 +76,7 @@
                             <p>For more information on Kumarajiva Plan, please visit: <a href="#">www.?</a>.</p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/KhyentseLogo.png" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/KhyentseLogo.png" alt="partner logo"/></div>
                         </div>
                     </div>
                     <div class="row bottom-margin">
@@ -90,7 +90,7 @@
                             <p>For more information on BDRC, please visit: <a href="http://www.tbrc.org">www.tbrc.org</a></p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/tbrc.png" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/tbrc.png" alt="partner logo"/></div>
                         </div>
                     </div>
                     <div class="row bottom-margin">
@@ -103,7 +103,7 @@
                             <p>For more information on Adarsha, please visit: <a href="https://adarsha.dharma-treasure.org/about">adarsha.dharma-treasure.org</a></p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/adarsha.png" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/adarsha.png" alt="partner logo"/></div>
                         </div>
                     </div>
                     <div class="row bottom-margin">
@@ -116,7 +116,7 @@
                             <p>For more information on Siddhartha’s Intent, please visit: <a href="https://www.siddharthasintent.org">www.siddharthasintent.org</a></p>
                         </div>
                         <div class="col-sm-3">
-                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/SI_logo-white.jpg" /></div>
+                            <div class="thumbnail"><img class="img-responsive" src="/wp-content/uploads/SI_logo-white.jpg" alt="partner logo"/></div>
                         </div>
                     </div>
                 </div>

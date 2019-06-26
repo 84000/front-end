@@ -83,7 +83,7 @@
                                 <div class="media-panel-heading">Events</div>
                                 <div class="media-panel-image thumbnail">
                                     <a href="#">
-                                        <img src="/imgs/resounding.jpg">
+                                        <img src="/imgs/resounding.jpg" alt="article thumbnail">
                                     </a>
                                 </div>
                                 <div class="media-panel-body">
@@ -100,7 +100,7 @@
                                 <div class="media-panel-heading">Announcement</div>
                                 <div class="media-panel-image thumbnail">
                                     <a href="#">
-                                        <img src="/imgs/rinpoche.jpg">
+                                        <img src="/imgs/rinpoche.jpg" alt="article thumbnail">
                                     </a>
                                 </div>
                                 <div class="media-panel-body">
@@ -117,7 +117,7 @@
                                 <div class="media-panel-heading">Events</div>
                                 <div class="media-panel-image thumbnail">
                                     <a href="#">
-                                        <img src="/imgs/resounding.jpg">
+                                        <img src="/imgs/resounding.jpg" alt="article thumbnail">
                                     </a>
                                 </div>
                                 <div class="media-panel-body">
@@ -134,7 +134,7 @@
                                 <div class="media-panel-heading">Announcement</div>
                                 <div class="media-panel-image thumbnail">
                                     <a href="#">
-                                        <img src="/imgs/rinpoche.jpg">
+                                        <img src="/imgs/rinpoche.jpg" alt="article thumbnail">
                                     </a>
                                 </div>
                                 <div class="media-panel-body">
@@ -151,7 +151,7 @@
                                 <div class="media-panel-heading">Events</div>
                                 <div class="media-panel-image thumbnail">
                                     <a href="#">
-                                        <img src="/imgs/resounding.jpg">
+                                        <img src="/imgs/resounding.jpg" alt="article thumbnail">
                                     </a>
                                 </div>
                                 <div class="media-panel-body">
@@ -168,7 +168,7 @@
                                 <div class="media-panel-heading">Announcement</div>
                                 <div class="media-panel-image thumbnail">
                                     <a href="#">
-                                        <img src="/imgs/rinpoche.jpg">
+                                        <img src="/imgs/rinpoche.jpg" alt="article thumbnail">
                                     </a>
                                 </div>
                                 <div class="media-panel-body">

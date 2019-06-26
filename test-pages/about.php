@@ -7,7 +7,7 @@
                 <div class="panel-img-header has-img thumbnail">
 
                     <h1>Vision</h1>
-                    <img src="/imgs/Photo-27-10-13-7-37-58-pm.jpg"  data-max-horizontal-crop="1" class="stretch"><!--  -->
+                    <img src="/imgs/Photo-27-10-13-7-37-58-pm.jpg" alt="header image" data-max-horizontal-crop="1" class="stretch"><!--  -->
 
                 </div>
                 <div class="panel-body">

@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/new-84000-publication-the-king-of-the-array-of-all-dharma-qualities/" class="thumbnail">
-                                <img width="225" height="112" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
+                                <img width="225" height="112" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
                                     style="margin: 14px -9px; width: 225px; height: 112px;"/>
                             </a>
                         </div>
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/new-84000-publication-the-white-lotus-of-good-dharma/" class="thumbnail">
-                                <img width="225" height="112" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
+                                <img width="225" height="112" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
                                     style="margin: 14px -9px; width: 225px; height: 112px;"/>
                             </a>
                         </div>
@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/new-84000-publication/" class="thumbnail">
-                                <img width="225" height="112" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
+                                <img width="225" height="112" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
                                     style="margin: 14px -9px; width: 225px; height: 112px;"/>
                             </a>
                         </div>
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/new-84000-publication-the-teaching-on-the-indivisible-nature-of-the-realm-of-phenomena/" class="thumbnail">
-                                <img width="225" height="112" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
+                                <img width="225" height="112" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
                                     style="margin: 14px -9px; width: 225px; height: 112px;"/>
                             </a>
                         </div>
@@ -78,7 +78,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/celebrating-in-bodhgaya/" class="thumbnail">
-                                <img width="225" height="150" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/08/84000_ENews32.jpeg" class="attachment-280x210 size-280x210 wp-post-image" alt="" style="margin: -5px -9px; width: 225px; height: 150px;"/>
+                                <img width="225" height="150" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/08/84000_ENews32.jpeg" class="attachment-280x210 size-280x210 wp-post-image" alt="" style="margin: -5px -9px; width: 225px; height: 150px;"/>
                             </a>
                         </div>
                         <div class="col-sm-9">
@@ -93,7 +93,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/happy-saga-dawa-2018/" class="thumbnail">
-                                <img width="280" height="194" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/SagaDawa_2018.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt=""
+                                <img width="280" height="194" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/SagaDawa_2018.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt=""
                                     srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/SagaDawa_2018.jpg 800w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/SagaDawa_2018-300x208.jpg 300w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/SagaDawa_2018-768x532.jpg 768w" sizes="(max-width: 280px) 100vw, 280px" style="margin: -27px -37px; width: 280px; height: 194px;"/>
                             </a>
                         </div>
@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/saga-dawa-sutra-resounding/" class="thumbnail">
-                                <img width="280" height="200" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/image5.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt=""
+                                <img width="280" height="200" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/image5.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt=""
                                     srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/image5.jpg 3680w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/image5-300x214.jpg 300w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/image5-768x548.jpg 768w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/05/image5-1024x730.jpg 1024w" sizes="(max-width: 280px) 100vw, 280px" style="margin: -30px -37px; width: 280px; height: 200px;"
                                 />
                             </a>
@@ -126,7 +126,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/2018-translation-grant-cycle-opens/" class="thumbnail">
-                                <img width="224" height="112" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2013/04/grants.png" class="attachment-280x210 size-280x210 wp-post-image" alt="" style="margin: 14px -9px; width: 224px; height: 112px;"/>
+                                <img width="224" height="112" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2013/04/grants.png" class="attachment-280x210 size-280x210 wp-post-image" alt="" style="margin: 14px -9px; width: 224px; height: 112px;"/>
                             </a>
                         </div>
                         <div class="col-sm-9">
@@ -141,7 +141,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/84000-seeks-associate-editor/" class="thumbnail">
-                                <img width="225" height="112" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/03/JobVacancyEng.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/03/JobVacancyEng.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/03/JobVacancyEng-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
+                                <img width="225" height="112" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/03/JobVacancyEng.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/03/JobVacancyEng.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/03/JobVacancyEng-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
                                     style="margin: 14px -9px; width: 225px; height: 112px;"/>
                             </a>
                         </div>
@@ -157,7 +157,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="http://trans84000.staging.wpengine.com/new-84000-translation-and-reading-room-publication-the-king-of-samadhis-sutra/" class="thumbnail">
-                                <img width="225" height="112" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
+                                <img width="225" height="112" alt="article thumbnail" src="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg" class="attachment-280x210 size-280x210 wp-post-image" alt="" srcset="http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1.jpg 225w, http://trans84000.staging.wpengine.com/wp-content/uploads/2018/02/NewSutraAnnouncementWPEng-1-224x112.jpg 224w" sizes="(max-width: 225px) 100vw, 225px"
                                     style="margin: 14px -9px; width: 225px; height: 112px;"/>
                             </a>
                         </div>

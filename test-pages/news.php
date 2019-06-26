@@ -6,7 +6,7 @@
             <div class="panel panel-default panel-news listing-panel foreground">
 
                 <div class="panel-img-header has-img thumbnail">
-                    <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg"  data-max-horizontal-crop="1" class="stretch">
+                    <img src="/imgs/Photo-27-10-13-7-35-49-pm.jpg" alt="article thumbnail" data-max-horizontal-crop="1" class="stretch">
                     <h1>All News</h1>
                 </div>
 
@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="/test-pages/?template=post" class="thumbnail">
-                                <img src="/imgs/Rooster-v1t-224x112.jpg" alt="">
+                                <img src="/imgs/Rooster-v1t-224x112.jpg" alt="article thumbnail">
                             </a>
                         </div>
                         <div class="col-sm-8">
@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="/test-pages/?template=post" class="thumbnail">
-                                <img src="/imgs/IMG_9449-224x112.jpg" alt="">
+                                <img src="/imgs/IMG_9449-224x112.jpg" alt="article thumbnail">
                             </a>
                         </div>
                         <div class="col-sm-8">
@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="/test-pages/?template=post" class="thumbnail">
-                                <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
+                                <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="article thumbnail">
                             </a>
                         </div>
                         <div class="col-sm-8">
@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="/test-pages/?template=post" class="thumbnail">
-                                <img src="/imgs/IMG_9449-224x112.jpg" alt="">
+                                <img src="/imgs/IMG_9449-224x112.jpg" alt="article thumbnail">
                             </a>
                         </div>
                         <div class="col-sm-8">
@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="/test-pages/?template=post" class="thumbnail">
-                                <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
+                                <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="article thumbnail">
                             </a>
                         </div>
                         <div class="col-sm-8">
@@ -100,7 +100,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="/test-pages/?template=post" class="thumbnail">
-                                <img src="/imgs/IMG_9449-224x112.jpg" alt="">
+                                <img src="/imgs/IMG_9449-224x112.jpg" alt="article thumbnail">
                             </a>
                         </div>
                         <div class="col-sm-8">
@@ -117,7 +117,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="/test-pages/?template=post" class="thumbnail">
-                                <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="">
+                                <img src="/imgs/MR1-Copy-1-224x112.jpg" alt="article thumbnail">
                             </a>
                         </div>
                         <div class="col-sm-8">

@@ -97,7 +97,7 @@
                     </ul>
 
                     <figure>
-                        <img src="/imgs/resoundingkids.jpg">
+                        <img src="/imgs/resoundingkids.jpg" alt="post image">
 
                         <figcaption>
                             Children read from 84000’s “The Play In Full” to a captive audience.
@@ -118,7 +118,7 @@
                     </p>
 
                     <figure>
-                        <img src="/imgs/2016ResoundingKids.jpg">
+                        <img src="/imgs/2016ResoundingKids.jpg" alt="post image">
 
                         <figcaption>
                             Children read from 84000’s translation of “The Play in Full.”
@@ -214,7 +214,7 @@
                                     data-lightbox="slideshow" 
                                     data-title="<?php echo $gallery_image->title ?>" 
                                     title="<?php echo $gallery_image->title ?>">
-                                    <img src="<?php echo $gallery_image->img_src ?>"/>
+                                    <img src="<?php echo $gallery_image->img_src ?>" alt="gallery thumbnail"/>
                                 </a>
                             </div>
                         <?php } ?>

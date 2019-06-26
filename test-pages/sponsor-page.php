@@ -5,7 +5,7 @@
             <div class="panel panel-default panel-how-you-can-help foreground">
                 
                 <div class="panel-img-header has-img thumbnail">
-                    <img src="/imgs/DSCN0799-2.jpg" data-max-horizontal-crop="200" data-max-vertical-crop="100">
+                    <img src="/imgs/DSCN0799-2.jpg" alt="header image" data-max-horizontal-crop="200" data-max-vertical-crop="100">
                     <h1>Sponsor a Page</h1>
                 </div>
 

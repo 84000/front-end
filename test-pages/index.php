@@ -71,7 +71,7 @@
 
 ?>
 
-        <script type="text/javascript">
+        <script>
             function downloadJSAtOnload() {
                 var element = document.createElement("script");
                 element.src = "/js/84000-fe.min.js";

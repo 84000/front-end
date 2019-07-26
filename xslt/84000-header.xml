@@ -58,14 +58,8 @@
         </item>
         <item class="resources" url="#resources">
             <label>Resources</label>
-            <item url="http://84000.co/resources/translator-training">
-                <label>Translator Training</label>
-            </item>
-            <item url="http://84000.co/resources/grants">
-                <label>Grants</label>
-            </item>
-            <item url="http://84000.co/resources/tools-and-resources">
-                <label>Translators' Tools</label>
+            <item url="http://84000.co/resources/teachings-on-sutra/">
+                <label>Teachings on Sūtra</label>
             </item>
             <item url="http://84000.co/resources/commentaries">
                 <label>Commentaries</label>
@@ -73,8 +67,17 @@
             <item url="http://84000.co/resources/resounding">
                 <label>Resounding</label>
             </item>
+            <item url="http://84000.co/resources/translator-training">
+                <label>Translator Training</label>
+            </item>
+            <item url="http://84000.co/resources/tools-and-resources">
+                <label>Translators' Tools</label>
+            </item>
             <item url="http://84000.co/resources/other-resources">
-                <label>Other Resources</label>
+                <label>Web Resources</label>
+            </item>
+            <item url="http://84000.co/resources/grants">
+                <label>Grants</label>
             </item>
         </item>
         <item class="about" url="#about">
@@ -219,9 +222,9 @@
             <item url="http://84000.co/ch-about/ch-sponsors">
                 <label>贊助人</label>
             </item>
-            <!-- <item url="http://84000.co/ch-about/ch-partnerships">
-                <label>Partnerships</label>
-            </item> -->
+            <item url="http://84000.co/ch-about/ch-partnerships">
+                <label>合作夥伴</label>
+            </item>
             <item url="http://84000.co/ch-about/ch-about-contact">
                 <label>聯繫方式</label>
             </item>

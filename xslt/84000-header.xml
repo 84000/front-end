@@ -76,9 +76,6 @@
             <item url="http://84000.co/resources/other-resources">
                 <label>Web Resources</label>
             </item>
-            <item url="http://84000.co/resources/grants">
-                <label>Grants</label>
-            </item>
         </item>
         <item class="about" url="#about">
             <label>About</label>
@@ -96,6 +93,9 @@
             </item>
             <item url="http://84000.co/about/impact">
                 <label>Global Impact</label>
+            </item>
+            <item url="http://84000.co/about/grants">
+                <label>Grants</label>
             </item>
             <item url="http://84000.co/about/work-flow">
                 <label>Work Flow</label>

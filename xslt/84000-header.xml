@@ -5,11 +5,11 @@
     </translation>
     <translation id="placeholder-search">
         <text xml:lang="en">Search...</text>
-        <text xml:lang="zh">Search...</text>
+        <text xml:lang="zh">網站檢索</text>
     </translation>
     <translation id="button-search-reading-room">
         <text xml:lang="en">Search the Reading Room</text>
-        <text xml:lang="zh">Search the Reading Room</text>
+        <text xml:lang="zh">雲端藏經閣檢索</text>
     </translation>
     <translation id="button-search-comms">
         <text xml:lang="en">Search the Website</text>
@@ -185,12 +185,18 @@
             </item>
         </item>
         <item class="resources" url="#ch-resources">
-            <label>資源</label>
+            <label>資源分享</label>
+            <item url="http://84000.co/ch-resources/ch-resources-training">
+                <label>譯者培訓</label>
+            </item>
             <item url="http://84000.co/ch-resources/ch-commentaries">
                 <label>論著</label>
             </item>
             <item url="http://84000.co/ch-resources/ch-resounding">
                 <label>經典迴響</label>
+            </item>
+            <item url="http://84000.co/ch-resources/ch-resources-other">
+                <label>其他資源</label>
             </item>
         </item>
         <item class="about" url="#ch-about">
@@ -210,9 +216,10 @@
             <item url="http://84000.co/ch-about/ch-about-copyright">
                 <label>關於版權</label>
             </item>
+            <!--
             <item url="http://84000.co/ch-about/ch-about-reading-room">
                 <label>關於雲端藏經閣</label>
-            </item>
+            </item>-->
             <item url="http://84000.co/ch-about/ch-about-team">
                 <label>我們的團隊</label>
             </item>
@@ -240,6 +247,14 @@
             <item url="http://84000.co/ch-how-you-can-help/ch-become-a-donor">
                 <label>八萬四千緣</label>
             </item>
+            <!-- 
+            <item url="http://84000.co/ch-how-you-can-help/ch-shop-n-give">
+                <label>購物捐獻</label>
+            </item> -->
+            <!-- 
+            <item url="http://84000.co/ch-how-you-can-help/ch-spread-the-word/">
+                <label>訂閱電子通訊</label>
+            </item> -->
             <item url="http://84000.co/ch-how-you-can-help/ch-faq">
                 <label>常見問題</label>
             </item>

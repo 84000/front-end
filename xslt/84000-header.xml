@@ -186,21 +186,37 @@
         </item>
         <item class="resources" url="#ch-resources">
             <label>資源分享</label>
-            <item url="http://84000.co/ch-resources/ch-resources-training">
-                <label>譯者培訓</label>
-            </item>
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-resources/ch-teachings-on-sutra/">
+                <label>Teachings on Sūtra</label>
+            </item> -->
             <item url="http://84000.co/ch-resources/ch-commentaries">
                 <label>論著</label>
             </item>
             <item url="http://84000.co/ch-resources/ch-resounding">
                 <label>經典迴響</label>
             </item>
+            <item url="http://84000.co/ch-resources/ch-resources-training">
+                <label>譯者培訓</label>
+            </item>
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-resources/ch-tools-and-resources">
+                <label>譯者工具</label>
+            </item> -->
             <item url="http://84000.co/ch-resources/ch-resources-other">
                 <label>其他資源</label>
             </item>
         </item>
         <item class="about" url="#ch-about">
             <label>關於我們</label>
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-about/ch-vision">
+                <label>願景</label>
+            </item> -->
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-about/ch-urgency">
+                <label>急迫性</label>
+            </item> -->
             <item url="http://84000.co/ch-about/ch-about-origin">
                 <label>成立緣起</label>
             </item>
@@ -210,13 +226,17 @@
             <item url="http://84000.co/ch-about/ch-about-impact">
                 <label>全球影響</label>
             </item>
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-about/ch-grants">
+                <label>譯者資助</label>
+            </item> -->
             <item url="http://84000.co/ch-about/ch-about-workflow">
                 <label>工作流程</label>
             </item>
             <item url="http://84000.co/ch-about/ch-about-copyright">
                 <label>關於版權</label>
             </item>
-            <!--
+            <!-- Deprecated
             <item url="http://84000.co/ch-about/ch-about-reading-room">
                 <label>關於雲端藏經閣</label>
             </item>-->
@@ -232,6 +252,14 @@
             <item url="http://84000.co/ch-about/ch-partnerships">
                 <label>合作夥伴</label>
             </item>
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-about/ch-endorsements">
+                <label>公眾認可</label>
+            </item> -->
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-about/ch-quotes">
+                <label>引言</label>
+            </item> -->
             <item url="http://84000.co/ch-about/ch-about-contact">
                 <label>聯繫方式</label>
             </item>
@@ -247,11 +275,11 @@
             <item url="http://84000.co/ch-how-you-can-help/ch-become-a-donor">
                 <label>八萬四千緣</label>
             </item>
-            <!-- 
+            <!-- No Chinese page
             <item url="http://84000.co/ch-how-you-can-help/ch-shop-n-give">
                 <label>購物捐獻</label>
             </item> -->
-            <!-- 
+            <!-- No Chinese page
             <item url="http://84000.co/ch-how-you-can-help/ch-spread-the-word/">
                 <label>訂閱電子通訊</label>
             </item> -->

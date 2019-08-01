@@ -1,4 +1,5 @@
 <eft-header xmlns="http://read.84000.co/ns/1.0">
+    <!-- Updated 01.08.2019 -->
     <translation id="tag-line">
         <text xml:lang="en">Translating the words of the Buddha</text>
         <text xml:lang="zh">八萬四千 • 佛典傳譯</text>
@@ -76,6 +77,9 @@
             <item url="http://84000.co/resources/other-resources">
                 <label>Web Resources</label>
             </item>
+            <item url="http://84000.co/resources/quotes">
+                <label>Quotes</label>
+            </item>
         </item>
         <item class="about" url="#about">
             <label>About</label>
@@ -117,9 +121,6 @@
             </item>
             <item url="http://84000.co/about/endorsements">
                 <label>Endorsements</label>
-            </item>
-            <item url="http://84000.co/about/quotes">
-                <label>Quotes</label>
             </item>
             <item url="http://84000.co/about/contact">
                 <label>Contact</label>
@@ -206,6 +207,10 @@
             <item url="http://84000.co/ch-resources/ch-resources-other">
                 <label>其他資源</label>
             </item>
+            <!-- No Chinese page
+            <item url="http://84000.co/ch-resources/ch-quotes">
+                <label>引言</label>
+            </item> -->
         </item>
         <item class="about" url="#ch-about">
             <label>關於我們</label>
@@ -255,10 +260,6 @@
             <!-- No Chinese page
             <item url="http://84000.co/ch-about/ch-endorsements">
                 <label>公眾認可</label>
-            </item> -->
-            <!-- No Chinese page
-            <item url="http://84000.co/ch-about/ch-quotes">
-                <label>引言</label>
             </item> -->
             <item url="http://84000.co/ch-about/ch-about-contact">
                 <label>聯繫方式</label>

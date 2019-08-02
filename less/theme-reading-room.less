@@ -1102,13 +1102,19 @@ h3, .milestone-h3 {
             }
         }
     }
-
+    
     .pull-quote {
         border-left: 5px solid @gray-light;
         padding-left: floor((@grid-gutter-width / 2));
         margin-bottom: (@line-height-computed / 2);
+        &.green-quote {
+            border-color: @brand-green;
+        }
         &.red-quote {
             border-color: @brand-red;
+        }
+        &.orange-quote {
+            border-color: @brand-orange;
         }
         .title {
             line-height: 1.2em;

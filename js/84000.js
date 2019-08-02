@@ -415,7 +415,6 @@ jQuery(document).ready(function($) {
 	(function ($) { 
 		$.fn.pulse = function () {
 			var $button = this;
-			console.log('pulse');
 			// Let other updates happen
 			setTimeout(function(){
 				// Flash the button

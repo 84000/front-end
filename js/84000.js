@@ -1447,9 +1447,9 @@ jQuery(document).ready(function($) {
 			clearTimeout($this.data('showOnScroll'));
 		}
 		// Set new time out to hide again
-		$this.data('showOnScroll', setTimeout(function() { $('.show-on-scroll').fadeOut(); }, 3600));
+		$this.data('showOnScroll', setTimeout(function() { $('.show-on-scroll, .xs .show-on-scroll-xs').fadeOut(); }, 3600));
 		// Show what's marked to show
-		$this.on('scroll', function(){ $('.show-on-scroll').fadeIn(); });
+		$this.on('scroll', function(){ $('.show-on-scroll, .xs .show-on-scroll-xs').fadeIn(); });
 	});
 
 	// On load...

@@ -4,7 +4,7 @@
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default panel-resources foreground">
                 <div class="panel-img-header has-img thumbnail">
-                    <img src="/imgs/text7.jpg" alt="header image">
+                    <img src="/imgs/text7.jpg" alt="header image" class="stretch">
                     <h1>Tools</h1>
                 </div>
                 <div class="panel-body">

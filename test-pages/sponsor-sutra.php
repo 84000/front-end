@@ -5,7 +5,7 @@
             <div class="panel panel-default panel-how-you-can-help foreground">
                 
                 <div class="panel-img-header has-img thumbnail">
-                    <img src="/imgs/text15.jpg" alt="header image" data-max-horizontal-crop="500" data-max-vertical-crop="100">
+                    <img src="/imgs/text15.jpg" alt="header image" class="stretch">
                     <h1>Sponsor a Sutra</h1>
                 </div>
 

@@ -5,11 +5,12 @@
             <div class="panel panel-default panel-how-you-can-help foreground">
                 
                 <div class="panel-img-header has-img thumbnail">
-                    <img src="/imgs/DSCN0799-2.jpg" alt="header image" data-max-horizontal-crop="200" data-max-vertical-crop="100">
+                    <img src="/imgs/DSCN0799-2.jpg" alt="header image" class="stretch">
                     <h1>Sponsor a Page</h1>
                 </div>
 
                 <div class="panel-body">
+                    
                     <p>
                         From US$5 a word to US$250 a page, you can sponsor the translation of the words of the Buddha, either as a one-time or a recurring donation.
                     </p>

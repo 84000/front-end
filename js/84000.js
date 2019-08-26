@@ -1132,8 +1132,15 @@ jQuery(document).ready(function($) {
 
             // Prioritise glossary items
             // ------------------------------
-            var $allGlossariesPrioritised = $allGlossaries.slice().sort(function(a, b) {
-				return +countWords($(b).find(".term").first().text()) - +countWords($(a).find(".term").first().text());
+            // Do a fake .slice() to apply .sort() to jQuery array
+            var $allGlossariesPrioritised = $allGlossaries.slice(0).sort(function(a, b) {
+            	if(!a.wordCount){
+            		a.wordCount = countWords($(a).find(".term").first().text());
+            	}
+            	if(!b.wordCount){
+            		b.wordCount = countWords($(b).find(".term").first().text());
+            	}
+            	return b.wordCount - a.wordCount;
 			});
 
             var escapeRegExp = function(stringToGoIntoTheRegex) {
@@ -1272,19 +1279,43 @@ jQuery(document).ready(function($) {
                 	// First glossarize terms with a higher priority
                 	// -------------------------------------------------
 
-                	var term = $glossary.find(".term").text();
-                	var priority = countWords(term);
-                    var regEx = glossaryRegEx(term);
+                	var $terms = $glossary.find(".term");
+                	var priority = countWords($terms.first().text());
+                    var regExs = new Array();
 
-                    var $higherPriority = $allGlossariesPrioritised.filter(':not(.backlinked)').filter(function() {
-                    	var thisTerm = $(this).find(".term").text();
-                    	var thisPriority = countWords(thisTerm);
-						return thisPriority > priority && thisTerm.match(regEx);
-					});
+                	$terms.each(function(index){
+                		regExs.push(glossaryRegEx($(this).text()));
+                	});
+
+                    var $higherPriority = 
+                    	$allGlossariesPrioritised
+                    		.filter(':not(.backlinked)')
+                    		.filter(function(){
+                    			return $(this).attr('id') != $glossary.attr('id');
+                    		})
+                    		.filter(function() {
+                    			return parseInt($(this)[0].wordCount) > parseInt($glossary[0].wordCount);
+							})
+                    		.filter(function(){
+                    			var matchingTerm = false;
+                    			var $otherGlossTerms = $(this).find(".term");
+                    			$otherGlossTerms.each(function(){
+                    				var otherTermText = $(this).text();
+                    				for (var i = regExs.length - 1; i >= 0; i--) {
+	                    				if (otherTermText.match(regExs[i])) {
+	                    					matchingTerm = true;
+	                    					break;
+	                    				};
+	                    			}
+                    				if(matchingTerm){
+                    					return false;
+                    				}
+                    			});
+                    			return matchingTerm;
+                    		});
 
 					$higherPriority.each(function(){
 						var $otherGlossary = $(this);
-
 						glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
                         	isWorking = false;
                         	$otherGlossary.addClass("backlinked");

@@ -45,6 +45,29 @@ figcaption, .lb-caption, .lb-number {
     }
 }
 
+@media only screen and (max-width: @screen-md) {
+    .col-sm-top-right {
+        position: absolute;
+        top: 7px;
+        right: 15px;
+    }
+    .col-sm-text-right {
+        text-align: right;
+    }
+}
+
+
+@media (max-width: @screen-sm) {
+    .col-xs-top-right {
+        position: absolute;
+        top: 0px;
+        right: 15px;
+    }
+    .col-xs-pull-right {
+        float: right;
+    }
+}
+
 // Article 
 // --------------------------------------------
 article {
@@ -1117,6 +1140,7 @@ ul.responsive-tabs__list{
             
         padding-top: 12px;
         padding-bottom: 12px;
+        position: relative;
 
         hr {
             margin-top:    7px;
@@ -1183,7 +1207,7 @@ ul.responsive-tabs__list{
 
 /* Fix to old sponsors table mess in WP */
 .page-id-2461 {
-       .table {
+    .table {
         > tbody {
             > tr {
                 > td {
@@ -1327,22 +1351,4 @@ ul.responsive-tabs__list{
         }
     }
 
-}
-
-@media only screen and (max-width: @screen-md) {
-    .section {
-        .text-list {
-
-            // Shift the status to next to the toh
-            .row {
-                position: relative;
-            }
-
-            .translation-status {
-                position: absolute;
-                top: 7px;
-                right: 15px;
-            }
-        }
-    }
 }

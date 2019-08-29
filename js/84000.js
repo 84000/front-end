@@ -1210,10 +1210,24 @@ jQuery(document).ready(function($) {
 			    	var glossaryId = $glossary.attr("id");
 			        var regEx = glossaryRegEx($term.text());
 			        
-			        $matchable.find("span.term").filter(function(){ return $(this).text().toLowerCase() == $term.text().toLowerCase(); }).each(function(spanIndex){
+			        $matchable
+			        	.find("span.term")
+			        	.filter(function(){ 
+			        		
+			        		var $this = $(this);
+			        		var this_ref = $this.data('ref');
+			        		if(this_ref){
+			        			//console.log(this_ref + " ? " + glossaryId + " = " + (this_ref == glossaryId).toString());
+			        			return this_ref == glossaryId;
+			        		}
+			        		//console.log($term.text() + " ? " + $(this).text() + " = " + $(this).text().match(regEx));
+			        		return $this.text().match(regEx);
+			        		//return $(this).text().toLowerCase() == $term.text().toLowerCase(); 
+			        	})
+			        	.each(function(spanIndex){
 
-			        	var $span = $(this);
-			        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link pop-up">' + $span.html().replace('glossarize', '') + '</a>');
+				        	var $span = $(this);
+				        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link pop-up">' + $span.html().replace('glossarize', '') + '</a>');
 			        	
 			        });
                 },

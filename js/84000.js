@@ -184,22 +184,30 @@ jQuery(document).ready(function($) {
 	(function ($) { 
 		$.matchHeights = function ($element) {
 			if($('html').hasClass('screen')){
+
 				var heights = {};
+
+				// set heights to auto
 				$element.find("[data-match-height]").height('auto');
+
 				// Match to a particular element
 				$element.find("[data-match-height].match-this-height:visible").each(function(){
 					var $this = $(this);
 					heights[$this.data('match-height')] = $this.outerHeight();
 				});
+
 				// Match to the tallest in the group
-				$element.find("[data-match-height]:not(.match-this-height):visible").each(function(){
-					var $this = $(this);
-					var this_height = $this.outerHeight();
-					var height_group = $this.data('match-height');
-					if(!heights[height_group] || this_height > heights[height_group]){
-						heights[height_group] = this_height;
-					}
-				});
+				if(heights.length){
+					$element.find("[data-match-height]:visible").each(function(){
+						var $this = $(this);
+						var this_height = $this.outerHeight();
+						var height_group = $this.data('match-height');
+						if(!heights[height_group] || this_height > heights[height_group]){
+							heights[height_group] = this_height;
+						}
+					});
+				}
+
 				$.each(heights, function(group, val) {
 					$("[data-match-height='" + group + "']").each(function(){
 						var $this = $(this);
@@ -1021,10 +1029,13 @@ jQuery(document).ready(function($) {
         $popupFooter.removeClass('in');
         
         var doPopUp = function(){
+
         	// Trigger pre-events
 	        $this.trigger("prepare");
+
 	        // The target of the link
 	        var $target = $($this.attr("href"));
+
 	        // Parse that content
 	        if($target.hasClass('glossarize')){
 	        	parseParagraph($target);
@@ -1032,19 +1043,26 @@ jQuery(document).ready(function($) {
 	        $target.find(".glossarize, .glossarize-complete").each(function(){
 	        	parseParagraph($(this));
 	        });
+
 	        // Get the content from the target
 	        var $content = $target.clone();
+
 	        // Reset the id
 	        $content.attr("id", "");
+
 	        // Copy content to the footer
 	        $('#popup-footer .data-container').html($content);
+
 	        // Show the footer
 			$popupFooter.collapse('show');
-        	
+
+			$popupFooter.on('shown.bs.collapse', function () {
+				$.matchHeights($(this));
+			});
+
         }
 
         // Is this the first call to the glossary?
-        
         if($this.hasClass("glossary-link")){
 	        $.wait("Loading the glossary...");
 	    	setTimeout(function(){
@@ -1290,9 +1308,6 @@ jQuery(document).ready(function($) {
                     var $higherPriority = 
                     	$allGlossariesPrioritised
                     		.filter(':not(.backlinked)')
-                    		.filter(function(){
-                    			return $(this).attr('id') != $glossary.attr('id');
-                    		})
                     		.filter(function() {
                     			return parseInt($(this)[0].wordCount) > parseInt($glossary[0].wordCount);
 							})
@@ -1316,6 +1331,7 @@ jQuery(document).ready(function($) {
 
 					$higherPriority.each(function(){
 						var $otherGlossary = $(this);
+
 						glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
                         	isWorking = false;
                         	$otherGlossary.addClass("backlinked");

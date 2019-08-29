@@ -197,7 +197,7 @@ jQuery(document).ready(function($) {
 				});
 
 				// Match to the tallest in the group
-				if(heights.length){
+				if($.isEmptyObject(heights)){
 					$element.find("[data-match-height]:visible").each(function(){
 						var $this = $(this);
 						var this_height = $this.outerHeight();

@@ -22,35 +22,23 @@ h3, .milestone-h3 {
 // ---------------------------------------------
 #popup-footer-source {
     .title {
-        margin: (@line-height-computed / 2) 0px;
-    }
-    p.text-bo {
-        line-height: 2;
-    }
-    hr {
-        margin-top: @line-height-computed / 2;
-        margin-bottom: @line-height-computed / 2;
-    }
-    .footer {
-        .text-muted();
-        text-align: center;
-        font-size: @font-size-small;
-        a.info {
-            color: @text-muted;
-            margin-left: 8px;
-            vertical-align: sub;
-            i {
-                font-size: 20px;
-            }
-            &:hover {
-                color: @brand-red;
-            }
-        }
-    }
-    .popover-title {
+        background-color: @brand-orange;
+        color: #fff;
         margin: 0px;
+        padding: (@line-height-computed / 2) 0px;
+        border-bottom: 1px solid @hr-border;
     }
-    
+}
+a.info-icon {
+    color: @text-muted;
+    margin-left: 8px;
+    vertical-align: sub;
+    i {
+        font-size: 20px;
+    }
+    &:hover {
+        color: @brand-red;
+    }
 }
 
 // Translation specific styles

@@ -1211,7 +1211,7 @@ jQuery(document).ready(function($) {
 			        var regEx = glossaryRegEx($term.text());
 			        
 			        $matchable
-			        	.find("span.term")
+			        	.find("span.match")
 			        	.filter(function(){ 
 			        		
 			        		var $this = $(this);
@@ -1564,7 +1564,7 @@ jQuery(document).ready(function($) {
 
         if(target.indexOf("#popup-footer-source") !== -1){
         	var $popupFooter = $('#popup-footer-source');
-        	$('.collapse').not($popupFooter).collapse('hide');
+        	$('.collapse').not($popupFooter).not($this.closest('.collapse')).collapse('hide');
         	$popupFooter.removeClass('in');
         	$.wait("Loading the source text...");
 	    	setTimeout(function(){
@@ -1579,7 +1579,14 @@ jQuery(document).ready(function($) {
         	$.wait("Loading content...");
         	setTimeout(function(){
 	    		$.get(source, function(data) {
-	                $target.html(data).collapse('show').addClass('loaded');
+	    			var ajaxData = $(data).find('.ajax-data > *');
+	    			if(ajaxData.length){
+	    				$target.html(ajaxData);
+	    			}
+	    			else {
+	    				$target.html(data);
+	    			}
+	                $target.collapse('show').addClass('loaded');
 	            });
 	        	$.wait("", true);
 	        },100);
@@ -1897,17 +1904,30 @@ jQuery(document).ready(function($) {
 		var $groups = $container.find('.add-nodes-group');
 		var groups_count = $groups.length;
 		var $new_group = $groups.first().clone();
-		$new_group.find("input, select, textarea").each(function(){
+		var new_group_index = parseInt(groups_count + 1);
+		$new_group.find("input, select, textarea, label").each(function(){
 			var $control = $(this);
-			var name_split = $control.attr('name').split('-');
-			$control.attr('name', name_split.slice(0, name.length - 1).join('-') + '-' + parseInt(groups_count + 1));
+			var control_name = $control.attr('name');
+			if(typeof control_name === 'string'){
+				var split = control_name.split('-');
+				$control.attr('name', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
+			}
+			var control_id = $control.attr('id');
+			if(typeof control_id === 'string'){
+				var split = control_id.split('-');
+				$control.attr('name', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
+			}
+			var control_for = $control.attr('for');
+			if(typeof control_for === 'string'){
+				var split = control_for.split('-');
+				$control.attr('name', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
+			}
 			if($control[0].tagName == 'select'){
 				$control.selectedValue = '';
 			}
 			else {
 				$control.val("");
 			}
-			
 		});
 		$new_group.insertAfter($groups.last());
 		

@@ -1248,6 +1248,20 @@ table.table.no-border {
     }
 }
 
+
+// Table without padding
+// ---------------------------------------------
+table.table.no-padding {
+    tbody {
+        > tr {
+            > th, > td {
+                padding-top: 1px;
+                padding-bottom: 1px;
+            }
+        }
+    }
+}
+
 // Contents table
 // ---------------------------------------------
 table.contents-table {

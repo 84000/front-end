@@ -69,6 +69,30 @@ a.text-color {
     .transition(.5s ease-in);
 }
 
+.visible-mobile,
+.visible-desktop, 
+.event-hover {
+  .responsive-invisibility();
+}
+
+.visible-mobile {
+  @media (max-width: @grid-float-breakpoint-max) {
+    .responsive-visibility();
+  }
+}
+
+.visible-desktop {
+  @media (min-width: @grid-float-breakpoint) {
+    .responsive-visibility();
+  }
+}
+
+.event-hover {
+  @media (hover: hover) and (pointer: fine) {
+    .responsive-visibility();
+  }
+}
+
 .visible-ebook {
     display: none;
 }
@@ -325,6 +349,7 @@ p.date {
     &.full-width {
         width: 100%;
     }
+
 }
 a.center-vertical {
     > * {

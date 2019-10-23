@@ -126,12 +126,13 @@ article {
 
     h1 {
         margin: 0px;
-        padding: 15px 30px;
-        text-transform: uppercase;
+        padding: 10px 15px;
+        font-size: 1.25em;
         font-weight: normal;
         position: relative;
         color: #fff;
         z-index: 1;
+        text-transform: uppercase;
     }
 
     h1:before {
@@ -169,22 +170,22 @@ article {
     
     .panel-home & , .panel-about & {
         h1:before {
-            background-color: rgb(red(@brand-red), green(@brand-red), blue(@brand-red));
+            background-color: @brand-orange;
         }
     }
     .panel-news & , .panel-how-you-can-help & {
         h1:before {
-            background-color: rgb(red(@brand-orange), green(@brand-orange), blue(@brand-orange));
+            background-color: @brand-blue;
         }
     }
     .panel-reading-room & {
         h1:before {
-            background-color: rgb(red(@brand-blue), green(@brand-blue), blue(@brand-blue));
+            background-color: @brand-red;
         }
     }
     .panel-resources & {
         h1:before {
-            background-color: rgb(red(@brand-green), green(@brand-green), blue(@brand-green));
+            background-color: @brand-green;
         }
     }
     
@@ -200,7 +201,7 @@ article {
 
     }
 
-    @media only screen and (max-width: @grid-float-breakpoint) {
+    @media only screen and (max-width: @grid-float-breakpoint-max) {
         h1 {
             padding: 15px;
         }
@@ -1008,7 +1009,7 @@ ul.responsive-tabs__list{
 
         .logo {
             margin-top: 30px;
-            width: 160px;
+            width: 228px;
         }
     }
 

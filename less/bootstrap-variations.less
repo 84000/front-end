@@ -108,8 +108,46 @@ mark, .mark {
     white-space: nowrap;
 }
 
-.dropdown-menu>li>a {
-    padding: 5px 20px;
+.dropdown-menu {
+
+    border: 0px;
+    margin-top: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    overflow: hidden;
+
+    > li > a {
+        &:before { 
+            content: "";
+            border-color: transparent;
+            border-left-color: inherit;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            display: inline-block;
+            height: 0;
+            width: 0;
+            padding-right: 10px;
+        }
+    }
+}
+
+// Bootstrap modifies the behaviour of all dropdowns in the navbar
+// This resets to normal behaviour to allow for normal dropdowns in the navbar.
+// -------------------------------------------
+.navbar-nav {
+    @media (max-width: @grid-float-breakpoint-max) {
+        .open .dropdown-menu {
+            position: absolute;
+            float: left;
+            background-color: @dropdown-bg;
+            .box-shadow(0 6px 12px rgba(0,0,0,.175));
+            > li > a {
+                padding: 7px 15px;
+            }
+        }
+    }
 }
 
 // Panel variations
@@ -141,12 +179,6 @@ mark, .mark {
     }
 }
 
-@media (min-width: @grid-float-breakpoint) {
-    .navbar-toggle {
-        display: none !important;
-    }
-}
-
 .collapsing.width {
     height: 100%;
     .transition-property(~"width, visibility");
@@ -154,30 +186,6 @@ mark, .mark {
 
 .collapsing.fade {
     .transition-property(opacity);
-}
-
-.visible-mobile,
-.visible-desktop, 
-.event-hover {
-  .responsive-invisibility();
-}
-
-.visible-mobile {
-  @media (max-width: @grid-float-breakpoint) {
-    .responsive-visibility();
-  }
-}
-
-.visible-desktop {
-  @media (min-width: @grid-float-breakpoint) {
-    .responsive-visibility();
-  }
-}
-
-.event-hover {
-  @media (hover: hover) and (pointer: fine) {
-    .responsive-visibility();
-  }
 }
 
 ul,

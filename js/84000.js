@@ -1557,6 +1557,7 @@ jQuery(document).ready(function($) {
         var source = $this.attr('href');
         var target = $this.data('ajax-target');
         var $target = $(target);
+        var $credentials;
 
         if($target.is('.replace')){
         	$target.html("").removeClass('loaded');
@@ -1568,26 +1569,36 @@ jQuery(document).ready(function($) {
         	$popupFooter.removeClass('in');
         	$.wait("Loading the source text...");
 	    	setTimeout(function(){
-	    		$.get(source, function(data) {
-	        		$(target).html($(data).find('.ajax-data > *'));
-	                $popupFooter.collapse('show');
-	            });
+	    		$.ajax({
+	    			url: source,
+	    			type: 'GET',
+	    			dataType: 'html',
+	    			success: function(data) {
+		        		$(target).html($(data).find('.ajax-data > *'));
+		                $popupFooter.collapse('show');
+		            }
+	    		});
 	        	$.wait("", true);
 	        },100);
         }
         else if(!$target.is('.loaded')){
         	$.wait("Loading content...");
         	setTimeout(function(){
-	    		$.get(source, function(data) {
-	    			var ajaxData = $(data).find('.ajax-data > *');
-	    			if(ajaxData.length){
-	    				$target.html(ajaxData);
-	    			}
-	    			else {
-	    				$target.html(data);
-	    			}
-	                $target.collapse('show').addClass('loaded');
-	            });
+        		$.ajax({
+	    			url: source,
+	    			type: 'GET',
+	    			dataType: 'html',
+	    			success: function(data) {
+		    			var ajaxData = $(data).find('.ajax-data > *');
+		    			if(ajaxData.length){
+		    				$target.html(ajaxData);
+		    			}
+		    			else {
+		    				$target.html(data);
+		    			}
+		                $target.collapse('show').addClass('loaded');
+		            }
+	    		});
 	        	$.wait("", true);
 	        },100);
         }

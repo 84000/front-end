@@ -18,12 +18,12 @@ body {
     position: relative;
     line-height: 1.6;
 
-    @media only screen and (max-width: @screen-md) {
+    @media only screen and (max-width: @grid-float-breakpoint-max) {
 
         > .container, .fixed-footer > .container {
             padding-left: 0px;
             padding-right: 0px;
-            overflow-x: hidden;
+            //overflow-x: hidden;
         }
 
     }
@@ -97,7 +97,7 @@ body .container > .panel, .panel.main-panel {
         overflow: hidden;
     }
 
-    @media only screen and (max-width: @grid-float-breakpoint) {
+    @media only screen and (max-width: @grid-float-breakpoint-max) {
         margin-bottom: 0px;
         > .panel-body {
             padding: 15px 25px 60px 25px;
@@ -308,7 +308,8 @@ span.indent {
 .navbar {
 
     border-width: 0 0 5px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
+    background-color: @gray-background-color;
     
     .container {
         position: relative;
@@ -331,16 +332,15 @@ span.indent {
         }
 
         .navbar-header {
-
             width: 100%;
             margin: 0px;
             position: relative;
-            
         }
 
         .logo {
 
-            width: 200px;
+            width: 130px;
+
             img {
                 .img-responsive();
             }
@@ -356,9 +356,11 @@ span.indent {
         }
 
         .nav-button {
+
             width: 36px;
             z-index: 1;
             position: relative;
+
             .affix {
                 top: 20px;
             }
@@ -376,17 +378,16 @@ span.indent {
             border-width: 0px;
             border-bottom-width: 5px;
 
-            > a {
+            > a, > div, > form {
+                padding: @nav-link-padding;
+            }
 
+            > a {
                 font-family: @font-family-bold;
                 font-size: 19px;
                 color: #444;
                 text-transform: uppercase;
-                padding-top: 12px;
-                padding-bottom: 7px; 
-
                 .transition(background-color .5s ease-in);
-
             }
 
             &.active {
@@ -396,15 +397,15 @@ span.indent {
             }
 
             &.home {
-                .nav-item-variant(@brand-red);
+                .nav-item-variant(@brand-orange);
             } 
 
             &.news {
-                .nav-item-variant(@brand-orange);
+                .nav-item-variant(@brand-blue);
             }
 
             &.reading-room {
-                .nav-item-variant(@brand-blue);
+                .nav-item-variant(@brand-red);
             }
 
             &.resources {
@@ -412,35 +413,41 @@ span.indent {
             }
 
             &.about {
-                .nav-item-variant(@brand-red);
-            }
-
-            &.how-to-help {
                 .nav-item-variant(@brand-orange);
             }
 
-            @media only screen and (max-width: @grid-float-breakpoint) {
-
-                border-bottom-width: 1px;
-                border-left-width: 10px;
-
-                > a {
-                    padding-top: 10px;
-                    padding-bottom: 10px;
-                }
-            
+            &.how-to-help {
+                .nav-item-variant(@brand-blue);
             }
 
-            @media only screen and (min-width: @grid-float-breakpoint) {
-
-                > a {
-                    &:hover {
-                        color: #fff;
-                    }
-                }
-            
+            &.languages {
+                .nav-item-variant(@brand-red);
             }
 
+            &.search {
+                .nav-item-variant(@brand-green);
+            }
+
+            &.social {
+                .nav-item-variant(@brand-orange);
+            }
+
+        }
+    }
+
+    // Dropdowns in nav
+    // --------------------------------------------------
+    .dropdown-menu {
+        > li {
+            > a {
+                padding: 7px 15px;
+            }
+            &:first-child > a {
+                padding-top: 9px;
+            }
+            &:last-child > a {
+                padding-bottom: 9px;
+            }
         }
     }
 
@@ -448,11 +455,11 @@ span.indent {
     // --------------------------------------------------
     #social {
 
-        position: relative;
+        > * {
 
-        > span, > a {
             padding: 0px;
             padding-right: 6px;
+
             &:last-child {
                 padding-right: 0px;
             }
@@ -465,11 +472,13 @@ span.indent {
         }
 
         > a {
+
             i {
                 font-size: 30px;
                 color: @text-color;
                 .transition(color .3s ease-out);
             }
+
             &:hover > i {
                 color: @brand-orange;
             }
@@ -477,7 +486,10 @@ span.indent {
         
     }
 
+    // Search form
+    // --------------------------------------------------
     .navbar-form {
+
         position: relative;
         z-index: 2;
 
@@ -492,9 +504,9 @@ span.indent {
 
     // Mobile nav variations
     // --------------------------------------------------
-    @media only screen and (max-width: @grid-float-breakpoint) {
+    @media only screen and (max-width: @grid-float-breakpoint-max) {
 
-        border-bottom-width: 1px;
+        border-bottom-width: 0px;
         border-bottom-color: @panel-inner-border;
 
         .brand-header {
@@ -514,47 +526,80 @@ span.indent {
             .logo {
                 width: 120px;
             }
-
         }
 
         .navbar-form {
-
-            margin-top: 0px;
-            margin-bottom: 0px;
+            margin: 0px;
             border: 0px;
-            padding: 0px;
-
-            > * {
-
-                border: 0px;
-                border-style: solid;
-                border-left-width: 10px;
-                border-bottom-width: 1px;
-
-            }
-
-            > #language-links {
-                border-color: @brand-green;
-                padding: 12px 20px;
-            }
-
-            > #search-controls {
-                border-color: @brand-blue;
-                padding: 6px 10px;
-                width: 100%;
-                .dropdown-menu {
-                    left: auto;
-                    right: 0;
-                }
-            }
-
         }
 
         #social {
-            margin-left: -15px;
-            margin-right: -15px;
-            padding: @nav-link-padding;
-            border-left: 10px solid @brand-red;
+            > span {
+                margin-bottom: 5px;
+            }
+        }
+
+        .navbar-nav {
+
+            > li {
+
+                position: relative;
+                border-bottom-width: 1px;
+                border-left-width: 10px;
+
+                > * {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+
+                > a.dropdown-toggle {
+                    > span {
+                        position: absolute;
+                        top: 0px;
+                        right: 0px;
+                        bottom: 0px;
+                        padding: 10px 16px;
+                        .fa {
+                            font-size: 18px;
+                        }
+                        i.fa-plus {
+                            display: inline-block;
+                        }
+                        i.fa-minus {
+                            display: none;
+                        }
+                    }
+                }
+                
+                &.open {
+                    background-color: #fff;
+                    > a.dropdown-toggle {
+                        background-color: #fff;
+                        color: @navbar-default-link-active-color;
+                        > span {
+                            i.fa-plus {
+                                display: none;
+                            }
+                            i.fa-minus {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+                
+                > .dropdown-menu {
+
+                    position: relative;
+                    float: unset;
+                    box-shadow: none;
+                    border-radius: 0;
+                    padding-right: 60px;
+                    background-color: #fff;
+                    padding-top: 0px;
+
+                }
+            
+            }
         }
 
     }
@@ -563,6 +608,14 @@ span.indent {
     // --------------------------------------------------
     @media (min-width: @grid-float-breakpoint) {
 
+        // Following container
+        // -------------------------------
+        & + .container {
+            margin-top: 15px;
+        }
+
+        // Child container
+        // -------------------------------
         .container {
             > #navbar {
                 margin-left: -@navbar-padding-horizontal;
@@ -574,124 +627,49 @@ span.indent {
             > li {
                 margin-bottom: -5px;
             }
+
         }
 
         .navbar-brand {
-            padding: 30px 0px;
+            padding: 15px 0px;
         }
 
-        .navbar-form {
-            // move the search box in line with the logo
+        .navbar-toggle {
+            display: none !important;
+        }
+
+        li.social {
             position: absolute;
-            top: -120px;
-            right: floor((@grid-gutter-width / 2));
-            > * {
-                text-align: right;
-                margin-bottom: 8px;
-            }
+            right: 0px;
+            top: -4px;
         }
 
-        #social {
-            padding-top: 6px;
-            .pull-right();
-        }
+        .navbar-nav {
+            > li {
+                height: 43px;
 
-    }
-
-    @media only screen and (max-width: @screen-md) {
-        margin-bottom: 0px;
-    }
-
-    @media only screen and (max-width: @screen-sm) {
-        
-        border-bottom-width: 1px;
-        
-        #social {
-            > span {
-                position: absolute;
-                top: 5px;
-                padding-left: 0px;
-            }
-            > a {
-                padding-top: 15px; 
-                padding-right: 10px;
-            }
-        }
-    }
-
-}
-
-// Drop navigation panel
-// -------------------------------------------
-.navbar-default .navbar-nav > li {
-
-    @media (max-width: @grid-float-breakpoint) {
-        position: relative;
-        > a.dropdown-toggle {
-            > span {
-                position: absolute;
-                top: 0px;
-                right: 0px;
-                bottom: 0px;
-                padding: 10px 16px;
-                .fa {
-                    font-size: 18px;
+                > a {
+                    &:hover {
+                        color: #fff;
+                    }
                 }
-                i.fa-plus {
-                    display: inline-block;
-                }
-                i.fa-minus {
+        
+                > .dropdown-toggle > span {
                     display: none;
                 }
-            }
-        }
-        &.open {
-            background-color: #fff;
-            > a.dropdown-toggle {
-                background-color: #fff;
-                color: @navbar-default-link-active-color;
-                > span {
-                    i.fa-plus {
-                        display: none;
-                    }
-                    i.fa-minus {
-                        display: inline-block;
-                    }
+                
+                > .dropdown-menu {
+                    margin-top: 4px;
+                }
+
+                &.social {
+                    .nav-item-variant(transparent);
                 }
             }
         }
-        > .dropdown-menu {
-            position: relative;
-            float: unset;
-            box-shadow: none;
-            border: 0;
-            border-radius: 0;
-            padding-right: 60px;
-            background-color: #fff;
-            > li > a {
-                padding: 5px 15px 5px 20px;
-                &:before { 
-                    content: "";
-                    border-color: transparent;
-                    border-left-color: inherit;
-                    border-style: solid;
-                    border-width: 5px 0 5px 5px;
-                    display: inline-block;
-                    height: 0;
-                    width: 0;
-                    padding-right: 10px;
-                }
-            }
-        }
+
     }
-    @media (min-width: @grid-float-breakpoint) {
-        > .dropdown-toggle > span {
-            display: none;
-        }
-        > .dropdown-menu {
-            margin-top: 4px;
-        }
-    }
+
 }
 
 // Nav tabs 
@@ -962,6 +940,7 @@ a.link-to-top {
             .title {
                 font-size: @font-size-large;
                 font-family: @font-family-bold;
+                text-transform: uppercase;
                 //font-style: normal;
                 text-align: left;
                 line-height: 1;

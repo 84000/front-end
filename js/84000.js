@@ -2028,6 +2028,64 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	// Download Dana
+	// -----------------------------------------
+	/*
+	function downloadDana($title){
+
+		$alert = $("#page-alert");
+
+    	$alert.find(".container")
+    		.append(
+				$("<div>", {"class": "center-vertical", "style": "margin: 0px auto;"})
+    				.append(
+		    			$("<span>")
+		    				.append(
+		    					$("<i>", {"class": "fa fa-cloud-download", "style": "font-size:30px;"})
+		    				)
+		    		).append(
+		        		$("<span>").text("You are downloading:")
+		    		)
+        	).append(
+        		$("<h2>", {"style": "color:#000", "class" : "no-top-margin no-bottom-margin"}).text($title)
+        	).append(
+        		$("<p>", {"class": "small"})
+	        		.append(
+	        			$("<span>").text("This is a free publication from 84000 - Translating the Words of the Buddha, a charity organisation 100% funded by it's donors.")
+	        		).append(
+	        			$("<br>")
+	        		).append(
+	        			$("<span>").text("Click an option below to support our work with a donation. In accordance with the principle of Dana all contributions are discretionary and gratefully recieved.")
+	        		)
+        	).append(
+        		$("<ul>", {"class": "list-inline inline-dots no-bottom-margin"})
+        			.append($("<li>").append(
+	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("$5")
+	        		))
+	        		.append($("<li>").append(
+	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("$10")
+	        		))
+	        		.append($("<li>").append(
+	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("$20")
+	        		))
+	        		.append($("<li>").append(
+	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("other")
+	        		))
+	        		.append($("<li>").append(
+	        			$("<a>", {"href": "#close", "class": "underline"})
+    	        			.text("close")
+    	        			.on("click", function(e){
+    	        				e.preventDefault();
+					    		$(this).parents("#page-alert").collapse('hide');
+					    	})
+	        		))
+        	);
+
+    	$alert.collapse('show');
+    	$alert.css({"background-image": "linear-gradient(100deg, rgb(86, 110, 144) 0%, rgb(183, 108, 30) 33%, rgb(117, 45, 40) 66%, rgb(77, 98, 83) 100%)"})
+	};
+	downloadDana("The Transcendent Perfection of Wisdom in Ten Thousand Lines");*/
+
 	// On resize...
 	//------------------------------------------
 	$(window).on("resize", function(){

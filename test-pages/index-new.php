@@ -1,34 +1,35 @@
 
 <?php
 
-$backgrounds = array(
-    'DEGE5-BLUR.JPG',
-    'DJKR-reading-BLUR.jpg',
-    'LTWA1-BLUR.jpg',
-    'LTWA2-BLUR.jpg',
-    'WORKING-COMMITTEE_BLUR.jpg'
-);
-
-$background_image = "linear-gradient(100deg, rgb(86, 110, 144) 5%, rgb(183, 108, 30) 35%, rgb(117, 45, 40) 60%, rgb(77, 98, 83) 95%)";
-if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count($backgrounds)) {
-    $background_image = "url('/imgs/backgrounds/" . $backgrounds[intval($_GET['bg'])] . "')";
-}
-
-$circles_imgs = array(
-    "/imgs/1068.jpg",
-    "/imgs/DSC_0212.jpg",
-    "/imgs/Boroburdo by Toto Iwantoro 23.jpg",
-    "/imgs/chart.png"
-);
-
-if(isset($_GET['circles']) && $_GET['circles'] == 'illustrations') {
-    $circles_imgs = array(
-        "/imgs/illustrations/profile-sq.jpg",
-        "/imgs/illustrations/GEM-STATIC-sq.jpg",
-        "/imgs/illustrations/circle-sq.jpg",
-        "/imgs/illustrations/wave-cropped-sq.jpg"
+    /* Variations to images - can be removed once agreed */
+    $backgrounds = array(
+        'DEGE5-BLUR.JPG',
+        'DJKR-reading-BLUR.jpg',
+        'LTWA1-BLUR.jpg',
+        'LTWA2-BLUR.jpg',
+        'WORKING-COMMITTEE_BLUR.jpg'
     );
-}
+
+    $background_image = "linear-gradient(100deg, rgb(86, 110, 144) 5%, rgb(183, 108, 30) 35%, rgb(117, 45, 40) 60%, rgb(77, 98, 83) 95%)";
+    if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count($backgrounds)) {
+        $background_image = "url('/imgs/backgrounds/" . $backgrounds[intval($_GET['bg'])] . "')";
+    }
+
+    $circles_imgs = array(
+        "/imgs/1068.jpg",
+        "/imgs/DSC_0212.jpg",
+        "/imgs/Boroburdo by Toto Iwantoro 23.jpg",
+        "/imgs/chart.png"
+    );
+
+    if(isset($_GET['circles']) && $_GET['circles'] == 'illustrations') {
+        $circles_imgs = array(
+            "/imgs/illustrations/profile-sq.jpg",
+            "/imgs/illustrations/GEM-STATIC-sq.jpg",
+            "/imgs/illustrations/circle-sq.jpg",
+            "/imgs/illustrations/wave-cropped-sq.jpg"
+        );
+    }
 
 ?>
 

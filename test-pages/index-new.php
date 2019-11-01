@@ -45,7 +45,7 @@
         color: #fff;
     }
     #title-band p {
-        color: #ddd;
+        color: #fff;
     }
     #title-band .text-shadow {
         text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);

@@ -1,11 +1,37 @@
 
+<?php
+
+$backgrounds = array(
+    'DEGE5-BLUR.JPG',
+    'DJKR-reading-BLUR.jpg',
+    'LTWA1-BLUR.jpg',
+    'LTWA2-BLUR.jpg',
+    'WORKING-COMMITTEE_BLUR.jpg'
+);
+
+$background_image = "linear-gradient(100deg, rgb(86, 110, 144) 5%, rgb(183, 108, 30) 35%, rgb(117, 45, 40) 60%, rgb(77, 98, 83) 95%)";
+if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count($backgrounds)) {
+    $background_image = "url('/imgs/backgrounds/" . $backgrounds[intval($_GET['bg'])] . "')";
+}
+?>
+
 <style type="text/css">
     #title-band {
-        background-image: linear-gradient(100deg, rgb(86, 110, 144) 5%, rgb(183, 108, 30) 35%, rgb(117, 45, 40) 60%, rgb(77, 98, 83) 95%);
+        background-color: rgb(183, 108, 30);
+        background-image: <?php echo $background_image ?>;
+        background-size: cover;
+        background-position: 50% 50%;
         padding-top: 55px;
     }
-    #title-band h2 { color: #fff; }
-    #title-band p { color: #ddd; }
+    #title-band h2 {
+        color: #fff;
+    }
+    #title-band p {
+        color: #ddd;
+    }
+    #title-band .text-shadow {
+        text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    }
     #latest {
         margin-top: 30px;
     }
@@ -176,17 +202,17 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
-                    <h2>84000 is a global non-profit initiative focused on preserving the words of the Buddha</h2>
+                    <h2 class="text-shadow">84000 is a global non-profit initiative focused on preserving the words of the Buddha</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
-                    <p>As a grant giving translation body and online publication house, we leverage and integrate new technologies to make our digital library of the Buddha’s wisdom as accessible and beneficial as possible to readers, practitioners, and scholars around the world.</p>
+                    <p class="text-shadow">As a grant giving translation body and online publication house, we leverage and integrate new technologies to make our digital library of the Buddha’s wisdom as accessible and beneficial as possible to readers, practitioners, and scholars around the world.</p>
                 </div>
             </div>
             <div id="latest">
 
-                <div class="panel shadow">
+                <div class="panel">
                     <div class="panel-body">
                         <div id="publications-carousel" class="carousel slide">
 

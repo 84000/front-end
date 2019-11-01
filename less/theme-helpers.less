@@ -106,6 +106,15 @@ a.text-color {
     }
 }
 
+// Hide if there's no javascript
+// ------------------------------
+.visible-scripts {
+    display: none;
+    .scripts & {
+        display: block;
+    }
+}
+
 a.warning {
     color: @brand-red;
     padding: @padding-base-vertical;

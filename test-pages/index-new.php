@@ -13,6 +13,23 @@ $background_image = "linear-gradient(100deg, rgb(86, 110, 144) 5%, rgb(183, 108,
 if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count($backgrounds)) {
     $background_image = "url('/imgs/backgrounds/" . $backgrounds[intval($_GET['bg'])] . "')";
 }
+
+$circles_imgs = array(
+    "/imgs/1068.jpg",
+    "/imgs/DSC_0212.jpg",
+    "/imgs/Boroburdo by Toto Iwantoro 23.jpg",
+    "/imgs/chart.png"
+);
+
+if(isset($_GET['circles']) && $_GET['circles'] == 'illustrations') {
+    $circles_imgs = array(
+        "/imgs/illustrations/profile-sq.jpg",
+        "/imgs/illustrations/GEM-STATIC-sq.jpg",
+        "/imgs/illustrations/circle-sq.jpg",
+        "/imgs/illustrations/wave-cropped-sq.jpg"
+    );
+}
+
 ?>
 
 <style type="text/css">
@@ -304,7 +321,7 @@ if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count
                         <div class="col-md-6 col-lg-3">
                             <div class="rubrik vision">
                                 <div class="thumbnail">
-                                    <img src="/imgs/1068.jpg">
+                                    <img src="<?php echo $circles_imgs[0] ?>">
                                 </div>
                                 <h2>Vision</h2>
                                 <p>Our 100 year vision is to preserve a living tradition for future generations. Read more about our vision, goals and the scope of our work.</p>
@@ -313,7 +330,7 @@ if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count
                         <div class="col-md-6 col-lg-3">
                             <div class="rubrik urgency">
                                 <div class="thumbnail">
-                                    <img src="/imgs/DSC_0212.jpg">
+                                    <img src="<?php echo $circles_imgs[1] ?>">
                                 </div>
                                 <h2>Urgency</h2>
                                 <p>Knowledge of Classical Tibetan is rapidly disappearing. Read more about the urgency of translation as a means of preservation.</p>
@@ -322,7 +339,7 @@ if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count
                         <div class="col-md-6 col-lg-3">
                             <div class="rubrik sponsorship">
                                 <div class="thumbnail">
-                                    <img src="/imgs/Boroburdo by Toto Iwantoro 23.jpg">
+                                    <img src="<?php echo $circles_imgs[2] ?>">
                                 </div>
                                 <h2>Sponsorship</h2>
                                 <p>Sponsor a page of translation today, and become a part of this historic movement to ensure these gems of wisdom live on for future generations.</p>
@@ -331,7 +348,7 @@ if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count
                         <div class="col-md-6 col-lg-3">
                             <div class="rubrik progress">
                                 <div class="thumbnail">
-                                    <img src="/imgs/chart.png">
+                                    <img src="<?php echo $circles_imgs[3] ?>">
                                 </div>
                                 <h2>Progress</h2>
                                 <p>As of 2010 only 5% of the Kangyur - the Words of the Buddha, or sutras, had been translated into modern languages. Take a look at our current progress.</p>
@@ -348,7 +365,7 @@ if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="thumbnail">
-                        <img src="/imgs/Tree_offwhite.jpg">
+                        <img src="/imgs/illustrations/Tree_offwhite.jpg">
                     </div>
                     <h2>Grants</h2>
                     <p>Currently supporting 297 translators, 84000 has a translation grant cycle that opens annually for new applications. Learn more about our selected source text lists, our translation and grants policies, text critical guidelines for translators, and our grants application form.</p>

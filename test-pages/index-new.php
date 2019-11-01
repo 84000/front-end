@@ -117,7 +117,7 @@
         background-color: #fdfaf1;
         padding-bottom: 20px;
         padding-bottom: 40px;
-        border-top: 5px solid #f0caa5;
+        border-top: 1px solid #f0caa5;
         position: relative;
     }
     #grants-band h2 {

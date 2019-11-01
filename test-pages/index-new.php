@@ -22,6 +22,8 @@
         "/imgs/chart.png"
     );
 
+    $about_bg = "background-color: #fff;";
+
     if(isset($_GET['circles']) && $_GET['circles'] == 'illustrations') {
         $circles_imgs = array(
             "/imgs/illustrations/profile-sq.jpg",
@@ -29,6 +31,7 @@
             "/imgs/illustrations/circle-sq.jpg",
             "/imgs/illustrations/wave-cropped-sq.jpg"
         );
+        $about_bg = "background: url('/imgs/illustrations/bg.jpg') ;";
     }
 
 ?>
@@ -90,7 +93,7 @@
         padding-top: 40px;
     }
     #about-band {
-        background-color: #fff;
+        <?php echo $about_bg ?>
         padding-top: 40px;
         padding-bottom: 20px;
     }
@@ -114,7 +117,7 @@
         background-color: #fdfaf1;
         padding-bottom: 20px;
         padding-bottom: 40px;
-        border-top: 1px solid #dadada;
+        border-top: 5px solid #f0caa5;
         position: relative;
     }
     #grants-band h2 {

@@ -106,12 +106,19 @@ a.text-color {
     }
 }
 
-// Hide if there's no javascript
-// ------------------------------
+// Show / hide based on javascript
+// -------------------------------
 .visible-scripts {
     display: none;
     .scripts & {
         display: block;
+    }
+}
+
+.hidden-scripts {
+    display: block;
+    .scripts & {
+        display: none;
     }
 }
 

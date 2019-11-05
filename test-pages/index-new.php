@@ -7,7 +7,7 @@
         'DJKR-reading-BLUR.jpg',
         'LTWA1-BLUR.jpg',
         'LTWA2-BLUR.jpg',
-        'WORKING-COMMITTEE_BLUR.jpg'
+        'DJKR-resounding-BLUR.jpg'
     );
 
     $background_image = "linear-gradient(100deg, rgb(86, 110, 144) 5%, rgb(183, 108, 30) 35%, rgb(117, 45, 40) 60%, rgb(77, 98, 83) 95%)";
@@ -19,7 +19,7 @@
         "/imgs/1068.jpg",
         "/imgs/DSC_0212.jpg",
         "/imgs/Boroburdo by Toto Iwantoro 23.jpg",
-        "/imgs/chart.png"
+        "/imgs/Everest-SQ.jpg"
     );
 
     $about_bg = "background-color: #fff;";

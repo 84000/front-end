@@ -3,7 +3,7 @@
     <div class="md-adjacent-panels panel-margin">
         <div class="md-three-quarter-width foreground movie-container">
             <div class="panel panel-default movie">
-                <iframe src="http://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720" allowfullscreen></iframe>
             </div>
         </div>
         <div class="md-quarter-width">

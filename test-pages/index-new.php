@@ -19,7 +19,8 @@
         "/imgs/1068.jpg",
         "/imgs/DSC_0212.jpg",
         "/imgs/Boroburdo by Toto Iwantoro 23.jpg",
-        "/imgs/Everest-SQ.jpg"
+        "/imgs/Everest-SQ.jpg",
+        "/imgs/Gen-Jamspal-reads-Prajnaparamita_Ladakh-2010.jpg"
     );
 
     $about_bg = "background-color: #fff;";
@@ -29,6 +30,7 @@
             "/imgs/illustrations/profile-sq.jpg",
             "/imgs/illustrations/GEM-STATIC-sq.jpg",
             "/imgs/illustrations/circle-sq.jpg",
+            "/imgs/illustrations/wave-cropped-sq.jpg",
             "/imgs/illustrations/wave-cropped-sq.jpg"
         );
         $about_bg = "background: url('/imgs/illustrations/bg.jpg') ;";
@@ -38,8 +40,14 @@
 
 <style type="text/css">
     #title-band {
-        background-color: rgb(183, 108, 30);
-        background-image: <?php echo $background_image ?>;
+        background-image: 
+            linear-gradient(
+                90deg, 
+                rgba(100, 100, 100, 0) 5%, 
+                rgba(100, 100, 100, 0.7) 50%, 
+                rgba(100, 100, 100, 0) 95%
+            ),
+            <?php echo $background_image ?>;
         background-size: cover;
         background-position: 50% 50%;
         padding-top: 55px;
@@ -51,7 +59,7 @@
         color: #fff;
     }
     #title-band .text-shadow {
-        text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+        text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
     }
     #latest {
         margin-top: 30px;
@@ -112,19 +120,6 @@
     }
     #about-band .thumbnail img {
         object-fit: cover;
-    }
-    #grants-band {
-        background-color: #fdfaf1;
-        padding-bottom: 20px;
-        padding-bottom: 40px;
-        border-top: 1px solid #f0caa5;
-        position: relative;
-    }
-    #grants-band h2 {
-        margin-top: 0px;
-    }
-    #grants-band p {
-        color: #707070;
     }
     #news-band {
         /*background-image: url('/imgs/pattern256.jpg');*/
@@ -321,8 +316,8 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-md-offset-1 col-md-10 col-lg-offset-0 col-lg-12">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-3">
+                    <div class="row text-center">
+                        <div class="col-md-6 col-lg-4">
                             <div class="rubrik vision">
                                 <div class="thumbnail">
                                     <img src="<?php echo $circles_imgs[0] ?>">
@@ -331,7 +326,7 @@
                                 <p>Our 100 year vision is to preserve a living tradition for future generations. Read more about our vision, goals and the scope of our work.</p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-4">
                             <div class="rubrik urgency">
                                 <div class="thumbnail">
                                     <img src="<?php echo $circles_imgs[1] ?>">
@@ -340,7 +335,7 @@
                                 <p>Knowledge of Classical Tibetan is rapidly disappearing. Read more about the urgency of translation as a means of preservation.</p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-4">
                             <div class="rubrik sponsorship">
                                 <div class="thumbnail">
                                     <img src="<?php echo $circles_imgs[2] ?>">
@@ -349,7 +344,7 @@
                                 <p>Sponsor a page of translation today, and become a part of this historic movement to ensure these gems of wisdom live on for future generations.</p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-4 col-lg-offset-2">
                             <div class="rubrik progress">
                                 <div class="thumbnail">
                                     <img src="<?php echo $circles_imgs[3] ?>">
@@ -358,21 +353,16 @@
                                 <p>As of 2010 only 5% of the Kangyur - the Words of the Buddha, or sutras, had been translated into modern languages. Take a look at our current progress.</p>
                             </div>
                         </div>
+                        <div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-0">
+                            <div class="rubrik progress">
+                                <div class="thumbnail">
+                                    <img src="<?php echo $circles_imgs[4] ?>">
+                                </div>
+                                <h2>Grants</h2>
+                                <p>Currently supporting 297 translators, editors and consultants, 84000's translation grant cycle opens annually for new applications.</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="grants-band">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div class="thumbnail">
-                        <img src="/imgs/illustrations/Tree_offwhite.jpg">
-                    </div>
-                    <h2>Grants</h2>
-                    <p>Currently supporting 297 translators, 84000 has a translation grant cycle that opens annually for new applications. Learn more about our selected source text lists, our translation and grants policies, text critical guidelines for translators, and our grants application form.</p>
                 </div>
             </div>
         </div>

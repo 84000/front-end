@@ -567,7 +567,7 @@
             <div class="row">
                 <div class="col-md-6 col-lg-8">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720"></iframe>
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720"></iframe>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 text-center">

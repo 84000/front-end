@@ -689,7 +689,7 @@ jQuery(document).ready(function($) {
 	    var srcChunks = scriptSrc ? scriptSrc.split('/') : [] ;
 	    return function() { return srcChunks[0] == "http:" ? srcChunks.slice(0,3).join('/') : "" ; };
 	    */
-	    return function() { return "http://cached-fe.84000.co"; };
+	    return function() { return "https://cached-fe.84000.co"; };
 	})();
 
 	// Bookmarks functionality

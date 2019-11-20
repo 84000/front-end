@@ -40,14 +40,7 @@
 
 <style type="text/css">
     #title-band {
-        background-image: 
-            linear-gradient(
-                90deg, 
-                rgba(100, 100, 100, 0) 5%, 
-                rgba(100, 100, 100, 0.7) 50%, 
-                rgba(100, 100, 100, 0) 95%
-            ),
-            <?php echo $background_image ?>;
+        background-image: <?php echo $background_image ?>;
         background-size: cover;
         background-position: 50% 50%;
         padding-top: 55px;

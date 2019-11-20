@@ -116,7 +116,9 @@
     }
     #news-band {
         /*background-image: url('/imgs/pattern256.jpg');*/
-        background-color: #0c3e5c;
+        /*background-color: #0c3e5c;*/
+        background-color: rgba(12, 68, 91, 0.6);
+        padding-top: 30px;
         padding-bottom: 15px;
     }
     #news-band > .container{ position: relative; }
@@ -124,7 +126,7 @@
         margin-bottom: 20px;
         color: #b1bccb;
         text-align: center;
-        
+        display: none;
     }
     #news-band .panel-default > .panel-heading {
         background-color: #fdfaf1;
@@ -196,10 +198,11 @@
 
     }
     body > footer {
-        background-color: transparent;
+        border-top: 0;
+        background-color: rgba(12, 68, 91, 0.6);
     }
     body > footer, body > footer a {
-        color: #606060;
+        color: #fff;
     }
 </style>
 

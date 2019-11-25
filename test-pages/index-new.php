@@ -72,8 +72,8 @@
         height: 100px;
     }
     .title-box, .title-box-addon {
-        /*background-color: rgba(12, 63, 94, 0.65);*/
-        background-color: rgba(0, 0, 0, 0.65);
+        background-color: rgba(12, 63, 94, 0.9);
+        /*background-color: rgba(0, 0, 0, 0.65);*/
         padding: 0px 25px 15px 25px;
     }
     .title-box {

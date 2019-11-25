@@ -70,6 +70,9 @@
         /*background-color: rgba(0, 0, 0, 0.65);*/
         padding: 0px 25px 15px 25px;
         position: relative;
+        background-image: url('/imgs/background-pattern-transparent.svg');
+        background-size: 80px;
+        background-repeat: repeat;
     }
     .title-box {
         border-radius: 5px 5px 0px 0px;

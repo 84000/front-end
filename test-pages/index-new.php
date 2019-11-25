@@ -65,16 +65,11 @@
     #title-band p {
         color: #fff;
     }
-    #title-band .img-container {
-        margin-top: -50px;
-    }
-    #title-band .img-container img {
-        height: 100px;
-    }
     .title-box, .title-box-addon {
         background-color: rgba(12, 63, 94, 0.9);
         /*background-color: rgba(0, 0, 0, 0.65);*/
         padding: 0px 25px 15px 25px;
+        position: relative;
     }
     .title-box {
         border-radius: 5px 5px 0px 0px;
@@ -84,6 +79,12 @@
         content: ' ';
         border-radius: 0px 0px 5px 5px;
         height: 20px;
+    }
+    .title-box .img-container {
+        margin-top: -50px;
+    }
+    .title-box .img-container img {
+        height: 100px;
     }
     #latest .panel {
         margin-top: 0px;
@@ -301,16 +302,18 @@
     <div id="title-band" class="clearfix">
         <div class="container text-center">
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 title-box">
-                    <div class="img-container">
-                        <img src="/imgs/logo.svg" alt="84000 logo" />
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2">
-                            <h2 class="text-shadow">84000 is a global non-profit initiative focused on preserving the words of the Buddha</h2>
+                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="title-box clearfix">
+                        <div class="img-container">
+                            <img src="/imgs/logo.svg" alt="84000 logo" />
                         </div>
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <h2 class="text-shadow">84000 is a global non-profit initiative focused on preserving the words of the Buddha</h2>
+                            </div>
+                        </div>
+                        <p class="text-shadow">As a grant giving translation body and online publication house, we leverage and integrate new technologies to make our digital library of the Buddha’s wisdom as accessible and beneficial as possible to readers, practitioners, and scholars around the world.</p>
                     </div>
-                    <p class="text-shadow">As a grant giving translation body and online publication house, we leverage and integrate new technologies to make our digital library of the Buddha’s wisdom as accessible and beneficial as possible to readers, practitioners, and scholars around the world.</p>
                 </div>
             </div>
             <div id="latest">
@@ -396,7 +399,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 title-box-addon">
+                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="title-box-addon clearfix"></div>
                 </div>
             </div>
         </div>

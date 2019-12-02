@@ -15,21 +15,14 @@
 
                         <input name="oid" type="hidden" value="00Di0000000iQGg">
                         <input name="retURL" type="hidden" value="/how-you-can-help/subscribed">
-                        <input id="lead_source" name="lead_source" type="hidden" value="Web">
-                        <input id="company" name="company" type="hidden" value="Self">
-                        <input id="00Ni000000CCgKc" name="00Ni000000CCgKc" type="hidden" value="1">
+                        <input name="lead_source" type="hidden" value="Web">
+                        <input name="company" type="hidden" value="Self">
+                        <input name="00Ni000000CCgKm" type="hidden" value="1">
 
                         <div class="form-group">
-                            <label for="first_name" class="col-sm-4 control-label">First name</label>
+                            <label for="name" class="col-sm-4 control-label">Name</label>
                             <div class="col-sm-8 col-md-4">
-                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="" required="required">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="last_name" class="col-sm-4 control-label">Last name</label>
-                            <div class="col-sm-8 col-md-4">
-                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="" required="required">
+                                <input type="text" name="00Ni000000CCgKX" class="form-control" id="name" maxlength="200" required="required">
                             </div>
                         </div>
 
@@ -47,7 +40,7 @@
                                         <button type="submit" class="btn btn-primary">Subscribe</button>
                                     </div>
                                     <div class="small text-muted">
-                                        我想訂閱 84000中文電訊（繁體）<a href="/ch-how-you-can-help/ch-spread-the-word">Subscribe here instead</a>.
+                                        Rather have your newsletter in English? <a href="/how-you-can-help/spread-the-word">Subscribe here instead</a>.
                                     </div>
                                 </div>
                             </div>

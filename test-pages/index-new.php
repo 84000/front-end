@@ -91,7 +91,7 @@
     }
     #latest .panel {
         margin-top: 0px;
-        border-radius: 0px;
+        border-radius: 5px;
     }
     #latest .panel {
         background-color: rgba(255,255,255,.9);
@@ -181,7 +181,10 @@
     }
     #news-band {
         padding-top: 15px;
-        padding-bottom: 35px;
+        padding-bottom: 15px;
+    }
+    #news-band .panel {
+        padding: 5px;
     }
     #news-band > .container { position: relative; }
     #news-band h2 {
@@ -204,7 +207,7 @@
     #movie-band {
         /*background-image: linear-gradient(180deg, rgb(255, 255, 255) 50%, rgb(230, 230, 230) 100%);*/
         background-color: #ffffff;
-        padding: 50px 0px;
+        padding: 35px 0px;
     }
     .text-shadow {
         text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
@@ -262,6 +265,7 @@
     .news-banner, .announcement-banner, .news-image {
         width: 100%;
         height: 160px;
+        border-radius: 3px;
     }
     .news-banner, .announcement-banner {
         display: table;

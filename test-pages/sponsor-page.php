@@ -144,16 +144,17 @@
                             </div>
                         </div>
                     </form>
-
-                    <hr>
+                </div>
+                
+                <div class="panel-footer">
 
                     <p>
                         If you have any questions please contact us at <a href="mailto:info@84000.co">info@84000.co</a>.
                     </p>
-                    
+
+                    <h4 class="no-bottom-margin">Donating by check?</h4>
                     <p>
-                        Donating by check?
-                        <br>To donate by check, please contact us at <a href="mailto:info@84000.co">info@84000.co</a>.
+                        To donate by check, please contact us at <a href="mailto:info@84000.co">info@84000.co</a>.
                         <br>To donate in Europe, please contact us at <a href="mailto:europe@84000.co">europe@84000.co</a>.
                         <br>香港捐款，請聯絡香港團隊: <a href="mailto:hongkong@84000.co">hongkong@84000.co</a>
                         <br>台灣捐款，請聯絡馮燕南: <a href="mailto:jain@84000.co">jain@84000.co</a>

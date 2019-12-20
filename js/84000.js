@@ -1402,7 +1402,7 @@ jQuery(document).ready(function($) {
 
  			    	hideTermsTimeout = setTimeout(function(){
  			    		$translation.addClass("mute-glossary");
- 			    	}, 1000);
+ 			    	}, 2000);
 			    }
 			}($));
 
@@ -1513,9 +1513,23 @@ jQuery(document).ready(function($) {
 			clearTimeout($this.data('showOnScroll'));
 		}
 		// Set new time out to hide again
-		$this.data('showOnScroll', setTimeout(function() { $('.show-on-scroll, .xs .show-on-scroll-xs').fadeOut(); }, 3600));
+		$this.data(
+			'showOnScroll', 
+			setTimeout(
+				function() {
+					$('body').removeClass('scrolling'); 
+					//$('.show-on-scroll, .xs .show-on-scroll-xs').fadeOut(); 
+				}
+			, 2400)
+		);
 		// Show what's marked to show
-		$this.on('scroll', function(){ $('.show-on-scroll, .show-on-scroll-xs').fadeIn(); });
+		$this.on(
+			'scroll', 
+			function(){ 
+				$('body').addClass('scrolling');
+				//$('.show-on-scroll, .show-on-scroll-xs').fadeIn(); 
+			}
+		);
 	});
 
 	// On load...

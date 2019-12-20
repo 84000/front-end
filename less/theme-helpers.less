@@ -122,6 +122,43 @@ a.text-color {
     }
 }
 
+// Show options on scrolling
+// -------------------------------
+
+@keyframes fadeIn {
+    0% { opacity: 0; display: none; }
+    1% { opacity: 0; display: block; }
+    100% { opacity: 1; display: block; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; display: block; }
+    99% { opacity: 0; display: block; }
+    100% { opacity: 0; display: block; }
+}
+
+.show-on-scroll, .show-on-scroll-xs {
+    opacity: 0;
+    display: none;
+    animation: fadeOut .5s;
+}
+
+.scrolling {
+    .show-on-scroll {
+        opacity: 1;
+        display: block;
+        animation: fadeIn .5s;
+        
+    }
+    @media only screen and (max-width: @screen-sm) {
+        .show-on-scroll-xs {
+            opacity: 1;
+            display: block;
+            animation: fadeIn .5s;
+        }
+    }
+}
+
 a.warning {
     color: @brand-red;
     padding: @padding-base-vertical;

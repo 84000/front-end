@@ -833,6 +833,8 @@ span.indent {
 
 }
 
+@nav-controls-sm-height: 68px;
+
 @media only screen and (max-width: @screen-md) {
     
     .nav-controls {
@@ -841,7 +843,7 @@ span.indent {
         top: auto;
         left: 0px;
         right: 0px;
-        height:68px;
+        height: @nav-controls-sm-height;
         background-color: @brand-blue;
         z-index: 5;
 
@@ -850,6 +852,20 @@ span.indent {
             color: @brand-blue;
         }
 
+        .fixed-btn-container {
+            position: absolute;
+        }
+
+    }
+
+    .nav-controls.show-on-scroll-xs {
+        display: block;
+        bottom: -@nav-controls-sm-height;
+        .transition(.25s ease-in);
+    }
+
+    .scrolling .nav-controls.show-on-scroll-xs {
+        bottom: 0px;
     }
 
     .fixed-btn-container {

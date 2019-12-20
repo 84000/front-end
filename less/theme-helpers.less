@@ -125,36 +125,27 @@ a.text-color {
 // Show options on scrolling
 // -------------------------------
 
-@keyframes fadeIn {
-    0% { opacity: 0; display: none; }
-    1% { opacity: 0; display: block; }
-    100% { opacity: 1; display: block; }
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; display: block; }
-    99% { opacity: 0; display: block; }
-    100% { opacity: 0; display: block; }
-}
-
-.show-on-scroll, .show-on-scroll-xs {
+.show-on-scroll {
     opacity: 0;
     display: none;
-    animation: fadeOut .5s;
+    .transition(.25s ease-in);
+}
+
+@media only screen and (max-width: @screen-md) {
+    opacity: 0;
+    display: none;
+    .transition(.25s ease-in);
 }
 
 .scrolling {
     .show-on-scroll {
         opacity: 1;
         display: block;
-        animation: fadeIn .5s;
-        
     }
-    @media only screen and (max-width: @screen-sm) {
+    @media only screen and (max-width: @screen-md) {
         .show-on-scroll-xs {
             opacity: 1;
             display: block;
-            animation: fadeIn .5s;
         }
     }
 }

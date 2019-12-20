@@ -1520,7 +1520,7 @@ jQuery(document).ready(function($) {
 					$('body').removeClass('scrolling'); 
 					//$('.show-on-scroll, .xs .show-on-scroll-xs').fadeOut(); 
 				}
-			, 2400)
+			, 2000)
 		);
 		// Show what's marked to show
 		$this.on(

@@ -803,16 +803,6 @@ a.info-icon {
 // Small viewport variations
 // --------------------------------------------
 
-@keyframes hideGtr {
-    0% { left: 0px;  }
-    100% { left: -@text-gtr-width-sm; }
-}
-
-@keyframes showGtr {
-    0% { left: -@text-gtr-width-sm; }
-    100% { left: 0px; }
-}
-
 @media only screen and (max-width: @screen-sm) {
 
     .translation {
@@ -844,12 +834,11 @@ a.info-icon {
             padding-right: 0px;
             margin-right: -@text-gtr-width-sm;
             left: -@text-gtr-width-sm;
-            animation: hideGtr .5s;
+            .transition(.15s ease-in);
             .rw {
                 margin-left: -@text-gtr-width-sm;
                 margin-right: 0px;
                 left: 0px;
-                animation: none;
             }
             .gtr{
                 margin-left: -@text-gtr-width-sm;
@@ -867,12 +856,10 @@ a.info-icon {
                 }
             }
         }
+
         &.scrolling .rw {
             left: 0px;
-            animation: showGtr .5s;
-            .rw {
-                animation: none;
-            }
+            .transition(1s ease-in);
         }
 
         #abbreviations {

@@ -280,12 +280,8 @@
             <item url="http://84000.co/ch-how-you-can-help/ch-shop-n-give">
                 <label>購物捐獻</label>
             </item> -->
-            <!-- No Chinese page
-            <item url="http://84000.co/ch-how-you-can-help/ch-spread-the-word/">
+            <item url="http://84000.co/ch-how-you-can-help/ch-howhelp-subscribe/">
                 <label>訂閱電子通訊</label>
-            </item> -->
-            <item url="http://84000.co/ch-how-you-can-help/ch-faq">
-                <label>常見問題</label>
             </item>
         </item>
     </navigation>

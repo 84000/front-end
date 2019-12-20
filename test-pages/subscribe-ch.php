@@ -6,7 +6,7 @@
 
                 <div class="panel-img-header has-img thumbnail">
                     <img src="/imgs/illustrations/Tree_offwhite.jpg" alt="header image" class="stretch">
-                    <h1>Subscribe to our newsletter</h1>
+                    <h1>訂閱電訊</h1>
                 </div>
                 
                 <div class="panel-body">
@@ -14,20 +14,20 @@
                     <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form-horizontal">
 
                         <input name="oid" type="hidden" value="00Di0000000iQGg">
-                        <input name="retURL" type="hidden" value="/how-you-can-help/subscribed">
+                        <input name="retURL" type="hidden" value="https://84000.co/how-you-can-help/subscribed">
                         <input name="lead_source" type="hidden" value="Web">
                         <input name="company" type="hidden" value="Self">
                         <input name="00Ni000000CCgKm" type="hidden" value="1">
 
                         <div class="form-group">
-                            <label for="name" class="col-sm-4 control-label">Name</label>
+                            <label for="name" class="col-sm-4 control-label">姓名</label>
                             <div class="col-sm-8 col-md-4">
                                 <input type="text" name="00Ni000000CCgKX" class="form-control" id="name" maxlength="200" required="required">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-sm-4 control-label">Email</label>
+                            <label for="email" class="col-sm-4 control-label">電子信箱</label>
                             <div class="col-sm-8 col-md-6">
                                 <input type="email" name="email" class="form-control" id="email" placeholder="" required="required">
                             </div>
@@ -37,7 +37,7 @@
                             <div class="col-sm-offset-4 col-sm-8">
                                 <div class="center-vertical">
                                     <div>
-                                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                                        <button type="submit" class="btn btn-primary">訂閱電訊</button>
                                     </div>
                                     <div class="small text-muted">
                                         Rather have your newsletter in English? <a href="/how-you-can-help/spread-the-word">Subscribe here instead</a>.

@@ -14,7 +14,7 @@
                     <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form-horizontal">
 
                         <input name="oid" type="hidden" value="00Di0000000iQGg">
-                        <input name="retURL" type="hidden" value="/how-you-can-help/subscribed">
+                        <input name="retURL" type="hidden" value="https://84000.co/how-you-can-help/subscribed">
                         <input id="lead_source" name="lead_source" type="hidden" value="Web">
                         <input id="company" name="company" type="hidden" value="Self">
                         <input id="00Ni000000CCgKc" name="00Ni000000CCgKc" type="hidden" value="1">

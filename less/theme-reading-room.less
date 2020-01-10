@@ -831,21 +831,40 @@ a.info-icon {
         .rw { // row
             position: relative;
             padding-left: @text-gtr-width-sm;
-            padding-right: 0px;
-            /*
-            margin-right: -@text-gtr-width-sm;
-            left: -@text-gtr-width-sm;
-            .transition(.15s ease-in);*/
+            // Floating milestones
+            //padding-left: 0px;
+            //padding-right: 0px;
             .rw {
                 margin-left: -@text-gtr-width-sm;
                 margin-right: 0px;
                 left: 0px;
             }
-            .gtr{
+            .gtr {
                 margin-left: -@text-gtr-width-sm;
                 .milestone {
                     width: (@text-gtr-width-sm - @panel-body-padding);
                 }
+                /* Floating milestones
+                position: absolute;
+                right: 0px;
+                text-align: right;
+                .milestone {
+                    position: absolute;
+                    max-width: 50px;
+                    right: 2px;
+                    top: 0;
+                    background-color: @brand-red;
+                    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
+                    color: #fff !important;
+                    border-radius: 3px;
+                    width: auto;
+                    padding: 0px 10px;
+                    white-space: nowrap;
+                    cursor: pointer;
+                    opacity: 0;
+                    .transition(.5s ease-in);
+                }*/
+                
             }
             .rw-heading {
                 padding-left: 0px;
@@ -858,10 +877,9 @@ a.info-icon {
             }
         }
 
-        /*
-        &.scrolling .rw {
-            left: 0px;
-            .transition(.5s ease-in);
+        /* Floating milestones
+        &.scrolling .rw .gtr .milestone {
+            opacity: 1;
         }*/
 
         #abbreviations {

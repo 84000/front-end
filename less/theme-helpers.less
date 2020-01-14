@@ -199,6 +199,12 @@ a.warning {
     }
 }
 
+@media (min-width: @screen-lg-min) {
+    .border-left-lg {
+        border-left: 1px solid @hr-border;
+    }
+}
+
 .no-shadow {
     .box-shadow(none);
 }
@@ -281,6 +287,10 @@ p.date {
 
 .input-group.full-width {
     width: 100%;
+}
+
+.form-horizontal.labels-left .control-label {
+    text-align: left;
 }
 
 // Hide/show content in collapse links
@@ -393,6 +403,9 @@ p.date {
     &.full-width {
         width: 100%;
     }
+    &.center-aligned {
+        margin: 0px auto;
+    }
 
 }
 a.center-vertical {
@@ -401,9 +414,6 @@ a.center-vertical {
     }
     > i {
         font-size: 30px;
-    }
-    &.center-aligned {
-        margin: 0px auto;
     }
 }
 .top-vertical {

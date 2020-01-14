@@ -1865,6 +1865,43 @@ jQuery(document).ready(function($) {
 	});
 
 	// Add behaviour...
+	// Modal set iframe src
+	// -------------------------------------------
+	$('#iframe-modal.modal').on('show.bs.modal', function (e) {
+		var $link = $(e.relatedTarget);
+		var $modal = $(this);
+		var $iframe = 
+			$('<iframe>', {
+				'src': $link.data('href'), 
+				'frameborder': '0', 
+				'scrolling': '0', 
+				'allowtransparency': 'true',
+				'style': 'width:100%;height:100%;min-height:500px'
+			})
+		$modal
+			.find('.modal-content')
+			.empty()
+			.append($iframe);
+	});
+
+	// Add behaviour...
+	// Tab set required input
+	// -------------------------------------------
+	$('[data-input-required]').on('show.bs.tab', function (e) {
+		$($(this).data('input-required'))
+			.each(function(){
+				$(this).attr('required', 'required');
+			});
+	});
+
+	$('[data-input-required]').on('hide.bs.tab', function (e) {
+		$($(this).data('input-required'))
+			.each(function(){
+				$(this).removeAttr('required');
+			});
+	});
+
+	// Add behaviour...
 	// Track some clicks
 	// -----------------------------------------
 	$('a.log-click').on('click', function (e) {
@@ -1890,12 +1927,24 @@ jQuery(document).ready(function($) {
 	});
 
 	// Add behaviour...
+	// Show if control checked
+	// -------------------------------------------
+	$(document).on("click", "input[data-show-on-checked], input[data-hide-on-checked]", function (e) {
+		var $this = $(this);
+		var action = $this.data("show-on-checked") ? 'show' : 'hide' ;
+		var $target = action == 'show' ? $($this.data("show-on-checked")) : $($this.data("hide-on-checked")) ;
+		if($this.is(':checked')) {
+			$target.collapse(action);
+		}
+	});
+
+	// Add behaviour...
 	// Body click event
 	// ------------------------------------------
 	$(document).on("click",'body', function(e) {
 	
 		// Close things
-        $('.collapse').collapse('hide');
+        $('.collapse').not('.persist').collapse('hide');
 
         // show glossary highlights
         if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
@@ -1986,64 +2035,50 @@ jQuery(document).ready(function($) {
 	// Add behaviour
 	// Initialise popovers
 	// ------------------------------------------
-	/*
 	$("a[data-download-dana]").on("click", function(e){
 
 		var $this = $(this);
 		var $title = $this.data("download-dana");
 		var $alert = $("#page-alert");
 
-    	$alert.find(".container")
+    	$alert
+    		.find(".container")
+    		.empty()
     		.append(
-				$("<div>", {"class": "center-vertical", "style": "margin: 0px auto;"})
+    			$("<div>", {"class": "row"})
     				.append(
-		    			$("<span>")
-		    				.append(
-		    					$("<i>", {"class": "fa fa-cloud-download", "style": "font-size:30px;"})
-		    				)
-		    		).append(
-		        		$("<span>").text("You are downloading:")
-		    		)
-        	).append(
-        		$("<h2>", {"style": "color:#000", "class" : "no-top-margin no-bottom-margin"}).text($title)
-        	).append(
-        		$("<p>", {"class": "small"})
-	        		.append(
-	        			$("<span>").text("This is a free publication from 84000 - Translating the Words of the Buddha, a charity organisation 100% funded by it's donors.")
-	        		).append(
-	        			$("<br>")
-	        		).append(
-	        			$("<span>").text("Click an option below to support our work with a donation. In accordance with the principle of Dana all contributions are discretionary and gratefully recieved.")
-	        		)
-        	).append(
-        		$("<ul>", {"class": "list-inline inline-dots no-bottom-margin"})
-        			.append($("<li>").append(
-	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("$5")
-	        		))
-	        		.append($("<li>").append(
-	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("$10")
-	        		))
-	        		.append($("<li>").append(
-	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("$20")
-	        		))
-	        		.append($("<li>").append(
-	        			$("<a>", {"href": "https://84000.secure.force.com/donate", "class": "underline"}).text("other")
-	        		))
-	        		.append($("<li>").append(
-	        			$("<a>", {"href": "#close", "class": "underline"})
-    	        			.text("close")
-    	        			.on("click", function(e){
-    	        				e.preventDefault();
-					    		$(this).parents("#page-alert").collapse('hide');
-					    	})
-	        		))
-        	);
+    					$("<div>", {"class": "col-sm-10 col-sm-offset-1"})
+				    		.append(
+								$("<div>", {"class": "center-vertical center-aligned"})
+				    				.append(
+						    			$("<span>")
+						    				.append(
+						    					$("<i>", {"class": "fa fa-cloud-download"})
+						    				)
+						    		).append(
+						        		$("<span>").text("You are downloading:")
+						    		)
+				        	).append(
+				        		$("<h2>", {"class" : "no-top-margin no-bottom-margin"}).text($title)
+				        	).append(
+				        		$("<p>", {"class": "small"})
+					        		.append(
+					        			$("<span>").text("This is a free publication from 84000: Translating the Words of the Buddha, a non-profit organization sharing the gift of wisdom with the world.")
+					        		).append(
+					        			$("<br>")
+					        		).append(
+					        			$("<span>").text("The cultivation of generosity, or dāna—giving voluntarily with a view that something wholesome will come of it—is considered to be a fundamental Buddhist practice by all schools. The nature and quantity of the gift itself is often considered less important.")
+					        		)
+				        	).append(
+				        		$("<a>", {"href" : "https://84000.co/donate", "target" : "_blank", "class" : "underline"}).text("Click here to make a dāna donation")
+				        	)
+    				)
+    		);
 
     	$alert.collapse('show');
-    	$alert.css({"background-color": "rgb(183, 108, 30)"})
+    	$alert.addClass('download-dana');
 
 	});
-	*/
 
 	// On loading the page...
 	// Scroll to the hash location

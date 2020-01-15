@@ -21,6 +21,7 @@ module.exports = function(grunt) {
           '<%= pkg.bootstrapJs %>/affix.js',
           '<%= pkg.bootstrapJs %>/dropdown.js',
           '<%= pkg.bootstrapJs %>/carousel.js',
+          '<%= pkg.bootstrapJs %>/alert.js',
         	'js/84000.js',
         	'js/ie10-viewport-bug-workaround.js'
        	],

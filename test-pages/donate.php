@@ -13,11 +13,18 @@
                         <h4 class="text-bold">Oops, something went wrong!</h4>
                         <p>Unfortunately your donation was not successful. If you think you think you may have made a mistake then please try filling out the form again.</p>
                     </div>
+                <?php } else { ?>
+                    <?php if($_GET['lang'] !== 'zh') { ?>
+                        <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            Prefer this in <a href="?lang=zh" class="alert-link">Chinese</a>?
+                        </div>
+                    <?php } ?>
                 <?php } ?>
                 
                 <div class="panel-body">
-
-                    
 
                     <form action="https://faas.cloud.clickandpledge.com" method="POST" class="form-horizontal labels-left">
 
@@ -26,9 +33,9 @@
                         <input id="SKU1" name="SKU1" type="hidden" value="DON">
                         <input id="Quantity1" name="Quantity1" type="hidden" value="1">
                         <!-- Update these to live urls!!! -->
-                        <input id="OnSuccessUrl" name="OnSuccessUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/?template=donate-success">
-                        <input id="OnDeclineUrl" name="OnDeclineUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/?template=donate&response=failed">
-                        <input id="OnErrorUrl" name="OnErrorUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/?template=donate&response=failed">
+                        <input id="OnSuccessUrl" name="OnSuccessUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/donate-success">
+                        <input id="OnDeclineUrl" name="OnDeclineUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/donate-failed">
+                        <input id="OnErrorUrl" name="OnErrorUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/donate-failed">
                         <input id="AccountGuid" name="AccountGuid" type="hidden" value="167f92fe-b51a-4ab2-b2de-746c189f5397">
                         <input id="AccountID" name="AccountID" type="hidden" value="27894">
                         <input id="WID" name="WID" type="hidden" value="75113">

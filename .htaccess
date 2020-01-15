@@ -37,4 +37,13 @@ RewriteRule ^/?.*ch-how-you-can-help/ch-howhelp-subscribe /test-pages/?template=
 RewriteRule ^/?.*how-you-can-help/sponsor-a-page /test-pages/?template=sponsor-page [NC,L]
 RewriteRule ^/?.*how-you-can-help* /test-pages/?template=sponsor-sutra [NC,L]
 RewriteRule ^/?.*ch-howhelp* /test-pages/?template=sponsor-sutra&lang=zh [NC,L]
+
+RewriteCond %{QUERY_STRING} ^(.+|.*)$
+RewriteRule ^test-pages/donate-success?.* /test-pages/?template=donate-success&%1 [NC,L]
+RewriteCond %{QUERY_STRING} ^(.+|.*)$
+RewriteRule ^test-pages/donate-failed?.* /test-pages/?template=donate&response=failed&%1 [NC,L]
+RewriteCond %{QUERY_STRING} ^(.+|.*)$
+RewriteRule ^test-pages/donate?.* /test-pages/?template=donate&%1 [NC,L]
+
+
 RewriteRule ^(wp-content/uploads/.*) http://trans84000.staging.wpengine.com/$1 [NC,L]

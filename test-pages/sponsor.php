@@ -146,7 +146,7 @@
 
                                 <div class="form-group collapse persist" id="recurringIntevalContainer">
                                     <label for="recurringInteval" class="control-label sr-only">Recurr</label>
-                                    <div class="col-sm-offset-3 col-sm-3">
+                                    <div class="col-sm-offset-4 col-sm-4">
                                         <select id="recurringInteval" name="Periodicity" class="form-control">
                                             <option value="Month" selected="selected">Monthly</option>
                                             <option value="Quarter">Quarterly</option>

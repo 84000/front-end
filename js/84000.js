@@ -1942,6 +1942,11 @@ jQuery(document).ready(function($) {
 				$(this).collapse(action);
 			});
 		}
+		else {
+			$target.each(function(e){
+				$(this).collapse( action == 'hide' ? 'show' : 'hide' );
+			});
+		}
 	});
 
 	// Add behaviour...

@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-md-9 col-md-merge-right">
             <div class="panel panel-default main-panel panel-how-you-can-help foreground">
-
+                
                 <div class="panel-body text-center min-height-md">
                     <h1>Your donation was successful!</h1>
-                    <p>Thank you for you generous support. We hope you enjoy the translation.</p>
+                    <p>Thank you for you generous support.</p>
                 </div>
                 
             </div>

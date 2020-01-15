@@ -34,7 +34,7 @@ RewriteRule ^/?.*ch-resources* /test-pages/?template=resources&lang=zh [NC,L]
 RewriteRule ^/?.*how-you-can-help/spread-the-word /test-pages/?template=subscribe [NC,L]
 RewriteRule ^/?.*how-you-can-help/subscribed /test-pages/?template=subscribed [NC,L]
 RewriteRule ^/?.*ch-how-you-can-help/ch-howhelp-subscribe /test-pages/?template=subscribe-ch&lang=zh [NC,L]
-RewriteRule ^/?.*how-you-can-help/sponsor-a-page /test-pages/?template=sponsor-page [NC,L]
+RewriteRule ^/?.*how-you-can-help/sponsor-a-page /test-pages/?template=sponsor [NC,L]
 RewriteRule ^/?.*how-you-can-help* /test-pages/?template=sponsor-sutra [NC,L]
 RewriteRule ^/?.*ch-howhelp* /test-pages/?template=sponsor-sutra&lang=zh [NC,L]
 
@@ -44,6 +44,13 @@ RewriteCond %{QUERY_STRING} ^(.+|.*)$
 RewriteRule ^test-pages/donate-failed?.* /test-pages/?template=donate&response=failed&%1 [NC,L]
 RewriteCond %{QUERY_STRING} ^(.+|.*)$
 RewriteRule ^test-pages/donate?.* /test-pages/?template=donate&%1 [NC,L]
+
+RewriteCond %{QUERY_STRING} ^(.+|.*)$
+RewriteRule ^test-pages/sponsor-success?.* /test-pages/?template=sponsor-success&%1 [NC,L]
+RewriteCond %{QUERY_STRING} ^(.+|.*)$
+RewriteRule ^test-pages/sponsor-failed?.* /test-pages/?template=sponsor&response=failed&%1 [NC,L]
+RewriteCond %{QUERY_STRING} ^(.+|.*)$
+RewriteRule ^test-pages/sponsor?.* /test-pages/?template=sponsor&%1 [NC,L]
 
 
 RewriteRule ^(wp-content/uploads/.*) http://trans84000.staging.wpengine.com/$1 [NC,L]

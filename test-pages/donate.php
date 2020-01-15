@@ -7,10 +7,40 @@
                 <div class="panel-img-header">
                     <h1>Download Dāna!</h1>
                 </div>
+
+                <?php if($_GET['response'] == 'failed') { ?>
+                    <div class="alert alert-danger text-center">
+                        <h4 class="text-bold">Oops, something went wrong!</h4>
+                        <p>Unfortunately your donation was not successful. If you think you think you may have made a mistake then please try filling out the form again.</p>
+                    </div>
+                <?php } ?>
                 
                 <div class="panel-body">
 
-                    <form action="?template=donate" method="POST" class="form-horizontal labels-left">
+                    
+
+                    <form action="https://faas.cloud.clickandpledge.com" method="POST" class="form-horizontal labels-left">
+
+                        <input id="ItemID1" name="ItemID1" type="hidden" value="1">
+                        <input id="ItemName1" name="ItemName1" type="hidden" value="Donation">
+                        <input id="SKU1" name="SKU1" type="hidden" value="DON">
+                        <input id="Quantity1" name="Quantity1" type="hidden" value="1">
+                        <!-- Update these to live urls!!! -->
+                        <input id="OnSuccessUrl" name="OnSuccessUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/?template=donate-success">
+                        <input id="OnDeclineUrl" name="OnDeclineUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/?template=donate&response=failed">
+                        <input id="OnErrorUrl" name="OnErrorUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/?template=donate&response=failed">
+                        <input id="AccountGuid" name="AccountGuid" type="hidden" value="167f92fe-b51a-4ab2-b2de-746c189f5397">
+                        <input id="AccountID" name="AccountID" type="hidden" value="27894">
+                        <input id="WID" name="WID" type="hidden" value="75113">
+                        <input id="RefID" name="RefID" type="hidden" value="Website">
+                        <input id="Tracker" name="Tracker" type="hidden" value="Website">
+                        <input id="SendReceipt" name="SendReceipt" type="hidden" value="1">
+                        <!-- Update orderMode for Production -->
+                        <input id="OrderMode" name="OrderMode" type="hidden" value="Test">
+                        <!-- <input id="OrderMode" name="OrderMode" type="hidden" value="Production"> -->
+                        <input id="TransactionType" name="TransactionType" type="hidden" value="Payment">
+                        <input id="DecimalMarkMode" name="DecimalMark" type="hidden" value="US">
+                        <input id="UnitDeductible1" name="UnitDeductible1" type="hidden" value="100%">
 
                         <div class="row">
 
@@ -25,10 +55,10 @@
                                             <div class="radio">
                                                 <label>
                                                     <?php if($amount == 'other') { ?>
-                                                        <input type="radio" name="amount" id="amountOther" value="other" data-show-on-checked="#otherAmountContainer" required="required"> 
+                                                        <input type="radio" name="UnitPrice1" id="amountOther" value="" data-show-on-checked="#otherAmountContainer" required="required"> 
                                                         Other amount
                                                     <?php } else { ?>
-                                                        <input type="radio" name="amount" id="amount<?php echo $amount ?>" value="<?php echo $amount ?>" data-hide-on-checked="#otherAmountContainer" required="required"> 
+                                                        <input type="radio" name="UnitPrice1" id="amount<?php echo $amount ?>" value="<?php echo $amount ?>" data-hide-on-checked="#otherAmountContainer" required="required"> 
                                                         <?php echo "US$".$amount; ?>
                                                     <?php } ?>
                                                 </label>
@@ -40,7 +70,7 @@
                                 <div class="form-group collapse persist" id="otherAmountContainer">
                                     <label for="otherAmount" class="col-sm-4 control-label">Enter US$ amount</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="otherAmount" placeholder="">
+                                        <input type="text" class="form-control" name="Other1" id="otherAmount" placeholder="" data-set-value-on-change="#amountOther">
                                     </div>
                                 </div>
 
@@ -50,7 +80,8 @@
                                     <div class="col-md-offset-4 col-md-8 col-lg-offset-0 col-lg-12">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="anonymous"> Make this an anonymous donation
+                                                <input autocomplete="off" name="FieldName24004" type="hidden" value="MarkAsAnonymous">
+                                                <input type="checkbox" name="FieldValue24004" value="yes"> Make this an anonymous donation
                                             </label>
                                         </div>
                                         <p class="text-muted small">We nevertheless require your personal details to process payment.</p>
@@ -58,9 +89,10 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <input autocomplete="off" name="FieldName2600" type="hidden" value="Title">
                                     <label for="title" class="col-sm-4 control-label">Title</label>
                                     <div class="col-sm-4">
-                                        <select name="title" id="title" class="form-control">
+                                        <select name="FieldValue2600" id="title" class="form-control">
                                             <option value=""></option>
                                             <option value="mr">Mr.</option>
                                             <option value="ms">Ms.</option>
@@ -74,22 +106,34 @@
                                 <div class="form-group">
                                     <label for="fname" class="col-sm-4 control-label">First name</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="fname" placeholder="" required="required">
+                                        <input type="text" name="BillingFirstName" class="form-control" id="fname" placeholder="" required="required">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="lname" class="col-sm-4 control-label">Family name</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="lname" placeholder="" required="required">
+                                        <input type="text" name="BillingLastName" class="form-control" id="lname" placeholder="" required="required">
                                     </div>
                                 </div>
 
+                                <!-- Chinese name 
                                 <div class="form-group">
+                                    <label for="ChineseName" class="col-sm-4 control-label">Family name</label>
+                                    <div class="col-sm-7">
+                                        <input type="hidden" name="FieldName26009" value="ChineseName">
+                                        <input type="text" name="FieldValue26009" class="form-control" id="ChineseName" placeholder="" required="required">
+                                    </div>
+                                </div>
+                                -->
+
+                                <div class="form-group">
+                                    <input type="hidden" id="BillingPhone" name="BillingPhone" size="30">
                                     <label for="phone" class="col-xs-12 col-sm-4 control-label">Tel. (optional)</label>
                                     <div class="col-sm-3">
 
-<select id="phoneCode" name="callingcountryCode" class="form-control">
+<select id="phoneCode" name="callingcountryCode" class="form-control" data-merge-values-on-change="#BillingPhone">
+    <!-- Which countries are common??? -->
     <optgroup label="Common countries">
         <option data-countrycode="US" value="1">USA (+1)</option>
     </optgroup>
@@ -313,14 +357,14 @@
 
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="tel" class="form-control" id="phoneLocal" placeholder="" pattern="\d{5,14}">
+                                        <input type="tel" name="callingmainphone" class="form-control" id="phoneLocal" placeholder="" pattern="\d{5,14}" data-merge-values-on-change="#BillingPhone">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email" class="col-sm-4 control-label">Email address</label>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control" id="email" placeholder="" required="required">
+                                        <input type="email" name="BillingEmail" class="form-control" id="email" placeholder="" required="required">
                                     </div>
                                 </div>
 
@@ -328,7 +372,12 @@
                                     <div class="col-md-offset-4 col-md-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="subscribe"> Add me to the mailing list
+                                                <input type="hidden" name="FieldName24001" value="GetNewsletterEnglish">
+                                                <input type="checkbox" name="FieldValue24001" value="yes"> Add me to the mailing list
+                                                <!-- Chinese newsletter
+                                                    <input type="hidden" name="FieldName24002" value="GetNewsletterTraditional">
+                                                    <input type="checkbox" name="FieldValue24002" value="yes">  我想訂閱 84000中文電訊（繁體）
+                                                -->
                                             </label>
                                         </div>
                                     </div>
@@ -336,12 +385,18 @@
 
                                 <div class="tabs-container top-margin">
 
+                                    <input type="hidden" name="PaymentType" id="paymentType" value="CreditCard">
+
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active">
-                                            <a href="#payment-cc" aria-controls="payment-cc" role="tab" data-toggle="tab" data-input-required="#cardName,#cardNumber,#cvvNumber">Credit Card</a>
+                                            <a href="#payment-cc" aria-controls="payment-cc" role="tab" data-toggle="tab" data-onclick-set='{"#paymentType": "CreditCard"}' data-input-required="#cardName,#cardNumber,#cvvNumber,#expiryYear">
+                                                Credit Card
+                                            </a>
                                         </li>
                                         <li role="presentation">
-                                            <a href="#payment-ft" aria-controls="payment-ft" role="tab" data-toggle="tab" data-input-required="#accountName,#routingNumber,#accountNumber">Electronic Funds Transfer</a>
+                                            <a href="#payment-ft" aria-controls="payment-ft" role="tab" data-toggle="tab" data-onclick-set='{"#paymentType": "Check"}' data-input-required="#accountName,#routingNumber,#accountNumber">
+                                                Electronic Funds Transfer
+                                            </a>
                                         </li>
                                     </ul>
 
@@ -351,14 +406,14 @@
                                             <div class="form-group">
                                                 <label for="cardName" class="col-sm-4 control-label">Name on card</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="cardName" placeholder="" required="required">
+                                                    <input type="text" name="NameOnCard" class="form-control" id="cardName" placeholder="" required="required">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="cardNumber" class="col-sm-4 control-label">Card Number</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="cardNumber" placeholder="" required="required" pattern="\d{16,19}">
+                                                    <input type="text" name="CardNumber" class="form-control" id="cardNumber" placeholder="" required="required" pattern="\d{16,19}">
                                                 </div>
                                             </div>
 
@@ -367,7 +422,7 @@
                                                 <div class="col-sm-8">
                                                     <div class="center-vertical">
                                                         <span>
-                                                            <input type="number" class="form-control" id="cvvNumber" placeholder="" required="required" pattern="\d{3,4}" style="width:100px;">
+                                                            <input type="number" name="Cvv2" class="form-control" id="cvvNumber" placeholder="" required="required" pattern="\d{3,4}" style="width:100px;">
                                                         </span>
                                                         <span>
                                                             <a href="#iframe-modal" class="small" data-toggle="modal" data-target="#iframe-modal" data-href="http://www.cvvnumber.com/cvv.html">
@@ -397,19 +452,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-xs-6 col-sm-4">
-                                                    <select id="expiryYear" name="ExpirationYear" class="form-control">
-                                                        <option value="20">2020</option>
-                                                        <option value="21">2021</option>
-                                                        <option value="22">2022</option>
-                                                        <option value="23">2023</option>
-                                                        <option value="24">2024</option>
-                                                        <option value="25">2025</option>
-                                                        <option value="26">2026</option>
-                                                        <option value="27">2027</option>
-                                                        <option value="28">2028</option>
-                                                        <option value="29">2029</option>
-                                                        <option value="30">2030</option>
-                                                    </select>
+                                                    <input type="number" name="ExpirationYear" id="expiryYear" class="form-control" placeholder="YYYY" pattern="\d{4}">
                                                 </div>
                                             </div>
 
@@ -422,14 +465,14 @@
                                                 <div class="col-sm-4">
                                                     <div class="radio">
                                                         <label>
-                                                            <input type="radio" name="accountType" value="1" checked="checked"> Checking
+                                                            <input type="radio" name="AccountType" value="CheckingAccount" id="accountType" checked="checked"> Checking
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="radio">
                                                         <label>
-                                                            <input type="radio" name="accountType" value="2"> Savings
+                                                            <input type="radio" name="accountType" value="SavingsAccount"> Savings
                                                         </label>
                                                     </div>
                                                 </div>
@@ -438,21 +481,21 @@
                                             <div class="form-group">
                                                 <label for="accountName" class="col-sm-4 control-label">Name on account</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="accountName" placeholder="">
+                                                    <input type="text" name="NameOnAccount" class="form-control" id="accountName" placeholder="">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="routingNumber" class="col-sm-4 control-label">Routing number</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="routingNumber" placeholder="">
+                                                    <input type="text" name="RoutingNumber" class="form-control" id="routingNumber" placeholder="">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="accountNumber" class="col-sm-4 control-label">Account number</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="accountNumber" placeholder="">
+                                                    <input type="text" name="AccountNumber" class="form-control" id="accountNumber" placeholder="">
                                                 </div>
                                             </div>
                                         </div>
@@ -460,21 +503,21 @@
                                         <div class="form-group">
                                             <label for="address1" class="col-sm-4 control-label">Billing address</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="address1" placeholder="" required="required">
+                                                <input type="text" name="BillingAddress1" class="form-control" id="address1" placeholder="" required="required">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="address2" class="col-sm-4 control-label sr-only">Address 2</label>
                                             <div class="col-sm-offset-4 col-sm-8">
-                                                <input type="text" class="form-control" id="address2" placeholder="">
+                                                <input type="text" name="BillingAddress2" class="form-control" id="address2" placeholder="">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="addressCity" class="col-sm-4 control-label">City</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="addressCity" placeholder="">
+                                                <input type="text" name="BillingCity" class="form-control" id="addressCity" placeholder="">
                                             </div>
                                         </div>
 
@@ -483,6 +526,7 @@
                                             <div class="col-sm-8">
 
 <select id="addressCountry" name="BillingCountryCode" class="form-control">
+    <!-- Which countries are common??? -->
     <optgroup label="Common coutries">
         <option value="840">USA</option>
     </optgroup>
@@ -705,14 +749,14 @@
                                         <div class="form-group">
                                             <label for="addressState" class="col-sm-4 control-label">State / province</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="addressState" placeholder="">
+                                                <input type="text" name="BillingStateProvince" class="form-control" id="addressState" placeholder="">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="addressZip" class="col-sm-4 control-label">Postcode / Zip</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="addressZip" placeholder="" required="required">
+                                                <input type="text" name="BillingPostalCode" class="form-control" id="addressZip" placeholder="" required="required">
                                             </div>
                                         </div>
 

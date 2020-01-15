@@ -1832,9 +1832,13 @@ jQuery(document).ready(function($) {
 			}
 			else {
 				var $value = $(values[keys[i]]);
-				$target.val($value.text());
+				if($value.length) {
+					$target.val($value.text());
+				}
+				else {
+					$target.val(values[keys[i]]);
+				}
 			}
-			
 		}
 
 	});
@@ -1934,8 +1938,38 @@ jQuery(document).ready(function($) {
 		var action = $this.data("show-on-checked") ? 'show' : 'hide' ;
 		var $target = action == 'show' ? $($this.data("show-on-checked")) : $($this.data("hide-on-checked")) ;
 		if($this.is(':checked')) {
-			$target.collapse(action);
+			$target.each(function(e){
+				$(this).collapse(action);
+			});
 		}
+	});
+
+	// Add behaviour...
+    // Set input on change
+    // ----------------------------------------------------------------- 
+    $(document).on("change","input[data-set-value-on-change]", function(e){
+	    var $this = $(this);
+	    var $target = $($this.data("set-value-on-change"));
+	    $target.each(function(e){
+	    	$(this).val($this.val());
+	    });
+	});
+
+	// Add behaviour...
+    // Set input on change
+    // ----------------------------------------------------------------- 
+    $(document).on("change","[data-merge-values-on-change]", function(e){
+	    var $this = $(this);
+	    var targetSelector = $this.data("merge-values-on-change");
+	    var $target = $(targetSelector);
+	    var $sources = $("[data-merge-values-on-change='" + targetSelector + "']");
+	    var mergedValue = [];
+	    $sources.each(function(){
+	    	if($(this).val() > '') {
+	    		mergedValue.push($(this).val());
+	    	}
+	    });
+	    $target.val(mergedValue.join(' '));
 	});
 
 	// Add behaviour...

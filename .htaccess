@@ -1,4 +1,4 @@
-# Allow subdomain acces to fonts
+# Allow subdomain access
 <FilesMatch ".(css|js|eot|ttf|otf|woff)">
 	Header set Access-Control-Allow-Origin "*"
 </FilesMatch>
@@ -10,6 +10,7 @@
 	AddType font/ttf .ttf
 	AddType image/png .png
 </IfModule>
+
 <IfModule mod_deflate.c>
 	AddOutputFilterByType DEFLATE text/html text/css application/javascript font/ttf image/png
 	<IfModule mod_setenvif.c>
@@ -27,26 +28,26 @@ RewriteRule ^/?.*category/announcements/?$ /test-pages/?template=announcements [
 RewriteRule ^/?.*category.* /test-pages/?template=news [NC,L]
 RewriteRule ^/?.*about/partnerships* /test-pages/?template=partnerships&lang=en [NC,L]
 RewriteRule ^/?.*ch-about/ch-partnerships* /test-pages/?template=partnerships&lang=zh [NC,L]
-RewriteRule ^/?.*about.* /test-pages/?template=about [NC,L]
-RewriteRule ^/?.*ch-about* /test-pages/?template=about&lang=zh [NC,L]
+RewriteRule ^/?.*about/.* /test-pages/?template=about [NC,L]
+RewriteRule ^/?.*ch-about/* /test-pages/?template=about&lang=zh [NC,L]
 RewriteRule ^/?.*resources/.* /test-pages/?template=resources [NC,L]
-RewriteRule ^/?.*ch-resources* /test-pages/?template=resources&lang=zh [NC,L]
+RewriteRule ^/?.*ch-resources/* /test-pages/?template=resources&lang=zh [NC,L]
 RewriteRule ^/?.*how-you-can-help/spread-the-word /test-pages/?template=subscribe [NC,L]
 RewriteRule ^/?.*how-you-can-help/subscribed /test-pages/?template=subscribed [NC,L]
 RewriteRule ^/?.*ch-how-you-can-help/ch-howhelp-subscribe /test-pages/?template=subscribe-ch&lang=zh [NC,L]
 RewriteRule ^/?.*how-you-can-help/sponsor-a-page /test-pages/?template=sponsor [NC,L]
-RewriteRule ^/?.*how-you-can-help* /test-pages/?template=sponsor-sutra [NC,L]
-RewriteRule ^/?.*ch-howhelp* /test-pages/?template=sponsor-sutra&lang=zh [NC,L]
+RewriteRule ^/?.*how-you-can-help/* /test-pages/?template=sponsor-sutra [NC,L]
+RewriteRule ^/?.*ch-howhelp/* /test-pages/?template=sponsor-sutra&lang=zh [NC,L]
 
 RewriteCond %{QUERY_STRING} ^(.+|.*)$
-RewriteRule ^test-pages/donate-success?.* /test-pages/?template=donate-success&%1 [NC,L]
+RewriteRule ^test-pages/donate-success?.* /test-pages/?template=donate&response=success&%1 [NC,L]
 RewriteCond %{QUERY_STRING} ^(.+|.*)$
 RewriteRule ^test-pages/donate-failed?.* /test-pages/?template=donate&response=failed&%1 [NC,L]
 RewriteCond %{QUERY_STRING} ^(.+|.*)$
 RewriteRule ^test-pages/donate?.* /test-pages/?template=donate&%1 [NC,L]
 
 RewriteCond %{QUERY_STRING} ^(.+|.*)$
-RewriteRule ^test-pages/sponsor-success?.* /test-pages/?template=sponsor-success&%1 [NC,L]
+RewriteRule ^test-pages/sponsor-success?.* /test-pages/?template=sponsor&response=success&%1 [NC,L]
 RewriteCond %{QUERY_STRING} ^(.+|.*)$
 RewriteRule ^test-pages/sponsor-failed?.* /test-pages/?template=sponsor&response=failed&%1 [NC,L]
 RewriteCond %{QUERY_STRING} ^(.+|.*)$

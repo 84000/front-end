@@ -1564,6 +1564,30 @@ jQuery(document).ready(function($) {
 	    if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
 	});
 
+	// Detect when user stops scrolling
+	// ---------------------------------------
+	(function ($) { 
+		$.replaceWithAjax = function(source, $target, callback) {
+			$.ajax({
+    			url: source,
+    			type: 'GET',
+    			dataType: 'html',
+    			success: function(data) {
+	    			var ajaxData = $(data).find('.ajax-data > *');
+	    			if(ajaxData.length){
+	    				$target.html(ajaxData);
+	    			}
+	    			else {
+	    				$target.html(data);
+	    			}
+			    	if(callback){
+			    		callback();
+			    	}
+	            }
+    		});
+		};
+	}($));
+
 	// Add behaviour...
     // Get the href content via ajax and put it in the specified element
     // ----------------------------------------------------------------- 
@@ -1603,21 +1627,7 @@ jQuery(document).ready(function($) {
         else if(!$target.is('.loaded')){
         	$.wait("Loading content...");
         	setTimeout(function(){
-        		$.ajax({
-	    			url: source,
-	    			type: 'GET',
-	    			dataType: 'html',
-	    			success: function(data) {
-		    			var ajaxData = $(data).find('.ajax-data > *');
-		    			if(ajaxData.length){
-		    				$target.html(ajaxData);
-		    			}
-		    			else {
-		    				$target.html(data);
-		    			}
-		                $target.collapse('show').addClass('loaded');
-		            }
-	    		});
+        		$.replaceWithAjax(source, $target, function(){ $target.collapse('show').addClass('loaded'); });
 	        	$.wait("", true);
 	        },100);
         }
@@ -1769,10 +1779,23 @@ jQuery(document).ready(function($) {
 		var keys = Object.keys(values);
 		for(var i=0; i<keys.length; i++){
 			var $target = $(keys[i]);
-			var $value = $(values[keys[i]]);
-			if($value.text()){
-				if($target.replaceMatchesWithThis($value)){
-					$($value.attr('href')).addClass("replaced");
+			var source = values[keys[i]];
+			
+			if(source.substr(0, 4) == 'http'){
+
+				// If source is a url get ajax content
+				$.replaceWithAjax(source, $target, function(){});
+			}
+			else {
+				var $source = $(source);
+
+				// If source is a node get text
+				if($source.length){
+					if($source.text()){
+						if($target.replaceMatchesWithThis($source)){
+							$($source.attr('href')).addClass("replaced");
+						}
+					}
 				}
 			}
 		}

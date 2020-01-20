@@ -1,6 +1,6 @@
 <div class="container home">
 
-    <div class="md-adjacent-panels panel-margin">
+    <div class="md-adjacent-panels full-width panel-margin">
         <div class="md-three-quarter-width foreground movie-container">
             <div class="panel panel-default movie">
                 <iframe src="https://www.youtube.com/embed/cLmRgUAPmVM?showinfo=1&rel=0&vq=hd720" allowfullscreen></iframe>

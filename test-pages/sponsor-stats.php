@@ -1,3 +1,4 @@
+<?php /*
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Join Us</h3>
@@ -24,4 +25,25 @@
             <a href="/test-pages/?template=sponsor-page" class="btn btn-primary">Sponsor a page now</a>
         </div>
     </div>
+</div>*/ ?>
+<?php 
+    $rr_host = "https://read.84000.co";
+    switch ($_SERVER['SERVER_NAME']) {
+        case 'fe.84000.local':
+            $rr_host = "http://read.84000.local";
+            break;
+        case 'trans84000.staging.wpengine.com':
+            $rr_host = "https://read.84000-translate.org";
+            break;
+        default:
+            #default already set
+            break;
+    }
+?>
+<div data-onload-replace='{"#project-progress-loading":"<?php echo $rr_host; ?>/widget/progress-panel.html"}'>
+
+    <div class="panel panel-default" id="project-progress-loading">
+        <div class="panel-body loading"></div>
+    </div>
+
 </div>

@@ -175,6 +175,10 @@
                                         </div>
                                     </div>
 
+                                    <div class="alert alert-info text-center small">
+                                        <p>In appreciation of your generous support, all the names and the dedication messages will be offered for prayers during the Dzongsar Monlam prayer festivals held biennially in Bodhgaya, India.</p>
+                                    </div>
+
                                     <div class="collapse persist" id="dedicationContainer">
 
                                         <div class="form-group">
@@ -499,10 +503,6 @@
 
                                         </div>
 
-                                    </div>
-
-                                    <div class="alert alert-info text-center small">
-                                        <p>In appreciation of your generous support, all the names and the dedication messages will be offered for prayers during the Dzongsar Monlam prayer festivals held biennially in Bodhgaya, India.</p>
                                     </div>
 
                                     <div class="alert alert-warning text-center small">

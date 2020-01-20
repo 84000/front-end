@@ -32,6 +32,8 @@
         case 'fe.84000.local':
             $rr_host = "http://read.84000.local";
             break;
+        case 'fe.84000-translate.org':
+            $rr_host = "https://read.84000-translate.org";
         case 'trans84000.staging.wpengine.com':
             $rr_host = "https://read.84000-translate.org";
             break;

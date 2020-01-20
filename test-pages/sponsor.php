@@ -214,7 +214,7 @@
                                                 <label for="ecardName" class="col-sm-4 control-label">eCard Recipient</label>
                                                 <div class="col-sm-8">
                                                     <input type="hidden" name="FieldName3402" value="Notify">
-                                                    <input type="text" name="FieldValue3402" class="form-control" id="ecardName" placeholder="e.g. Anne Jones">
+                                                    <input type="text" name="FieldValue3402" class="form-control" id="ecardName" placeholder="e.g. Ann Jones">
                                                 </div>
                                             </div>
 

@@ -196,14 +196,14 @@ jQuery(document).ready(function($) {
 				$element.find("[data-match-height]").height('auto');
 
 				// Match to a particular element
-				$element.find("[data-match-height].match-this-height:visible").each(function(){
+				$element.find("[data-match-height].match-this-height").each(function(){
 					var $this = $(this);
 					heights[$this.data('match-height')] = $this.outerHeight();
 				});
 
 				// Match to the tallest in the group
 				if($.isEmptyObject(heights)){
-					$element.find("[data-match-height]:visible").each(function(){
+					$element.find("[data-match-height]").each(function(){
 						var $this = $(this);
 						var this_height = $this.outerHeight();
 						var height_group = $this.data('match-height');
@@ -1568,12 +1568,15 @@ jQuery(document).ready(function($) {
 	// ---------------------------------------
 	(function ($) { 
 		$.replaceWithAjax = function(source, $target, callback) {
+			var sourceSplit = source.split("#");
+			var sourceUrl = sourceSplit[0];
+			var sourceFragment = sourceSplit[1];
 			$.ajax({
-    			url: source,
+    			url: sourceUrl,
     			type: 'GET',
     			dataType: 'html',
     			success: function(data) {
-	    			var ajaxData = $(data).find('.ajax-data > *');
+	    			var ajaxData = $(data).find("#" + sourceFragment);
 	    			if(ajaxData.length){
 	    				$target.html(ajaxData);
 	    			}
@@ -1612,15 +1615,7 @@ jQuery(document).ready(function($) {
         	$popupFooter.removeClass('in');
         	$.wait("Loading the source text...");
 	    	setTimeout(function(){
-	    		$.ajax({
-	    			url: source,
-	    			type: 'GET',
-	    			dataType: 'html',
-	    			success: function(data) {
-		        		$(target).html($(data).find('.ajax-data > *'));
-		                $popupFooter.collapse('show');
-		            }
-	    		});
+	    		$.replaceWithAjax(source, $target, function(){ $popupFooter.collapse('show'); });
 	        	$.wait("", true);
 	        },100);
         }

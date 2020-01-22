@@ -44,6 +44,10 @@
     text-align: justify;
 }
 
+.text-shadow {
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
+}
+
 .underline {
     text-decoration: underline;
 }
@@ -106,6 +110,10 @@ a.text-color {
     }
 }
 
+.no-shadow {
+    .box-shadow(none);
+}
+
 // Show / hide based on javascript
 // -------------------------------
 .visible-scripts {
@@ -124,14 +132,7 @@ a.text-color {
 
 // Show options on scrolling
 // -------------------------------
-
 .show-on-scroll {
-    opacity: 0;
-    display: none;
-    .transition(.25s ease-in);
-}
-
-@media only screen and (max-width: @screen-md) {
     opacity: 0;
     display: none;
     .transition(.25s ease-in);
@@ -150,6 +151,8 @@ a.text-color {
     }
 }
 
+// Warning link
+// -------------------------------
 a.warning {
     color: @brand-red;
     padding: @padding-base-vertical;
@@ -168,6 +171,8 @@ a.warning {
     }
 }
 
+// Margin helpers
+// -------------------------------
 .top-margin {
     margin-top: 20px;
 }
@@ -199,16 +204,32 @@ a.warning {
     }
 }
 
+hr.sml-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+hr.xs-margin {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+hr.no-margin {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+// Border helpers
+// -------------------------------
+
 @media (min-width: @screen-lg-min) {
     .border-left-lg {
         border-left: 1px solid @hr-border;
     }
 }
 
-.no-shadow {
-    .box-shadow(none);
-}
-
+// Wrap / break helpers
+// -------------------------------
 .break {
 
     overflow-wrap: break-word;
@@ -227,21 +248,6 @@ a.warning {
 
 span.nowrap, a.nowrap {
     white-space: pre;
-}
-
-hr.sml-margin {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-hr.xs-margin {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-hr.no-margin {
-    margin-top: 0px;
-    margin-bottom: 0px;
 }
 
 table {
@@ -285,6 +291,8 @@ p.date {
     }
 }
 
+// Input
+// -------------------------------
 .input-group.full-width {
     width: 100%;
 }
@@ -311,18 +319,6 @@ p.date {
         display: none;
     }
 }
-
-.modal-content {
-    &, p, .modal-title {
-        text-align: left !important;
-        color: initial !important;
-    }
-    /*
-    p {
-        line-height: initial !important;
-    }*/
-}
-
 @media print {
     .collapsed {
         .collapsed-show, .collapsed-hide {
@@ -333,7 +329,6 @@ p.date {
         display: block;
     }
 }
-
 
 // Centered tabs
 // ----------------------------
@@ -369,28 +364,23 @@ p.date {
         width: 100%;
     }
 
+    &.full-height {
+        height: 100%;
+    }
+
+    &.center-aligned {
+        margin: 0px auto;
+    }
+
     > * {
 
         display: table-cell;
         vertical-align: middle;
+        padding-left: 7px;
+        padding-right: 7px;
 
         >  .panel {
             margin-bottom: 0px;
-        }
-
-    }
-}
-.center-vertical {
-
-    .adjacent-panels();
-
-    > * {
-
-        vertical-align: middle;
-        padding-left: 15px;
-
-        &:first-child {
-            padding-left: 0 !important;
         }
 
         &.nowrap {
@@ -399,14 +389,30 @@ p.date {
 
     }
 
+    > .half-width {
+        width: 50%;
+    }
+
     &.together {
         > * {
-            padding-left: 7px;
+            padding: 0px;
         }
     }
-    
-    &.center-aligned {
-        margin: 0px auto;
+
+    &.align-left {
+        > * {
+            padding-left: 0px;
+            padding-right: 15px;
+        }
+    }
+
+}
+.center-vertical {
+
+    .adjacent-panels();
+
+    > * {
+        vertical-align: middle;
     }
 
 }
@@ -423,23 +429,9 @@ a.center-vertical {
     .adjacent-panels();
 
     > * {
-
         vertical-align: top;
-        padding-left: 15px;
-
-        &:first-child {
-            padding-left: 0 !important;
-        }
-
     }
-    &.full-width {
-
-        width: 100%;
-        
-        > *:last-child {
-            text-align: right;
-        }
-    }
+    
 }
 
 // Merge columns
@@ -493,6 +485,31 @@ a.center-vertical {
 @media only screen and (min-width: @screen-md) {
     .min-height-md {
         min-height: 520px;
+    }
+}
+
+// Position top left on md viewport
+// -----------------------------------
+@media (min-width: @screen-md-min) {
+    .col-md-top-left {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+}
+
+// Pull right on sm viewport
+// -----------------------------------
+@media only screen and (max-width: @screen-md) {
+    .col-sm-pull-right {
+        float: right;
+    }
+}
+// Pull right on xs viewport
+// -----------------------------------
+@media (max-width: @screen-sm) {
+    .col-xs-pull-right {
+        float: right;
     }
 }
 

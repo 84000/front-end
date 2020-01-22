@@ -44,11 +44,11 @@ label, .label {
 
 .btn {
     font-family: @font-family-heading;
-    font-size: 13px;
-    padding: 8px 12px;
+    //font-size: 13px;
+    //padding: 8px 12px;
     text-transform: uppercase;
     // white-space: normal;
-    .transition(.5s ease-in);
+    //.transition(.5s ease-in);
     i {
         font-size: @btn-icon-size;
         display: inline-block;
@@ -57,6 +57,17 @@ label, .label {
     .caret {
         display: inline-block;
         margin-left: 10px;
+    }
+}
+
+[data-toggle="collapse"] {
+    cursor: pointer;
+    tr&
+    {
+        background-color: #eee;
+        &.collapsed {
+            background-color: inherit;
+        }
     }
 }
 
@@ -96,12 +107,23 @@ mark, .mark {
         opacity: 1;
     }
 }
+
+// Modals
+// -------------------------------
 .modal-content {
     overflow: hidden;
     .modal-title {
         font-weight: bold;
         font-style: normal !important;
     }
+    &, p, .modal-title {
+        text-align: left !important;
+        color: initial !important;
+    }
+    /*
+    p {
+        line-height: initial !important;
+    }*/
 }
 
 .breadcrumb > li > a {
@@ -179,6 +201,14 @@ mark, .mark {
     }
 }
 
+blockquote {
+  footer,
+  small,
+  .small {
+    font-size: @font-size-small;
+  }
+}
+
 .collapsing.width {
     height: 100%;
     .transition-property(~"width, visibility");
@@ -234,6 +264,25 @@ table.table-hover {
     }
 }
 
+// Carousel variations
+// --------------------------------------------
+.carousel-control i {
+    position: absolute;
+    top: 45%;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+.carousel-control.left i {
+    left: 0px;
+}
+.carousel-control.right i {
+    right: 0px;
+}
+
+
+// Print variations
+// --------------------------------------------
 @media print {
     a.printable[href]:after {
         content: "";

@@ -36,8 +36,6 @@ RewriteRule ^/?.*how-you-can-help/spread-the-word /test-pages/?template=subscrib
 RewriteRule ^/?.*how-you-can-help/subscribed /test-pages/?template=subscribed [NC,L]
 RewriteRule ^/?.*ch-how-you-can-help/ch-howhelp-subscribe /test-pages/?template=subscribe-ch&lang=zh [NC,L]
 RewriteRule ^/?.*how-you-can-help/sponsor-a-page /test-pages/?template=sponsor [NC,L]
-RewriteRule ^/?.*how-you-can-help/* /test-pages/?template=sponsor-sutra [NC,L]
-RewriteRule ^/?.*ch-howhelp/* /test-pages/?template=sponsor-sutra&lang=zh [NC,L]
 
 RewriteCond %{QUERY_STRING} ^(.+|.*)$
 RewriteRule ^test-pages/donate-success?.* /test-pages/?template=donate&response=success&%1 [NC,L]

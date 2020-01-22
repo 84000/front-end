@@ -1,311 +1,3 @@
-
-<?php
-
-    /* Variations to images - can be removed once agreed */
-    $backgrounds = array(
-        'DEGE5-BLUR.JPG',
-        'DJKR-reading.jpg',
-        'LTWA1-BLUR.jpg',
-        'LTWA2-BLUR.jpg',
-        'DJKR-resounding-BLUR.jpg',
-        'Dege5.JPG',
-        'Monk-reading.jpg',
-        'LTWA1.jpg',
-        'LTWA2.jpg'
-    );
-
-    //$background_image = "linear-gradient(100deg, rgb(86, 110, 144) 5%, rgb(183, 108, 30) 35%, rgb(117, 45, 40) 60%, rgb(77, 98, 83) 95%)";
-    $background_image = "url('/imgs/backgrounds/LTWA1.jpg')";
-    if(isset($_GET['bg']) && intval($_GET['bg']) >= 0 && intval($_GET['bg']) < count($backgrounds)) {
-        $background_image = "url('/imgs/backgrounds/" . $backgrounds[intval($_GET['bg'])] . "')";
-    }
-
-    $circles_imgs = array(
-        "/imgs/1068.jpg",
-        "/imgs/DSC_0212.jpg",
-        "/imgs/Boroburdo by Toto Iwantoro 23.jpg",
-        "/imgs/Everest-SQ.jpg",
-        "/imgs/Gen-Jamspal-reads-Prajnaparamita_Ladakh-2010.jpg"
-    );
-
-    $about_bg = "background-color: #fff;";
-
-    if(isset($_GET['circles']) && $_GET['circles'] == 'illustrations') {
-        $circles_imgs = array(
-            "/imgs/illustrations/profile-sq.jpg",
-            "/imgs/illustrations/GEM-STATIC-sq.jpg",
-            "/imgs/illustrations/circle-sq.jpg",
-            "/imgs/illustrations/wave-cropped-sq.jpg",
-            "/imgs/illustrations/wave-cropped-sq.jpg"
-        );
-        $about_bg = "background: url('/imgs/illustrations/bg.jpg') ;";
-    }
-
-?>
-
-<style type="text/css">
-    body {
-        background-color: #003f5f;
-        background-image: url('/imgs/background-pattern-transparent.svg');
-        background-size: 80px;
-        background-repeat: repeat;
-    }
-    #title-band {
-        /*linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, rgba(149, 69, 0, 0.47) 50%, rgba(255, 255, 255, 0.0) 90%), */
-        background-image: <?php echo $background_image ?>;
-        background-size: cover;
-        background-position: 50% 40%;
-    }
-    #title-band > .container {
-        padding-top: 50px;
-        padding-bottom: 25px;
-    }
-    #title-band h2 {
-        color: #fff;
-    }
-    #title-band p {
-        color: #fff;
-    }
-    .title-box, .title-box-addon {
-        background-color: rgba(12, 63, 94, 0.9);
-        /*background-color: rgba(0, 0, 0, 0.65);*/
-        padding: 0px 25px 15px 25px;
-        position: relative;
-        background-image: url('/imgs/background-pattern-transparent.svg');
-        background-size: 80px;
-        background-repeat: repeat;
-    }
-    .title-box {
-        border-radius: 5px 5px 0px 0px;
-        margin-top: 50px;
-    }
-    .title-box-addon {
-        content: ' ';
-        border-radius: 0px 0px 5px 5px;
-        height: 20px;
-    }
-    .title-box .img-container {
-        margin-top: -50px;
-    }
-    .title-box .img-container img {
-        height: 100px;
-    }
-    #latest .panel {
-        margin-top: 0px;
-        border-radius: 5px;
-    }
-    #latest .panel {
-        background-color: rgba(255,255,255,.9);
-        margin-bottom: 0px;
-    }
-    #latest h5 {
-        color: rgb(117, 45, 40);
-    }
-    #latest h3 {
-        color: #333;
-        margin-top: 0px
-    }
-    #latest .source-titles {
-        color: #5b5b5c;
-    }
-    #latest .quote {
-        border-left: 1px solid #bbb;
-        text-align: left;
-    }
-    @media only screen and (max-width: 920px) {
-        #latest .quote {
-            border-left: none;
-            text-align: center;
-        }
-    }
-    #latest blockquote {
-        border-left: 0px;
-        padding: 11px 0px;
-    }
-    #latest .quote p {
-        color: #333;
-    }
-    #latest .quote footer, #latest .quote a {
-        color: #566e90;
-    }
-    #latest .item {
-        padding: 0px 30px;
-    }
-    #latest .item .vertical-pad {
-        padding-top: 40px;
-    }
-    #about-band {
-        <?php echo $about_bg ?>
-        padding-top: 50px;
-        padding-bottom: 20px;
-    }
-    #about-band .rubrik {
-        max-width: 380px;
-        margin: 0px auto 40px auto;
-    }
-    #about-band .rubrik p {
-        color: #707070;
-    }
-    #about-band .thumbnail {
-        width: 220px;
-        height: 220px;
-        margin: 0px auto;
-        border-radius: 120px;
-        border: 7px solid #b76c1e;
-    }
-    #about-band .urgency .thumbnail {
-        border-color: #566e90; 
-    }
-    #about-band .urgency h2 {
-        color: #566e90; 
-    }
-    #about-band .sponsorship .thumbnail {
-        border-color: #752d28; 
-    }
-    #about-band .sponsorship h2 {
-        color: #752d28; 
-    }
-    #about-band .progress .thumbnail {
-        border-color: #4d6253; 
-    }
-    #about-band .progress h2 {
-        color: #4d6253; 
-    }
-    #about-band .grants .thumbnail {
-        border-color: #003f5f; 
-    }
-    #about-band .grants h2 {
-        color: #003f5f; 
-    }
-    #about-band .thumbnail img {
-        object-fit: cover;
-    }
-    #news-band {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-    #news-band .panel {
-        padding: 5px;
-    }
-    #news-band > .container { position: relative; }
-    #news-band h2 {
-        color: #e5e5e5;
-        margin-bottom: 25px;
-        text-align: center;
-        text-transform: uppercase;
-    }
-    #news-band .panel-default > .panel-heading {
-        /*background-color: #fdfaf1;
-        border-bottom: 1px solid #dadada;*/
-        background-color: #ffffff;
-        color: #999999;
-        text-align: center;
-        text-transform: uppercase;
-    }
-    #news-band .thumbnail img {
-        object-fit: cover;
-    }
-    #movie-band {
-        /*background-image: linear-gradient(180deg, rgb(255, 255, 255) 50%, rgb(230, 230, 230) 100%);*/
-        background-color: #ffffff;
-        padding: 35px 0px;
-    }
-    .text-shadow {
-        text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
-    }
-    .panel {
-        overflow: hidden;
-        border-radius: 3px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 6px 0px;
-    }
-    @media only screen and (max-width: 600px) {
-        .panel {
-            margin-bottom: 22px;
-        }
-    }
-    .carousel-control i {
-        position: absolute;
-        top: 45%;
-    }
-    .carousel-control.left, .carousel-control.right {
-        background-image: none;
-    }
-    .carousel-control.left i {
-        left: 0px;
-    }
-    .carousel-control.right i {
-        right: 0px;
-    }
-    .page-divider {
-        position: relative;
-    }
-    .page-divider:after {
-        content: '';
-        background-image: url('/imgs/page-divider.svg');
-        position: absolute;
-        top: -3px;
-        left: 39%;
-        width: 22%;
-        height: 6px;
-        background-position: center;
-        background-repeat-x: no-repeat;
-        background-size: cover;
-    }
-    @media only screen and (max-width: 1200px) {
-        .page-divider:after {
-            left: 25%;
-            width: 50%;
-        }
-    }
-    .divider {
-        height: 1px;
-    }
-    .btn-lg {
-        font-size: 17px;
-    }
-    .news-banner, .announcement-banner, .news-image {
-        width: 100%;
-        height: 160px;
-        border-radius: 3px;
-    }
-    .news-banner, .announcement-banner {
-        display: table;
-    }
-    .news-banner {
-        background-color: rgb(183, 108, 30);
-        background-image: url('/imgs/background-pattern-transparent.svg');
-        background-size: 40px;
-        background-repeat: repeat;
-    }
-    .announcement-banner {
-        background-color: rgb(77, 98, 83);
-        background-image: url('/imgs/background-pattern-transparent.svg');
-        background-size: 40px;
-        background-repeat: repeat;
-    }
-    .news-banner span, .announcement-banner span {
-        display: table-cell;
-        color: #fff;
-        vertical-align: middle;
-        text-align: center;
-        font-size: 1.3em;
-        padding: 15px;
-        line-height: 1.3em;
-    }
-    .announcement-banner small {
-        font-size: 15px;
-        line-height: 1em;
-        color: rgb(255,255,255);
-    }
-    body > footer {
-        border-top: 0;
-        background: transparent;
-    }
-    body > footer, body > footer a {
-        color: rgb(255, 255, 255);
-    }
-</style>
-
 <div class="home">
     <div id="title-band" class="clearfix">
         <div class="container text-center">
@@ -324,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div id="latest">
+            <div id="latest-pubs">
                 <div class="panel">
                     <div class="panel-body">
                         <div id="publications-carousel" class="carousel slide">
@@ -413,7 +105,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="about-band">
         <div class="container text-center">
             <div class="row">
@@ -422,7 +114,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="rubrik vision">
                                 <div class="thumbnail">
-                                    <img src="<?php echo $circles_imgs[0] ?>">
+                                    <img src="/imgs/1068.jpg">
                                 </div>
                                 <h2>Vision</h2>
                                 <p>Our 100 year vision is to preserve a living tradition for future generations. Read more about our vision, goals and the scope of our work.</p>
@@ -431,7 +123,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="rubrik urgency">
                                 <div class="thumbnail">
-                                    <img src="<?php echo $circles_imgs[1] ?>">
+                                    <img src="/imgs/DSC_0212.jpg">
                                 </div>
                                 <h2>Urgency</h2>
                                 <p>Knowledge of Classical Tibetan is rapidly disappearing. Read more about the urgency of translation as a means of preservation.</p>
@@ -440,7 +132,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="rubrik sponsorship">
                                 <div class="thumbnail">
-                                    <img src="<?php echo $circles_imgs[2] ?>">
+                                    <img src="/imgs/Boroburdo by Toto Iwantoro 23.jpg">
                                 </div>
                                 <h2>Sponsorship</h2>
                                 <p>Sponsor a page of translation today, and become a part of this historic movement to ensure these gems of wisdom live on for future generations.</p>
@@ -449,7 +141,7 @@
                         <div class="col-md-6 col-lg-4 col-lg-offset-2">
                             <div class="rubrik progress">
                                 <div class="thumbnail">
-                                    <img src="<?php echo $circles_imgs[3] ?>">
+                                    <img src="/imgs/Everest-SQ.jpg">
                                 </div>
                                 <h2>Progress</h2>
                                 <p>As of 2010 only 5% of the Kangyur - the Words of the Buddha, or sutras, had been translated into modern languages. Take a look at our current progress.</p>
@@ -458,7 +150,7 @@
                         <div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-0">
                             <div class="rubrik grants">
                                 <div class="thumbnail">
-                                    <img src="<?php echo $circles_imgs[4] ?>">
+                                    <img src="/imgs/Gen-Jamspal-reads-Prajnaparamita_Ladakh-2010.jpg">
                                 </div>
                                 <h2>Grants</h2>
                                 <p>Currently supporting 297 translators, editors and consultants, 84000's translation grant cycle opens annually for new applications.</p>

@@ -11,6 +11,13 @@
                 
                 <div class="panel-body">
 
+                    <div class="alert alert-info alert-dismissible fade in text-center small" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p>This form is also available in <a href="/how-you-can-help/spread-the-word" class="alert-link">English</a></p>
+                    </div>
+
                     <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form-horizontal">
 
                         <input name="oid" type="hidden" value="00Di0000000iQGg">
@@ -20,29 +27,26 @@
                         <input name="00Ni000000CCgKm" type="hidden" value="1">
 
                         <div class="form-group">
-                            <label for="name" class="col-sm-4 control-label">姓名</label>
-                            <div class="col-sm-8 col-md-4">
-                                <input type="text" name="00Ni000000CCgKX" class="form-control" id="name" maxlength="200" required="required">
+                            <label for="last_name" class="col-xs-3 col-sm-4 control-label">姓</label>
+                            <div class="col-xs-2 col-sm-2">
+                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="" required="required">
+                            </div>
+                            <label for="first_name" class="col-xs-1 col-sm-1 control-label">名</label>
+                            <div class="col-xs-3 col-sm-3">
+                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="" required="required">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-sm-4 control-label">電子信箱</label>
-                            <div class="col-sm-8 col-md-6">
+                            <label for="email" class="col-xs-3 col-sm-4 control-label">電子信箱</label>
+                            <div class="col-xs-9 col-sm-8">
                                 <input type="email" name="email" class="form-control" id="email" placeholder="" required="required">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-sm-offset-4 col-sm-8">
-                                <div class="center-vertical">
-                                    <div>
-                                        <button type="submit" class="btn btn-primary">訂閱電訊</button>
-                                    </div>
-                                    <div class="small text-muted">
-                                        Rather have your newsletter in English? <a href="/how-you-can-help/spread-the-word">Subscribe here instead</a>.
-                                    </div>
-                                </div>
+                            <div class="col-xs-offset-3 col-xs-9 col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-primary">訂閱電訊</button>
                             </div>
                         </div>
                     </form>

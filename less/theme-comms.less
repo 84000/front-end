@@ -9,6 +9,7 @@
 
     // Homepage title band
     // -----------------------------------------
+
     #title-band {
         /*linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, rgba(149, 69, 0, 0.47) 50%, rgba(255, 255, 255, 0.0) 90%), */
         background-image: url('/imgs/backgrounds/LTWA1.jpg');
@@ -24,19 +25,21 @@
         p {
             color: #fff;
         }
+
     }
     .title-box, .title-box-addon {
-        background-color: rgba(12, 63, 94, 0.9);
         margin: 0px 15px;
         padding: 0px 25px 15px 25px;
         position: relative;
         background-image: url('/imgs/background-pattern-transparent.svg');
         background-size: 80px;
         background-repeat: repeat;
+        background-color: @brand-blue-dark;
+        //opacity: 0.9;
         .clearfix();
     }
     .title-box {
-        border-radius: 5px 5px 0px 0px;
+        border-radius: @border-radius-large @border-radius-large 0px 0px;
         margin-top: 50px;
         .img-container {
             margin-top: -50px;
@@ -48,7 +51,7 @@
     }
     .title-box-addon {
         content: ' ';
-        border-radius: 0px 0px 5px 5px;
+        border-radius: 0px 0px @border-radius-large @border-radius-large;
         height: 20px;
     }
 
@@ -57,22 +60,23 @@
     #latest-pubs {
         .panel {
             margin-top: 0px;
-            border-radius: 5px;
-            background-color: rgba(255,255,255,.9);
+            border-radius: @border-radius-large;
+            background-color: rgba(255, 255, 255, 1);
             margin-bottom: 0px;
+            border: 0px;
         }
         h5 {
-            color: rgb(117, 45, 40);
+            color: @brand-red;
         }
         h3 {
-            color: #333;
+            color: @gray-dark;
             margin-top: 0px
         }
         p {
-            color: #333;
+            color: @gray-dark;
         }
         .source-titles {
-            color: #5b5b5c;
+            color: @gray;
         }
         blockquote {
             border-left: 0px;
@@ -87,7 +91,7 @@
                 text-align: center;
             }
             footer, #latest .quote a {
-                color: #566e90;
+                color: @link-color;
             }
         }
         .item {
@@ -102,55 +106,76 @@
     // -----------------------------------------
     #about-band {
         background-color: #fff;
-        padding-top: 50px;
-        padding-bottom: 20px;
-        .rubrik {
-            max-width: 380px;
-            margin: 0px auto 40px auto;
-            p {
-                color: #707070;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        a {
+            display: block;
+            .transition(.25s ease-in);
+            &:hover {
+                text-decoration: none;
+                .rubrik {
+                    background: #eee;
+                }
             }
         }
-        .thumbnail {
-            width: 220px;
-            height: 220px;
+        .rubrik {
+            padding: 25px 0px;
             margin: 0px auto;
-            border-radius: 120px;
-            border: 7px solid #b76c1e;
-            img {
-                object-fit: cover;
+            border-radius: @border-radius-base;
+            .thumbnail {
+                width: 220px;
+                height: 220px;
+                margin: 0px auto;
+                border-radius: 120px;
+                border: 7px solid @brand-orange;
+                img {
+                    object-fit: cover;
+                }
+            }
+            p {
+                color: #707070;
+                max-width: 300px;
+                margin: 0px auto;
+            }
+        }
+        .vision {
+            .thumbnail {
+                border-color: @brand-orange; 
+            }
+            h2 {
+                color: @brand-orange; 
             }
         }
         .urgency {
             .thumbnail {
-                border-color: #566e90; 
+                border-color: @brand-blue; 
             }
             h2 {
-                color: #566e90; 
+                color: @brand-blue; 
             }
         }
         .sponsorship {
             .thumbnail {
-                border-color: #752d28; 
+                border-color: @brand-red; 
             }
             h2 {
-                color: #752d28; 
+                color: @brand-red; 
             }
         }
         .progress {
             .thumbnail {
-                border-color: #4d6253; 
+                border-color: @brand-green; 
             }
             h2 {
-                color: #4d6253; 
+                color: @brand-green; 
             }
         }
         .grants {
             .thumbnail {
-                border-color: #003f5f; 
+                border-color: @brand-blue-dark; 
             }
             h2 {
-                color: #003f5f; 
+                color: @brand-blue-dark; 
             }
         }
     }
@@ -158,6 +183,7 @@
     // Homepage news band
     // -----------------------------------------
     #news-band {
+        background: transparent;
         padding-top: 15px;
         padding-bottom: 15px;
         > .container {
@@ -172,9 +198,6 @@
         a:hover {
             text-decoration: none;
         }
-        .thumbnail img {
-            object-fit: cover;
-        }
         .panel {
             padding: 5px;
         }
@@ -182,9 +205,12 @@
             /*background-color: #fdfaf1;
             border-bottom: 1px solid #dadada;*/
             background-color: #ffffff;
-            color: #999999;
+            color: #999;
             text-align: center;
             text-transform: uppercase;
+        }
+        .news-banner, .announcement-banner, .news-image {
+            height: 160px;
         }
     }
 
@@ -195,52 +221,57 @@
         background-color: #ffffff;
         padding: 35px 0px;
     }
+}
 
-    // News panels
-    // ----------------------------------------
-    // .news-image: news with image
-    // .news-banner: news without image
-    // .announcement-banner: publication announcement
-    .news-banner, .announcement-banner, .news-image {
-        width: 100%;
-        height: 160px;
-        border-radius: 3px;
+// News panels
+// ----------------------------------------
+// .news-image: news with image
+// .news-banner: news without image
+// .announcement-banner: publication announcement
+.news-banner, .announcement-banner, .news-image {
+    width: 100%;
+    min-height: 140px;
+    border-radius: @border-radius-base;
+}
+.news-banner, .announcement-banner {
+    display: table;
+    line-height: 1.2em;
+    text-align: center;
+    color: #fff;
+    .title {
+        font-size: 1.2em;
+        margin-bottom: 15px;
     }
-    .news-banner, .announcement-banner {
-        display: table;
-        line-height: 1.2em;
-        text-align: center;
-        color: #fff;
+    .sub-title {
+        font-size: .9em;
+    }
+    &.title-long {
         .title {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-        }
-        .sub-title {
-            font-size: .9em;
-        }
-        &.title-long {
-            .title {
-                font-size: 1.1em;
-            }
+            font-size: 1.1em;
         }
     }
-    .news-banner {
-        background-color: rgb(183, 108, 30);
-        background-image: url('/imgs/background-pattern-transparent.svg');
-        background-size: 40px;
-        background-repeat: repeat;
+}
+.news-banner {
+    background-color: @brand-green;
+    background-image: url('/imgs/background-pattern-transparent.svg');
+    background-size: 40px;
+    background-repeat: repeat;
+}
+.announcement-banner {
+    background-color: @brand-red;
+    background-image: url('/imgs/background-pattern-transparent.svg');
+    background-size: 40px;
+    background-repeat: repeat;
+}
+.news-image {
+    &.thumbnail img {
+        object-fit: cover;
     }
-    .announcement-banner {
-        background-color: rgb(77, 98, 83);
-        background-image: url('/imgs/background-pattern-transparent.svg');
-        background-size: 40px;
-        background-repeat: repeat;
-    }
-    .news-banner > div, .announcement-banner > div {
-        display: table-cell;
-        vertical-align: middle;
-        padding: 15px;
-    }
+}
+.news-banner > div, .announcement-banner > div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 15px;
 }
 
 // Divider 
@@ -346,95 +377,6 @@ article {
     }
 }
 
-// Image as panel header
-// -------------------------------------------
-.panel-img-header {
-
-    h1 {
-        margin: 0px;
-        padding: 10px 15px;
-        font-size: 1.25em;
-        font-weight: normal;
-        position: relative;
-        color: #fff;
-        z-index: 1;
-        text-transform: uppercase;
-    }
-
-    h1:before {
-        content: ' ';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-
-    &.has-img {
-
-        height: 414px;
-        position: relative;
-        display: block;
-        overflow: hidden;
-        background-color: #333;
-
-        h1 {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: #fff;
-            z-index: 1;
-        }
-
-        /*h1:before {
-            opacity: 0.7;
-        }*/
-
-    }
-    
-    .panel-home & , .panel-about & {
-        h1:before {
-            background-color: @brand-orange;
-        }
-    }
-    .panel-news & , .panel-how-you-can-help & {
-        h1:before {
-            background-color: @brand-blue;
-        }
-    }
-    .panel-reading-room & {
-        h1:before {
-            background-color: @brand-red;
-        }
-    }
-    .panel-resources & {
-        h1:before {
-            background-color: @brand-green;
-        }
-    }
-    
-    @media only screen and (max-width: @screen-sm-max) {
-
-        &.has-img {
-            height: 40vh;
-            padding: 0;
-            &.thumbnail img {
-                height: 100%;
-            }
-        }
-
-    }
-
-    @media only screen and (max-width: @grid-float-breakpoint-max) {
-        h1 {
-            padding: 15px;
-        }
-    }
-
-}
-
 // Staggered blockquotes
 // ----------------------------------------------
 blockquote.offset {
@@ -461,6 +403,7 @@ blockquote.offset:nth-child(4n+4) {
     margin-right: 0%;
 }
 
+/*
 @media only screen and (min-width: @screen-sm) {
 
     .panel.main-panel .panel-img-header.has-img+.panel-body {
@@ -491,7 +434,7 @@ blockquote.offset:nth-child(4n+4) {
 
     }
 }
-
+*/
 
 // Translation statistics table
 // -------------------------------------------
@@ -509,7 +452,6 @@ table#translation-stats {
                 line-height: 44px;
                 font-family: @font-family-stats;
                 text-align: center;
-                width: 120px;
                 letter-spacing: -1px;
             }
             > td:first-child {
@@ -527,7 +469,6 @@ table#translation-stats {
                 text-transform: uppercase;
                 padding: 0px 6px;
                 text-align: left;
-                width: 140px;
                 letter-spacing: -1px;
                 &:first-child {
                     text-align: right;
@@ -675,33 +616,28 @@ ul.list-archive {
 
 // Media list
 // -------------------------------------------
-.panel.listing-panel {
+.listing-panel {
 
     h1 {
         margin-top: 0px;
     }
 
     .row {
-
-        padding-top: 12px;
-        margin-top: 12px;
-        border-top: 1px solid @gray-background-color;
-
-        &:first-child {
-            margin-top: -15px;
-        }
+        padding-bottom: 30px;
     }
 
-    .title {
-        color: @brand-orange;
+    .title, p {
+        margin-top: 2px;
+        margin-bottom: 0px;
     }
 
-    h4 {
-        margin-top: 6px;
+    .thumbnail {
+        height: 140px;
+        border-radius: @border-radius-base;
     }
 
     @media only screen and (max-width: @screen-sm) {
-        .panel-body img {
+        img {
             margin: auto;
         }
     }
@@ -729,12 +665,6 @@ ul.list-archive {
     .gallery & {
         height: 100px;
         margin-bottom: @grid-gutter-width;
-    }
-
-    .listing-panel > .panel-body &{
-        // background-color: #f5f5f5;
-        // border: 1px solid #e5e5e5;
-        height: 140px;
     }
 
     .home .media-panel-image& {
@@ -1244,7 +1174,7 @@ ul.responsive-tabs__list{
 
         width: auto;
         background-color: @brand-orange;
-        border-radius: 3px;
+        border-radius: @border-radius-base;
         margin: 0px auto;
         padding: 3px;
 

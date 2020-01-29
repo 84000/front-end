@@ -21,7 +21,7 @@
             <div class="brand-header">
                 <div class="container">
                     <div class="navbar-header">
-                        <div class="navbar-brand center-vertical">
+                        <div class="navbar-brand center-vertical full-width">
                             
                             <!-- Logo -->
                             <a href="http://84000.co" class="logo">
@@ -52,7 +52,7 @@
                             </span>
                             
                             <div class="visible-desktop">
-                                <div class="center-vertical pull-right">
+                                <div class="center-vertical align-right">
                                     <span>
                                         <xsl:call-template name="language-links"/>
                                     </span>
@@ -444,7 +444,7 @@
     </xsl:template>
     
     <xsl:template name="search-form">
-        <form method="get" role="search" name="searchformTop" class="navbar-form navbar-right">
+        <form method="get" role="search" name="searchformTop" class="navbar-form">
             <xsl:attribute name="action">
                 <xsl:choose>
                     <xsl:when test="$default-search-form-target = 'reading-room'">

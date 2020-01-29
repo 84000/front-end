@@ -43,10 +43,10 @@ label, .label {
 }
 
 .btn {
-    font-family: @font-family-heading;
+    //font-family: @font-family-heading;
     //font-size: 13px;
     //padding: 8px 12px;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     // white-space: normal;
     //.transition(.5s ease-in);
     i {
@@ -126,9 +126,14 @@ mark, .mark {
     }*/
 }
 
-.breadcrumb > li > a {
-    white-space: nowrap;
-}
+.breadcrumb {
+    > li > a {
+        white-space: nowrap;
+    }
+    h1 {
+        display: inline;
+    }
+} 
 
 .dropdown-menu {
 
@@ -175,11 +180,10 @@ mark, .mark {
 // Panel variations
 // -------------------------------------------
 .panel {
-    border-width: 0px;
-    .box-shadow(0 6px 12px rgba(0,0,0,.175));
-    .bordered {
-        border-width: 1px;
-    }
+    .box-shadow(none);
+    //.bordered {
+    //    border-width: 1px;
+    //}
 }
 
 .panel-title {
@@ -198,6 +202,25 @@ mark, .mark {
     padding: 0px;
     mark, .mark {
         background-color: @brand-red-alert !important;
+    }
+}
+
+.alert {
+    padding: 10px 20px;
+    &.alert-dismissible {
+        padding-right: 30px;
+        &.text-center {
+            padding-left: 30px;
+        }
+    }
+    &.alert-danger, &.alert-success {
+        h1 {
+            color: #fff;
+        }
+    } 
+    &.alert-danger.red-alert {
+        background-color: @brand-red-alert;
+        border-color: @brand-red-alert;
     }
 }
 

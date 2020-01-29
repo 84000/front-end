@@ -1091,7 +1091,6 @@ jQuery(document).ready(function($) {
 
         var selector = $(this).attr('href');
         var $sidebar = $(selector);
-        var h_padding = (20 * 2);
 
         $('.collapse').not($sidebar).collapse('hide');
         $sidebar.removeClass('in');
@@ -1110,10 +1109,10 @@ jQuery(document).ready(function($) {
         	});
         }
 
-        $('.lg ' + selector + ' .container').width(parseInt($(window).width() * 0.35) - h_padding);
-        $('.md ' + selector + ' .container').width(parseInt($(window).width() * 0.6) - h_padding);
-        $('.sm ' + selector + ' .container').width(parseInt($(window).width() * 0.75) - h_padding);
-        $('.xs ' + selector + ' .container').width(parseInt($(window).width()) - h_padding);
+        $('.lg ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.35));
+        $('.md ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.6));
+        $('.sm ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.75));
+        $('.xs ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.90));
 
 		$sidebar.collapse('toggle');
 	});

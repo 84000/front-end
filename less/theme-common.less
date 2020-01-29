@@ -7,23 +7,183 @@
 // ----------------------------------------
 html {
     background-color: @gray-background-color;
-    height: 100%;
+    height: auto!important;
 }
 
 body {
 
-    height: auto!important;
+    min-height: 100vh;
     position: relative;
     line-height: 1.6;
 
-    background-color: #003f5f;
     background-image: url('/imgs/background-pattern-transparent.svg');
     background-size: 80px;
     background-repeat: repeat;
+    background-color: @brand-blue-dark;
+
+    &.resources, &.reading-room.utilities {
+        background-color: @brand-green;
+        .title-band {
+            .btn-round {
+                i {
+                    color: @brand-green;
+                }
+            }
+        }
+    }
+
+    &.about, &.reading-room.about {
+        background-color: @brand-orange;
+        .title-band {
+            .btn-round {
+                i {
+                    color: @brand-orange;
+                }
+            }
+        }
+    }
+
+    &.reading-room {
+        background-color: @brand-red;
+        .title-band {
+            .btn-round {
+                i {
+                    color: @brand-red;
+                }
+            }
+        }
+    }
+
+    &.error404, &.reading-room.error {
+        background-color: @brand-red-alert;
+        .title-band {
+            .btn-round {
+                i {
+                    color: @brand-red-alert;
+                }
+            }
+        }
+    }
+
+    // Title band
+    // -------------------------------------------
+    .title-band {
+
+        background: transparent;
+        color: #fff;
+        .box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.3));
+
+        > .container {
+            > .center-vertical {
+                height: 50px;
+            }
+        }
+
+        .logo {
+            width: 100px;
+            img {
+                .img-responsive();
+            }
+        }
+
+        h1 {
+            line-height: 30px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            padding: 10px 0px;
+            font-size: 1.25em;
+            font-weight: normal;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            &, a {
+                color: #fff;
+            }
+        }
+
+        h1, .breadcrumb {
+            .text-shadow();
+        }
+
+        &.has-img {
+            background-size: cover;
+            background-position: center;
+            .box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.8));
+            h1 {
+                margin-top: 170px;
+            }
+        }
+
+        &.warning {
+            background-color: @brand-red-alert;
+        }
+
+        a {
+            color: #fff;
+        }
+
+        .btn-round {
+            background-color: #fff;
+            i {
+                color: @brand-blue-dark;
+            }
+        }
+
+        .quote-band {
+            background-color: rgba(0, 0, 0, 0.6);
+            blockquote {
+                border: 0px;
+                margin: 0px;
+                padding: 20px 0px;
+                text-shadow: 0px 2px 3px #000;
+                &, p {
+                    color: #fff;
+                    font-size: 17px;
+                }
+                footer {
+                    color: #ddd;
+                    margin-top: 3px;
+                }
+            }
+            
+        }
+        
+        @media only screen and (max-width: @screen-sm-max) {
+
+            &.has-img {
+                height: 40vh;
+                padding: 0;
+                &.thumbnail img {
+                    height: 100%;
+                }
+            }
+
+        }
+
+        @media only screen and (max-width: @grid-float-breakpoint-max) {
+            h1 {
+                padding: 15px;
+            }
+        }
+
+    }
+    
+    // Content band
+    // -------------------------------------------
+    .content-band {
+        background-color: #fff;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        min-height: 70vh;
+    }
+    .content-band + .content-band {
+        border-top: 1px solid @hr-border;
+        min-height: 30px;
+    }
 
     @media only screen and (max-width: @grid-float-breakpoint-max) {
 
-        > .container, .fixed-footer > .container {
+        .fixed-footer > .container {
             padding-left: 0px;
             padding-right: 0px;
             overflow: hidden;
@@ -39,15 +199,12 @@ body {
     // Footer
     // -------------------------------------------
     > footer {
-        color: @text-muted;
         text-align: center;
         padding: 25px 0px 100px 0px;
-        //background-color: @gray-background-color;
-        //border-top: 5px solid @gray-border-color;
         font-family: @font-family-sans-serif;
         font-size: @font-size-small;
         background: transparent;
-        &, a {
+        &, a, a:hover, a:focus {
             color: rgb(255, 255, 255);
         }
     }
@@ -73,6 +230,7 @@ p {
         font-weight: inherit;
     }
 }
+
 
 // Mail panel
 // -------------------------------------------
@@ -158,10 +316,12 @@ body.wait {
     /*font-family: 'Jomolhari', serif !important;
     line-height: 2em;*/
     font-style: normal !important;
+    font-weight: normal !important;
 }
 .text-sa, .text-wy {
     font-family: @font-family-serif !important;
     font-style: italic;
+    font-weight: normal !important;
 }
 .text-zh {
     font-style: normal !important;
@@ -175,7 +335,7 @@ body.wait {
 // ----------------------------------------
 .panel {
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 6px 0px;
+    //box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 6px 0px;
 }
 @media only screen and (max-width: @screen-xs) {
     .panel {
@@ -286,7 +446,6 @@ a {
     display: inline;
     margin-bottom: 0px;
     padding: 0px;
-    padding-left: 8px;
 }
 
 // Affix
@@ -853,12 +1012,12 @@ span.indent {
         left: 0px;
         right: 0px;
         height: @nav-controls-sm-height;
-        background-color: @brand-blue;
+        background-color: @brand-red;
         z-index: 5;
 
         .btn-round {
             background-color: #fff;
-            color: @brand-blue;
+            color: @brand-red;
         }
 
         .fixed-btn-container {
@@ -1079,14 +1238,10 @@ a.link-to-top {
     overflow: auto;
     z-index: 9;
 
-    .container {
+    .sidebar-content {
         position: relative;
-        padding: 20px;
-    }
-
-    .fix-width {
         overflow: auto;
-        margin-right: 70px;
+        margin: 35px 20px 20px 20px;
     }
 
     h2, h4 {
@@ -1110,11 +1265,6 @@ a.link-to-top {
             }
         }
     }
-    .fixed-sidebar {
-        .fix-width {
-            margin-right: 50px;
-        }
-    }
     
 }
 
@@ -1133,7 +1283,7 @@ a.link-to-top {
 
     display: block;
     margin: 20px 0px;
-    padding: 10px;
+    padding: 15px 30px;
     text-align: center;
     background: 
         url(/imgs/ornament/title-ornament.svg) no-repeat top center, 
@@ -1148,49 +1298,41 @@ a.link-to-top {
     background-size: 50px, 18px, 18px, 18px, 18px, 50px, 50px, 6px, 6px;
     background-color: #fff;
 
-    .block-link {
-
-        display: block;
-
-        &:hover {
-            text-decoration: none;
-            h3 {
-                text-decoration: underline;
-            }
+    
+    h1, h2, h3, h4 {
+        color: #565656;
+        text-shadow: 1px 2px 3px #dfe0e0;
+        margin-top: 15px;
+        margin-bottom: 0px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid @panel-inner-border;
+        &:first-child {
+            margin-top: 25px;
         }
-
-        > * {
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            color: @brand-blue;
-            border-bottom: 1px solid @panel-inner-border;
-        }
-
-        > *:last-child {
-            margin-bottom: 0px;
+        &:last-child {
             border-bottom: 0px;
+            padding-bottom: 25px;
         }
-
     }
 
-    > div {
-        .clearfix();
+    h1 {
+        color: @brand-red;
     }
 
-    h3 {
-        font-weight: bold;
-        font-family: @font-family-heading;
+    a {
+        text-decoration: none;
     }
-
+    
     .notes {
-
         color: @text-muted;
         font-size: @font-size-small;
+        padding-top: 15px;
+        border-top: 1px solid @panel-inner-border;
     }
 
     .footer {
 
-        margin: 15px -10px -10px -10px;
+        margin: 20px -30px -15px -30px;
         padding: 0px;
         background-color: #fff;
         font-family: @font-family-sans-serif;

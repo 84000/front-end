@@ -123,7 +123,6 @@
                                                 </label>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="form-group collapse persist" id="otherAmountContainer">

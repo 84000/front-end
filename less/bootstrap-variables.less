@@ -4,17 +4,17 @@
 
 // 84000 palette
 // --------------------------------------------------
-@brand-blue: rgb(59, 109, 142);
+@brand-blue: rgb(59, 109, 142); // rgb(86, 110, 144)
 @brand-blue-dark: rgb(0, 60, 87);
 @brand-blue-light: rgb(129, 162, 208);
-@brand-orange: rgb(183, 108, 30);
-@brand-red: rgb(117, 45, 40);
-@brand-green: rgb(77, 98, 83);
+@brand-orange: rgb(183, 108, 30); // rgb(207, 111, 26)
+@brand-red: rgb(117, 45, 40); // rgb(136, 38, 41)
+@brand-green:  rgb(77, 98, 82); // rgb(56, 99, 81)
 @brand-gray: #404040;
 @brand-red-alert: rgb(216,27,27);
 @brand-orange-text: #a65712;
 
-@gray-color: #404040;
+@gray-color: @brand-gray;
 @gray-background-color: #dcdcdc;
 @gray-border-color: #989898;
 
@@ -72,7 +72,7 @@
 
 @font-size-base:          16px;
 @font-size-large:         1.25em;//ceil((@font-size-base * 1.25)); // ~18px
-@font-size-small:         ceil((@font-size-base * 0.85)); // ~12px
+@font-size-small:         ceil((@font-size-base * 0.85)); // ceil((@font-size-base * 0.85)) // ~12px
 
 @font-size-h1:            1.7em;//floor((@font-size-base * 1.7)); // ~36px
 @font-size-h2:            1.5em;//floor((@font-size-base * 1.5)); // ~30px
@@ -124,7 +124,7 @@
 @line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
 @line-height-small:         1.5;
 
-@border-radius-base:        4px;
+@border-radius-base:        3px;
 @border-radius-large:       6px;
 @border-radius-small:       2px;
 
@@ -154,7 +154,7 @@
 @table-bg-accent:               #f9f9f9;
 //** Background color used for `.table-hover`.
 @table-bg-hover:                #f5f5f5;
-@table-bg-active:               #e5e5e5;
+@table-bg-active:               #d9e6ef;
 
 //** Border color for table and cell borders.
 @table-border-color:            #ddd;
@@ -518,21 +518,21 @@
 //
 //## Define colors for form feedback states and, by default, alerts.
 
-@state-success-text:             #3c763d;
-@state-success-bg:               #dff0d8;
-@state-success-border:           darken(spin(@state-success-bg, -10), 5%);
+@state-success-text:             @brand-green;
+@state-success-bg:               lighten(@brand-green, 50%);
+@state-success-border:           lighten(@brand-green, 20%);
 
-@state-info-text:                #31708f;
-@state-info-bg:                  #eaf8ff;
-@state-info-border:              lighten(@state-info-text, 50%);
+@state-info-text:                @brand-blue;
+@state-info-bg:                  lighten(@brand-blue, 50%);
+@state-info-border:              lighten(@brand-blue, 20%);
 
-@state-warning-text:             #a65712;
-@state-warning-bg:               #f9eadb;
-@state-warning-border:           darken(spin(@state-warning-bg, -10), 5%);
+@state-warning-text:             @brand-orange;
+@state-warning-bg:               lighten(@brand-orange, 50%);
+@state-warning-border:           lighten(@brand-orange, 20%);
 
-@state-danger-text:              #a94442;
-@state-danger-bg:                #f2dede;
-@state-danger-border:            darken(spin(@state-danger-bg, -10), 5%);
+@state-danger-text:              @brand-red;
+@state-danger-bg:                lighten(@brand-red, 50%);
+@state-danger-border:            lighten(@brand-red, 20%);
 
 
 //== Tooltips
@@ -646,9 +646,9 @@
 @alert-border-radius:         @border-radius-base;
 @alert-link-font-weight:      bold;
 
-@alert-success-bg:            @state-success-bg;
-@alert-success-text:          @state-success-text;
-@alert-success-border:        @state-success-border;
+@alert-success-bg:            @brand-green;
+@alert-success-text:          #fff;
+@alert-success-border:        @brand-green;
 
 @alert-info-bg:               @state-info-bg;
 @alert-info-text:             @state-info-text;
@@ -658,9 +658,9 @@
 @alert-warning-text:          @state-warning-text;
 @alert-warning-border:        @state-warning-border;
 
-@alert-danger-bg:             @state-danger-bg;
-@alert-danger-text:           @state-danger-text;
-@alert-danger-border:         @state-danger-border;
+@alert-danger-bg:             @brand-red;
+@alert-danger-text:           #fff;
+@alert-danger-border:         @brand-red;
 
 
 //== Progress bars
@@ -728,15 +728,15 @@
 @panel-body-padding:          15px;
 @panel-heading-padding:       10px 15px;
 @panel-footer-padding:        @panel-body-padding;
-@panel-border-radius:         3px;
+@panel-border-radius:         @border-radius-base;
 
 //** Border color for elements within panels
 @panel-inner-border:          @gray-background-color;
 @panel-footer-bg:             @panel-bg;
 
 @panel-default-text:          @gray-dark;
-@panel-default-border:        transparent;
-@panel-default-heading-bg:    @gray-background-color;
+@panel-default-border:        @hr-border;
+@panel-default-heading-bg:    #fff;
 
 @panel-primary-text:          #fff;
 @panel-primary-border:        @brand-primary;

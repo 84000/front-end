@@ -360,10 +360,6 @@ p.date {
         margin-bottom: @line-height-computed;
     }
 
-    &.full-width {
-        width: 100%;
-    }
-
     &.full-height {
         height: 100%;
     }
@@ -393,6 +389,16 @@ p.date {
         width: 50%;
     }
 
+    &.full-width {
+        width: 100%;
+        > *:first-child {
+            padding-left: 0px;
+        }
+        > *:last-child {
+            padding-right: 0px;
+        }
+    }
+
     &.together {
         > * {
             padding: 0px;
@@ -400,9 +406,18 @@ p.date {
     }
 
     &.align-left {
+        .pull-left();
         > * {
             padding-left: 0px;
             padding-right: 15px;
+        }
+    }
+
+    &.align-right {
+        .pull-right();
+        > * {
+            padding-left: 15px;
+            padding-right: 0px;
         }
     }
 
@@ -510,6 +525,9 @@ a.center-vertical {
 @media (max-width: @screen-sm) {
     .col-xs-pull-right {
         float: right;
+    }
+    .xs-extra-pad {
+        padding: 15px 30px;
     }
 }
 

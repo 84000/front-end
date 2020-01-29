@@ -20,6 +20,15 @@ h3, .milestone-h3 {
 
 // Source text pop-up
 // ---------------------------------------------
+#popup-footer {
+    .data-container {
+        padding-top: 20px;
+        padding-bottom: 20px; 
+    }
+}
+
+// Source text pop-up
+// ---------------------------------------------
 #popup-footer-source {
     .title {
         background-color: @brand-orange;
@@ -185,56 +194,31 @@ a.info-icon {
         .page {
             margin-top: 70px;
             .clearfix();
-        } 
-
-        h1 {
-            color: @brand-red;
-        }
-
-        h2 {
-            color: #565656;
-        }
-
-        h1, h2, h3{
-            margin: 10px 0px;
-        }
-
-        h4 {
-            margin: 0px;
-        }
-
-        #toh {
-            margin: 20px 0px;
         }
 
         #titles {
             width: auto;
             padding: 30px;
             margin: 0px;
-            margin-top: 50px;
-            text-shadow: 1px 2px 3px #dfe0e0;
             .clearfix();
+        }
+
+        #toh {
+            margin: 20px 0px;
         }
 
         #long-titles {
             margin: 0px 30px 120px 30px;
+            h4 {
+                float: left;
+                clear: left;
+                width: 100%;
+            }
             .clearfix();
         }
 
         #titles + #long-titles {
             margin-top: 50px;
-        }
-
-        #titles, #long-titles {
-            h1, h2, h3, h4 {
-                border-bottom: 1px solid @hr-border;
-                padding-bottom: 15px;
-                margin-bottom: 15px;
-                &:last-child {
-                    border-bottom: 0px;
-                    margin-bottom: 0px;
-                }
-            }
         }
 
         img.logo {
@@ -856,7 +840,7 @@ a.info-icon {
                     background-color: @brand-red;
                     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
                     color: #fff !important;
-                    border-radius: 3px;
+                    border-radius: @border-radius-base;
                     width: auto;
                     padding: 0px 10px;
                     white-space: nowrap;
@@ -1099,7 +1083,7 @@ a.info-icon {
             background-color: #aaa;
             text-decoration:none;
             padding: 1px 8px;
-            border-radius:4px;
+            border-radius: @border-radius-base;
             font-family: @font-family-heading
         }
     }
@@ -1132,9 +1116,6 @@ a.info-icon {
             .name + .row {
                 margin-top: (@line-height-computed / 2);
             }
-            ul {
-                margin-bottom: 0px;
-            }
         }
     }
     
@@ -1159,24 +1140,6 @@ a.info-icon {
         p {
             font-size: @font-size-small;
         }
-    }
-
-    #cumulative-glossary {
-
-        .download-link {
-            padding: @nav-link-padding;
-            .pull-right();
-        }
-        
-        .glossary-item {
-            margin-top: 10px;
-            ul {
-                list-style-type: circle;
-                margin-top: 2px;
-                margin-bottom: 0px;
-            }
-        }
-
     }
 }
 

@@ -1009,15 +1009,18 @@ jQuery(document).ready(function($) {
 		$.popupFooterHeight = function () {
 
 			// Footer should not be more than 50% of the viewport
+			// --------------------------------------------------
+			var height_factor = 0.5;
+			if($("html.xs").length){
+				height_factor = 0.75;
+			}
+
 			$(".fixed-footer .fix-height").each(function(){
-				$(this).css({"max-height": ($(window).height() * 0.5) + "px"});
+				$(this).css({"max-height": ($(window).height() * height_factor) + "px"});
 			});
 
 		}
 	}($));
-
-	// Set footer max-height on loading the page
-	// -----------------------------------------
 	$.popupFooterHeight();
 
 	// Pop-up footer

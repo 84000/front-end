@@ -21,6 +21,104 @@ body {
     background-repeat: repeat;
     background-color: @brand-blue-dark;
 
+    // Title band
+    // -------------------------------------------
+    .title-band {
+
+        background: transparent;
+        color: #fff;
+        .box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.3));
+
+        &.warning {
+            background-color: @brand-red-alert;
+        }
+
+        > .container {
+            > .center-vertical {
+                min-height: 50px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }
+
+        .logo {
+            width: 100px;
+            img {
+                .img-responsive();
+            }
+        }
+
+        h1 {
+            line-height: 30px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            padding: 10px 0px;
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            &, a {
+                color: #fff;
+            }
+        }
+
+        a {
+            color: #fff;
+        }
+
+        .btn-round {
+            background-color: #fff;
+            i {
+                color: @brand-blue-dark;
+            }
+        }
+    }
+
+    // Page header band
+    // -------------------------------------------
+    .page-header-band {
+        background-color: @gray-background-color;
+        padding-top: @line-height-computed;
+        min-height: 270px;
+        .container {
+            position: relative;
+        }
+        blockquote {
+            font-size: 34px;
+            margin-right: 320px;
+            border-color: @brand-orange;
+            footer  {
+                color: @gray;
+            }
+        }
+        img {
+            width: 320px;
+            height: 320px;
+            border-radius: 200px;
+            object-fit: cover;
+            position: absolute;
+            top: -50px;
+            right: 15px;
+            border: 5px solid #fff;
+            z-index: 0;
+        }
+    }
+    
+    // Content band
+    // -------------------------------------------
+    .content-band {
+        background-color: #fff;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        min-height: 60vh;
+    }
+    .content-band + .content-band {
+        border-top: 1px solid @hr-border;
+        min-height: 30px;
+    }
+
+    // Variations of body
+    // -------------------------------
     &.resources, &.reading-room.utilities {
         background-color: @brand-green;
         .title-band {
@@ -65,133 +163,39 @@ body {
         }
     }
 
-    // Title band
-    // -------------------------------------------
-    .title-band {
+    // Variations by size
+    // -------------------------------
+    @media (min-width: @screen-sm-min) and (max-width: @screen-md) {
 
-        background: transparent;
-        color: #fff;
-        .box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.3));
-
-        > .container {
-            > .center-vertical {
-                height: 50px;
-            }
-        }
-
-        .logo {
-            width: 100px;
-            img {
-                .img-responsive();
-            }
-        }
-
-        h1 {
-            line-height: 30px;
-            margin-bottom: 0px;
-            margin-top: 0px;
-            padding: 10px 0px;
-            font-size: 1.25em;
-            font-weight: normal;
-            position: relative;
-            z-index: 1;
-            text-transform: uppercase;
-            &, a {
-                color: #fff;
-            }
-        }
-
-        h1, .breadcrumb {
-            .text-shadow();
-        }
-
-        &.has-img {
-            background-size: cover;
-            background-position: center;
-            .box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.8));
-            h1 {
-                margin-top: 170px;
-            }
-        }
-
-        &.warning {
-            background-color: @brand-red-alert;
-        }
-
-        a {
-            color: #fff;
-        }
-
-        .btn-round {
-            background-color: #fff;
-            i {
-                color: @brand-blue-dark;
-            }
-        }
-
-        .quote-band {
-            background-color: rgba(0, 0, 0, 0.6);
+        .page-header-band {
+            min-height: 220px;
             blockquote {
-                border: 0px;
-                margin: 0px;
-                padding: 20px 0px;
-                text-shadow: 0px 2px 3px #000;
-                &, p {
-                    color: #fff;
-                    font-size: 17px;
-                }
-                footer {
-                    color: #ddd;
-                    margin-top: 3px;
-                }
+                font-size: 24px;
+                margin-right: 280px;
             }
-            
-        }
-        
-        @media only screen and (max-width: @screen-sm-max) {
-
-            &.has-img {
-                height: 40vh;
-                padding: 0;
-                &.thumbnail img {
-                    height: 100%;
-                }
-            }
-
-        }
-
-        @media only screen and (max-width: @grid-float-breakpoint-max) {
-            h1 {
-                padding: 15px;
+            img {
+                width: 280px;
+                height: 280px;
+                border-radius: 140px;
             }
         }
 
     }
-    
-    // Content band
-    // -------------------------------------------
-    .content-band {
-        background-color: #fff;
-        padding-top: 25px;
-        padding-bottom: 25px;
-        min-height: 70vh;
-    }
-    .content-band + .content-band {
-        border-top: 1px solid @hr-border;
-        min-height: 30px;
-    }
 
-    @media only screen and (max-width: @grid-float-breakpoint-max) {
+    @media (max-width: @screen-sm) {
 
-        .fixed-footer > .container {
-            padding-left: 0px;
-            padding-right: 0px;
-            overflow: hidden;
-            /* Fix to overflow-y overriding overflow-x issues */
-            position: relative;
-            padding-top: 5px;
-            top: -5px;
-            margin-bottom: -5px;
+        .page-header-band {
+            min-height: 140px;
+            blockquote {
+                font-size: 18px;
+                margin-top: 150px;
+                margin-right: 0px;
+            }
+            img {
+                width: 200px;
+                height: 200px;
+                border-radius: 100px;
+            }
         }
 
     }
@@ -215,60 +219,8 @@ body {
 // ---------------------------------------------
 h1, .h1 {
     color: @brand-red;
-    font-family: @font-family-bold;
-}
-
-// Link styles 
-// ---------------------------------------------
-a {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-}
-p {
-    a {
-        text-decoration: underline;
-        font-weight: inherit;
-    }
-}
-
-
-// Mail panel
-// -------------------------------------------
-body .container > .panel, .panel.main-panel {
-
-    width: 100%;
-
-    > .panel-body {
-
-        padding: 20px 30px 60px 30px;
-        overflow: hidden;
-        position: relative;
-        
-        > p:first-child > img:first-child {
-            width: 100%;
-        }
-
-    }
-
-    > .panel-footer {
-        padding: 20px 30px 20px 30px;
-        overflow: hidden;
-    }
-
-    > .alert {
-        border-radius: 0px;
-        border-width: 0px;
-        border-bottom-width: 1px; 
-        margin-bottom: 0px;
-    }
-
-    @media only screen and (max-width: @grid-float-breakpoint-max) {
-        margin-bottom: 0px;
-        > .panel-body {
-            padding: 15px 25px 60px 25px;
-        }
-    }
-
+    font-weight: 700;
+    font-family: @font-family-heading;
 }
 
 // Disable page while processing
@@ -297,186 +249,6 @@ body.wait {
     }
 }
 
-// Text classes 
-// ---------------------------------------------
-.name {
-    font-weight: bold;
-    font-style: italic;
-}
-.title {
-    .label {
-        font-style: normal;
-    }
-}
-.foreign {
-    font-style: italic;
-}
-.text-bo {
-    font-family:"Tibetan" !important;
-    /*font-family: 'Jomolhari', serif !important;
-    line-height: 2em;*/
-    font-style: normal !important;
-    font-weight: normal !important;
-}
-.text-sa, .text-wy {
-    font-family: @font-family-serif !important;
-    font-style: italic;
-    font-weight: normal !important;
-}
-.text-zh {
-    font-style: normal !important;
-}
-.small-plain {
-    font-family: @font-family-heading;
-    font-size: @font-size-small;
-}
-
-// Panels
-// ----------------------------------------
-.panel {
-    overflow: hidden;
-    //box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 6px 0px;
-}
-@media only screen and (max-width: @screen-xs) {
-    .panel {
-        margin-bottom: 22px;
-    }
-}
-
-// Brand header & Nav
-// ----------------------------------------
-.tag-line {
-    font-family: @font-family-tag-line;
-    color: @brand-blue;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-// Icons
-// ----------------------------------------
-i.fa-envelope-square {
-    color: @brand-green;
-}
-
-i.fa-facebook-square {
-    color: @brand-blue;
-}
-
-i.fa-twitter-square {
-    color: @brand-orange;
-}
-
-i.fa-youtube-square {
-    color: @brand-red;
-}
-
-i.fa-google-plus-square {
-    color: @brand-red;
-}
-
-a {
-    i.fa-chevron-down {
-        .transition(.25s linear);
-    }
-    &.collapsed {
-        i.fa-chevron-down {
-            .rotate(-90deg);
-        }
-        .text-right {
-            i.fa-chevron-down {
-                .rotate(90deg);
-            }
-        }
-    }
-}
-
-// Danger well for tantra warnings
-// ----------------------------------
-.well.well-danger {
-    &, p {
-        color: #ffffff !important;
-    }
-    border-color: darken(@brand-red, 10%);
-    background-color: @brand-red;
-}
-
-// Modal variation
-// ----------------------------------
-.modal.warning {
-    .modal-header {
-        background-color: @brand-red;
-        .modal-title, .close {
-            color: #fff !important;
-        }
-    }
-}
-
-// Background off-white
-// ----------------------------------
-.bg-off-white {
-    background-color: #e5e5e5;
-}
-
-// Badges
-// -------------------------------------------------
-.badge {
-    font-family: @font-family-sans-serif;
-}
-.badge-muted {
-    background-color: @label-default-bg;
-}
-.badge-notification {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    line-height: 12px;
-    padding: 6px 0px;
-    z-index: 10;
-    .transition(.75s ease-out);
-    &.pulse {
-        background-color: @brand-red-alert;
-        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
-    }
-}
-
-// Breadcrumb
-// -----------------------------------------
-.breadcrumb {
-    display: inline;
-    margin-bottom: 0px;
-    padding: 0px;
-}
-
-// Affix
-// -----------------------------------------
-#affix-nav .affix {
-    top: 20px;
-}
-
-// Debug for environment
-// -------------------------------------------------
-.environment-warning {
-    position: fixed;
-    z-index: 9;
-    left: 0px;
-    bottom: 0px;
-    background-color: rgba(red(@brand-green),green(@brand-green),blue(@brand-green),.7);
-    color: #fff;
-    padding: 2px 7px;
-    font-size: @font-size-small;
-    font-family: @font-family-sans-serif;
-    border-top-right-radius: 4px;
-}
-
-// Indent with a left border
-// -------------------------------------------------
-span.indent {
-    border-left: 1px solid @table-border-color;
-    padding-left: @grid-gutter-width / 2;
-    display: inline-block;
-}
-    
 // Navbar
 // --------------------------------------------------
 .navbar {
@@ -604,23 +376,6 @@ span.indent {
 
             &.social {
                 .nav-item-variant(@brand-orange);
-            }
-
-        }
-    }
-
-    // Dropdowns in nav
-    // --------------------------------------------------
-    .dropdown-menu {
-        > li {
-            > a {
-                padding: 7px 15px;
-            }
-            &:first-child > a {
-                padding-top: 9px;
-            }
-            &:last-child > a {
-                padding-bottom: 9px;
             }
         }
     }
@@ -881,10 +636,82 @@ span.indent {
     }
 }
 
+// Override Bootstrap styles
+// ------------------------
+ul.dropdown-menu {
+    border: 0px;
+    margin-top: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    overflow: hidden;
+    &, ul {
+        list-style: none;
+        overflow: hidden;
+
+        > li {
+            > a {
+                padding: 7px 15px;
+                white-space: nowrap;
+                &:hover {
+                    text-decoration: none;
+                }
+                // Add a caret
+                // ------------------------
+                &:before { 
+                    content: "";
+                    border-color: transparent;
+                    border-left-color: inherit;
+                    border-style: solid;
+                    border-width: 5px 0 5px 5px;
+                    display: inline-block;
+                    height: 0;
+                    width: 0;
+                    padding-right: 10px;
+                }
+            }
+            &:first-child > a {
+                padding-top: 9px;
+            }
+            &:last-child > a {
+                padding-bottom: 9px;
+            }
+        }
+    }
+    
+
+    // Additional sub nav list 
+    // (also in mixin)
+    // --------------------------
+    .subnav {
+        max-width: 100%;
+        .title {
+            width: 35%;
+            padding: 9px 15px;
+            line-height: 1.4em;
+        }
+        .links {
+            width: 65%;
+        }
+        ul {
+
+            width: 100%;
+            padding: 0;
+            margin: 0;
+
+            > li > a {
+                display: block;
+                clear: both;
+                color: inherit;
+            }
+        }
+        
+    }
+}
 
 // App style navigation Button
 // ----------------------------------------
-
 .btn-round {
 
     display: inline-block;
@@ -960,7 +787,6 @@ span.indent {
 
 // Fixed positions for buttons
 // ---------------------------------------------
-
 .fixed-btn-container {
 
     position: fixed;
@@ -1076,110 +902,199 @@ a.link-to-top {
 }
 
 
-// Big panel headings
+// Text classes 
+// ---------------------------------------------
+.name {
+    font-weight: bold;
+    font-style: italic;
+}
+.title {
+    .label {
+        font-style: normal;
+    }
+}
+.foreign {
+    font-style: italic;
+}
+.text-bo {
+    font-family:"Tibetan" !important;
+    /*font-family: 'Jomolhari', serif !important;
+    line-height: 2em;*/
+    font-style: normal !important;
+    font-weight: normal !important;
+}
+.text-sa, .text-wy {
+    font-family: @font-family-serif !important;
+    font-style: italic;
+    font-weight: normal !important;
+}
+.text-zh {
+    font-style: normal !important;
+}
+.small-plain {
+    font-family: @font-family-heading;
+    font-size: @font-size-small;
+}
+
+// Brand header & Nav
+// ----------------------------------------
+.tag-line {
+    font-family: @font-family-tag-line;
+    color: @brand-blue;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+// Icons
+// ----------------------------------------
+i.fa-envelope-square {
+    color: @brand-green;
+}
+
+i.fa-facebook-square {
+    color: @brand-blue;
+}
+
+i.fa-twitter-square {
+    color: @brand-orange;
+}
+
+i.fa-youtube-square {
+    color: @brand-red;
+}
+
+i.fa-google-plus-square {
+    color: @brand-red;
+}
+
+a {
+    i.fa-chevron-down {
+        .transition(.25s linear);
+    }
+    &.collapsed {
+        i.fa-chevron-down {
+            .rotate(-90deg);
+        }
+        .text-right {
+            i.fa-chevron-down {
+                .rotate(90deg);
+            }
+        }
+    }
+}
+
+// Danger well for tantra warnings
 // ----------------------------------
-.panel-heading {
-
-    width: 100%;
-
-    .bookmark-button {
-
-        text-align: right;
-
-        a {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border-radius: 15px;
-            font-size: @font-size-large;
-            line-height: 20px;
-            padding: 5px 0px;
-            text-align: center;
-            background-color: @brand-red;
-            color: #fff;
-            .transition(.25s ease-in);
-            &:hover {
-                background-color: #fff;
-                color: @brand-red;
-            }
-        }
+.well.well-danger {
+    &, p {
+        color: #ffffff !important;
     }
-
-    .breadcrumb {
-        margin-bottom: 0px;
-        padding: 0px;
-        > li + li:before {
-            padding: 0 5px 0 10px;
-        }
-        a {
-            text-decoration: underline;
-        }
-    }
-
+    border-color: darken(@brand-red, 10%);
+    background-color: @brand-red;
 }
 
-.panel-default {
-    .panel-heading {
-
-        &.bold {
-            width: 100%;
-            padding: @panel-heading-padding;
-            font-weight: normal;
-            background-color: @brand-red;
-            border-bottom: 0px;
-
-            &, a, li, .title, .panel-title {
-                color: #fff;
-            }
-
-            .title {
-                font-size: @font-size-large;
-                font-family: @font-family-bold;
-                text-transform: uppercase;
-                //font-style: normal;
-                text-align: left;
-                line-height: 1;
-                margin: 0px;
-            }
-
-            .label {
-                margin-left: 8px;
-            }
-
-            .btn-round {
-                margin-top: -5px;
-                margin-bottom: -5px;
-                background-color: #fff;
-                color: @brand-red;
-            }
+// Modal variation
+// ----------------------------------
+.modal.warning {
+    .modal-header {
+        background-color: @brand-red;
+        .modal-title, .close {
+            color: #fff !important;
         }
-
-        &.danger {
-            background-color: @brand-red-alert;
-            color: #fff;
-            a {
-                color: #fff;
-            }
-        }
-
-        &.alert {
-            background-color: @brand-green;
-            color: #fff;
-            a {
-                color: #fff;
-            }
-        }
-
     }
-    /*
-    @media only screen and (max-width: @screen-sm) {
+}
+
+// Background off-white
+// ----------------------------------
+.bg-off-white {
+    background-color: #e5e5e5;
+}
+
+// Badges
+// -------------------------------------------------
+.badge {
+    font-family: @font-family-sans-serif;
+}
+.badge-muted {
+    background-color: @label-default-bg;
+}
+.badge-notification {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 6px 0px;
+    z-index: 10;
+    .transition(.75s ease-out);
+    &.pulse {
+        background-color: @brand-red-alert;
+        .box-shadow(0px 0px 0px 70px rgba(255,25,25,.5));
+    }
+}
+
+// Breadcrumb
+// -----------------------------------------
+.breadcrumb {
+    display: inline;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+// Affix
+// -----------------------------------------
+#affix-nav .affix {
+    top: 20px;
+}
+
+// Debug for environment
+// -------------------------------------------------
+.environment-warning {
+    position: fixed;
+    z-index: 9;
+    left: 0px;
+    bottom: 0px;
+    background-color: rgba(red(@brand-green),green(@brand-green),blue(@brand-green),.7);
+    color: #fff;
+    padding: 2px 7px;
+    font-size: @font-size-small;
+    font-family: @font-family-sans-serif;
+    border-top-right-radius: 4px;
+}
+
+// Indent with a left border
+// -------------------------------------------------
+span.indent {
+    border-left: 1px solid @table-border-color;
+    padding-left: @grid-gutter-width / 2;
+    display: inline-block;
+}
+
+
+// Panels
+// ----------------------------------------
+.panel {
+    .box-shadow(none);
+    overflow: hidden;
+}
+
+.panel-title {
+    font-family: @font-family-bold;
+    text-transform: uppercase;
+}
+.panel-footer {
+    .pagination {
         margin: 0px;
-        border-bottom: 1px solid @gray-border-color;
-        .box-shadow(none);
-        //padding-bottom: 40px;
-    }*/
+    }
+}
+@media only screen and (max-width: @screen-xs) {
+    .panel {
+        margin-bottom: 22px;
+    }
 }
 
+// Widget loading
+// ------------------------------------
 .loading {
     height: 300px;
     background-image: url('/imgs/spinner.gif');
@@ -1191,7 +1106,6 @@ a.link-to-top {
 // Pop-up footer for notes and glossary
 // ------------------------------------
 .fixed-footer {
-
     position:fixed;
     bottom:0px;
     left:0px;
@@ -1199,30 +1113,11 @@ a.link-to-top {
     background-color: #fff;
     border-top: 1px solid @hr-border;
     z-index: 8;
-
-    .container {
-        position: relative;
-        > .panel {
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-top: (@line-height-computed / 2);
-            padding-bottom: @line-height-computed;
-            > .panel-body {
-                padding-bottom: 0px;
-                padding-top: 0px;
-            }
-        }
-    }
     .fix-height {
         overflow: auto;
         min-height: 70px;
     }
-    .glossary-item {
-        margin-bottom: 0px;
-    }
 }
-
-
 
 // Pop-out sidebar for contents and bookmarks
 // ------------------------------------------
@@ -1254,18 +1149,6 @@ a.link-to-top {
         font-family: @font-family-serif;
     }
 
-}
-
-@media only screen and (max-width: @screen-sm) {
-    .fixed-footer {
-        .container {
-            position: relative;
-            > .panel {
-                .box-shadow(none);
-            }
-        }
-    }
-    
 }
 
 // Remove bookmark button
@@ -1300,8 +1183,7 @@ a.link-to-top {
 
     
     h1, h2, h3, h4 {
-        color: #565656;
-        text-shadow: 1px 2px 3px #dfe0e0;
+        //text-shadow: 1px 2px 3px #dfe0e0;
         margin-top: 15px;
         margin-bottom: 0px;
         padding-bottom: 15px;
@@ -1311,16 +1193,24 @@ a.link-to-top {
         }
         &:last-child {
             border-bottom: 0px;
-            padding-bottom: 25px;
         }
     }
 
-    h1 {
-        color: @brand-red;
+    h2, h3, h4 {
+        color: @gray;
+    }
+
+    h2, h3 {
+        color: @gray;
+        font-family: @font-family-heading;
+        font-weight: 700;
     }
 
     a {
         text-decoration: none;
+        &.block-link > * {
+            color: @link-color;
+        }
     }
     
     .notes {
@@ -1377,6 +1267,8 @@ a.link-to-top {
         
 }
 
+// List types
+// ---------------------------------------------
 .list {
     &.list-bullet {
         > .list-item {
@@ -1424,31 +1316,7 @@ a.link-to-top {
     }
 }
 
-// Table without a borders
-// ---------------------------------------------
-table.table.no-border {
-    tbody {
-        > tr {
-            > th, > td {
-                border-top: 0px;
-            }
-        }
-    }
-}
 
-
-// Table without padding
-// ---------------------------------------------
-table.table.no-padding {
-    tbody {
-        > tr {
-            > th, > td {
-                padding-top: 1px;
-                padding-bottom: 1px;
-            }
-        }
-    }
-}
 
 // Contents table
 // ---------------------------------------------

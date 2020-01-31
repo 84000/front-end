@@ -3,10 +3,6 @@
 // Styles relevant to the Reading Room
 // ---------------------------------------- //
 
-// General styles
-// ---------------------------------
-
-
 // Title variations 
 // ---------------------------------------------
 h2, h3, h4, h5, h6,
@@ -16,41 +12,6 @@ h2, h3, h4, h5, h6,
 
 h3, .milestone-h3 {
     margin-bottom: @line-height-computed;
-}
-
-// Source text pop-up
-// ---------------------------------------------
-#popup-footer {
-    .data-container {
-        padding-top: 20px;
-        padding-bottom: 20px; 
-    }
-}
-
-// Source text pop-up
-// ---------------------------------------------
-#popup-footer-source {
-    .title {
-        background-color: @brand-orange;
-        color: #fff;
-        margin: 0px;
-        padding: (@line-height-computed / 2) 0px;
-        border-bottom: 1px solid @hr-border;
-    }
-    .text-bo.source {
-        line-height: 2em;
-    }
-}
-a.info-icon {
-    color: @text-muted;
-    margin-left: 8px;
-    vertical-align: sub;
-    i {
-        font-size: 20px;
-    }
-    &:hover {
-        color: @brand-red;
-    }
 }
 
 // Translation specific styles
@@ -64,15 +25,6 @@ a.info-icon {
 
     h1, h2, h3 {
         text-align: center;
-    }
-
-    h1 {
-        font-family: @font-family-heading;
-        font-weight: 700;
-    }
-    
-    h2, h3, h4, h5, h6 {
-        font-family: @font-family-serif;
     }
 
     h3 {
@@ -601,7 +553,12 @@ a.info-icon {
                     }
                 }
             }
-            
+        }
+    }
+
+    .fixed-footer {
+        .glossary-item {
+            margin-bottom: 0px;
         }
     }
 
@@ -662,6 +619,44 @@ a.info-icon {
 
 }
 
+// Source text pop-up
+// ---------------------------------------------
+#popup-footer {
+    .data-container {
+        padding-top: 20px;
+        padding-bottom: 20px; 
+    }
+}
+
+// Source text pop-up
+// ---------------------------------------------
+#popup-footer-source {
+    .title {
+        background-color: @brand-orange;
+        color: #fff;
+        margin: 0px;
+        padding: (@line-height-computed / 2) 0px;
+        border-bottom: 1px solid @hr-border;
+    }
+    .text-bo.source {
+        line-height: 2em;
+    }
+}
+
+// Info icon
+// ---------------------------------------------
+a.info-icon {
+    color: @text-muted;
+    margin-left: 8px;
+    vertical-align: sub;
+    i {
+        font-size: 20px;
+    }
+    &:hover {
+        color: @brand-red;
+    }
+}
+
 // Different styles for the editors
 // ---------------------------------------------
 .editor-mode {
@@ -694,6 +689,8 @@ a.info-icon {
     } 
 
     .translation {
+
+        margin: 0px 30px; 
 
         #title {
             margin-top: 0px;

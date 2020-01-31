@@ -2,25 +2,58 @@
 // --------------------------------------------
 .nav-item-variant(@brand-color) {
 
-	border-color: @brand-color;
+    border-color: @brand-color;
 
     &.active > a, .active > a {
     	color: #fff;
         background-color: @brand-color;
     }
 
+    .dropdown-menu {
+        .subnav {
+            .title {
+                color: @brand-color;
+            }
+        }
+    }
+
+    // Mobile layout
+    // ------------------------------
     @media (max-width: @grid-float-breakpoint-max) {
     	.dropdown-menu li.active > a {
     		color: @brand-color;
     	}
+        .dropdown-menu {
+            .subnav {
+                width: 100%;
+            }
+        }
     }
 
+    // Desktop layout
+    // ------------------------------
     @media (min-width: @grid-float-breakpoint) {
     	> a:hover,
         .dropdown-menu li > a:hover {
 	    	color: #fff;
 	        background-color: @brand-color;
 	    }
+        .dropdown-menu {
+            .subnav {
+                width: 360px;
+            }
+            .subnav:hover {
+                color: #fff;
+                background-color: @brand-color;
+                ul {
+                    background-color: rgba(255, 255, 255, 0.2);
+                }
+                .title {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+            
     }
     
 }

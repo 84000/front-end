@@ -319,6 +319,13 @@ figcaption, .lb-caption, .lb-number {
 // --------------------------------------------
 article {
 
+    margin-bottom: @line-height-computed;
+
+    img {
+        max-width: 100%;
+        object-fit: cover;
+    }
+
     img, .embed-responsive, .nav-tabs, figure {
         margin: (@line-height-computed / 2) 0px;
     }
@@ -402,39 +409,6 @@ blockquote.offset:nth-child(4n+4) {
     margin-left: 21%;
     margin-right: 0%;
 }
-
-/*
-@media only screen and (min-width: @screen-sm) {
-
-    .panel.main-panel .panel-img-header.has-img+.panel-body {
-
-        overflow: visible;
-
-        > blockquote:first-child {
-            position: absolute;
-            top: -130px;
-            left: 0px;
-            right: 0px;
-            font-size: 17px;
-            padding-top: 0px;
-            padding-bottom: 0px;
-            background-color: rgba(0, 0, 0, 0.6);
-            text-shadow: 0px 2px 3px #000;
-            border: 0px;
-            margin: 0px;
-            padding: 20px 30px;
-            &, p {
-            	color: #fff;
-            }
-            footer {
-                color: #ddd;
-                margin-top: 3px;
-            }
-        }
-
-    }
-}
-*/
 
 // Translation statistics table
 // -------------------------------------------
@@ -547,25 +521,6 @@ table#translation-stats {
     }
 }
 
-
-// Sutra list
-// -------------------------------------------
-/*
-.sutra-list {
-    .list-unstyled();
-    li {
-        background-image:  url('/imgs/sutra-icon.jpg');
-        background-size: 70px 70px;
-        background-repeat: no-repeat;
-        padding: 5px 0px 5px 85px;
-        min-height: 85px;
-        line-height: 1.2em;
-        p {
-            margin-bottom: 0px;
-        }
-    }
-}*/
-
 // Archive list
 // ------------------------------------------
 ul.list-archive {
@@ -577,40 +532,6 @@ ul.list-archive {
         &:last-child {
             padding-bottom: 0px;
         }
-    }
-}
-
-// Media panel
-// -------------------------------------------
-.media-panel {
-
-    background-color: #fff;
-    margin-bottom: 22px;
-
-    .media-panel-heading {
-        //color: #fff;
-        //background-color: @brand-gray;
-        color: @brand-red;
-        padding: 6px 0px;
-        font-family: @font-family-sans-serif;
-        text-transform: uppercase;
-    }
-
-    .media-panel-body {
-        > * {
-            display: block;
-            width: 100%;
-            margin-top: 6px;
-            margin-bottom: 0px;
-        }
-        > p.date {
-            margin-top: 0px;
-        }
-    }
-
-    .media-panel-table {
-        border: 1px solid @table-border-color;
-        border-top: 0px;
     }
 }
 
@@ -634,6 +555,11 @@ ul.list-archive {
     .thumbnail {
         height: 140px;
         border-radius: @border-radius-base;
+    }
+
+    .entry-content {
+        border-left: 1px solid @hr-border;
+        padding-left: 15px;
     }
 
     @media only screen and (max-width: @screen-sm) {
@@ -695,58 +621,27 @@ ul.list-archive {
     }
 }
 
-
 // Homepage movie
 // ----------------------------------
+
 .movie-container {
 
+    width: 100%;
+    height: 460px;
     background-color: #333;
 
-    .movie {
-
+    > a {
+        display: block;
         width: 100%;
-        height: 460px;
-
-        &.panel {
-            background-color: #333
-        }
-
-        > iframe {
-            height: 100%;
-            width: 100%;
-            border: 0;
-        }
-
-        > a {
-            display: block;
-            width: 100%;
-            height: 100%;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
-
-        @media only screen and (max-width: @screen-sm-max) {
-
-            position: relative;
-            height: 0;
-            padding: 0;
-            overflow: hidden;
-            padding-bottom: 56.25%;
-
-            > iframe, > a {
-
-                position: absolute;
-                top: 0;
-                left: 0;
-                bottom: 0;
-
-            }
-
-        }
+        height: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
-    &+p {
-        margin-top: 20px;
+
+    @media only screen and (max-width: @screen-sm-max) {
+
+        height: 280px;
     }
 }
 
@@ -935,25 +830,9 @@ ul.responsive-tabs__list{
 .wp-caption {
   margin-bottom: calc(1.5 * 1rem);
 }
-
 .wp-caption.aligncenter {
     position: relative;
 }
-/*
-@media only screen and (min-width: 768px) {
-  .wp-caption.aligncenter {
-    position: relative;
-    left: calc(~" calc(8 * (100vw / 12) - 28px) / 2");
-    transform: translateX(-50%);
-  }
-}
-
-@media only screen and (min-width: 1168px) {
-  .wp-caption.aligncenter {
-    left: calc(~" calc(6 * (100vw / 12) - 28px) / 2");
-  }
-}
-*/
 .wp-caption img {
   display: block;
   margin-left: auto;
@@ -962,7 +841,7 @@ ul.responsive-tabs__list{
 
 .wp-caption-text {
   color: #767676;
-  font-size: 0.71111em;
+  font-size: 0.8em;
   font-family: @font-family-sans-serif;
   line-height: 1.6;
   margin: 0;
@@ -1129,11 +1008,8 @@ ul.responsive-tabs__list{
 // ---------------------------------------------
 .section {
 
-    h2, h3, h4, h5, h6,
-    .h2, .h3, .h4, .h5, .h6 {
-        color: @text-color;
-    }
-
+    // The section title
+    // -------------------------------
     #title {
         
         margin-bottom: 25px;
@@ -1147,29 +1023,18 @@ ul.responsive-tabs__list{
                 color: @brand-red;
                 font-family: @font-family-bold;
                 font-style: normal;
+                font-weight: 400;
             }
 
-            h4 {
-                font-style: italic;
+            h2, h3, h4, h5, h6 {
+                color: @text-color;
             }
 
-            p {
-                //color: @text-muted;
-                font-style: normal;
-            }
-
-            hr {
-                margin-top: 16px;
-                margin-bottom: 16px;
-            }
-
-            .logo {
-                margin-top: 30px;
-                width: 228px;
-            }
         }
     }
 
+    // The stable of stats
+    // -------------------------------
     table.table-stats {
 
         width: auto;
@@ -1190,11 +1055,9 @@ ul.responsive-tabs__list{
         }
     }
 
-    h2 {
-        color: @text-muted;
-    }
-
-    .translation-options {
+    // links to downloads etc..
+    // ------------------------------
+    .translation-links {
         .list-unstyled();
         > li {
             margin-bottom: 5px;
@@ -1204,12 +1067,13 @@ ul.responsive-tabs__list{
             text-align: left;
         }
     }
-    .translation-status {
-        margin-top: 5px;
-        margin-bottom: 8px;
-    }
 
+    // The summary in the about tab
+    // -------------------------------
     #summary {
+        h1 {
+            text-align: left;
+        }
         h4 {
             font-weight: bold;
         }
@@ -1268,20 +1132,6 @@ ul.responsive-tabs__list{
     .list-grouping {
 
         &.border {
-            /*
-            background: 
-                url(/imgs/ornament/title-ornament.svg) no-repeat top center, 
-                url(/imgs/ornament/title-corner-top-left.svg) no-repeat top left, 
-                url(/imgs/ornament/title-corner-top-right.svg) no-repeat top right, 
-                url(/imgs/ornament/title-corner-bottom-left.svg) no-repeat bottom left, 
-                url(/imgs/ornament/title-corner-bottom-right.svg) no-repeat bottom right, 
-                url(/imgs/ornament/title-top.svg) repeat-x top center, 
-                url(/imgs/ornament/title-top.svg) repeat-x bottom center, 
-                url(/imgs/ornament/title-sides.svg) repeat-y top left, 
-                url(/imgs/ornament/title-sides.svg) repeat-y top right;
-            background-size: 50px, 18px, 18px, 18px, 18px, 50px, 50px, 6px, 6px;
-            padding: (@grid-gutter-width / 2) (@grid-gutter-width + 10) @grid-gutter-width (@grid-gutter-width + 10);
-            margin: @grid-gutter-width -(@grid-gutter-width / 2);*/
             border: 1px solid rgba(red(@brand-red), green(@brand-red), blue(@brand-red), .4);
             .box-shadow(0 3px 6px rgba(0,0,0,.175));
             padding: 0 @grid-gutter-width (@grid-gutter-width / 2) @grid-gutter-width;
@@ -1468,28 +1318,7 @@ ul.responsive-tabs__list{
 @media only screen and (max-width: @screen-sm) {
 
     .section {
-        .panel-heading.bold {
-            .btn-round {
-                margin-top: 2px;
-                margin-bottom: 2px;
-            }
-        }
-        .panel-heading.center-vertical {
-            > * {
-                display: block;
-                margin-top: 8px;
-                width: 100%;
-                float: left;
-                padding-left: 0px;
-                .pull-right {
-                    .pull-left();
-                }
-            }
-            > *:first-child {
-                margin-top: 0px;
-            }
-        }
-
+        
         #title {
             table.table-stats {
                 td {
@@ -1498,11 +1327,15 @@ ul.responsive-tabs__list{
                 }
             }
         }
+
+        // Dont' justify on small screens
+        // -------------------------------
         #summary {
             p {
                 text-align: left;
             }
         }
+        
     }
 
 }

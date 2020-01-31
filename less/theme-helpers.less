@@ -2,6 +2,9 @@
 // ---------------------------------------- //
 // General helper classes
 // ---------------------------------------- //
+// Theme independent helper classes that can
+// implement common / reusable styles
+// ---------------------------------------- //
 
 .foreground {
     position: relative;
@@ -61,8 +64,12 @@ a.disabled {
     pointer-events: none;
     cursor: none;
 }
-a.text-color {
-    color: @text-color;
+
+a.block-link {
+    display: block;
+    > * {
+        color: @link-color;
+    }
 }
 
 .list-indent  {
@@ -219,14 +226,6 @@ hr.no-margin {
     margin-bottom: 0px;
 }
 
-// Border helpers
-// -------------------------------
-
-@media (min-width: @screen-lg-min) {
-    .border-left-lg {
-        border-left: 1px solid @hr-border;
-    }
-}
 
 // Wrap / break helpers
 // -------------------------------
@@ -350,7 +349,7 @@ p.date {
 
 }
 
-// Vertical align helper
+// Vertical align helper - with variants
 // ----------------------------------------
 .adjacent-panels {
 
@@ -449,44 +448,6 @@ a.center-vertical {
     
 }
 
-// Merge columns
-// ----------------------------------------
-@media (min-width: @screen-sm-min) {
-
-    .sm-center-vertical {
-        .center-vertical();
-    }
-
-}
-
-@media (min-width: @screen-md-min) {
-
-    .col-md-merge-right {
-        padding-right: 0px;
-    }
-
-    .col-md-merge-left {
-        padding-left: 0px;
-    }
-
-    .md-adjacent-panels {
-        .adjacent-panels();
-    }
-
-    .md-center-vertical {
-        .center-vertical();
-    }
-
-    .col-md-pad-top {
-        padding-top: 20px;
-    }
-
-    .text-md-right {
-        text-align: right;
-    }
-
-}
-
 // Max width is sm size
 // -----------------------------------
 .max-width-sm {
@@ -495,43 +456,20 @@ a.center-vertical {
     margin-right: auto;
 }
 
-// Set a min height for md or greater
-// -----------------------------------
-@media only screen and (min-width: @screen-md) {
-    .min-height-md {
-        min-height: 520px;
+// Center vertical on larger viewports
+// - on smaller default to spaced stack
+// ------------------------------------
+.center-vertical-sm, .center-vertical-md {
+    padding-top: 7px;
+    padding-bottom: 15px;
+    > * {
+        display: block;
+        padding-top: 7px;
+        .clearfix();
     }
 }
 
-// Position top left on md viewport
-// -----------------------------------
-@media (min-width: @screen-md-min) {
-    .col-md-top-left {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-    }
-}
-
-// Pull right on sm viewport
-// -----------------------------------
-@media only screen and (max-width: @screen-md) {
-    .col-sm-pull-right {
-        float: right;
-    }
-}
-// Pull right on xs viewport
-// -----------------------------------
-@media (max-width: @screen-sm) {
-    .col-xs-pull-right {
-        float: right;
-    }
-    .xs-extra-pad {
-        padding: 15px 30px;
-    }
-}
-
-// inline list
+// Inline list
 // -----------------------------------
 .list-inline {
 
@@ -574,4 +512,96 @@ a.center-vertical {
         }
     }
 
+}
+
+// Table without a borders
+// ---------------------------------------------
+table.table.no-border {
+    tbody {
+        > tr {
+            > th, > td {
+                border-top: 0px;
+            }
+        }
+    }
+}
+
+
+// Table without padding
+// ---------------------------------------------
+table.table.no-padding {
+    tbody {
+        > tr {
+            > th, > td {
+                padding-top: 1px;
+                padding-bottom: 1px;
+            }
+        }
+    }
+}
+
+// Apply to smaller than md
+// -----------------------------------
+@media only screen and (max-width: @screen-md) {
+    .col-sm-pull-right {
+        float: right;
+    }
+
+}
+
+// Apply to smaller than sm
+// -----------------------------------
+@media (max-width: @screen-sm) {
+
+    .col-xs-pull-right {
+        float: right;
+    }
+
+    .extra-pad-xs {
+        padding: 10px 20px;
+    }
+
+    .bottom-margin-xs {
+        margin-bottom: 20px;
+    }
+}
+
+// Apply to sm and bigger
+// -----------------------------------
+@media (min-width: @screen-sm-min) {
+
+    .center-vertical-sm {
+        .center-vertical();
+    }
+
+    .text-right-sm {
+        text-align: right;
+    }
+}
+
+// Apply to md and bigger
+// -----------------------------------
+@media (min-width: @screen-md-min) {
+
+    .col-md-top-left {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+
+    .center-vertical-md {
+        .center-vertical();
+    }
+
+    .text-right-md {
+        text-align: right;
+    }
+}
+
+// Apply to lg and bigger
+// -------------------------------
+@media (min-width: @screen-lg-min) {
+    .border-left-lg {
+        border-left: 1px solid @hr-border;
+    }
 }

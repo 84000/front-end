@@ -2132,7 +2132,7 @@ jQuery(document).ready(function($) {
 					        			$("<span>").text("The cultivation of generosity, or dāna—giving voluntarily with a view that something wholesome will come of it—is considered to be a fundamental Buddhist practice by all schools. The nature and quantity of the gift itself is often considered less important.")
 					        		)
 				        	).append(
-				        		$("<a>", {"href" : "https://84000.co/donate", "target" : "_blank", "class" : "underline"}).text("Click here to make a dāna donation")
+				        		$("<a>", {"href" : "https://84000.co/how-you-can-help/download-dana", "target" : "_blank", "class" : "underline"}).text("Click here to make a dāna donation")
 				        	)
     				)
     		);

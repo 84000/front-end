@@ -406,6 +406,7 @@ p.date {
 
     &.align-left {
         .pull-left();
+        .clearfix();
         > * {
             padding-left: 0px;
             padding-right: 15px;
@@ -414,6 +415,7 @@ p.date {
 
     &.align-right {
         .pull-right();
+        .clearfix();
         > * {
             padding-left: 15px;
             padding-right: 0px;
@@ -454,19 +456,6 @@ a.center-vertical {
     max-width: @screen-sm;
     margin-left: auto;
     margin-right: auto;
-}
-
-// Center vertical on larger viewports
-// - on smaller default to spaced stack
-// ------------------------------------
-.center-vertical-sm, .center-vertical-md {
-    padding-top: 7px;
-    padding-bottom: 15px;
-    > * {
-        display: block;
-        padding-top: 7px;
-        .clearfix();
-    }
 }
 
 // Inline list
@@ -540,16 +529,32 @@ table.table.no-padding {
     }
 }
 
-// Apply to smaller than md
+// Center vertical on larger viewports
+// - on smaller default to spaced stack
+// ------------------------------------
+
+
+// Apply to sm and smaller
 // -----------------------------------
 @media only screen and (max-width: @screen-md) {
+
     .col-sm-pull-right {
         float: right;
     }
 
+    .center-vertical-md {
+        padding-top: 7px;
+        padding-bottom: 15px;
+        > * {
+            display: block;
+            padding-top: 7px;
+            .clearfix();
+        }
+    }
+
 }
 
-// Apply to smaller than sm
+// Apply to xs and smaller
 // -----------------------------------
 @media (max-width: @screen-sm) {
 
@@ -563,6 +568,16 @@ table.table.no-padding {
 
     .bottom-margin-xs {
         margin-bottom: 20px;
+    }
+
+    .center-vertical-sm {
+        padding-top: 7px;
+        padding-bottom: 15px;
+        > * {
+            display: block;
+            padding-top: 7px;
+            .clearfix();
+        }
     }
 }
 
@@ -595,6 +610,10 @@ table.table.no-padding {
 
     .text-right-md {
         text-align: right;
+    }
+    
+    .pull-right-md {
+        .pull-right();
     }
 }
 

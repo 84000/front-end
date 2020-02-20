@@ -27,18 +27,11 @@ body {
 
         background: transparent;
         color: #fff;
+        min-height: 50px;
         .box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.3));
 
         &.warning {
             background-color: @brand-red-alert;
-        }
-
-        > .container {
-            > .center-vertical {
-                min-height: 50px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
         }
 
         .logo {
@@ -119,7 +112,7 @@ body {
 
     // Variations of body
     // -------------------------------
-    &.resources, &.reading-room.utilities {
+    &.resources, &.utilities {
         background-color: @brand-green;
         .title-band {
             .btn-round {
@@ -130,7 +123,7 @@ body {
         }
     }
 
-    &.about, &.reading-room.about {
+    &.about {
         background-color: @brand-orange;
         .title-band {
             .btn-round {
@@ -708,6 +701,31 @@ ul.dropdown-menu {
         }
         
     }
+
+    // Mobile layout
+    // ------------------------------
+    @media (max-width: @grid-float-breakpoint-max) {
+        .subnav {
+            width: 100%;
+        }
+    }
+
+    // Desktop layout
+    // ------------------------------
+    @media (min-width: @grid-float-breakpoint) {
+        .subnav {
+            width: 360px;
+            &:hover {
+                color: #fff;
+                ul {
+                    background-color: rgba(255, 255, 255, 0.2);
+                }
+                .title {
+                    color: rgba(255, 255, 255, 0.8) !important;
+                }
+            }
+        }
+    }
 }
 
 // App style navigation Button
@@ -765,6 +783,20 @@ ul.dropdown-menu {
         background: @brand-green;
         &:hover {
             background-color: darken(@brand-green, 10%);
+        }
+    }
+
+    &.orange {
+        background: @brand-orange;
+        &:hover {
+            background-color: darken(@brand-orange, 10%);
+        }
+    }
+
+    &.gray {
+        background: @gray-light;
+        &:hover {
+            background-color: @gray;
         }
     }
 
@@ -1288,15 +1320,17 @@ span.indent {
 // ---------------------------------------------
 #page-alert {
     background-color: @brand-green;
+    color: #e5e5e5;
     position: fixed;
     bottom: 0px;
     width: 100%;
     z-index: 8;
     .text-center();
-    padding: 10px 15px 25px 15px;
-    &, a {
+    padding: 15px 15px 25px 15px;
+    a, h2 {
         color: #fff;
     }
+    
     .close {
         background-color: #fff;
         color: @brand-green;
@@ -1306,13 +1340,15 @@ span.indent {
 
 // Download dana pop-up
 // -------------------------------------------
-#page-alert.download-dana {
-    background-color: @brand-blue;
+#dana-description {
     i {
         font-size: 30px;
     }
     h2 {
-        color: #000;
+        font-family: @font-family-heading;
+        font-weight: 700;
+        margin-top: 5px;
+        margin-bottom: 11px;
     }
 }
 

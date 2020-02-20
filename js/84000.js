@@ -2092,50 +2092,15 @@ jQuery(document).ready(function($) {
 	});
 
 	// Add behaviour
-	// Initialise popovers
+	// Show page alert on clicking a link
+	// (In addition to normal link behaviour)
 	// ------------------------------------------
-	$("a[data-download-dana]").on("click", function(e){
+	$("a[data-page-alert]").on("click", function(e){
 
-		var $this = $(this);
-		var $title = $this.data("download-dana");
-		var $alert = $("#page-alert");
+		var source = $(this).data("page-alert");
+		var $target = $("#page-alert");
 
-    	$alert
-    		.find(".container")
-    		.empty()
-    		.append(
-    			$("<div>", {"class": "row"})
-    				.append(
-    					$("<div>", {"class": "col-sm-10 col-sm-offset-1"})
-				    		.append(
-								$("<div>", {"class": "center-vertical center-aligned"})
-				    				.append(
-						    			$("<span>")
-						    				.append(
-						    					$("<i>", {"class": "fa fa-cloud-download"})
-						    				)
-						    		).append(
-						        		$("<span>").text("You are downloading:")
-						    		)
-				        	).append(
-				        		$("<h2>", {"class" : "no-top-margin no-bottom-margin"}).text($title)
-				        	).append(
-				        		$("<p>", {"class": "small"})
-					        		.append(
-					        			$("<span>").text("This is a free publication from 84000: Translating the Words of the Buddha, a non-profit organization sharing the gift of wisdom with the world.")
-					        		).append(
-					        			$("<br>")
-					        		).append(
-					        			$("<span>").text("The cultivation of generosity, or dāna—giving voluntarily with a view that something wholesome will come of it—is considered to be a fundamental Buddhist practice by all schools. The nature and quantity of the gift itself is often considered less important.")
-					        		)
-				        	).append(
-				        		$("<a>", {"href" : "https://84000.co/donate", "target" : "_blank", "class" : "underline"}).text("Click here to make a dāna donation")
-				        	)
-    				)
-    		);
-
-    	$alert.collapse('show');
-    	$alert.addClass('download-dana');
+		$.replaceWithAjax(source, $target, function(){ $target.collapse('show').addClass('loaded'); });
 
 	});
 

@@ -2121,7 +2121,7 @@ jQuery(document).ready(function($) {
 						        		$("<span>").text("You are downloading:")
 						    		)
 				        	).append(
-				        		$("<h2>", {"class" : "no-top-margin no-bottom-margin"}).text($title)
+				        		$("<h2>", {"class" : "sml-margin top bottom"}).text($title)
 				        	).append(
 				        		$("<p>")
 						        	.append(

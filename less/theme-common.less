@@ -1319,14 +1319,22 @@ span.indent {
 // Header Alert
 // ---------------------------------------------
 #page-alert {
-    background-color: @brand-green;
+
+    
     color: #e5e5e5;
+    padding: 15px 15px 25px 15px;
     position: fixed;
     bottom: 0px;
     width: 100%;
     z-index: 8;
     .text-center();
-    padding: 15px 15px 25px 15px;
+    
+    background-color: @brand-green;
+
+    &.danger {
+        background-color: @brand-red;
+    }
+
     a, h2 {
         color: #fff;
     }

@@ -28,7 +28,7 @@ body {
         background: transparent;
         color: #fff;
         min-height: 50px;
-        .box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.3));
+        //.box-shadow(inset 0px 0px 7px 0px rgba(0,0,0,.3));
 
         &.warning {
             background-color: @brand-red-alert;
@@ -954,6 +954,12 @@ a.link-to-top {
     line-height: 2em;*/
     font-style: normal !important;
     font-weight: normal !important;
+    a, &.a {
+        text-decoration: none;
+    }
+    a:hover, &.a:hover {
+        text-decoration: underline;
+    }
 }
 .text-sa, .text-wy {
     font-family: @font-family-serif !important;
@@ -1331,6 +1337,12 @@ span.indent {
     
     background-color: @brand-green;
 
+    &.info {
+        background-color: @brand-blue;
+    }
+    &.warning {
+        background-color: @brand-blue;
+    }
     &.danger {
         background-color: @brand-red;
     }

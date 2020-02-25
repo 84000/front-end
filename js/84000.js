@@ -2100,7 +2100,7 @@ jQuery(document).ready(function($) {
 		var source = $(this).data("page-alert");
 		var $target = $("#page-alert");
 
-		$.replaceWithAjax(source, $target, function(){ $target.collapse('show').addClass('loaded'); });
+		$.replaceWithAjax(source, $target, function(){ $target.addClass('info').collapse('show').addClass('loaded'); });
 
 	});
 

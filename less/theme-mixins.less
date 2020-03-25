@@ -1,5 +1,13 @@
 // Theme mixins
 // --------------------------------------------
+
+.background-pattern(@img-size) {
+    background-image: url('/imgs/background-pattern-transparent.svg');
+    background-size: @img-size;
+    background-repeat: repeat;
+    background-color: @brand-blue-dark;
+}
+
 .nav-item-variant(@brand-color) {
 
     border-color: @brand-color;
@@ -20,9 +28,9 @@
     // Mobile layout
     // ------------------------------
     @media (max-width: @grid-float-breakpoint-max) {
-    	.dropdown-menu li.active > a {
-    		color: @brand-color;
-    	}
+    	//.dropdown-menu li.active > a {
+    	//	color: @brand-color;
+    	//}
     }
 
     // Desktop layout
@@ -39,6 +47,22 @@
     
 }
 
+.body-variant(@brand-color) {
+    background-color: @brand-color;
+    .title-band {
+        .btn-round {
+            i {
+                color: @brand-color;
+            }
+        }
+    }
+    .nav-sidebar {
+        .active {
+            background-color: @brand-color;
+            border-color: @brand-color;
+        }
+    }
+}
 
 .fade-out(@height) {
     display: block;

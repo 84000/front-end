@@ -66,6 +66,7 @@ label, .label {
 }
 
 .btn {
+    font-family: @font-family-heading;
     i {
         font-size: @btn-icon-size;
         display: inline-block;
@@ -158,6 +159,8 @@ mark, .mark {
     .modal-title {
         font-weight: bold;
         font-style: normal !important;
+        margin: 0px;
+        padding: 0px;
     }
     &, p, .modal-title {
         text-align: left !important;
@@ -237,6 +240,7 @@ ol {
 // Well
 // -------------------------------------------
 .well {
+    page-break-inside: avoid;
     hr {
         border-top-color: @well-border;
     }
@@ -293,9 +297,12 @@ table.table-hover {
     a.printable[href]:after {
         content: "";
     }
-    .well {
-        hr {
-            border-top-color: @hr-border;
-        }
-    } 
+    hr, 
+    .well, 
+    .well hr, 
+    .alert, 
+    table.table th, 
+    table.table td {
+        border-color: @gray-light !important;
+    }
 }

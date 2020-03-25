@@ -44,6 +44,14 @@ module.exports = function(grunt) {
         files: {
           'css/84000-reading-room.css': 'less/bootstrap-reading-room.less'
         }
+      },
+      utilities: {
+        options: {
+          compress: true
+        },
+        files: {
+          'css/84000-utilities.css': 'less/bootstrap-utilities.less'
+        }
       }
     },
     watch: {
@@ -53,7 +61,7 @@ module.exports = function(grunt) {
       },
       less: {
         files: 'less/**/*.less',
-        tasks: ['less:comms', 'less:readingRoom']
+        tasks: ['less:comms', 'less:readingRoom', 'less:utilities']
       }
     }
   });
@@ -62,6 +70,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['uglify', 'less:comms', 'less:readingRoom', 'watch']);
+  grunt.registerTask('default', ['uglify', 'less:comms', 'less:readingRoom', 'less:utilities', 'watch']);
 
 };

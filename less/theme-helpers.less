@@ -162,7 +162,6 @@ a.block-link {
 // -------------------------------
 a.warning {
     color: @brand-red;
-    padding: @padding-base-vertical;
     border-radius: @border-radius-base;
     text-decoration: none;
     font-size: 14px;
@@ -173,7 +172,7 @@ a.warning {
         text-decoration: underline;
     }
     i {
-        font-size: 22px;
+        font-size: 26px;
         vertical-align: middle;
     }
 }
@@ -225,7 +224,6 @@ hr.no-margin {
     margin-top: 0px;
     margin-bottom: 0px;
 }
-
 
 // Wrap / break helpers
 // -------------------------------
@@ -510,6 +508,7 @@ table.table.no-border {
         > tr {
             > th, > td {
                 border-top: 0px;
+                vertical-align: middle;
             }
         }
     }
@@ -536,7 +535,7 @@ table.table.no-padding {
 
 // Apply to sm and smaller
 // -----------------------------------
-@media only screen and (max-width: @screen-md) {
+@media (max-width: @screen-md) {
 
     .col-sm-pull-right {
         float: right;

@@ -25,16 +25,13 @@
         p {
             color: #fff;
         }
-
     }
     .title-box, .title-box-addon {
         margin: 0px 15px;
         padding: 0px 25px 15px 25px;
         position: relative;
-        background-image: url('/imgs/background-pattern-transparent.svg');
-        background-size: 80px;
-        background-repeat: repeat;
-        background-color: @brand-blue;
+        .background-pattern(80px);
+        background-color: @brand-blue-dark;
         //opacity: 0.9;
         .clearfix();
     }
@@ -113,78 +110,67 @@
             .transition(.25s ease-in);
             &:hover {
                 text-decoration: none;
-                .rubrik {
+                .category {
                     background: #eee;
                 }
             }
         }
-        .rubrik {
+        .category {
             padding: 25px 0px;
             margin: 0px auto;
             border-radius: @border-radius-base;
-            .thumbnail {
-                width: 220px;
-                height: 220px;
+            @homepage-category-image-size: 250px;
+            .image {
+                content: '';
+                width: @homepage-category-image-size;
+                height: @homepage-category-image-size;
                 margin: 0px auto;
-                border-radius: 120px;
+                border-radius: @homepage-category-image-size / 2;
                 border: 7px solid @brand-orange;
-                img {
-                    object-fit: cover;
-                }
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+                background-size: cover;
             }
             p {
                 color: #707070;
                 margin: 0px auto;
-                //max-width: 300px;
-            }
-            .list-group {
-                max-width: 260px;
-                margin: 12px auto;
-            }
-            .list-group-item {
-                border: 0;
-                border-top: 1px solid @hr-border;
-                border-radius: 0px
+                max-width: 350px;
             }
         }
-        .vision {
-            .thumbnail {
+        .category.work {
+            .image {
                 border-color: @brand-orange; 
+                background-image: url('/imgs/1068.jpg');
             }
-            h2 {
+            h2, a {
                 color: @brand-orange; 
             }
-        }
-        .urgency {
-            .thumbnail {
-                border-color: @brand-blue; 
+            .list-group-item:before {
+                border-color: @brand-orange;
             }
-            h2 {
+        }
+        .category.impact {
+            .image {
+                border-color: @brand-blue; 
+                background-image: url('/imgs/DSC_0212.jpg');
+            }
+            h2, a {
                 color: @brand-blue; 
             }
-        }
-        .sponsorship {
-            .thumbnail {
-                border-color: @brand-red; 
+            .list-group-item:before {
+                border-color: @brand-blue;
             }
-            h2 {
+        }
+        .category.people {
+            .image {
+                border-color: @brand-red; 
+                background-image: url('/imgs/Boroburdo by Toto Iwantoro 23.jpg');
+            }
+            h2, a {
                 color: @brand-red; 
             }
-        }
-        .progress {
-            .thumbnail {
-                border-color: @brand-green; 
-            }
-            h2 {
-                color: @brand-green; 
-            }
-        }
-        .grants {
-            .thumbnail {
-                border-color: @brand-blue-dark; 
-            }
-            h2 {
-                color: @brand-blue-dark; 
+            .list-group-item:before {
+                border-color: @brand-red;
             }
         }
     }
@@ -211,12 +197,11 @@
             padding: 5px;
         }
         .panel-default > .panel-heading {
-            /*background-color: #fdfaf1;
-            border-bottom: 1px solid #dadada;*/
             background-color: #ffffff;
             color: #999;
             text-align: center;
             text-transform: uppercase;
+            border-color: transparent;
         }
         .news-banner, .announcement-banner, .news-image {
             height: 160px;
@@ -229,6 +214,29 @@
         /*background-image: linear-gradient(180deg, rgb(255, 255, 255) 50%, rgb(230, 230, 230) 100%);*/
         background-color: #ffffff;
         padding: 35px 0px;
+    }
+
+    .list-group {
+        max-width: 260px;
+        margin: 12px auto;
+    }
+    .list-group-item {
+        border: 0;
+        border-radius: 0px;
+        position: relative;
+        &:before {
+            position: absolute;
+            content: ' ';
+            top: 0px;
+            border-top: 1px solid #aaa;
+            display: block;
+            width: 20%;
+            left: 40%;
+            opacity: .5;
+        }
+        &:first-child:before {
+            display: none;
+        }
     }
 }
 
@@ -261,16 +269,12 @@
     }
 }
 .news-banner {
-    background-color: @brand-green;
-    background-image: url('/imgs/background-pattern-transparent.svg');
-    background-size: 40px;
+    .background-pattern(40px);
     background-repeat: repeat;
 }
 .announcement-banner {
+    .background-pattern(40px);
     background-color: @brand-red;
-    background-image: url('/imgs/background-pattern-transparent.svg');
-    background-size: 40px;
-    background-repeat: repeat;
 }
 .news-image {
     &.thumbnail img {
@@ -1039,6 +1043,10 @@ ul.responsive-tabs__list{
                 color: @text-color;
             }
 
+            p {
+                margin-bottom: 15px;
+            }
+
         }
     }
 
@@ -1061,6 +1069,9 @@ ul.responsive-tabs__list{
             font-size: @font-size-small;
             padding: 6px 10px;
             vertical-align: middle;
+            &:first-child {
+                border-left: 0px;
+            }
         }
     }
 
@@ -1102,6 +1113,7 @@ ul.responsive-tabs__list{
 .text-list {
 
     margin: 15px;
+    page-break-inside: avoid;
 
     .table-headers {
 
@@ -1345,4 +1357,34 @@ ul.responsive-tabs__list{
         
     }
 
+}
+
+@media print {
+    .text-list {
+
+        font-size: initial;
+        margin: 0px;
+
+        .table-headers {
+            border-color: @gray-light !important;
+        }
+
+        .list-item {
+            border: none !important;
+        }
+
+    }
+
+    .section {
+        
+        #title {
+            table.table-stats {
+                border: 1px solid @gray-light !important;
+            }
+        }
+    }
+
+    .list-grouping.border {
+        border-color: @gray-light !important;
+    }
 }

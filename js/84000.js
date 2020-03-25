@@ -1733,21 +1733,32 @@ jQuery(document).ready(function($) {
 	// Add behaviour...
     // Show only the first line of content
     // ----------------------------------------------------------------- 
-    $(".collapse-one-line").each(function() {
-    	var $this = $(this);
-    	$this.data("collapse-one-line-height", $this.height()).addClass('one-line');
-    });
+    (function ($) { 
+		$.setOneLineHeights = function ($element) {
+			$element.find(".collapse-one-line:visible").each(function() {
+		    	var $this = $(this);
+		    	$this.removeClass('one-line');
+		    	$this.data("collapse-one-line-height", $this.height());
+		    	$this.addClass('one-line');
+		    });
+		}
+	}($));
     $(document).on("mouseover", ".collapse-one-line", function(e){
     	e.preventDefault();
     	var $this = $(this);
-    	$this.height($this.data('collapse-one-line-height')).removeClass('one-line');
+    	var thisHeight = $this.data('collapse-one-line-height');
+    	if(thisHeight){
+    		$this.height(thisHeight).removeClass('one-line');
+    	}
     });
     $(document).on("mouseout", ".collapse-one-line", function(e){
     	e.preventDefault();
     	var $this = $(this);
-    	$this.addClass('one-line').css({"height" : ""});
+    	var thisHeight = $this.data('collapse-one-line-height');
+    	if(thisHeight){
+    		$this.addClass('one-line').css({"height" : ""});
+    	}
     });
-
 
     // Add behaviour...
     // Replace matches in text.
@@ -1886,6 +1897,8 @@ jQuery(document).ready(function($) {
 		// Match heights on hidden content
 		//------------------------------------------
 		$.matchHeights($(document));
+		$.setOneLineHeights($(document));
+
 	});
 
 	// Add behaviour...
@@ -2053,12 +2066,12 @@ jQuery(document).ready(function($) {
 			var control_id = $control.attr('id');
 			if(typeof control_id === 'string'){
 				var split = control_id.split('-');
-				$control.attr('name', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
+				$control.attr('id', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
 			}
 			var control_for = $control.attr('for');
 			if(typeof control_for === 'string'){
 				var split = control_for.split('-');
-				$control.attr('name', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
+				$control.attr('for', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
 			}
 			if($control[0].tagName == 'select'){
 				$control.selectedValue = '';
@@ -2156,16 +2169,19 @@ jQuery(document).ready(function($) {
 
 	// Affix nav
 	// ------------------------------------------
-	$("#affix-nav [data-spy='affix']").width($("#affix-nav [data-spy='affix']").width());
-	$("#affix-nav [data-spy='affix']").affix({
-		offset: {
-			top: function () {
-		    	return $('#affix-nav').offset().top;
-		    },
-			bottom: function () {
-		    	return (this.bottom = $('body > footer').outerHeight(true) + 20);
-		    }
-		}
+	$("[data-spy='affix']").each(function(){
+		var $this = $(this);
+		$this.width($this.width());
+		$this.affix({
+			offset: {
+				top: function () {
+			    	return $this.parents('.affix-container').offset().top;
+			    }/*,
+				bottom: function () {
+			    	return (this.bottom = $('body > footer').outerHeight(true) + 20);
+			    }*/
+			}
+		});
 	});
 
 	// On resize...
@@ -2174,6 +2190,7 @@ jQuery(document).ready(function($) {
 		$.mediaSize();
 		$.matchHeights($(document));
 		$.popupFooterHeight();
+		$.setOneLineHeights($(document));
 	});
 
 	// On loading the page...

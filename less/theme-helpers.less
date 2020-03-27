@@ -463,14 +463,22 @@ a.center-vertical {
     margin-left: 0px;
 
     > li {
-        padding-right: 5px;
+        
         padding-left: 0px;
+        padding-right: 5px;
+
         &:before {
             padding-right: 5px;
         }
+
         &:first-child:before {
             padding-right: 0px;
         }
+
+        &:last-child {
+            padding-right: 0px;
+        }
+
     }
 
     // Dot seperators

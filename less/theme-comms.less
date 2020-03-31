@@ -1280,11 +1280,15 @@ ul.responsive-tabs__list{
 }
 
 
-// Endorsements
+// Bios
 // --------------------------------------------
-.endorsement {
+.profile {
 
     margin-bottom: 40px;
+
+    .role {
+        font-style: italic;
+    }
 
     .thumbnail.letter {
         
@@ -1298,11 +1302,13 @@ ul.responsive-tabs__list{
     
     .portrait-container {
         
+        display: block;
         position: relative;
         margin-bottom: 15px;
 
         > h3 {
             margin-top: 7px;
+            margin-bottom: 7px;
             line-height: 1.2;
         }
         > div {
@@ -1317,6 +1323,25 @@ ul.responsive-tabs__list{
             height:100px;
             border-radius:50px;
             margin-top: 15px;
+        }
+    }
+
+    a.portrait-container {
+        color: inherit;
+        &:hover {
+            text-decoration: none;
+            > h3 {
+                text-decoration: underline;
+            }
+        }
+        &:active, &:focus {
+            text-decoration: none;
+        }
+    }
+
+    &.modal {
+        .thumbnail {
+            border-radius: 3px;
         }
     }
 }

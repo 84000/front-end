@@ -787,6 +787,20 @@ span.indent {
         }
     }
 
+    &.orange {
+        background: @brand-orange;
+        &:hover {
+            background-color: darken(@brand-orange, 10%);
+        }
+    }
+
+    &.gray {
+        background: @gray-light;
+        &:hover {
+            background-color: @gray;
+        }
+    }
+
     .badge {
         position: absolute;
         right: -8px;

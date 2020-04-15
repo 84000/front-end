@@ -1,2 +1,7 @@
 User-agent: *
 Disallow: /
+Allow: /css
+Allos: /favicon
+Allos: /fonts
+Allos: /imgs
+Allow: /js

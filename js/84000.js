@@ -1003,6 +1003,13 @@ jQuery(document).ready(function($) {
         
 	});
 
+	// Add behaviour
+	// Show Loading... on clicking a link
+	// ---------------------------------
+	$(document).on("click",'a[data-loading]', function (e) {
+		$.wait($(this).data('loading'));
+	});
+
 	// Set pop-up footer max-height
 	// --------------------------------------
 	(function ($) { 

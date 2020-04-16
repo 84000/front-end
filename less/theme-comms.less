@@ -36,7 +36,7 @@
     }
     .title-box, .title-box-addon {
         margin: 0px 15px;
-        padding: 0px 25px 15px 25px;
+        padding: 15px 25px 15px 25px;
         position: relative;
         .background-pattern(80px);
         background-color: @brand-blue-dark;
@@ -57,7 +57,7 @@
     .title-box-addon {
         content: ' ';
         border-radius: 0px 0px @border-radius-large @border-radius-large;
-        height: 20px;
+        //height: 20px;
     }
 
     // Homepage latest publications
@@ -249,47 +249,47 @@
 // .news-image: news with image
 // .news-banner: news without image
 // .announcement-banner: publication announcement
-.news-banner, .announcement-banner, .news-image {
+.news-banner {
     width: 100%;
     min-height: 140px;
     border-radius: @border-radius-base;
-}
-.news-banner, .announcement-banner {
     display: table;
     line-height: 1.2em;
     text-align: center;
     color: #fff;
+    background-color: @brand-blue;
+    .background-pattern(40px);
+    background-repeat: repeat;
     .title {
         font-size: 1.2em;
         margin-bottom: 15px;
-    }
-    .sub-title {
-        font-size: .9em;
     }
     &.title-long {
         .title {
             font-size: 1.1em;
         }
     }
-}
-.news-banner {
-    .background-pattern(40px);
-    background-repeat: repeat;
-}
-.announcement-banner {
-    .background-pattern(40px);
-    background-color: @brand-red;
-}
-.news-image {
-    &.thumbnail img {
-        object-fit: cover;
+    > div {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 15px;
+    }
+    &.announcement-banner {
+        background-color: @brand-red;
+    }
+    &.event-banner {
+        background-color: @brand-orange;
+    }
+    &.people-banner {
+        background-color: @brand-green;
+    }
+    &.news-image.thumbnail {
+        img {
+            object-fit: cover;
+        }
     }
 }
-.news-banner > div, .announcement-banner > div {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 15px;
-}
+
 
 // Divider 
 // ---------------------------------------------

@@ -1577,21 +1577,38 @@ jQuery(document).ready(function($) {
 	// ---------------------------------------
 	(function ($) { 
 		$.replaceWithAjax = function(source, $target, callback) {
+
+			// Extract the url and fragment from the source
+	    	// ----------------------------------------------
 			var sourceSplit = source.split("#");
 			var sourceUrl = sourceSplit[0];
 			var sourceFragment = sourceSplit[1];
+
 			$.ajax({
     			url: sourceUrl,
     			type: 'GET',
     			dataType: 'html',
     			success: function(data) {
-	    			var ajaxData = $(data).find("#" + sourceFragment);
-	    			if(ajaxData.length){
-	    				$target.html(ajaxData);
+
+    				// Get a fragment of the result
+	    			// ----------------------------------------------
+	    			var $dataFragment = $(data).find("#" + sourceFragment);
+
+	    			// Remove ids when we insert from a different dom
+	    			// ----------------------------------------------
+	    			$dataFragment.find("[id]").addBack().removeAttr('id');
+
+	    			// Append the data to the target
+	    			// ----------------------------------------------
+	    			if($dataFragment.length){
+	    				$target.html($dataFragment);
 	    			}
 	    			else {
 	    				$target.html(data);
 	    			}
+
+	    			// Do callbacks
+	    			// ----------------------------------------------
 			    	if(callback){
 			    		callback();
 			    	}

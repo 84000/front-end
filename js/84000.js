@@ -1596,7 +1596,7 @@ jQuery(document).ready(function($) {
 
 	    			// Remove ids when we insert from a different dom
 	    			// ----------------------------------------------
-	    			$dataFragment.find("[id]").addBack().removeAttr('id');
+	    			// $dataFragment.find("[id]").addBack().removeAttr('id');
 
 	    			// Append the data to the target
 	    			// ----------------------------------------------

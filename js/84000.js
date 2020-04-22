@@ -993,13 +993,13 @@ jQuery(document).ready(function($) {
 
 	// Close button for a collapse element
 	// --------------------------------------
-	$(document).on("click",'.collapse .close', function(e) {
+	$(document).on("click",'.collapse .close-collapse', function(e) {
 	
         e.preventDefault();
         e.stopPropagation();
         
 		// Close the footer
-        $(this).parents('.collapse').collapse('hide');
+        $(this).parents('.collapse').first().collapse('hide');
         
 	});
 

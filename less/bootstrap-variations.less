@@ -49,12 +49,14 @@ label, .label {
     font-weight: normal;
     font-family: @font-family-heading;
     line-height: 1.3;
-    color: @label-color !important;
     &.label-lg {
         font-size: 1em;
         padding: .2em .5em;
         line-height: 1.6;
     }
+}
+.label {
+    color: @label-color !important;
 }
 .label + .label, a + .label {
     margin-left: 5px;

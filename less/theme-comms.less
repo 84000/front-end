@@ -1292,10 +1292,6 @@ ul.responsive-tabs__list{
             margin-bottom: 0px;
         }
         
-        small {
-            color: #666;
-            font-style: italic;
-        }
     }
     div.collapse {
         @media print {
@@ -1308,69 +1304,78 @@ ul.responsive-tabs__list{
 
 // Bios
 // --------------------------------------------
-.profile {
-
-    margin-bottom: 40px;
-
-    .role {
+.bios {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    small {
+        color: #666;
         font-style: italic;
     }
+    .profile {
 
-    .thumbnail.letter {
-        
-        height:220px;
+        margin-bottom: 40px;
 
-        img {
-            -webkit-filter: grayscale(1);
-            filter: grayscale(1);
+        .role {
+            font-style: italic;
         }
-    }
-    
-    .portrait-container {
-        
-        display: block;
-        position: relative;
-        margin-bottom: 15px;
 
-        > h3 {
-            margin-top: 7px;
-            margin-bottom: 7px;
-            line-height: 1.2;
-        }
-        > div {
-            font-size: @font-size-small;
-        }
-        > ul {
-            margin-bottom: 0px;
-            font-size: @font-size-small;
-        }
-        .thumbnail {
-            width:100px;
-            height:100px;
-            border-radius:50px;
-            margin-top: 15px;
-        }
-    }
+        .thumbnail.letter {
+            
+            height:220px;
 
-    a.portrait-container {
-        color: inherit;
-        &:hover {
-            text-decoration: none;
-            > h3 {
-                text-decoration: underline;
+            img {
+                -webkit-filter: grayscale(1);
+                filter: grayscale(1);
             }
         }
-        &:active, &:focus {
-            text-decoration: none;
-        }
-    }
+        
+        .portrait-container {
+            
+            display: block;
+            position: relative;
+            margin-bottom: 15px;
 
-    &.modal {
-        .thumbnail {
-            border-radius: 3px;
+            > h3 {
+                margin-top: 7px;
+                margin-bottom: 7px;
+                line-height: 1.2;
+            }
+            > div {
+                font-size: @font-size-small;
+            }
+            > ul {
+                margin-bottom: 0px;
+                font-size: @font-size-small;
+            }
+            .thumbnail {
+                width:100px;
+                height:100px;
+                border-radius:50px;
+                margin-top: 15px;
+            }
+        }
+
+        a.portrait-container {
+            color: inherit;
+            &:hover {
+                text-decoration: none;
+                > h3 {
+                    text-decoration: underline;
+                }
+            }
+            &:active, &:focus {
+                text-decoration: none;
+            }
+        }
+
+        &.modal {
+            .thumbnail {
+                border-radius: 3px;
+            }
         }
     }
 }
+
 
 /* Fix to old sponsors table mess in WP */
 .page-id-2461 {

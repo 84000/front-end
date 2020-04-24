@@ -349,7 +349,7 @@
 @grid-gutter-width:         30px;
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
-@grid-float-breakpoint:     1150px;
+@grid-float-breakpoint:     1060px;
 //** Point at which the navbar begins collapsing.
 @grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
 
@@ -369,7 +369,7 @@
 @container-md:                 @container-desktop;
 
 // Large screen / wide desktop
-@container-large-desktop:      (1250px + @grid-gutter-width);
+@container-large-desktop:      (@screen-lg - @grid-gutter-width);
 //** For `@screen-lg-min` and up.
 @container-lg:                 @container-large-desktop;
 
@@ -731,7 +731,7 @@
 @panel-border-radius:         @border-radius-base;
 
 //** Border color for elements within panels
-@panel-inner-border:          @gray-background-color;
+@panel-inner-border:          @hr-border;
 @panel-footer-bg:             @panel-bg;
 
 @panel-default-text:          @gray-dark;

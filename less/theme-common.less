@@ -67,28 +67,49 @@ body {
 
     // Page header image
     // -------------------------------------------
+    @banner-img-width: 20vw;
+    @banner-img-overlap: 2.5vw;
     .title-band + .banner-band {
         
         background-color: #fff;
+        position: relative;
+        min-height: @banner-img-width - (@banner-img-overlap * 3);
+        z-index: 1;
 
-        img {
-            width: 100%;
-            border: 5px solid #fff;
-            .box-shadow(0px 1px 3px 1px rgba(0,0,0,0.15));
-            margin-top: -40px;
-            border-radius: @border-radius-base;
-            object-fit: cover;
-            min-height: 240px;
+        .container {
+            position: relative;
+            img {
+                position: absolute;
+                top: -@banner-img-overlap;
+                right: 0px;
+            }
         }
 
         blockquote {
             margin-top: @line-height-computed;
+            margin-right: @banner-img-width + @banner-img-overlap;
             p {
                 margin-bottom: @line-height-computed / 2;
-                font-size: 24px;
+                font-size: 22px;
                 font-family: @font-family-serif;
             }
-            footer  {
+        }
+
+        img {
+            width: @banner-img-width;
+            height: @banner-img-width;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            //.box-shadow(0px 1px 3px 1px rgba(0,0,0,0.15));
+        }
+
+        & + .content-band {
+            //position: relative;
+            //z-index: 2;
+            border-top: 1px solid @hr-border;
+            aside {
+                margin-top: @banner-img-overlap * 2;
             }
         }
         
@@ -121,49 +142,8 @@ body {
         .body-variant(@brand-red);
     }
 
-    //&.news, &.how-you-can-help {
-    //    .body-variant(@brand-blue-dark);
-    //}
-
     &.error404, &.reading-room.error {
         .body-variant(@brand-red-alert);
-    }
-
-    // Variations by size
-    // -------------------------------
-    @media (min-width: @screen-sm-min) and (max-width: @screen-md) {
-
-        .page-header-band {
-            min-height: 220px;
-            blockquote {
-                font-size: 24px;
-                margin-right: 280px;
-            }
-            img {
-                width: 280px;
-                height: 280px;
-                border-radius: 140px;
-            }
-        }
-
-    }
-
-    @media (max-width: @screen-sm) {
-
-        .page-header-band {
-            min-height: 140px;
-            blockquote {
-                font-size: 18px;
-                margin-top: 150px;
-                margin-right: 0px;
-            }
-            img {
-                width: 200px;
-                height: 200px;
-                border-radius: 100px;
-            }
-        }
-
     }
 
     // Footer
@@ -177,6 +157,140 @@ body {
         border-top: 1px solid rgba(0,0,0,.25);
         &, a, a:hover, a:focus {
             color: rgb(255, 255, 255);
+        }
+    }
+
+    // Variations by size
+    // -------------------------------
+
+    @media (max-width: 1600px) {
+        @banner-img-width: 25vw;
+        @banner-img-overlap: 3vw;
+        .title-band + .banner-band {
+            
+            min-height: @banner-img-width - (@banner-img-overlap * 3);
+
+            .container {
+                img {
+                    top: -@banner-img-overlap;
+                    right: 5px;
+                }
+            }
+
+            blockquote {
+                margin-right: @banner-img-width + @banner-img-overlap;
+            }
+
+            img {
+                width: @banner-img-width;
+                height: @banner-img-width;
+            }
+
+            & + .content-band {
+                aside {
+                    margin-top: (@banner-img-overlap * 2);
+                }
+            }
+            
+        }
+    }
+
+    @media (max-width: @screen-lg) {
+        @banner-img-width: 30vw;
+        @banner-img-overlap: 3vw;
+        .title-band + .banner-band {
+            
+            min-height: @banner-img-width - (@banner-img-overlap * 3);
+
+            .container {
+                img {
+                    top: -@banner-img-overlap;
+                }
+            }
+
+            blockquote {
+                margin-right: @banner-img-width + @banner-img-overlap;
+            }
+
+            img {
+                width: @banner-img-width;
+                height: @banner-img-width;
+            }
+
+            & + .content-band {
+                aside {
+                    margin-top: (@banner-img-overlap * 2);
+                }
+            }
+            
+        }
+    }
+
+    @media (max-width: @grid-float-breakpoint) {
+        @banner-img-width: 33vw;
+        @banner-img-overlap: 3vw;
+        .title-band + .banner-band {
+            
+            min-height: @banner-img-width - (@banner-img-overlap * 3);
+
+            .container {
+                img {
+                    top: -@banner-img-overlap;
+                    right: 15px;
+                }
+            }
+
+            blockquote {
+                margin-right: @banner-img-width + @banner-img-overlap;
+            }
+
+            img {
+                width: @banner-img-width;
+                height: @banner-img-width;
+            }
+
+            & + .content-band {
+                aside {
+                    margin-top: (@banner-img-overlap * 2);
+                }
+            }
+            
+        }
+    }
+
+    @media (max-width: @screen-sm) {
+        @banner-img-width: 33vw;
+        .title-band + .banner-band {
+            
+            min-height: auto;
+
+            .container {
+                img {
+                    position: absolute;
+                    top: auto;
+                    right: 15px;
+                    bottom: 15px;
+                }
+            }
+
+            blockquote {
+                margin-right: 0px;
+                margin-top: @line-height-computed;
+                margin-bottom: @banner-img-width;
+            }
+
+            img {
+                width: @banner-img-width;
+                height: @banner-img-width;
+                border-width: 0px;
+            }
+
+            & + .content-band {
+                aside.sidebar {
+                    margin-top: 0px;
+                }
+            }
+            
         }
     }
 

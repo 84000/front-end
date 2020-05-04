@@ -176,6 +176,18 @@ mark, .mark {
 // Breadcrumb
 // -------------------------------
 .breadcrumb {
+    > li {
+        break-inside: avoid;
+        + li:before, &:last-child:after {
+            content: '';
+            padding: 0px;
+        }
+        &:after {
+            content: "@{breadcrumb-separator}";
+            padding: 0 5px;
+            color: @breadcrumb-color;
+        }
+    }
     > li > a {
         white-space: nowrap;
     }

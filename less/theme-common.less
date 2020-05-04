@@ -304,6 +304,31 @@ h1, .h1 {
     font-family: @font-family-heading;
 }
 
+// Introductory paragraph
+// -------------------------------------------
+p.intro {
+    margin-top: 0px;
+    font-size: @font-size-h3;
+    line-height: 1.4em;
+    &, a {
+        color: @headings-color;
+    }
+}
+
+// Aside
+// -------------------------------------------
+aside {
+    font-family: @font-family-heading;
+    font-size: .9em;
+    color: #888;
+}
+
+.nav-sidebar {
+    a {
+        color: @text-color;
+    }
+}
+
 // Disable page while processing
 // -------------------------------------------
 body.wait {
@@ -1220,14 +1245,35 @@ span.indent {
     .box-shadow(none);
     overflow: hidden;
 }
-
+.panel-heading {
+    a {
+        color: inherit;
+    }
+}
 .panel-title {
     font-family: @font-family-bold;
     text-transform: uppercase;
 }
+.panel-body {
+
+    h2:first-child, blockquote:first-child+h2 {
+        margin-top:  (@line-height-computed / 2);
+    }
+
+    &.no-padding {
+        padding: 0px;
+    }
+
+}
 .panel-footer {
     .pagination {
         margin: 0px;
+    }
+}
+.panel-danger {
+    .label-default {
+        background-color: #fff;
+        color: @brand-red;
     }
 }
 @media only screen and (max-width: @screen-xs) {

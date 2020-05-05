@@ -67,52 +67,28 @@ body {
 
     // Page header image
     // -------------------------------------------
-    @banner-img-width: 20vw;
-    @banner-img-overlap: 2.5vw;
     .banner-band {
         
-        background-color: #fff;
-        position: relative;
-        min-height: @banner-img-width - (@banner-img-overlap * 3);
-        z-index: 1;
-
-        .container {
-            position: relative;
-            img {
-                position: absolute;
-                top: -@banner-img-overlap;
-                right: 0px;
-            }
-        }
+        background-color: rgba(255,255,255,.75);
 
         blockquote {
-            margin-top: @line-height-computed;
-            margin-right: @banner-img-width + @banner-img-overlap;
+            margin: @line-height-computed 0px;
             p {
                 margin-bottom: @line-height-computed / 2;
                 font-size: 22px;
                 font-family: @font-family-serif;
             }
+            footer {
+                color: inherit;
+            }
         }
 
         img {
-            width: @banner-img-width;
-            height: @banner-img-width;
+            margin: 10px 0px;
             object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            //.box-shadow(0px 1px 3px 1px rgba(0,0,0,0.15));
+            border-radius: @border-radius-base;
         }
 
-        & + .content-band {
-            //position: relative;
-            //z-index: 2;
-            border-top: 1px solid @hr-border;
-            aside {
-                margin-top: @banner-img-overlap * 2;
-            }
-        }
-        
     }
     
     // Content band
@@ -157,140 +133,6 @@ body {
         border-top: 1px solid rgba(0,0,0,.25);
         &, a, a:hover, a:focus {
             color: rgb(255, 255, 255);
-        }
-    }
-
-    // Variations by size
-    // -------------------------------
-
-    @media (max-width: 1600px) {
-        @banner-img-width: 25vw;
-        @banner-img-overlap: 3vw;
-        .banner-band {
-            
-            min-height: @banner-img-width - (@banner-img-overlap * 3);
-
-            .container {
-                img {
-                    top: -@banner-img-overlap;
-                    right: 5px;
-                }
-            }
-
-            blockquote {
-                margin-right: @banner-img-width + @banner-img-overlap;
-            }
-
-            img {
-                width: @banner-img-width;
-                height: @banner-img-width;
-            }
-
-            & + .content-band {
-                aside {
-                    margin-top: (@banner-img-overlap * 2);
-                }
-            }
-            
-        }
-    }
-
-    @media (max-width: @screen-lg) {
-        @banner-img-width: 30vw;
-        @banner-img-overlap: 3vw;
-        .banner-band {
-            
-            min-height: @banner-img-width - (@banner-img-overlap * 3);
-
-            .container {
-                img {
-                    top: -@banner-img-overlap;
-                }
-            }
-
-            blockquote {
-                margin-right: @banner-img-width + @banner-img-overlap;
-            }
-
-            img {
-                width: @banner-img-width;
-                height: @banner-img-width;
-            }
-
-            & + .content-band {
-                aside {
-                    margin-top: (@banner-img-overlap * 2);
-                }
-            }
-            
-        }
-    }
-
-    @media (max-width: @grid-float-breakpoint) {
-        @banner-img-width: 33vw;
-        @banner-img-overlap: 3vw;
-        .banner-band {
-            
-            min-height: @banner-img-width - (@banner-img-overlap * 3);
-
-            .container {
-                img {
-                    top: -@banner-img-overlap;
-                    right: 15px;
-                }
-            }
-
-            blockquote {
-                margin-right: @banner-img-width + @banner-img-overlap;
-            }
-
-            img {
-                width: @banner-img-width;
-                height: @banner-img-width;
-            }
-
-            & + .content-band {
-                aside {
-                    margin-top: (@banner-img-overlap * 2);
-                }
-            }
-            
-        }
-    }
-
-    @media (max-width: @screen-sm) {
-        @banner-img-width: 33vw;
-        .banner-band {
-            
-            min-height: auto;
-
-            .container {
-                img {
-                    position: absolute;
-                    top: auto;
-                    right: 15px;
-                    bottom: 15px;
-                }
-            }
-
-            blockquote {
-                margin-right: 0px;
-                margin-top: @line-height-computed;
-                margin-bottom: @banner-img-width;
-            }
-
-            img {
-                width: @banner-img-width;
-                height: @banner-img-width;
-                border-width: 0px;
-            }
-
-            & + .content-band {
-                aside.sidebar {
-                    margin-top: 0px;
-                }
-            }
-            
         }
     }
 
@@ -1125,6 +967,15 @@ i.fa-youtube-square {
 i.fa-google-plus-square {
     color: @brand-red;
 }
+
+i.fa-whatsapp {
+    color: @brand-green;
+}
+
+i.fa-weixin {
+    color: @brand-green;
+}
+
 
 a {
     i.fa-chevron-down {

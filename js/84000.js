@@ -714,6 +714,7 @@ jQuery(document).ready(function($) {
 	    	    
 	    	    return bookmarks;
 	    	}
+
     	}($));
 
     	(function ($) { 
@@ -726,6 +727,7 @@ jQuery(document).ready(function($) {
 	    		//console.log(domain);
 	    		return domain;
 	    	}
+
 	    }($));
 
     	(function ($) { 
@@ -746,6 +748,7 @@ jQuery(document).ready(function($) {
 	    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
 	    	    return {'page': page, 'hash': hash, 'title': title};
 	    	}
+
     	}($));
 
     	(function ($) { 
@@ -784,6 +787,7 @@ jQuery(document).ready(function($) {
 	    	    $(window).scroll();
 	    	    $("#bookmarks-btn-container .badge-notification").pulse();
 	    	}
+
     	}($));
 
     	(function ($) { 
@@ -840,6 +844,7 @@ jQuery(document).ready(function($) {
     			$('#bookmarks-btn .badge').text(bookmarks.length);
     			
     		}
+
     	}($));
 
 		// Load bookmarks into DOM on page load
@@ -878,6 +883,7 @@ jQuery(document).ready(function($) {
 
     	    // Reload bookmarks
     	    $.loadBookmarks();
+    	    
     	});
 
 		// Save the location for the next visit

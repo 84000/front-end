@@ -21,6 +21,8 @@
         background-image: url('/imgs/backgrounds/LTWA1.jpg');
         background-size: cover;
         background-position: 50% 40%;
+        min-height: 80vh;
+        .box-shadow(inset 0px 0px 2px 0px rgba(0,0,0,.5));
         > .container {
             padding-top: 50px;
             padding-bottom: 25px;
@@ -30,7 +32,7 @@
         }
         p {
             &, a {
-                color: #fff;
+                color: #ddd;
             }
         }
     }
@@ -47,9 +49,9 @@
         border-radius: @border-radius-large @border-radius-large 0px 0px;
         margin-top: 50px;
         .img-container {
-            margin-top: -50px;
+            margin-top: -60px;
             img {
-                width: 260px;
+                width: 230px;
                 max-width: 100%;
             }
         }
@@ -1359,6 +1361,29 @@ ul.responsive-tabs__list{
 // Small viewport variations
 // --------------------------------------------
 @media only screen and (max-width: @screen-sm) {
+    .home {
+        #title-band {
+            min-height: auto;
+            background-image: none;
+            > .container {
+                padding: 0px;
+            }
+        }
+        .title-box, .title-box-addon {
+            margin: 0px;
+            border-radius: 0px;
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+        .title-box .img-container {
+            margin-top: 0px;
+            display: none;
+        }
+        #latest-pubs .panel {
+            margin: 0px 15px;
+        }
+    }
 
     .section {
         

@@ -72,19 +72,21 @@ body {
         background-color: rgba(255,255,255,.75);
         z-index: 1;
 
-        .container {
-            position: relative;
-        }
-
         blockquote {
             margin: @line-height-computed 0px;
+            padding: 0px;
+            border: 0px;
             p {
-                margin-bottom: @line-height-computed / 2;
+                margin-bottom: @line-height-computed;
                 font-size: 22px;
                 font-family: @font-family-serif;
+                background-color: #fff;
+                padding: @line-height-computed;
+                border-radius: 5px;
             }
             footer {
                 color: inherit;
+                padding-left: @line-height-computed;
             }
         }
 

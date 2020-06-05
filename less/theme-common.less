@@ -70,6 +70,11 @@ body {
     .banner-band {
         
         background-color: rgba(255,255,255,.75);
+        z-index: 1;
+
+        .container {
+            position: relative;
+        }
 
         blockquote {
             margin: @line-height-computed 0px;
@@ -84,12 +89,49 @@ body {
         }
 
         img {
-            margin: 10px 0px;
             object-fit: cover;
-            border-radius: @border-radius-base;
-            min-height: 20vh;
+            width: 23vw;
+            height: 23vw;
+            border-radius: 12vw;
+            margin-top: -1vw;
+            margin-bottom: -6vw;
+            float: right;
         }
 
+    }
+    // Viewport smaller than lg
+    @media only screen and (max-width: @screen-lg) {
+        .banner-band {
+            img {
+                width: 33vw;
+                height: 33vw;
+                border-radius: 16vw;
+            }
+        }
+    }
+    // Viewport smaller than md
+    @media only screen and (max-width: @screen-md) {
+        .banner-band {
+            img {
+                width: 50vw;
+                height: 50vw;
+                border-radius: 25vw;
+                margin-top: -5vw;
+                margin-bottom: -12vw;
+            }
+        }
+    }
+    // Viewport smaller than sm
+    @media only screen and (max-width: @screen-md) {
+        .banner-band {
+            img {
+                width: 70vw;
+                height: 70vw;
+                border-radius: 35vw;
+                margin-top: -5vw;
+                margin-bottom: -20vw;
+            }
+        }
     }
     
     // Content band
@@ -99,6 +141,8 @@ body {
         padding-top: 25px;
         padding-bottom: 25px;
         min-height: 60vh;
+        position: relative;
+        z-index: 2;
     }
     .content-band + .content-band {
         border-top: 1px solid @hr-border;

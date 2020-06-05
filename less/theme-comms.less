@@ -1368,6 +1368,64 @@ ul.responsive-tabs__list{
     }
 }
 
+#workflow {
+    padding-top: 20px;
+    > div {
+        position: relative;
+        margin-left: 50px;
+        border-left: 1px dashed #d1d1d1;
+        padding-bottom: 30px;
+        > p {
+            padding-left: 70px;
+            padding-right: 10vw;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            color: @gray;
+            font-family: @font-family-heading;
+            min-height: 80px;
+        }
+        > i {
+            display: block;
+            position: absolute;
+            top: -10px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            font-size: 40px;
+            border-radius: 50px;
+            padding: 20px 0px;
+            text-align: center;
+            color: #ffffff;
+            background-color: @brand-orange;
+            border: 10px solid #fff;
+            z-index: 2;
+        }
+    }
+    > div:nth-child(4n+1) {
+        > i {
+            background-color: @brand-orange;
+        }
+    }
+    > div:nth-child(4n+2) {
+        > i {
+            background-color: @brand-blue;
+        }
+    }
+    > div:nth-child(4n+3) {
+        > i {
+            background-color: @brand-red;
+        }
+    }
+    > div:nth-child(4n+4) {
+        > i {
+            background-color: @brand-green;
+        }
+    }
+    > div:last-child {
+        border-left: 0px;
+    }
+}
+
 // Small viewport variations
 // --------------------------------------------
 @media only screen and (max-width: @screen-sm) {

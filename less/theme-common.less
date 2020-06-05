@@ -70,6 +70,7 @@ body {
     .banner-band {
         
         background-color: rgba(255,255,255,.75);
+        position: relative;
         z-index: 1;
 
         blockquote {
@@ -143,12 +144,14 @@ body {
         padding-top: 25px;
         padding-bottom: 25px;
         min-height: 60vh;
-        position: relative;
-        z-index: 2;
     }
     .content-band + .content-band {
         border-top: 1px solid @hr-border;
         min-height: 30px;
+    }
+    .banner-band + .content-band {
+        position: relative;
+        z-index: 2;
     }
 
     // Variations of body

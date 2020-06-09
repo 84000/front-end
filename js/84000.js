@@ -1077,10 +1077,6 @@ jQuery(document).ready(function($) {
 	        // Show the footer
 			$popupFooter.collapse('show');
 
-			$popupFooter.on('shown.bs.collapse', function () {
-				$.matchHeights($(this));
-			});
-
         }
 
         // Is this the first call to the glossary?
@@ -2059,7 +2055,14 @@ jQuery(document).ready(function($) {
 	$(document).on("click",'.collapse', function(e) {
 	
 		e.stopPropagation();
-        
+
+	});
+
+	// Add behaviour
+	// Match heights on expand
+	// ------------------------------------------
+	$(document).on('shown.bs.collapse', function () {
+		$.matchHeights($(this));
 	});
 
 	// Add behaviour

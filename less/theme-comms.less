@@ -1368,61 +1368,94 @@ ul.responsive-tabs__list{
     }
 }
 
-#workflow {
-    padding-top: 20px;
+.progress-list {
     > div {
         position: relative;
         margin-left: 50px;
         border-left: 1px dashed #d1d1d1;
-        padding-bottom: 30px;
-        > p {
-            padding-left: 70px;
-            padding-right: 10vw;
-            padding-top: 7px;
-            padding-bottom: 7px;
-            color: @gray;
-            font-family: @font-family-heading;
-            min-height: 80px;
+        .clearfix();
+        h4 {
+            margin-top: 0px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
-        > i {
+        > span {
             display: block;
             position: absolute;
             top: -10px;
             left: -50px;
             width: 100px;
             height: 100px;
-            font-size: 40px;
             border-radius: 50px;
-            padding: 20px 0px;
             text-align: center;
             color: #ffffff;
             background-color: @brand-orange;
             border: 10px solid #fff;
             z-index: 2;
+            font-size: 24px;
+            line-height: 24px;
+            padding: 28px 0px;
+            i {
+                font-size: 40px;
+                line-height: 40px;
+                margin-top: -8px;
+            }
+        }
+        > div {
+            padding: 7px 0px 7px 60px;
+            .clearfix();
+            > div {
+                width: 97%;
+                margin: 0px 1.5% 30px 1.5%;
+                float: left;
+                padding: 12px 20px;
+                .box-shadow(0px 1px 4px 0px rgba(0,0,0,.25));
+                border-radius: @border-radius-base;
+                min-height: 100px;
+            }
         }
     }
     > div:nth-child(4n+1) {
-        > i {
-            background-color: @brand-orange;
+        h4 {
+            color: @brand-green;
+        }
+        > span {
+            background-color: @brand-green;
         }
     }
     > div:nth-child(4n+2) {
-        > i {
-            background-color: @brand-blue;
+        h4 {
+            color: @brand-red;
         }
-    }
-    > div:nth-child(4n+3) {
-        > i {
+        > span {
             background-color: @brand-red;
         }
     }
+    > div:nth-child(4n+3) {
+        h4 {
+            color: @brand-blue;
+        }
+        > span {
+            background-color: @brand-blue;
+        }
+    }
     > div:nth-child(4n+4) {
-        > i {
-            background-color: @brand-green;
+        h4 {
+            color: @brand-orange;
+        }
+        > span {
+            background-color: @brand-orange;
         }
     }
     > div:last-child {
         border-left: 0px;
+    }
+    @media only screen and (min-width: @screen-md) {
+        &.col-50pc {
+            > div > div > div {
+                width: 47%;
+            }
+        }
     }
 }
 

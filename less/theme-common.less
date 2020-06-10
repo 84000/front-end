@@ -77,18 +77,18 @@ body {
             margin: @line-height-computed 0px;
             padding: 0px;
             border: 0px;
+            font-family: @font-family-serif;
+            background-color: #fff;
+            padding: @line-height-computed;
+            border-radius: 5px;
+            .box-shadow(0px 1px 2px 0px rgba(0,0,0,.1));
             p {
-                margin-bottom: 15px;
+                margin-bottom: 10px;
                 font-size: 22px;
-                font-family: @font-family-serif;
-                background-color: #fff;
-                padding: @line-height-computed;
-                border-radius: 5px;
-                .box-shadow(0px 1px 2px 0px rgba(0,0,0,.1));
+                
             }
             footer {
                 color: inherit;
-                padding-left: @line-height-computed;
             }
         }
 
@@ -1389,8 +1389,7 @@ span.indent {
 // ---------------------------------------------
 #page-alert {
 
-    
-    color: #e5e5e5;
+    //color: #e5e5e5;
     padding: 15px 15px 25px 15px;
     position: fixed;
     bottom: 0px;
@@ -1410,7 +1409,7 @@ span.indent {
         background-color: @brand-red;
     }
 
-    a, h2 {
+    &, a, h2 {
         color: #fff;
     }
     

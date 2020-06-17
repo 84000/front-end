@@ -140,43 +140,44 @@
             p {
                 color: #707070;
                 margin: 0px auto;
+                margin-bottom: 12px;
                 max-width: 350px;
             }
         }
         .category.work {
             .image {
-                border-color: @brand-orange; 
-                background-image: url('/imgs/homepage-circles/work.jpg');
-            }
-            h2, a {
-                color: @brand-orange; 
-            }
-            .list-group-item:before {
-                border-color: @brand-orange;
-            }
-        }
-        .category.impact {
-            .image {
-                border-color: @brand-blue; 
-                background-image: url('/imgs/homepage-circles/impact.jpg');
-            }
-            h2, a {
-                color: @brand-blue; 
-            }
-            .list-group-item:before {
-                border-color: @brand-blue;
-            }
-        }
-        .category.people {
-            .image {
                 border-color: @brand-red; 
-                background-image: url('/imgs/homepage-circles/people.jpg');
+                background-image: url('/imgs/homepage-circles/work.jpg');
             }
             h2, a {
                 color: @brand-red; 
             }
             .list-group-item:before {
                 border-color: @brand-red;
+            }
+        }
+        .category.impact {
+            .image {
+                border-color: @brand-green; 
+                background-image: url('/imgs/homepage-circles/impact.jpg');
+            }
+            h2, a {
+                color: @brand-green; 
+            }
+            .list-group-item:before {
+                border-color: @brand-green;
+            }
+        }
+        .category.people {
+            .image {
+                border-color: @brand-orange; 
+                background-image: url('/imgs/homepage-circles/people.jpg');
+            }
+            h2, a {
+                color: @brand-orange; 
+            }
+            .list-group-item:before {
+                border-color: @brand-orange;
             }
         }
     }
@@ -190,14 +191,14 @@
         > .container {
             position: relative;
         }
+        a {
+            color: @brand-blue; 
+        }
         h2 {
             color: #e5e5e5;
             margin-bottom: 25px;
             text-align: center;
             text-transform: uppercase;
-        }
-        a:hover {
-            text-decoration: none;
         }
         .panel {
             padding: 5px;
@@ -212,6 +213,9 @@
         .news-banner, .announcement-banner, .news-image {
             height: 160px;
         }
+        .list-group-item:before {
+            border-color: @brand-blue;
+        }
     }
 
     // Homepage movie band
@@ -224,7 +228,7 @@
 
     .list-group {
         max-width: 260px;
-        margin: 12px auto;
+        margin: 0px auto;
     }
     .list-group-item {
         border: 0;
@@ -242,6 +246,9 @@
         }
         &:first-child:before {
             display: none;
+        }
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

@@ -243,23 +243,23 @@ legend {
         padding: (@line-height-computed / 2) 0px 5px 0px;
     }
 
-    .item-controls {
-
-        position: absolute;
-        top: -20px;
-        right: 15px;
-
-        .btn {
-            margin-left: 5px;
-        }
-    }
-
     &.no-border-top {
         .item:first-child {
             border-top: 0px;
         }
     }
 
+}
+
+.item-controls {
+
+    position: absolute;
+    top: -20px;
+    right: 15px;
+
+    fieldset & {
+        top: 0px;
+    }
 }
 
 .pull-quote {

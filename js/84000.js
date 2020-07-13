@@ -2059,6 +2059,16 @@ jQuery(document).ready(function($) {
 	});
 
 	// Add behaviour
+	// Set item background on expand
+	// ------------------------------------------
+	$('.collapse-background').on('show.bs.collapse', function () {
+		$(this).addClass('show-background');
+	});
+	$('.collapse-background').on('hide.bs.collapse', function () {
+		$(this).removeClass('show-background');
+	});
+
+	// Add behaviour
 	// Match heights on expand
 	// ------------------------------------------
 	$(document).on('shown.bs.collapse', function () {

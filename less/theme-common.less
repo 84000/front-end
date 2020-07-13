@@ -1193,6 +1193,25 @@ span.indent {
     }
 }
 
+// List group
+// ------------------------------------
+.list-group.accordion {
+    .list-group-item {
+        a:focus {
+            text-decoration: none;
+        }
+        &.show-background {
+            background-color: #f5f5f5;
+        }
+    }
+    div.collapse {
+        @media print {
+            display: block;
+            height: auto;
+        }
+    }
+}
+
 // Widget loading
 // ------------------------------------
 .loading {
@@ -1480,6 +1499,8 @@ table.contents-table {
     }
 }
 
+// Search results
+// -------------------------------------------------
 #search-container {
     form {
         //margin-bottom: @line-height-computed;
@@ -1540,7 +1561,6 @@ table.contents-table {
 // All styles should default to desktop/screen
 // except ...
 // -------------------------------------------
-
 @media screen {
 
     section {

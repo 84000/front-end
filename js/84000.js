@@ -1012,7 +1012,7 @@ jQuery(document).ready(function($) {
 	// Add behaviour
 	// Show Loading... on clicking a link
 	// ---------------------------------
-	$(document).on("click",'a[data-loading]', function (e) {
+	$(document).on("click",'[data-loading]', function (e) {
 		$.wait($(this).data('loading'));
 	});
 

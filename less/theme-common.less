@@ -59,9 +59,6 @@ body {
 
         .btn-round {
             background-color: #fff;
-            i {
-                color: @brand-blue-dark;
-            }
         }
     }
 
@@ -71,14 +68,15 @@ body {
         
         //background-color: rgba(255,255,255,.75);
         background-image: url('/imgs/eft-bg-pattern.svg');
-        background-size: 200px;
-        background-position: center top;
+        background-size: 500px;
+        background-position: center center;
         background-repeat: repeat;
 
         position: relative;
         z-index: 1;
 
         blockquote {
+            color: @gray;
             margin: @line-height-computed 0px;
             padding: 0px;
             border: 0px;
@@ -105,7 +103,7 @@ body {
             margin-top: -1vw;
             margin-bottom: -6vw;
             float: right;
-            border: 7px solid rgba(255,255,255,.9);
+            border: 7px solid @gray-background-color;
         }
 
     }
@@ -175,7 +173,8 @@ body {
         .body-variant(@brand-red);
     }
 
-    &.how-you-can-help {
+    //(default)
+    &, &.how-you-can-help {
         .body-variant(@brand-blue-dark);
     }
 
@@ -992,6 +991,7 @@ a.link-to-top {
 }
 .text-zh {
     font-style: normal !important;
+    font-weight: normal;
 }
 .small-plain {
     font-family: @font-family-heading;

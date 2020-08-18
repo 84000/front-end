@@ -1,7 +1,7 @@
 # Allow subdomain access
-SetEnvIf            Origin ^(https?://(?:.+\.)?(84000\.co|84000-translate\.org|84000\.local|trans84000stg\.wpengine\.com)(?::\d{1,5})?)$   CORS_ALLOW_ORIGIN=$1
-Header              append Access-Control-Allow-Origin  %{CORS_ALLOW_ORIGIN}e   env=CORS_ALLOW_ORIGIN
-Header              merge  Vary "Origin"
+SetEnvIf Origin ^(https?://(?:.+\.)?(84000\.co|84000-translate\.org|84000\.local|trans84000stg\.wpengine\.com)(?::\d{1,5})?)$   CORS_ALLOW_ORIGIN=$1
+Header append Access-Control-Allow-Origin  %{CORS_ALLOW_ORIGIN}e   env=CORS_ALLOW_ORIGIN
+Header merge  Vary "Origin"
 
 <IfModule mod_mime.c>
 	AddType text/html .html

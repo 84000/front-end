@@ -1,6 +1,6 @@
 <?php 
 
-    $content_template = array_key_exists('template', $_GET) ? $_GET['template'] : 'home';
+    $content_template = array_key_exists('template', $_GET) ? $_GET['template'] : 'index-new';
 
     // Get the stylesheet
     $xsl = new DOMDocument;

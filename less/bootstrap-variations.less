@@ -2,26 +2,62 @@
 // ---------------------------------------- //
 // General variations from bootstrap
 // ---------------------------------------- //
+// These are theme independent variations to 
+// Bootstrap to avoid updating the core files
+// and bootstrap variables do not support
+// the variance configuration
+// ---------------------------------------- //
+
+// Nested containers
+// - only allow one in page, negate descendents
+// ---------------------------------------------
 .container .container {
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
 }
 
+// Headings 
+// ---------------------------------------------
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  small,
+  .small {
+    font-size: ~"@{font-size-small-factor}em";
+    color: inherit;
+    font-weight: inherit;
+  }
+}
+
+// Links 
+// ---------------------------------------------
+a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
 p {
     a {
         font-weight: bold;
+        text-decoration: underline;
+        font-weight: inherit;
     }
     &:last-child {
         margin-bottom: 0px;
     }
 }
 
+// HR 
+// ---------------------------------------------
 hr {
     margin-top: @vertical-spacing;
     margin-bottom: @vertical-spacing;
 }
 
+// Form controls 
+// ---------------------------------------------
 label, .label {
     font-weight: normal;
     font-family: @font-family-heading;
@@ -31,6 +67,9 @@ label, .label {
         padding: .2em .5em;
         line-height: 1.6;
     }
+}
+.label {
+    color: @label-color !important;
 }
 .label + .label, a + .label {
     margin-left: 5px;
@@ -44,11 +83,7 @@ label, .label {
 
 .btn {
     font-family: @font-family-heading;
-    font-size: 13px;
-    padding: 8px 12px;
-    text-transform: uppercase;
-    // white-space: normal;
-    .transition(.5s ease-in);
+    //.box-shadow(0px 1px 3px 0px rgba(0, 0, 0, 0.35));
     i {
         font-size: @btn-icon-size;
         display: inline-block;
@@ -58,10 +93,15 @@ label, .label {
         display: inline-block;
         margin-left: 10px;
     }
+    &.disabled {
+        .button-variant(#fff; @gray-light; @gray-light);
+        color: #fff !important;
+    }
 }
 
 .form-control {
     padding: @padding-base-vertical @padding-base-vertical + 2;
+    max-width: 100%;
 }
 
 .form-control-height {
@@ -71,6 +111,9 @@ label, .label {
 
 .form-inline {
     label, .form-control, .form-group > a, .checkbox {
+        margin-right: 5px;
+    }
+    .input-group {
         margin-right: 5px;
     }
 }
@@ -83,54 +126,99 @@ fieldset {
     margin-bottom: @form-group-margin-bottom;
 }
 
+.input-group-btn {
+    .form-control {
+        margin: 0px;
+        border-radius: 0px;
+        border-left: 0px;
+    }
+}
+
+// Collapse
+// -------------------------------
+[data-toggle="collapse"] {
+    cursor: pointer;
+    tr&
+    {
+        background-color: #eee;
+        &.collapsed {
+            background-color: inherit;
+        }
+    }
+}
+.collapsing.width {
+    height: 100%;
+    .transition-property(~"width, visibility");
+}
+.collapsing.fade {
+    .transition-property(opacity);
+}
+
+// Highlight
+// -------------------------------
 mark, .mark {
     padding: 0px;
     color: #000;
     background-color: #ffeb3b;
     .box-shadow(0px 0px 0px 2px #ffeb3b);
+    // Alert nested <mark/>s
+    mark, .mark {
+        background-color: @brand-red-alert !important;
+    }
 }
 
+// Close button 
+// -------------------------------
 .close {
     opacity: 1;
     &:focus, &:hover {
         opacity: 1;
     }
 }
+
+// Modals
+// -------------------------------
 .modal-content {
     overflow: hidden;
+    border-radius: 0px;
     .modal-title {
         font-weight: bold;
         font-style: normal !important;
+        margin: 0px;
+        padding: 0px;
+    }
+    &, p, .modal-title {
+        text-align: left !important;
+        color: initial !important;
     }
 }
 
-.breadcrumb > li > a {
-    white-space: nowrap;
-}
+// Breadcrumb
+// -------------------------------
+.breadcrumb {
 
-.dropdown-menu {
+    display: inline;
+    margin-bottom: 0px;
+    padding: 0px;
 
-    border: 0px;
-    margin-top: 0px;
-    border-top-right-radius: 0px;
-    border-top-left-radius: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    overflow: hidden;
-    /*
-    > li > a {
-        &:before { 
-            content: "";
-            border-color: transparent;
-            border-left-color: inherit;
-            border-style: solid;
-            border-width: 5px 0 5px 5px;
-            display: inline-block;
-            height: 0;
-            width: 0;
-            padding-right: 10px;
+    > li {
+        break-inside: avoid;
+        + li:before, &:last-child:after {
+            content: '';
+            padding: 0px;
         }
-    }*/
+        &:after {
+            content: "@{breadcrumb-separator}";
+            padding: 0 5px;
+            color: @breadcrumb-color;
+        }
+    }
+    > li > a {
+        white-space: nowrap;
+    }
+    h1 {
+        display: inline-block;
+    }
 }
 
 // Bootstrap modifies the behaviour of all dropdowns in the navbar
@@ -150,44 +238,39 @@ mark, .mark {
     }
 }
 
-// Panel variations
+// Alert variations
 // -------------------------------------------
-.panel {
-    border-width: 0px;
-    .box-shadow(0 6px 12px rgba(0,0,0,.175));
-    .bordered {
-        border-width: 1px;
+.alert {
+    padding: 10px 20px;
+    &.alert-dismissible {
+        padding-right: 30px;
+        &.text-center {
+            padding-left: 30px;
+        }
+    }
+    &.alert-danger, &.alert-success {
+        h1 {
+            color: #fff;
+        }
+    } 
+    &.alert-danger.red-alert {
+        background-color: @brand-red-alert;
+        border-color: @brand-red-alert;
     }
 }
 
-.panel-title {
-    font-family: @font-family-bold;
-    //color: #444;
-    text-transform: uppercase;
+// Blockquote
+// -------------------------------------------
+blockquote {
+  footer,
+  small,
+  .small {
+    font-size: @font-size-small;
+  }
 }
 
-.panel-footer {
-    .pagination {
-        margin: 0px;
-    }
-}
-
-mark, .mark {
-    padding: 0px;
-    mark, .mark {
-        background-color: @brand-red-alert !important;
-    }
-}
-
-.collapsing.width {
-    height: 100%;
-    .transition-property(~"width, visibility");
-}
-
-.collapsing.fade {
-    .transition-property(opacity);
-}
-
+// Lists
+// -------------------------------------------
 ul,
 ol {
   ul,
@@ -196,12 +279,18 @@ ol {
   }
 }
 
+// Well
+// -------------------------------------------
 .well {
+    page-break-inside: avoid;
+    border-radius: 0px;
     hr {
         border-top-color: @well-border;
     }
 } 
 
+// Nav
+// -------------------------------------------
 .nav-justified > li {
     white-space: pre;
     > a {
@@ -210,6 +299,8 @@ ol {
     }
 }
 
+// Tables
+// -------------------------------------------
 table.table tr > td {
     select, input, label {
         margin: 0px;
@@ -226,21 +317,39 @@ table.table-hover {
   }
 }
 
-.input-group-btn {
-    .form-control {
-        margin: 0px;
-        border-radius: 0px;
-        border-left: 0px;
-    }
+// Carousel variations
+// --------------------------------------------
+.carousel-control i {
+    position: absolute;
+    top: 45%;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+.carousel-control.left i {
+    left: 0px;
+}
+.carousel-control.right i {
+    right: 0px;
 }
 
+
+// Print variations
+// --------------------------------------------
 @media print {
     a.printable[href]:after {
         content: "";
     }
-    .well {
-        hr {
-            border-top-color: @hr-border;
-        }
-    } 
+    hr, 
+    .well, 
+    .well hr, 
+    .alert, 
+    table.table th, 
+    table.table td {
+        border-color: @gray-light !important;
+    }
+    .label {
+        background-color: transparent !important;
+        color: @text-color !important;
+    }
 }

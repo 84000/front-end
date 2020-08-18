@@ -11,6 +11,13 @@
                 
                 <div class="panel-body">
 
+                    <div class="alert alert-info alert-dismissible fade in text-center small" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p>This form is also available in <a href="/ch-how-you-can-help/ch-howhelp-subscribe" class="alert-link">Chinese</a></p>
+                    </div>
+
                     <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form-horizontal">
 
                         <input name="oid" type="hidden" value="00Di0000000iQGg">
@@ -42,14 +49,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-8">
-                                <div class="center-vertical">
-                                    <div>
-                                        <button type="submit" class="btn btn-primary">Subscribe</button>
-                                    </div>
-                                    <div class="small text-muted">
-                                        我想訂閱 84000中文電訊（繁體）<a href="/ch-how-you-can-help/ch-spread-the-word">Subscribe here instead</a>.
-                                    </div>
-                                </div>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
                             </div>
                         </div>
                     </form>

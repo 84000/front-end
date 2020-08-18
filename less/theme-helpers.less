@@ -2,6 +2,9 @@
 // ---------------------------------------- //
 // General helper classes
 // ---------------------------------------- //
+// Theme independent helper classes that can
+// implement common / reusable styles
+// ---------------------------------------- //
 
 .foreground {
     position: relative;
@@ -29,19 +32,23 @@
 }
 
 .uppercase {
-    text-transform: uppercase;
+    text-transform: uppercase !important;
 }
 
 .text-left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .text-right {
-    text-align: right;
+    text-align: right !important;
 }
 
 .text-justify {
-    text-align: justify;
+    text-align: justify !important;
+}
+
+.text-shadow {
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .underline {
@@ -57,8 +64,12 @@ a.disabled {
     pointer-events: none;
     cursor: none;
 }
-a.text-color {
-    color: @text-color;
+
+a.block-link {
+    display: block;
+    > * {
+        color: @link-color;
+    }
 }
 
 p.indent {
@@ -110,6 +121,10 @@ p.indent {
     }
 }
 
+.no-shadow {
+    .box-shadow(none);
+}
+
 // Show / hide based on javascript
 // -------------------------------
 .visible-scripts {
@@ -128,14 +143,7 @@ p.indent {
 
 // Show options on scrolling
 // -------------------------------
-
 .show-on-scroll {
-    opacity: 0;
-    display: none;
-    .transition(.25s ease-in);
-}
-
-@media only screen and (max-width: @screen-md) {
     opacity: 0;
     display: none;
     .transition(.25s ease-in);
@@ -154,9 +162,10 @@ p.indent {
     }
 }
 
+// Warning link
+// -------------------------------
 a.warning {
     color: @brand-red;
-    padding: @padding-base-vertical;
     border-radius: @border-radius-base;
     text-decoration: none;
     font-size: 14px;
@@ -167,17 +176,19 @@ a.warning {
         text-decoration: underline;
     }
     i {
-        font-size: 22px;
+        font-size: 26px;
         vertical-align: middle;
     }
 }
 
+// Margin helpers
+// -------------------------------
 .top-margin {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
 .bottom-margin {
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 
 .no-top-margin {
@@ -203,16 +214,27 @@ a.warning {
     }
 }
 
-@media (min-width: @screen-lg-min) {
-    .border-left-lg {
-        border-left: 1px solid @hr-border;
-    }
+hr.sml-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.no-shadow {
-    .box-shadow(none);
+hr.xs-margin {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
+hr.no-margin {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+hr.dashed {
+    border-style: dashed;
+}
+
+// Wrap / break helpers
+// -------------------------------
 .break {
 
     overflow-wrap: break-word;
@@ -229,23 +251,12 @@ a.warning {
 
 }
 
+a.no-underline:hover {
+    text-decoration: none !important;
+}
+
 span.nowrap, a.nowrap {
     white-space: pre;
-}
-
-hr.sml-margin {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-hr.xs-margin {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-hr.no-margin {
-    margin-top: 0px;
-    margin-bottom: 0px;
 }
 
 table {
@@ -289,6 +300,8 @@ p.date {
     }
 }
 
+// Input
+// -------------------------------
 .input-group.full-width {
     width: 100%;
 }
@@ -315,18 +328,6 @@ p.date {
         display: none;
     }
 }
-
-.modal-content {
-    &, p, .modal-title {
-        text-align: left !important;
-        color: initial !important;
-    }
-    /*
-    p {
-        line-height: initial !important;
-    }*/
-}
-
 @media print {
     .collapsed {
         .collapsed-show, .collapsed-hide {
@@ -337,7 +338,6 @@ p.date {
         display: block;
     }
 }
-
 
 // Centered tabs
 // ----------------------------
@@ -359,7 +359,7 @@ p.date {
 
 }
 
-// Vertical align helper
+// Vertical align helper - with variants
 // ----------------------------------------
 .adjacent-panels {
 
@@ -369,32 +369,23 @@ p.date {
         margin-bottom: @line-height-computed;
     }
 
-    &.full-width {
-        width: 100%;
+    &.full-height {
+        height: 100%;
+    }
+
+    &.center-aligned {
+        margin: 0px auto;
     }
 
     > * {
 
         display: table-cell;
         vertical-align: middle;
+        padding-left: 7px;
+        padding-right: 7px;
 
         >  .panel {
             margin-bottom: 0px;
-        }
-
-    }
-}
-.center-vertical {
-
-    .adjacent-panels();
-
-    > * {
-
-        vertical-align: middle;
-        padding-left: 15px;
-
-        &:first-child {
-            padding-left: 0 !important;
         }
 
         &.nowrap {
@@ -403,14 +394,51 @@ p.date {
 
     }
 
-    &.together {
-        > * {
-            padding-left: 7px;
+    > .half-width {
+        width: 50%;
+    }
+
+    &.full-width {
+        width: 100%;
+        > *:first-child {
+            padding-left: 0px;
+        }
+        > *:last-child {
+            padding-right: 0px;
         }
     }
-    
-    &.center-aligned {
-        margin: 0px auto;
+
+    &.together {
+        > * {
+            padding: 0px;
+        }
+    }
+
+    &.align-left {
+        .pull-left();
+        .clearfix();
+        > * {
+            padding-left: 0px;
+            padding-right: 15px;
+        }
+    }
+
+    &.align-right {
+        .pull-right();
+        .clearfix();
+        > * {
+            padding-left: 15px;
+            padding-right: 0px;
+        }
+    }
+
+}
+.center-vertical {
+
+    .adjacent-panels();
+
+    > * {
+        vertical-align: middle;
     }
 
 }
@@ -427,61 +455,9 @@ a.center-vertical {
     .adjacent-panels();
 
     > * {
-
         vertical-align: top;
-        padding-left: 15px;
-
-        &:first-child {
-            padding-left: 0 !important;
-        }
-
     }
-    &.full-width {
-
-        width: 100%;
-        
-        > *:last-child {
-            text-align: right;
-        }
-    }
-}
-
-// Merge columns
-// ----------------------------------------
-@media (min-width: @screen-sm-min) {
-
-    .sm-center-vertical {
-        .center-vertical();
-    }
-
-}
-
-@media (min-width: @screen-md-min) {
-
-    .col-md-merge-right {
-        padding-right: 0px;
-    }
-
-    .col-md-merge-left {
-        padding-left: 0px;
-    }
-
-    .md-adjacent-panels {
-        .adjacent-panels();
-    }
-
-    .md-center-vertical {
-        .center-vertical();
-    }
-
-    .col-md-pad-top {
-        padding-top: 20px;
-    }
-
-    .text-md-right {
-        text-align: right;
-    }
-
+    
 }
 
 // Max width is sm size
@@ -492,29 +468,29 @@ a.center-vertical {
     margin-right: auto;
 }
 
-// Set a min height for md or greater
-// -----------------------------------
-@media only screen and (min-width: @screen-md) {
-    .min-height-md {
-        min-height: 520px;
-    }
-}
-
-// inline list
+// Inline list
 // -----------------------------------
 .list-inline {
 
     margin-left: 0px;
 
     > li {
-        padding-right: 5px;
+        
         padding-left: 0px;
+        padding-right: 5px;
+
         &:before {
             padding-right: 5px;
         }
+
         &:first-child:before {
             padding-right: 0px;
         }
+
+        &:last-child {
+            padding-right: 0px;
+        }
+
     }
 
     // Dot seperators
@@ -543,4 +519,140 @@ a.center-vertical {
         }
     }
 
+}
+
+// Table without a borders
+// ---------------------------------------------
+table.table {
+    tr.vertical-middle {
+        > th, > td {
+            vertical-align: middle;
+        }
+    }
+}
+
+// Table without a borders
+// ---------------------------------------------
+table.table.no-border {
+    tbody {
+        > tr {
+            > th, > td {
+                border-top: 0px;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+// Table without padding
+// ---------------------------------------------
+table.table.no-padding {
+    tbody {
+        > tr {
+            > th, > td {
+                padding-top: 1px;
+                padding-bottom: 1px;
+            }
+        }
+    }
+}
+
+// Center vertical on larger viewports
+// - on smaller default to spaced stack
+// ------------------------------------
+
+
+// Apply to sm and smaller
+// -----------------------------------
+@media (max-width: @screen-md) {
+
+    .col-sm-pull-right {
+        float: right;
+    }
+
+    .center-vertical-md {
+        padding-top: 7px;
+        padding-bottom: 15px;
+        > * {
+            display: block;
+            padding-top: 7px;
+            .clearfix();
+        }
+    }
+
+    .top-margin-sm {
+        margin-top: 20px;
+    }
+    
+}
+
+// Apply to xs and smaller
+// -----------------------------------
+@media (max-width: @screen-sm) {
+
+    .col-xs-pull-right {
+        float: right;
+    }
+
+    .extra-pad-xs {
+        padding: 10px 20px;
+    }
+
+    .bottom-margin-xs {
+        margin-bottom: 20px;
+    }
+
+    .center-vertical-sm {
+        //padding-top: 7px;
+        //padding-bottom: 15px;
+        > * {
+            display: block;
+            padding-top: 7px;
+            .clearfix();
+        }
+    }
+}
+
+// Apply to sm and bigger
+// -----------------------------------
+@media (min-width: @screen-sm-min) {
+
+    .center-vertical-sm {
+        .center-vertical();
+    }
+
+    .text-right-sm {
+        text-align: right;
+    }
+}
+
+// Apply to md and bigger
+// -----------------------------------
+@media (min-width: @screen-md-min) {
+
+    .col-md-top-left {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+
+    .center-vertical-md {
+        .center-vertical();
+    }
+
+    .text-right-md {
+        text-align: right;
+    }
+    
+    .pull-right-md {
+        .pull-right();
+    }
+}
+
+// Apply to lg and bigger
+// -------------------------------
+@media (min-width: @screen-lg-min) {
+    .border-left-lg {
+        border-left: 1px solid @hr-border;
+    }
 }

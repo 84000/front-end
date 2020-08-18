@@ -42,9 +42,9 @@
             break;
     }
 ?>
-<div data-onload-replace='{"#project-progress-loading":"<?php echo $rr_host; ?>/widget/progress-panel.html"}'>
+<div id="project-progress-loading" data-onload-replace='{"#project-progress-loading":"<?php echo $rr_host; ?>/widget/progress-panel.html#panel"}'>
 
-    <div class="panel panel-default" id="project-progress-loading">
+    <div class="panel panel-default">
         <div class="panel-body loading"></div>
     </div>
 

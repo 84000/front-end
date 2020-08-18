@@ -47,7 +47,11 @@
 
                                     <input id="ItemID1" name="ItemID1" type="hidden" value="1">
                                     <input id="ItemName1" name="ItemName1" type="hidden" value="Donation">
-                                    <input id="SKU1" name="SKU1" type="hidden" value="DON">
+                                    <?php if($_GET['lang'] == 'zh') { ?>
+                                        <input id="SKU1" name="SKU1" type="hidden" value="SKU_DownloadDana_ch">
+                                    <?php } else { ?>
+                                        <input id="SKU1" name="SKU1" type="hidden" value="SKU_DownloadDana">
+                                    <?php } ?>
                                     <input id="Quantity1" name="Quantity1" type="hidden" value="1">
                                     <!-- Update these to live urls!!! -->
                                     <input id="OnSuccessUrl" name="OnSuccessUrl" type="hidden" value="https://fe.84000-translate.org/test-pages/donate-success">

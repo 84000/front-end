@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" stroke-width="0" version="1.1" width="88" height="40" viewBox="0 20 88 40" style="shape-rendering:crispEdges">
+  <g stroke="none">
+    <g transform="translate(-8,-10)">
+      <rect width="20" height="100" fill="#d2661f"/>
+      <rect width="20" height="20" fill="#36614d"/>
+      <rect width="20" height="20" fill="#36614d" y="40"/>
+      <rect width="20" height="20" fill="#36614d" y="80"/>
+    </g>
+    <g transform="translate(36,-10)">
+      <rect width="20" height="100" fill="#36614d"/>
+      <rect width="20" height="20" fill="#d2661f"/>
+      <rect width="20" height="20" fill="#d2661f" y="40"/>
+      <rect width="20" height="20" fill="#d2661f" y="80"/>
+    </g>
+    <g transform="translate(80,-10)">
+      <rect width="20" height="100" fill="#d2661f"/>
+      <rect width="20" height="20" fill="#36614d"/>
+      <rect width="20" height="20" fill="#36614d" y="40"/>
+      <rect width="20" height="20" fill="#36614d" y="80"/>
+    </g>
+    <g transform="translate(4,0)">
+      <rect width="20" height="18" fill="#0b435f"/>
+      <rect width="20" height="18" fill="#891b2a" x="20"/>
+      <rect width="20" height="18" fill="#891b2a" y="22"/>
+      <rect width="20" height="18" fill="#d2661f" x="20" y="22"/>
+      <rect width="32" height="32" fill="#3e6c92" x="4" y="4"/>
+      <polygon points="36,4 36,36 4,36" fill="#0b435f" />
+    </g>
+    <g transform="translate(4,40)">
+      <rect width="20" height="18" fill="#0b435f"/>
+      <rect width="20" height="18" fill="#891b2a" x="20"/>
+      <rect width="20" height="18" fill="#891b2a" y="22"/>
+      <rect width="20" height="18" fill="#d2661f" x="20" y="22"/>
+      <rect width="32" height="32" fill="#3e6c92" x="4" y="4"/>
+      <polygon points="36,4 36,36 4,36" fill="#0b435f" />
+    </g>
+    <g transform="translate(48,20)">
+      <rect width="20" height="18" fill="#0b435f"/>
+      <rect width="20" height="18" fill="#891b2a" x="20"/>
+      <rect width="20" height="18" fill="#891b2a" y="22"/>
+      <rect width="20" height="18" fill="#d2661f" x="20" y="22"/>
+      <rect width="32" height="32" fill="#3e6c92" x="4" y="4"/>
+      <polygon points="36,4 36,36 4,36" fill="#0b435f" />
+    </g>
+  </g>
+</svg>

@@ -196,14 +196,14 @@ jQuery(document).ready(function($) {
 				$element.find("[data-match-height]").height('auto');
 
 				// Match to a particular element
-				$element.find("[data-match-height].match-this-height:visible").each(function(){
+				$element.find("[data-match-height].match-this-height").each(function(){
 					var $this = $(this);
 					heights[$this.data('match-height')] = $this.outerHeight();
 				});
 
 				// Match to the tallest in the group
 				if($.isEmptyObject(heights)){
-					$element.find("[data-match-height]:visible").each(function(){
+					$element.find("[data-match-height]").each(function(){
 						var $this = $(this);
 						var this_height = $this.outerHeight();
 						var height_group = $this.data('match-height');
@@ -714,6 +714,7 @@ jQuery(document).ready(function($) {
 	    	    
 	    	    return bookmarks;
 	    	}
+
     	}($));
 
     	(function ($) { 
@@ -726,6 +727,7 @@ jQuery(document).ready(function($) {
 	    		//console.log(domain);
 	    		return domain;
 	    	}
+
 	    }($));
 
     	(function ($) { 
@@ -746,6 +748,7 @@ jQuery(document).ready(function($) {
 	    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
 	    	    return {'page': page, 'hash': hash, 'title': title};
 	    	}
+
     	}($));
 
     	(function ($) { 
@@ -784,6 +787,7 @@ jQuery(document).ready(function($) {
 	    	    $(window).scroll();
 	    	    $("#bookmarks-btn-container .badge-notification").pulse();
 	    	}
+
     	}($));
 
     	(function ($) { 
@@ -840,6 +844,7 @@ jQuery(document).ready(function($) {
     			$('#bookmarks-btn .badge').text(bookmarks.length);
     			
     		}
+
     	}($));
 
 		// Load bookmarks into DOM on page load
@@ -878,6 +883,7 @@ jQuery(document).ready(function($) {
 
     	    // Reload bookmarks
     	    $.loadBookmarks();
+    	    
     	});
 
 		// Save the location for the next visit
@@ -993,14 +999,21 @@ jQuery(document).ready(function($) {
 
 	// Close button for a collapse element
 	// --------------------------------------
-	$(document).on("click",'.collapse .close', function(e) {
+	$(document).on("click",'.collapse .close-collapse', function(e) {
 	
         e.preventDefault();
         e.stopPropagation();
         
 		// Close the footer
-        $(this).parents('.collapse').collapse('hide');
+        $(this).parents('.collapse').first().collapse('hide');
         
+	});
+
+	// Add behaviour
+	// Show Loading... on clicking a link
+	// ---------------------------------
+	$(document).on("click",'[data-loading]', function (e) {
+		$.wait($(this).data('loading'));
 	});
 
 	// Set pop-up footer max-height
@@ -1009,15 +1022,18 @@ jQuery(document).ready(function($) {
 		$.popupFooterHeight = function () {
 
 			// Footer should not be more than 50% of the viewport
+			// --------------------------------------------------
+			var height_factor = 0.5;
+			if($("html.xs").length){
+				height_factor = 0.75;
+			}
+
 			$(".fixed-footer .fix-height").each(function(){
-				$(this).css({"max-height": ($(window).height() * 0.5) + "px"});
+				$(this).css({"max-height": ($(window).height() * height_factor) + "px"});
 			});
 
 		}
 	}($));
-
-	// Set footer max-height on loading the page
-	// -----------------------------------------
 	$.popupFooterHeight();
 
 	// Pop-up footer
@@ -1061,10 +1077,6 @@ jQuery(document).ready(function($) {
 	        // Show the footer
 			$popupFooter.collapse('show');
 
-			$popupFooter.on('shown.bs.collapse', function () {
-				$.matchHeights($(this));
-			});
-
         }
 
         // Is this the first call to the glossary?
@@ -1091,7 +1103,6 @@ jQuery(document).ready(function($) {
 
         var selector = $(this).attr('href');
         var $sidebar = $(selector);
-        var h_padding = (20 * 2);
 
         $('.collapse').not($sidebar).collapse('hide');
         $sidebar.removeClass('in');
@@ -1110,10 +1121,10 @@ jQuery(document).ready(function($) {
         	});
         }
 
-        $('.lg ' + selector + ' .container').width(parseInt($(window).width() * 0.35) - h_padding);
-        $('.md ' + selector + ' .container').width(parseInt($(window).width() * 0.6) - h_padding);
-        $('.sm ' + selector + ' .container').width(parseInt($(window).width() * 0.75) - h_padding);
-        $('.xs ' + selector + ' .container').width(parseInt($(window).width()) - h_padding);
+        $('.lg ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.35));
+        $('.md ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.6));
+        $('.sm ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.75));
+        $('.xs ' + selector + ' .fix-width').width(parseInt($(window).width() * 0.90));
 
 		$sidebar.collapse('toggle');
 	});
@@ -1568,18 +1579,38 @@ jQuery(document).ready(function($) {
 	// ---------------------------------------
 	(function ($) { 
 		$.replaceWithAjax = function(source, $target, callback) {
+
+			// Extract the url and fragment from the source
+	    	// ----------------------------------------------
+			var sourceSplit = source.split("#");
+			var sourceUrl = sourceSplit[0];
+			var sourceFragment = sourceSplit[1];
+
 			$.ajax({
-    			url: source,
+    			url: sourceUrl,
     			type: 'GET',
     			dataType: 'html',
     			success: function(data) {
-	    			var ajaxData = $(data).find('.ajax-data > *');
-	    			if(ajaxData.length){
-	    				$target.html(ajaxData);
+
+    				// Get a fragment of the result
+	    			// ----------------------------------------------
+	    			var $dataFragment = $(data).find("#" + sourceFragment);
+
+	    			// Remove ids when we insert from a different dom
+	    			// ----------------------------------------------
+	    			// $dataFragment.find("[id]").addBack().removeAttr('id');
+
+	    			// Append the data to the target
+	    			// ----------------------------------------------
+	    			if($dataFragment.length){
+	    				$target.html($dataFragment);
 	    			}
 	    			else {
 	    				$target.html(data);
 	    			}
+
+	    			// Do callbacks
+	    			// ----------------------------------------------
 			    	if(callback){
 			    		callback();
 			    	}
@@ -1612,15 +1643,7 @@ jQuery(document).ready(function($) {
         	$popupFooter.removeClass('in');
         	$.wait("Loading the source text...");
 	    	setTimeout(function(){
-	    		$.ajax({
-	    			url: source,
-	    			type: 'GET',
-	    			dataType: 'html',
-	    			success: function(data) {
-		        		$(target).html($(data).find('.ajax-data > *'));
-		                $popupFooter.collapse('show');
-		            }
-	    		});
+	    		$.replaceWithAjax(source, $target, function(){ $popupFooter.collapse('show'); });
 	        	$.wait("", true);
 	        },100);
         }
@@ -1736,21 +1759,32 @@ jQuery(document).ready(function($) {
 	// Add behaviour...
     // Show only the first line of content
     // ----------------------------------------------------------------- 
-    $(".collapse-one-line").each(function() {
-    	var $this = $(this);
-    	$this.data("collapse-one-line-height", $this.height()).addClass('one-line');
-    });
+    (function ($) { 
+		$.setOneLineHeights = function ($element) {
+			$element.find(".collapse-one-line:visible").each(function() {
+		    	var $this = $(this);
+		    	$this.removeClass('one-line');
+		    	$this.data("collapse-one-line-height", $this.height());
+		    	$this.addClass('one-line');
+		    });
+		}
+	}($));
     $(document).on("mouseover", ".collapse-one-line", function(e){
     	e.preventDefault();
     	var $this = $(this);
-    	$this.height($this.data('collapse-one-line-height')).removeClass('one-line');
+    	var thisHeight = $this.data('collapse-one-line-height');
+    	if(thisHeight){
+    		$this.height(thisHeight).removeClass('one-line');
+    	}
     });
     $(document).on("mouseout", ".collapse-one-line", function(e){
     	e.preventDefault();
     	var $this = $(this);
-    	$this.addClass('one-line').css({"height" : ""});
+    	var thisHeight = $this.data('collapse-one-line-height');
+    	if(thisHeight){
+    		$this.addClass('one-line').css({"height" : ""});
+    	}
     });
-
 
     // Add behaviour...
     // Replace matches in text.
@@ -1889,6 +1923,8 @@ jQuery(document).ready(function($) {
 		// Match heights on hidden content
 		//------------------------------------------
 		$.matchHeights($(document));
+		$.setOneLineHeights($(document));
+
 	});
 
 	// Add behaviour...
@@ -2019,7 +2055,24 @@ jQuery(document).ready(function($) {
 	$(document).on("click",'.collapse', function(e) {
 	
 		e.stopPropagation();
-        
+
+	});
+
+	// Add behaviour
+	// Set item background on expand
+	// ------------------------------------------
+	$('.collapse-background').on('show.bs.collapse', function () {
+		$(this).addClass('show-background');
+	});
+	$('.collapse-background').on('hide.bs.collapse', function () {
+		$(this).removeClass('show-background');
+	});
+
+	// Add behaviour
+	// Match heights on expand
+	// ------------------------------------------
+	$(document).on('shown.bs.collapse', function () {
+		$.matchHeights($(this));
 	});
 
 	// Add behaviour
@@ -2056,12 +2109,12 @@ jQuery(document).ready(function($) {
 			var control_id = $control.attr('id');
 			if(typeof control_id === 'string'){
 				var split = control_id.split('-');
-				$control.attr('name', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
+				$control.attr('id', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
 			}
 			var control_for = $control.attr('for');
 			if(typeof control_for === 'string'){
 				var split = control_for.split('-');
-				$control.attr('name', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
+				$control.attr('for', split.slice(0, split.length - 1).join('-') + '-' + new_group_index);
 			}
 			if($control[0].tagName == 'select'){
 				$control.selectedValue = '';
@@ -2095,48 +2148,15 @@ jQuery(document).ready(function($) {
 	});
 
 	// Add behaviour
-	// Initialise popovers
+	// Show page alert on clicking a link
+	// (In addition to normal link behaviour)
 	// ------------------------------------------
-	$("a[data-download-dana]").on("click", function(e){
+	$("a[data-page-alert]").on("click", function(e){
 
-		var $this = $(this);
-		var $title = $this.data("download-dana");
-		var $alert = $("#page-alert");
+		var source = $(this).data("page-alert");
+		var $target = $("#page-alert");
 
-    	$alert
-    		.find(".container")
-    		.empty()
-    		.append(
-    			$("<div>", {"class": "row"})
-    				.append(
-    					$("<div>", {"class": "col-sm-10 col-sm-offset-1"})
-				    		.append(
-								$("<div>", {"class": "center-vertical center-aligned"})
-				    				.append(
-						    			$("<span>")
-						    				.append(
-						    					$("<i>", {"class": "fa fa-cloud-download"})
-						    				)
-						    		).append(
-						        		$("<span>").text("You are downloading:")
-						    		)
-				        	).append(
-				        		$("<h2>", {"class" : "sml-margin top bottom"}).text($title)
-				        	).append(
-				        		$("<p>")
-						        	.append(
-						        		$("<a>", {"href" : "https://84000.co/how-you-can-help/download-dana", "target" : "_blank", "class" : "underline"}).text("Click here to make a dāna donation")
-						        	)
-				        	).append(
-			        			$("<p>").text("This is a free publication from 84000: Translating the Words of the Buddha, a non-profit organization sharing the gift of wisdom with the world.")
-			        		).append(
-			        			$("<p>").text("The cultivation of generosity, or dāna—giving voluntarily with a view that something wholesome will come of it—is considered to be a fundamental Buddhist practice by all schools. The nature and quantity of the gift itself is often considered less important.")
-			        		)
-    				)
-    		);
-
-    	$alert.collapse('show');
-    	$alert.addClass('download-dana');
+		$.replaceWithAjax(source, $target, function(){ $target.addClass('info').collapse('show').addClass('loaded'); });
 
 	});
 
@@ -2192,16 +2212,19 @@ jQuery(document).ready(function($) {
 
 	// Affix nav
 	// ------------------------------------------
-	$("#affix-nav [data-spy='affix']").width($("#affix-nav [data-spy='affix']").width());
-	$("#affix-nav [data-spy='affix']").affix({
-		offset: {
-			top: function () {
-		    	return $('#affix-nav').offset().top;
-		    },
-			bottom: function () {
-		    	return (this.bottom = $('body > footer').outerHeight(true) + 20);
-		    }
-		}
+	$("[data-spy='affix']").each(function(){
+		var $this = $(this);
+		$this.width($this.width());
+		$this.affix({
+			offset: {
+				top: function () {
+			    	return $this.parents('.affix-container').offset().top;
+			    }/*,
+				bottom: function () {
+			    	return (this.bottom = $('body > footer').outerHeight(true) + 20);
+			    }*/
+			}
+		});
 	});
 
 	// On resize...
@@ -2210,6 +2233,7 @@ jQuery(document).ready(function($) {
 		$.mediaSize();
 		$.matchHeights($(document));
 		$.popupFooterHeight();
+		$.setOneLineHeights($(document));
 	});
 
 	// On loading the page...

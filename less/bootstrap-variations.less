@@ -74,7 +74,7 @@ label, .label {
 .label + .label, a + .label {
     margin-left: 5px;
 }
-.label.label-category {
+.label.label-filter {
     margin: 4px 8px 8px 4px;
     font-size: @font-size-small;
     background-color: @gray-border-color;
@@ -330,20 +330,26 @@ table.table-hover {
 
 // Carousel variations
 // --------------------------------------------
-.carousel-control i {
-    position: absolute;
-    top: 45%;
-}
-.carousel-control.left, .carousel-control.right {
-    background-image: none;
-}
-.carousel-control.left i {
-    left: 0px;
-}
-.carousel-control.right i {
-    right: 0px;
-}
+.carousel-control {
 
+    i {
+        position: absolute;
+        top: 45%;
+    }
+    &.left {
+        #gradient > .horizontal(@start-color: rgba(255,255,255,.7); @end-color: rgba(255,255,255,.0001));
+        i {
+            left: 0px;
+        }
+    }
+    &.right {
+        #gradient > .horizontal(@start-color: rgba(255,255,255,.0001); @end-color: rgba(255,255,255,.7));
+        i {
+            right: 0px;
+        }
+    }
+
+}
 
 // Print variations
 // --------------------------------------------

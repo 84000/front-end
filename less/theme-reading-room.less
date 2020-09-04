@@ -54,6 +54,23 @@ h3, .milestone-h3 {
         color: inherit;
     }
 
+    .supp-head {
+
+        .text-muted();
+
+        h4 {
+
+            .text-muted();
+
+            &:before {
+            content: '[';
+            }
+            &:after {
+                content: ']';
+            }
+        }
+    }
+
     // Milestones for titles
     // ---------------------------------------------
     .milestone-h2, .milestone-h3, .milestone-h4 {

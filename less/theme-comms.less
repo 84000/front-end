@@ -1142,12 +1142,15 @@ ul.responsive-tabs__list{
     // The summary in the about tab
     // -------------------------------
     #summary {
+
         h1 {
             text-align: left;
         }
+
         h4 {
             font-weight: bold;
         }
+
         p {
             text-align: justify;
             .title {
@@ -1155,6 +1158,69 @@ ul.responsive-tabs__list{
             }
         }
         
+    }
+
+    #filters {
+
+        @filters-height: 220px;
+        @filter-width: 298px;
+
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: @filters-height;
+        margin-bottom: @line-height-computed;
+
+        > .row-filter {
+
+            position: absolute;
+            top: 0px;
+            left: 2000px;
+            padding: 0 15px;
+            .transition(left .75s ease-out);
+
+            .col-filter {
+        
+                float: left;
+                clear: none;
+                width: @filter-width;
+                position: relative;
+                min-height: 1px;
+                padding-left: 15px;
+                padding-right: 15px;
+
+                .filter-panel {
+                    height: @filters-height;
+                    margin-bottom: 0px;
+                }
+                
+            }
+        }
+    }
+
+    .filter-panel {
+
+        display: block;
+        padding: 10px 20px;
+        margin-bottom: @line-height-computed;
+        background: url('/imgs/background-pattern-transparent.svg');
+        background-color: @brand-blue;
+        background-size: 40px;
+        color: @gray-lighter;
+        text-align: center;
+        border-radius: @border-radius-base;
+        text-decoration: none;
+
+        h3 {
+            color: #fff !important;
+            margin: 7px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+
+    .active .filter-panel {
+        background-color: @brand-blue-dark;
     }
 
 }

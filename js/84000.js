@@ -598,75 +598,6 @@ jQuery(document).ready(function($) {
 		$(this).removeClass("open");
 	});
 
-/*
-	// Image sizing
-	// DEPRECATED in favour of object-fit property
-	// --------------------------------------
-	(function ($) { 
-		$.fn.centerWithMargins = function () {
-			this.each(function(){
-				var $this = $(this);
-				$this.css({
-					'margin-top': 0,
-					'margin-bottom': 0,
-					'margin-left': 0,
-					'margin-right': 0,
-					'width': '',
-					'height': ''
-				});
-				var $viewport = $this.parents(".thumbnail");
-				var viewport_width = parseFloat($viewport.outerWidth());
-				var viewport_height = parseFloat($viewport.outerHeight());
-				var image_width = parseFloat($this.width());
-				var image_height = parseFloat($this.height());
-				var image_ratio = image_width/image_height;
-				var min_width_margin = -300;
-				var min_height_margin = -300;
-				if($this.data("max-horizontal-crop")){
-					min_width_margin = -(parseInt($this.data("max-horizontal-crop")));
-				}
-				if($this.data("max-vertical-crop")){
-					min_height_margin = -(parseInt($this.data("max-vertical-crop")));
-				}
-				var width_margin = (viewport_width-image_width)/2;
-				var height_margin = (viewport_height-image_height)/2;
-				if(width_margin < min_width_margin){
-					image_width = viewport_width - (min_width_margin * 2);
-					width_margin = min_width_margin;
-					image_height = image_width/image_ratio;
-					height_margin = (viewport_height-image_height)/2;
-				}
-				if(height_margin < min_height_margin){
-					image_height = viewport_height - (min_height_margin * 2);
-					height_margin = min_height_margin;
-					image_width = image_height*image_ratio;
-					width_margin = (viewport_width-image_width)/2;
-				}
-				var css = {
-					'margin-top': height_margin.toFixed(0) + "px",
-					'margin-bottom': height_margin.toFixed(0) + "px",
-					'margin-left': width_margin.toFixed(0) + "px",
-					'margin-right': width_margin.toFixed(0) + "px",
-					'width': image_width.toFixed(0) + "px",
-					'height': image_height.toFixed(0) + "px"
-				};
-				//console.log(css);
-				$this.css(css);
-			});
-			return this;
-		};
-	}($));
-
-	// Size image on loading image
-	// --------------------------------------
-	$('.thumbnail img').on("load", function () {
-		$(this).centerWithMargins();
-	});
-	
-	// Size images on loading page
-	// --------------------------------------
-	$('.thumbnail img').centerWithMargins();
-*/
 	// Lightbox
 	// -------------------------------------------------------
 	if($('html').hasClass('screen') && $('[data-lightbox="slideshow"]').length) {
@@ -1705,6 +1636,7 @@ jQuery(document).ready(function($) {
     		$(this).attr('style', '');
     	});
 	}
+
 	// Add listener for chrome
 	// -----------------------------
 	window.matchMedia('print').addListener(function(mql) {
@@ -2145,6 +2077,47 @@ jQuery(document).ready(function($) {
 	// ------------------------------------------
 	$("a.redirect-onload").each(function(e){
 		location.href = $(this).attr("href");
+	});
+
+	// On loading the page...
+	// Set up the filters carousel
+	// ------------------------------------------
+	$('#filters').each(function(e){
+		var $filters = $(this);
+		var $row = $(this).find('.row-filter');
+		var $filter_items = $row.find('.col-filter');
+		var filter_width = $filter_items.first().outerWidth();
+		var row_width = $filter_items.length * filter_width;
+		var offset_max = filter_width / 3;
+		var offset_min = -row_width + ($filters.width() - (filter_width / 3));
+		var offset = 0;
+
+		// Set width of slider
+		$row.innerWidth(row_width + 30);
+
+		// Set offset default
+		//console.log($filter_items.filter('.active').index());
+		offset = -($filter_items.filter('.active').index() * filter_width);
+		offset = offset <= offset_max ? (offset >= offset_min ? offset : offset_min) : offset_max;
+		
+		$row.data('offset', offset);
+		$row.css({'left': $row.data('offset') + 'px'});
+
+		// Add events to controls
+		$filters.find("a.carousel-control").on("click", function(e){
+			e.preventDefault();
+
+			var $control = $(this);
+			var increment = $control.hasClass('left') ? filter_width : -filter_width ;
+
+			offset = $row.data('offset');
+			offset = offset ? offset + increment : increment;
+			offset = offset <= offset_max ? (offset >= offset_min ? offset : offset_min) : offset_max;
+
+			$row.data('offset', offset);
+			$row.css({'left': $row.data('offset') + 'px'});
+
+		});
 	});
 
 	// Add behaviour

@@ -282,17 +282,17 @@ jQuery(document).ready(function($) {
 		    	//Don't preview things that are very short
 		    	// --------------------------------------
 
-		    	if($section.attr('id') == "notes"){
-		    		if($element.find("div.footnote").length > 5){
-		    			$previewContent = $element.find("div.footnote").slice(0,5).clone();
+		    	/*if($section.attr('id') == "end-notes"){
+		    		if($element.find(".footnote").length > 5){
+		    			$previewContent = $element.find(".rw").slice(0,5).clone();
 		    		}
 		    	}
 		    	else if($section.attr('id') == "glossary"){
-		    		if($element.find("div.glossary-item").length > 2){
-		    			$previewContent = $element.find("div.glossary-item").slice(0,2).clone();
+		    		if($element.find(".glossary-item").length > 2){
+		    			$previewContent = $element.find(".rw").slice(0,3).clone();
 		    		}
 		    	}
-		    	else {
+		    	else {*/
 
 		    		// Add nodes until there's x characters in the preview
 		    		// ------------------------------------------------------
@@ -318,7 +318,7 @@ jQuery(document).ready(function($) {
 		    		if(!longSection){
 		    			$previewContent = "";
 		    		}
-		    	}
+		    	/*}*/
 
 		    	if($previewContent){
 
@@ -355,8 +355,8 @@ jQuery(document).ready(function($) {
 			    	$section.append($link);
 					
 					var previewHeight = $preview.height();
-					var previewLimit = 350;
-					$preview.height(((previewHeight < previewLimit ? previewHeight : previewLimit) - 50) + 'px');
+					var previewLimit = 400;
+					$preview.height((previewHeight < previewLimit ? previewHeight : previewLimit) + 'px');
 
 					$element.addClass('render-in-viewport');
 
@@ -2084,38 +2084,28 @@ jQuery(document).ready(function($) {
 	// ------------------------------------------
 	$('#filters').each(function(e){
 		var $filters = $(this);
-		var $row = $(this).find('.row-filter');
-		var $filter_items = $row.find('.col-filter');
+		var $viewport = $filters.find('.viewport');
+		var $slider = $viewport.find('.slider');
+		var $filter_items = $slider.find('.col-filter');
 		var filter_width = $filter_items.first().outerWidth();
 		var row_width = $filter_items.length * filter_width;
-		var offset_max = filter_width / 3;
-		var offset_min = -row_width + ($filters.width() - (filter_width / 3));
-		var offset = 0;
+		var increment = $filter_items.filter('.active').index() * filter_width;
 
 		// Set width of slider
-		$row.innerWidth(row_width + 30);
+		$slider.innerWidth(row_width + 30);
+		$filters.removeClass('not-ready');
 
-		// Set offset default
-		//console.log($filter_items.filter('.active').index());
-		offset = -($filter_items.filter('.active').index() * filter_width);
-		offset = offset <= offset_max ? (offset >= offset_min ? offset : offset_min) : offset_max;
-		
-		$row.data('offset', offset);
-		$row.css({'left': $row.data('offset') + 'px'});
+		// Set offset default based on the active element
+		$viewport.animate({ scrollLeft: increment }, "slow");
 
 		// Add events to controls
 		$filters.find("a.carousel-control").on("click", function(e){
 			e.preventDefault();
 
-			var $control = $(this);
-			var increment = $control.hasClass('left') ? filter_width : -filter_width ;
+			increment = $(this).hasClass('left') ? -filter_width : filter_width ;
 
-			offset = $row.data('offset');
-			offset = offset ? offset + increment : increment;
-			offset = offset <= offset_max ? (offset >= offset_min ? offset : offset_min) : offset_max;
-
-			$row.data('offset', offset);
-			$row.css({'left': $row.data('offset') + 'px'});
+			$viewport.animate({ scrollLeft: ($viewport.scrollLeft() + increment) });
+			$viewport.data('offset', $viewport.scrollLeft());
 
 		});
 	});

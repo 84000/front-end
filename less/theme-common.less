@@ -1264,6 +1264,7 @@ span.indent {
 
     h2, h4 {
         margin-top: 0px !important;
+        margin-bottom: (@line-height-computed / 2) !important;
         text-align: left !important;
     }
 
@@ -1476,10 +1477,15 @@ table.contents-table {
             }
         }
         td {
-            padding: 14px 10px 0px 0px;
+            padding: 0px;
+            padding-top: 14px;
+            padding-right: 10px;
             line-height: 1.3em;
             break-inside: auto;
             page-break-inside: auto;
+        }
+        td:last-child {
+            padding-right: 0px;
         }
     }
     tbody {
@@ -1605,7 +1611,7 @@ table.contents-table {
         
         a.preview {
             position: absolute;
-            top: 0px;
+            top: 15px;
             right: 0px;
             .btn-round {
                 background-color: #ccc;

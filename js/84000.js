@@ -2082,7 +2082,7 @@ jQuery(document).ready(function($) {
 	// On loading the page...
 	// Set up the filters carousel
 	// ------------------------------------------
-	$('#filters').each(function(e){
+	$('#filters-carousel').each(function(e){
 		var $filters = $(this);
 		var $viewport = $filters.find('.viewport');
 		var $slider = $viewport.find('.slider');

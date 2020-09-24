@@ -1246,9 +1246,9 @@ span.indent {
 // ------------------------------------------
 .fixed-sidebar {
 
-    position:fixed;
-    bottom:0px;
-    top:0px;
+    position: fixed;
+    bottom: 0px;
+    top: 0px;
     right: 0px;
     background-color: #fff;
     border-left: 1px solid @hr-border;
@@ -1259,18 +1259,15 @@ span.indent {
     .sidebar-content {
         position: relative;
         overflow: auto;
-        margin: 35px 20px 20px 20px;
+        padding: 35px 20px 20px 20px;
     }
 
-    h2, h4 {
-        margin-top: 0px !important;
+    h2, h3, h4, h5 {
         margin-bottom: (@line-height-computed / 2) !important;
         text-align: left !important;
-    }
-
-    h4 {
-        color: @text-color;
-        font-family: @font-family-serif;
+        &:first-child {
+            margin-top: 0px !important;
+        }
     }
 
 }

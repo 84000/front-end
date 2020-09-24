@@ -255,8 +255,10 @@ hr.dashed {
 
 }
 
-a.no-underline:hover {
-    text-decoration: none !important;
+a.no-underline {
+    &:hover, &:focus {
+        text-decoration: none !important;
+    }
 }
 
 span.nowrap, a.nowrap {

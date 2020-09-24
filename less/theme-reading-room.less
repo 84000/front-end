@@ -199,33 +199,31 @@ h3 {
 
     .heading-section {
 
-        h2 {
-            color: @brand-red;
-            text-transform: uppercase;
-        }
-
-        h3 {
-            color: @text-color;
+        h2, h3, h4 {
             margin-bottom: @line-height-computed / 2;
         }
 
-        h4 {
+        h3, h4 {
             color: @text-color;
+            
         }
 
         &.chapter {
-            h4 {
-                color: @text-muted;
-                margin-bottom: @line-height-computed / 2;
+            h2 {
+                color: @brand-red;
+                text-transform: uppercase;
             }
+            h4 {
+                .text-muted();
+            }
+
         }
 
         &.floating {
 
-            h4 {
+            .text-muted();
 
-                .text-muted();
-                margin-bottom: @line-height-computed / 2;
+            h4 {
 
                 &:before {
                     content: '[';

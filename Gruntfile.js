@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
       build: {
         src: [
-        	'js/jquery-3.3.1.js',
+        	'js/jquery-3.5.1.js',
         	'js/js-cookies.js',
         	'js/replace-text.js',
         	'<%= pkg.bootstrapJs %>/transition.js',

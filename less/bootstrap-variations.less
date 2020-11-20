@@ -36,6 +36,14 @@ a {
     overflow-wrap: break-word;
     word-wrap: break-word;
     cursor: pointer;
+    &:focus{
+        outline-width: 1px;
+        outline-offset:2px;
+        outline-color: #aaa;
+        .mark {
+            outline: none;
+        }
+    }
 }
 
 p {
@@ -134,7 +142,12 @@ p.form-control {
 }
 
 fieldset {
+    margin-top: @form-group-margin-bottom;
     margin-bottom: @form-group-margin-bottom;
+    legend {
+        font-size: @font-size-h4;
+        margin-bottom: @line-height-computed / 2;
+    }
 }
 
 .input-group-btn {

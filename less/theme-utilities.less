@@ -5,7 +5,7 @@
 .control-label {
     text-align: left;
 }
-
+/*
 fieldset {
     border-color: @legend-border-color;
 }
@@ -13,7 +13,7 @@ fieldset {
 legend {
     color: @legend-color;
     padding: 8px;
-}
+}*/
 
 .preview-list {
     a.preview {
@@ -228,9 +228,6 @@ legend {
         > .item-row:last-child {
             margin-bottom: 0px;
         }
-        &.show-background {
-            background-color: #e5e5e5;
-        }
         &.selected {
             border: 1px solid @hr-border;
             z-index: 2;
@@ -239,6 +236,13 @@ legend {
         }
         &.pad {
             padding: 15px;
+            &.flagged {
+                border-left: 5px solid @brand-red;
+                padding-left: 10px;
+            }
+        }
+        .glossary-item {
+            margin-bottom: 0px;
         }
     }
 

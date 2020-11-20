@@ -69,16 +69,17 @@ body {
         
         //background-color: rgba(255,255,255,.75);
         background-image: url('/imgs/eft-bg-pattern.svg');
-        background-size: 500px;
+        background-size: 200px;
         background-position: center top;
         background-repeat: repeat;
 
         position: relative;
         z-index: 1;
+        overflow: visible;
 
         blockquote {
             color: #fff;
-            background-color: @brand-blue;
+            background-color: @brand-green;
             margin: @line-height-computed 0px;
             padding: 16px 20px;
             border: 0px;
@@ -135,12 +136,21 @@ body {
     // Viewport smaller than sm
     @media only screen and (max-width: @screen-md) {
         .banner-band {
+            blockquote {
+                position: relative;
+                z-index: 1;
+                margin-top: 60vw;
+                margin-bottom: 0px;
+            }
             img {
-                width: 70vw;
-                height: 70vw;
-                border-radius: 35vw;
-                margin-top: -5vw;
-                margin-bottom: -20vw;
+                width: 80vw;
+                height: 80vw;
+                border-radius: 40vw;
+                position: absolute;
+                top: -15px;
+                right: 15px;
+                margin-top: 0;
+                margin-bottom: 0;
             }
         }
     }
@@ -223,7 +233,7 @@ p.intro {
 // Disable page while processing
 // -------------------------------------------
 body.wait {
-    &:after{
+    &:after {
         content:'';
         z-index: 1000;
         position:fixed;
@@ -233,7 +243,7 @@ body.wait {
         height:100%;
         background-color:rgba(255,255,255,.3);
     }
-    > #wait{
+    > #wait {
         position:fixed;
         display:inline-block;
         text-align:center;
@@ -1288,7 +1298,7 @@ span.indent {
 
     display: block;
     margin: 20px 0px;
-    padding: 15px 30px;
+    padding: 15px 20px;
     text-align: center;
     background: 
         url(/imgs/ornament/title-ornament.svg) no-repeat top center, 
@@ -1351,7 +1361,7 @@ span.indent {
 
     .footer {
 
-        margin: 20px -30px -15px -30px;
+        margin: 20px -20px -15px -20px;
         padding: 0px;
         background-color: #fff;
         font-family: @font-family-sans-serif;
@@ -1547,7 +1557,7 @@ table.contents-table {
             }
         }
 
-        a.render {
+        a.reveal {
             bottom: 10px;
         }
 
@@ -1572,32 +1582,22 @@ table.contents-table {
 // -------------------------------------------
 @media screen {
 
-    section {
+    section, aside {
 
-        > .render-in-viewport {
-            display: none;
-        }
+        display: block;
+        overflow: hidden;
+        position: relative;
 
-        > .unrendered-preview {
-            .fade-out(80px);
-            a {
-                border-bottom: 0 !important;
-                color: inherit !important;
-                text-decoration: none !important;
-            }
-        }
+        a.reveal {
 
-        a.render, a.preview {
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
             position: absolute;
             z-index: 4;
             text-align: center;
-            margin-top: 0px !important; // in case it occurs after a .space
-        }
+            margin-top: 0px !important;
 
-        a.render {
-            bottom: -(@btn-round-size / 2);
-            left: 0px;
-            right: 0px;
             .btn-round {
                 background-color: #fff;
                 border: 1px solid @brand-red;
@@ -1606,11 +1606,17 @@ table.contents-table {
                 }
             }
         }
-        
+
         a.preview {
+
             position: absolute;
-            top: 15px;
+            top: 0px;
             right: 0px;
+            position: absolute;
+            z-index: 4;
+            text-align: center;
+            margin-top: 0px !important;
+
             .btn-round {
                 background-color: #ccc;
                 i {
@@ -1619,6 +1625,29 @@ table.contents-table {
             }
         }
 
+        &.preview {
+
+            max-height: 300px;
+            .fade-out(80px);
+
+            a.preview {
+                display: none;
+            }
+        }
+
+        &.show {
+            
+            a.reveal {
+                display: none;
+            }
+        }
+
+    }
+
+    // Editor mode
+    // -------------------------------------
+    .editor-mode, .annotation-mode {
+        // Needs re-thinking
     }
 
     .collapse-one-line {
@@ -1633,15 +1662,7 @@ table.contents-table {
         }
     }
 
-    // Render everything in editor mode
-    // -------------------------------------
-    .editor-mode {
-        section, aside {
-            > .render-in-viewport {
-                display: block;
-            }
-        }
-    }
+    
 
 }
 
@@ -1754,6 +1775,10 @@ table.contents-table {
             page-break-before: avoid;
         }
 
+    }
+
+    #wait {
+        display: none;
     }
 
     .well.well-danger {

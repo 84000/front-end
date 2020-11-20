@@ -44,25 +44,9 @@ h3 {
 
     }
 
-    /*
-    section.hide-header {
-        margin-top: 0;
-        > hr:first-child,
-        > div > .rw-section-head {
-            display: none;
-            & + .rw {
-                margin-top: 0px;
-            }
-        }
-        a.preview {
-            top: -22px;
-        }
-    }*/
-
     #titles, #long-titles, #body-title {
         h1, h2, h3, h4 {
-            margin-top: @line-height-computed;
-            margin-bottom: 0px;
+            padding-top: 15px;
         }
         
     }
@@ -141,7 +125,7 @@ h3 {
         .text-center();
 
         .page {
-            margin-top: 70px;
+            margin-top: 50px;
             .clearfix();
         }
 
@@ -150,10 +134,12 @@ h3 {
 
         margin-top: 0px;
 
+        .section-panel {
+            padding: 35px 45px 30px 45px;
+        }
+
         #main-titles {
             width: auto;
-            padding: 35px 65px;
-            margin: 0px;
             .clearfix();
         }
 

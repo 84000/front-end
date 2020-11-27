@@ -115,9 +115,9 @@ h3 {
         }
     }
 
-    //.glossary-link.glossary-requested {
-    //    .mark();
-    //}
+    .glossary-link.not-cached {
+        .box-shadow(0px 0px 0px 2px @brand-red-alert);
+    }
 
     // Title section
     // ---------------------------------------------
@@ -671,9 +671,6 @@ h3 {
         padding: (@line-height-computed / 2) 0px;
         border-bottom: 1px solid @hr-border;
     }
-    .text-bo.source {
-        line-height: 2em;
-    }
 }
 
 // Info icon
@@ -740,7 +737,7 @@ a.info-icon {
 
         // Unless it's complete - then show everything
         &.complete {
-            aside {
+            section.preview, section.partial, aside {
                 display: block;
             }
         }

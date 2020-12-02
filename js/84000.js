@@ -533,17 +533,6 @@ jQuery(document).ready(function($) {
 			}
 		});
 
-		// Show/hide scroll to top link
-		// --------------------------------------
-		$(window).scroll(function () {
-			if($(document).scrollTop() > 200){
-				$(".link-to-top").addClass("in");
-			}
-			else if($(document).scrollTop() < 200){
-				$(".link-to-top").removeClass("in");
-			}
-		});
-
 		// Mark
 		// -----------------------------------------
 		(function ($) { 
@@ -990,8 +979,6 @@ jQuery(document).ready(function($) {
 				$popupFooter.collapse('show');
 	        }
 
-	        
-
 		});
 
 		// Pop-out sidebar
@@ -1064,8 +1051,79 @@ jQuery(document).ready(function($) {
 		    if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
 		});
 
-		// Detect when user stops scrolling
-		// ---------------------------------------
+		
+		(function ($) { 
+			$.processElementInView = function() {
+
+				$(".reading-room.translation section.show [data-in-view-replace]").each(function() {
+
+					var $paragraph = $(this);
+
+					var elementInViewStatus = $paragraph.elementInView();
+
+					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
+						//console.log($paragraph.data('in-view-replace'));
+
+						if($paragraph.data('in-view-replace') > ''){
+							$.replaceWithAjax(
+	                    		$paragraph.data('in-view-replace'), 
+	                    		$paragraph, 
+	                    		function(){
+	                    			$paragraph.data('in-view-replace', '');
+	                    		}
+	                    	);
+						}
+
+ 					}
+ 					else if(elementInViewStatus == 'below'){
+ 					    // This allows us to break on the first non-visible after a visible.
+ 					    return false;
+ 					}
+
+				});
+			};
+		}($));
+
+		// Add behaviour...
+		// Window scroll
+		// -------------------------------------------
+		var windowScroll200Timeout;
+		var windowScroll3000Timeout;
+		$(window).on('scroll', function(){
+
+			// Clear any existing timeouts
+			clearTimeout(windowScroll200Timeout);
+			clearTimeout(windowScroll3000Timeout);
+
+			$('body').addClass('scrolling');
+			//console.log('scroll');
+
+			// Show/hide scroll to top link
+			if($(document).scrollTop() > 200){
+				$(".link-to-top").addClass("in");
+			}
+
+			windowScroll200Timeout = 
+				setTimeout(function() { $.processElementInView(); } , 200);
+			
+			windowScroll3000Timeout = 
+				setTimeout(
+					function() {
+
+						$('body').removeClass('scrolling');
+						//console.log('un-scroll');
+
+						if($(document).scrollTop() < 200){
+							$(".link-to-top").removeClass("in");
+						}
+
+					}
+				, 3000);
+			
+		});
+
+		// Replace an element with some html via ajax
+		// ------------------------------------------
 		(function ($) { 
 			$.replaceWithAjax = function(source, $target, callback) {
 
@@ -1074,7 +1132,7 @@ jQuery(document).ready(function($) {
 				var sourceSplit = source.split("#");
 				var sourceUrl = sourceSplit[0];
 				var sourceFragment = sourceSplit[1];
-				var ajaxUrl = sourceUrl.replace('view-mode=', 'view-mode-x=') + (sourceUrl.indexOf('?') == -1 ? '?' : '&') + 'view-mode=ajax' ;
+				var ajaxUrl = sourceUrl + (sourceUrl.indexOf('?') == -1 ? '?' : '&') + 'request-mode=ajax' ;
 
 				$.ajax({
 	    			url: ajaxUrl,
@@ -1088,15 +1146,13 @@ jQuery(document).ready(function($) {
 
 		    			// Remove ids when we insert from a different dom
 		    			// ----------------------------------------------
-		    			$dataFragment.find("[id]").addBack().removeAttr('id');
+		    			// Don't need to do this as we are replacing
+		    			// $dataFragment.find("[id]").addBack().removeAttr('id');
 
 		    			// Append the data to the target
 		    			// ----------------------------------------------
 		    			if($dataFragment.length){
-		    				$target.html($dataFragment);
-		    			}
-		    			else {
-		    				$target.html(data);
+		    				$target.replaceWith($dataFragment);
 		    			}
 
 		    			// Do callbacks
@@ -1108,38 +1164,6 @@ jQuery(document).ready(function($) {
 	    		});
 			};
 		}($));
-
-		
-		// Add behaviour...
-		// Window scroll, fade in controls
-		// -------------------------------------------
-		var windowScrollTimeout;
-		$(window).on('scroll', function(){
-
-			// Clear any existing timeout
-			clearTimeout(windowScrollTimeout);
-
-			// Show what's marked to show
-			windowScrollTimeout = 
-				setTimeout(
-					function() {
-
-						$('body').addClass('scrolling');
-						//$('.show-on-scroll, .show-on-scroll-xs').fadeIn(); 
-						//console.log('scroll');
-
-						// Hide it again
-						setTimeout(
-							function() {
-								$('body').removeClass('scrolling'); 
-								//$('.show-on-scroll, .xs .show-on-scroll-xs').fadeOut(); 
-								//console.log('un-scroll');
-							}
-						,2000)
-					}
-				,200)
-			
-		});
 
 		// Add behaviour...
 	    // Get the href content via ajax and put it in the specified element
@@ -1167,14 +1191,15 @@ jQuery(document).ready(function($) {
 		    		$.replaceWithAjax(source, $target, function(){ $popupFooter.collapse('show'); $.wait("", true); });
 		        },100);
 	        }
-	        else if(!$target.is('.loaded')){
+	        else if($target.length && !$this.is('.loaded')){
 	        	$.wait("Loading content...");
 	        	setTimeout(function(){
-	        		$.replaceWithAjax(source, $target, function(){ $target.collapse('show').addClass('loaded'); $.wait("", true); });
+	        		var $collapse = $target.closest('.collapse');
+	        		$.replaceWithAjax(source, $target, function(){ $collapse.collapse('show'); $this.addClass('loaded'); $.wait("", true); });
 		        },100);
 	        }
 	        else{
-	            $target.collapse('toggle');
+	            $target.closest('.collapse').collapse('toggle');
 	        }
 	        
 	    });
@@ -1613,7 +1638,7 @@ jQuery(document).ready(function($) {
 			var source = $(this).data("page-alert");
 			var $target = $("#page-alert");
 
-			$.replaceWithAjax(source, $target, function(){ $target.addClass('info').collapse('show').addClass('loaded'); });
+			$.replaceWithAjax(source, $target.find('.container'), function(){ $target.addClass('info').collapse('show').addClass('loaded'); });
 
 		});
 

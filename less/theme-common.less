@@ -920,7 +920,7 @@ ul.dropdown-menu {
     .nav-controls.show-on-scroll-xs {
         display: block;
         bottom: -@nav-controls-sm-height;
-        .transition(.25s ease-in);
+        .transition(.25s ease-out);
     }
 
     .scrolling .nav-controls.show-on-scroll-xs {
@@ -1646,12 +1646,6 @@ table.contents-table {
 
     }
 
-    // Editor mode
-    // -------------------------------------
-    .editor-mode, .annotation-mode {
-        // Needs re-thinking
-    }
-
     .collapse-one-line {
         overflow: hidden;
         cursor: pointer;
@@ -1668,6 +1662,7 @@ table.contents-table {
 
 }
 
+/*
 @media only screen and (max-width: @screen-md) {
     section, aside {
         a.preview {
@@ -1675,6 +1670,7 @@ table.contents-table {
         }
     }
 }
+*/
 
 @media only screen and (min-width: @screen-sm) {
     .panel.main-panel > .panel-body {

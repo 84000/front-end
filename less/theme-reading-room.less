@@ -689,7 +689,7 @@ a.info-icon {
 
 // Different styles for the editors
 // ---------------------------------------------
-.editor-mode, .glossary-editor-mode, .annotation-mode {
+.editor-mode, .annotation-mode {
     &.translation {
         a.footnote-link, a.glossary-link {
             color: inherit;
@@ -699,6 +699,9 @@ a.info-icon {
             display: block;
             color: @brand-orange;
         }
+    }
+    [data-in-view-replace] {
+        background-color: #f5f5f5;
     }
 }
 

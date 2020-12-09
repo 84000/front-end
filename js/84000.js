@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 	
 	// Disable page while processing js
 	// -------------------------------------
-	(function ($) { 
+	(function ($) {
 		$.wait = function (text, cancel) {
 			var $body = self==top ? $("body") : window.parent.$("body");
 			if(cancel){
@@ -455,7 +455,14 @@ jQuery(document).ready(function($) {
 									callback();
 								}
 			    				
+			    			},
+			    			error: function(data) {
+			    				$.wait("", true);
+			    				if(callback){
+									callback();
+								}
 			    			}
+
 			    		});
 			    		
 					}
@@ -1163,7 +1170,11 @@ jQuery(document).ready(function($) {
 			    	if(callback){
 			    		callback();
 			    	}
-	            }
+	            },
+    			error: function(data) {
+    				callback();
+    			}
+
     		});
 		};
 	}($));
@@ -1190,29 +1201,35 @@ jQuery(document).ready(function($) {
         	$('.collapse').not($popupFooter).not($this.closest('.collapse')).collapse('hide');
         	$popupFooter.removeClass('in');
         	$.wait("Loading the source text...");
-	    	setTimeout(function(){
-	    		$.replaceWithAjax(
-	    			source, 
-	    			$target, 
-	    			function(){
-	    				$popupFooter.collapse('show');
-	    				$.wait("", true); 
-	    			});
-	        },100);
+	    	setTimeout(
+	    		function(){
+		    		$.replaceWithAjax(
+		    			source, 
+		    			$target, 
+		    			function(){
+		    				$popupFooter.collapse('show');
+		    				$.wait("", true); 
+		    			}
+		    		);
+		        }
+	        ,100);
         }
         else if($target.length && !$this.is('.loaded')){
         	$.wait("Loading content...");
-        	setTimeout(function(){
-        		var $collapse = $target.closest('.collapse');
-        		$.replaceWithAjax(
-        			source, 
-        			$target, 
-        			function(){ 
-        				$collapse.collapse('show'); 
-        				$this.addClass('loaded');
-        				$.wait("", true);
-        			});
-	        },100);
+        	setTimeout(
+        		function(){
+	        		var $collapse = $target.closest('.collapse');
+	        		$.replaceWithAjax(
+	        			source, 
+	        			$target, 
+	        			function(){ 
+	        				$collapse.collapse('show'); 
+	        				$this.addClass('loaded');
+	        				$.wait("", true);
+	        			}
+	        		);
+		        }
+	        ,100);
         }
         else{
             $target.closest('.collapse').collapse('toggle');
@@ -1238,7 +1255,8 @@ jQuery(document).ready(function($) {
 			$target, 
 			function(){ 
 				$.wait("", true);
-			});
+			}
+		);
 		
 		return false;
 	});
@@ -1772,10 +1790,15 @@ jQuery(document).ready(function($) {
 	// Flash a button
 	// ------------------------------------------
 	$('[data-onload-pulse]').each(function(e){
+
 		var $this = $(this);
-		setInterval(function(){
-			$this.pulse();
-		}, $this.data('onload-pulse'));
+
+		setInterval(
+			function(){
+				$this.pulse();
+			}, 
+			$this.data('onload-pulse')
+		);
 		
 	});
 
@@ -1800,13 +1823,17 @@ jQuery(document).ready(function($) {
 	// On resize...
 	// ------------------------------------------
 	$(window).on("resize", function(){
+
 		$.wait("Rendering page...");
-    	setTimeout(function(){
-    		$.mediaSize();
-			$.matchHeights($(document));
-			$.popupFooterHeight();
-    		$.wait("", true);
-        },100);
+
+    	setTimeout(
+    		function(){
+	    		$.mediaSize();
+				$.matchHeights($(document));
+				$.popupFooterHeight();
+	    		$.wait("", true);
+	        }
+        ,100);
 		
 	});
 
@@ -1842,5 +1869,7 @@ jQuery(document).ready(function($) {
 		$(window).scroll();
 
 	});
+
+	$.wait("", true);
 
 });

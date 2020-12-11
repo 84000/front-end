@@ -750,7 +750,7 @@ a.info-icon {
             }
         }
 
-        // pdfs of body and back hide the front
+        // pdfs of body and back, hide the front
         &.pdf-mode.part {
             &.part-body, &.part-back {
                 #titles, #imprint, #toc {
@@ -799,6 +799,10 @@ a.info-icon {
         .rw-section-head {
             page-break-after: avoid;
             page-break-inside: avoid;
+        }
+
+        article {
+            padding-bottom: 0;
         }
     }
 

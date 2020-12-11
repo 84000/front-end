@@ -1869,7 +1869,5 @@ jQuery(document).ready(function($) {
 		$(window).scroll();
 
 	});
-
-	$.wait("", true);
-
+	
 });

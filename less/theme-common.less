@@ -1763,16 +1763,12 @@ table.contents-table {
     }
 
     .page {
-
         margin-top: 300px !important;
+    }
+    .page + .page,
+    .page.page-force {
         break-before: always;
         page-break-before: always;
-
-        &.page-first {
-            break-before: avoid;
-            page-break-before: avoid;
-        }
-
     }
 
     #wait {

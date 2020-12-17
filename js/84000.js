@@ -425,8 +425,14 @@ jQuery(document).ready(function($) {
 						// --------------------------------------
 						// console.log(hash + ' not present in DOM');
 
-						var partParam = "?part=" + hash.substr(hash.indexOf('#') + 1);
-						var ajaxUrl = window.location.pathname + partParam + "&view-mode=ajax-part";
+						var params = [];
+						params.push("part=" + hash.substr(hash.indexOf('#') + 1));
+						var urlArchivePath = $.getUrlParameter('archive-path');
+						if(urlArchivePath > ''){
+							params.push("archive-path=" + urlArchivePath);
+						}
+						params.push("view-mode=ajax-part");
+						var ajaxUrl = window.location.pathname + '?' + params.join('&');
 
 						$.wait("Loading section...");
 

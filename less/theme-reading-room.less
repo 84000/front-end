@@ -728,6 +728,8 @@ a.info-icon {
         }
     }
 
+    // Hide open / close controls
+    // ---------------------------------------
     section.preview, a.reveal, a.preview {
         display: none;
     }
@@ -745,30 +747,37 @@ a.info-icon {
             display: none;
         }
 
-        //except toc
-        #toc {
-            display: block;
-        }
-
         // Unless it's complete - then show everything
         &.complete {
-            section.preview, section.partial, aside {
+            section.preview, aside {
                 display: block;
             }
         }
 
-        // pdfs of body and back, hide the front
+        // pdfs
         &.pdf-mode.part {
+
+            // body and back: hide the front matter
             &.part-body, &.part-back {
                 #titles, #imprint, #toc {
                     display: none;
                 }
             }
-            &.part-body {
+
+            // body: show the body-title
+            &.part-body, &.part-body-title {
                 #body-title {
                     display: block;
                 }
             }
+
+            // front: show the table of contents
+            &.part-front {
+                #toc {
+                    display: block;
+                }
+            }
+            
         }
 
         a.glossary-link {

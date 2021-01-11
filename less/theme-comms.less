@@ -1076,12 +1076,11 @@ ul.responsive-tabs__list{
     // -------------------------------
     #title {
         
-        margin-bottom: 25px;
+        margin-bottom: @line-height-computed;
 
         .title {
 
             text-align: center;
-            margin-bottom: 25px;
 
             h1 {
                 color: @brand-red;
@@ -1098,10 +1097,6 @@ ul.responsive-tabs__list{
                 margin-top: 25px;
             }
 
-            p {
-                margin-bottom: 15px;
-            }
-
         }
     }
 
@@ -1113,6 +1108,7 @@ ul.responsive-tabs__list{
         background-color: @brand-orange;
         border-radius: @border-radius-base;
         margin: 0px auto;
+        margin-bottom: @line-height-computed;
         padding: 3px;
 
         td {
@@ -1258,7 +1254,7 @@ ul.responsive-tabs__list{
         }
 
         .active .filter-panel {
-            background-color: @brand-blue-dark;
+            background-color: @brand-orange;
         }
 
         .more-filters .filter-panel {

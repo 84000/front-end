@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 	
 	// Disable page while processing js
 	// -------------------------------------
-	(function ($) { 
+	(function ($) {
 		$.wait = function (text, cancel) {
 			var $body = self==top ? $("body") : window.parent.$("body");
 			if(cancel){
@@ -31,18 +31,17 @@ jQuery(document).ready(function($) {
 			}
 		}
 	}($));
-	$.wait("", true);
+
+	// Add a class to signal that scripts work
+	// (in case it's an ereader browser)
+	// ---------------------------------------
+	$('html').addClass("scripts");
 
 	// Use cache for loading scripts
 	// ---------------------------------
 	$.ajaxSetup({
 		cache: true
 	});
-
-	// Add a class to signal that scripts work
-	// (in case it's an ereader browser)
-	// ---------------------------------------
-	$('html').addClass("scripts");
 
 	// Media size
 	// ---------------------------------------
@@ -188,36 +187,47 @@ jQuery(document).ready(function($) {
 	// ------------------------------------------
 	(function ($) { 
 		$.matchHeights = function ($element) {
-			if($('html').hasClass('screen')){
+
+			//console.log($element);
+
+			if($("html.screen").length && $element.find("[data-match-height]").length){
 
 				var heights = {};
+				var documentWidth = $(document).width();
+				//console.log(documentWidth);
 
-				// set heights to auto
-				$element.find("[data-match-height]").height('auto');
-
-				// Match to a particular element
-				$element.find("[data-match-height].match-this-height").each(function(){
+				// Loop through all sub-nodes with [data-match-height]
+				$element.find("[data-match-height]:visible").each(function(){
 					var $this = $(this);
+					// Don't repeat if this was already done for this width
+					if($this.data("matched-height") == documentWidth) return;
+					//console.log($this.data("matched-height"));
+					// Set the height to auto
+					$this.height('auto');
+					// Get the height
+					var this_height = $this.outerHeight();
+					var height_group = $this.data('match-height');
+					// Set the height for this group if it's taller
+					if(!heights[height_group] || this_height > heights[height_group]){
+						heights[height_group] = this_height;
+					}
+					
+				});
+
+				// Override if a particular element is specified
+				$element.find("[data-match-height].match-this-height:visible").each(function(){
+					var $this = $(this);
+					// Don't repeat if this was already done for this width
+					if($this.data("matched-height") == documentWidth) return;
 					heights[$this.data('match-height')] = $this.outerHeight();
 				});
 
-				// Match to the tallest in the group
-				if($.isEmptyObject(heights)){
-					$element.find("[data-match-height]").each(function(){
-						var $this = $(this);
-						var this_height = $this.outerHeight();
-						var height_group = $this.data('match-height');
-						if(!heights[height_group] || this_height > heights[height_group]){
-							heights[height_group] = this_height;
-						}
-					});
-				}
-
+				// Set the heights
 				$.each(heights, function(group, val) {
 					$("[data-match-height='" + group + "']").each(function(){
 						var $this = $(this);
 						if(!$this.data('match-height-media') || $('html').is($this.data('match-height-media'))){
-							$this.height(val + 'px');
+							$this.height(val + 'px').data("matched-height", documentWidth);
 						}
 					});
 				});
@@ -225,203 +235,25 @@ jQuery(document).ready(function($) {
 		}
 	}($));
 
-	// Render a section that is hidden with .render-in-viewport
-	// --------------------------------------------------------
+	// Get a paramater from the url
+	// ------------------------------------------
 	(function ($) { 
-		$.fn.render = function (callback) {
-			var $element = $(this);
-			$.wait("Rendering this section...");
-	    	setTimeout(function(){
-	    		if($element.hasClass('render-in-viewport')){
+		$.getUrlParameter = function (param, link) {
+			var search = link ? link.search : window.location.search;
+			var pageURL = search.substring(1),
+		        urlVariables = pageURL.split('&'),
+		        parameterName,
+		        i;
 
-					// render the node
-			    	$element.removeClass('render-in-viewport');
+		    for (i = 0; i < urlVariables.length; i++) {
+		        parameterName = urlVariables[i].split('=');
 
-			    	// delete the preview node
-			    	$element.siblings(".unrendered-preview").remove();
-			    	$element.siblings("a.render").remove();
-
-			    	// add an option to collapse it again
-			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "preview show-on-scroll", "title": "Collapse this section"});
-			    	$btn = $("<span>", {"class": "btn-round"});
-			    	$icon = $("<i>", {"class": "fa fa-times"});
-			    	$btn.append($icon);
-			    	$link.hide().append($btn);
-			    	$element.append($link);
-			    	$link.fadeIn(500);
-
-			    	// Match heights on newly visible
-			    	$.matchHeights($element);
-
-			    	// Do other scroll events
-			    	$(window).trigger("scroll");
-
-			    	// Do other callbacks
-			    	if(callback){
-			    		callback();
-			    	}
-				}
-	    		$.wait("", true);
-	        },100);
-	    }
-	}($));
-
-	// Create a preview for a section
-	// The content is hidden with .render-in-viewport
-	// --------------------------------------------------------
-	(function($){
-		$.fn.unrenderedPreview = function (){
-
-			var $element = $(this);
-		    var $section = $element.parent();
-
-		    if($section.length){
-
-		    	var $previewContent;
-
-		    	//Don't preview things that are very short
-		    	// --------------------------------------
-
-		    	if($section.attr('id') == "notes"){
-		    		if($element.find("div.footnote").length > 5){
-		    			$previewContent = $element.find("div.footnote").slice(0,5).clone();
-		    		}
-		    	}
-		    	else if($section.attr('id') == "glossary"){
-		    		if($element.find("div.glossary-item").length > 2){
-		    			$previewContent = $element.find("div.glossary-item").slice(0,2).clone();
-		    		}
-		    	}
-		    	else {
-
-		    		// Add nodes until there's x characters in the preview
-		    		// ------------------------------------------------------
-
-		    		$previewContent = $();
-		    		var longSection = false;
-		    		var previewHTML = "";
-		    		var child;
-		    		
-		    		$element.children().each(function(index){
-		    			$child = $(this).clone();
-		    			previewHTML += $child.html().replace(/<\/?[^>]+(>|$)/g, "");
-		    			$previewContent = $previewContent.add($child);
-
-		    			if(previewHTML.length > 700){
-		    				longSection = true;
-		    				return false;
-		    			}
-		    		});
-
-		    		// If it's not very long cancel the preview
-		    		// --------------------------------------------------
-		    		if(!longSection){
-		    			$previewContent = "";
-		    		}
-		    	}
-
-		    	if($previewContent){
-
-		    		// Add a preview to the DOM
-		    		// ----------------------------------
-
-		    		var $preview = $("<div>", {"class": "unrendered-preview"});
-
-			    	$preview.append($previewContent);
-			    	
-			    	$preview.find(".glossarize, .glossarize-complete, .glossary-item").each(function(){
-			    		$(this).addClass("ignore");
-			    	});
-			    	
-			    	$preview.find(".glossary-item .occurences").each(function(){
-			    		$(this).addClass("hidden");
-			    	});
-
-			    	$preview.find("[id]").each(function(){
-			    		$(this).attr("id", '');
-			    	});
-
-			    	$section.append($preview);
-
-			    	if(!$element.attr("id")){
-			    		$element.attr("id", $section.attr('id') + "-content")
-			    	}
-
-			    	$link = $("<a>", {"href": "#" + $element.attr("id"), "class": "render log-click", "title": "Expand this section"});
-			    	$btn = $("<span>", {"class": "btn-round"});
-			    	$icon = $("<i>", {"class": "fa fa-angle-down"});
-			    	$btn.append($icon);
-			    	$link.append($btn);
-			    	$section.append($link);
-					
-					var previewHeight = $preview.height();
-					var previewLimit = 350;
-					$preview.height(((previewHeight < previewLimit ? previewHeight : previewLimit) - 50) + 'px');
-
-					$element.addClass('render-in-viewport');
-
-					// Remove the button that triggered this
-		    		// -------------------------------------
-					$element.find("a.preview").remove();
-		    	}
-		    	else {
-
-		    		// The content is short, just show it
-		    		// ----------------------------------
-		    		$element.removeClass('render-in-viewport');
-		    	}
+		        if (parameterName[0] === param) {
+		            return parameterName[1] === undefined ? true : decodeURIComponent(parameterName[1]);
+		        }
 		    }
 		}
 	}($));
-
-	// Render sections as they come into view
-    // -----------------------------------------------------------
-    /*
-    (function ($) { 
-		$.renderInViewport = function () {
-			$('.screen section > .render-in-viewport').each(function(){
-
-				// If there's no preview then we can ignore this one
-				// -------------------------------------------------
-			    var $element = $(this);
-			    var $visible = $element.siblings(".unrendered-preview");
-
-			    if($visible.length){
-
-			    	// Use this to check it's in the viewport (the child element is hidden)
-			    	// --------------------------------------------------------------------
-			    	var elementInViewStatus = $visible.elementInView();
-			    	if(elementInViewStatus == 'topInView'){
-				    	$element.render();
-					}
-					else if(elementInViewStatus == 'below'){
-						return false;
-					}
-
-			    }
-			});
-	    };
-	}($));*/
-
-	// Click to render a section
-	// ------------------------------------------
-	$(document).on("click", "a.render", function (e) {
-		e.preventDefault();
-		$($(this).attr("href")).render();
-	});
-
-	// Click to hide a section and show a preview
-	// -------------------------------------------
-	$(document).on("click", "a.preview", function (e) {
-		e.preventDefault();
-		$($(this).attr("href")).unrenderedPreview();
-	});
-
-	// On load create previews for unrendered sections
-    // -----------------------------------------------------------
-	$('.screen section > .render-in-viewport:hidden').each(function(){
-		$(this).unrenderedPreview();
-	});
 
 	// Flash a button
 	// --------------------------------------
@@ -441,6 +273,61 @@ jQuery(document).ready(function($) {
 		}
 	}($));
 
+	// Render a section that is hidden with .preview
+	// --------------------------------------------------------
+	(function ($) { 
+		$.fn.render = function (callback) {
+			var $element = $(this);
+    		if($element.hasClass('preview')){
+
+				// render the node
+		    	$element.removeClass('preview').addClass('show');
+
+		    	// Do other callbacks
+		    	if(callback){
+		    		callback();
+		    	}
+			}
+	    }
+	}($));
+
+	// Click to render a section
+	// ------------------------------------------
+	$(document).on("click", ".preview:not(.partial) a.reveal", function (e) {
+		e.preventDefault();
+		var href = $(this).attr('href');
+	    var hrefSplit = href.split("#");
+	    var targetId = hrefSplit[hrefSplit.length - 1];
+	    var $target = $("#" + targetId);
+	    if($target.length){
+	    	$target.render();
+	    }
+	});
+
+	// Collapse a section with .preview
+	// --------------------------------------------------------
+	(function ($) { 
+		$.fn.preview = function (callback) {
+			var $element = $(this);
+    		if($element.hasClass('show')){
+
+				// render the node
+		    	$element.removeClass('show').addClass('preview');
+
+		    	// Do other callbacks
+		    	if(callback){
+		    		callback();
+		    	}
+			}
+	    }
+	}($));
+
+	$(document).on("click",'.show a.preview', function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		$($this.attr('href')).preview();
+	});
+
 	// Scroll to an anchor
 	// -----------------------------------------
 	(function ($) { 
@@ -448,105 +335,225 @@ jQuery(document).ready(function($) {
 
 			if(!legacyLink() && $("html.screen").length) {
 
-				var $target;
-				if(!hash) hash = window.location.hash;
-				if(hash) $target = $(hash);
+				if(!hash){
+					hash = window.location.hash;
+				}
+				//console.log(hash);
 
-				if($target){
+				if(hash){
 
-					// Compile the scroll function, with callback.
+					var isTranslation = window.location.pathname.indexOf('/translation/') == 0;
+					//console.log(window.location.pathname.split('/'));
+					var $target = $(hash);
+					//console.log($target);
+
+					// Fallback for legacy ids 
+					// e.g. #section-6 -> #UT22084-001-001-section-6
 					// -------------------------------------------
-					if(!delay) delay = 0;
-					if(!parent) parent = "html, body";
+					// If this target wasn't found, try it with a UT prefix
+					if(!$target.length && hash.indexOf('#UT') !== 0 && isTranslation) {
 
-					var scrollToAnchorScroll = function(){
-						if(!offset) offset = $target.offset();
-						if(offset){
-							$(parent).delay(delay).animate({ scrollTop: (offset.top - 30) }, "slow", callback);
+						// Scan DOM for any ids that start with 'UT and' end with this hash
+						$speculate = $("[id^=UT][id$=-"+ hash.substr(hash.indexOf('#') + 1) +"]");
+						if($speculate.length) {
+							hash = '#' + $speculate.attr('id');
+							$target = $(hash);
 						}
-						else {
-							if(callback){
-								callback();
+
+					}
+
+					// Is the hash in the DOM?
+					// Is the section complete (or partial)?
+					if($target.length && !$target.closest(".partial").length){
+
+						// Compile the scroll function, with callback.
+						// -------------------------------------------
+						if(!delay) delay = 0;
+						if(!parent) parent = "html, body";
+
+						var scrollToAnchorScroll = function(){
+							if(!offset) offset = $target.offset();
+							if(offset){
+								$(parent).delay(delay).animate({ scrollTop: (offset.top - 15) }, "slow", callback);
+							}
+							else {
+								if(callback){
+									callback();
+								}
 							}
 						}
-					}
 
-					// The content may be hidden. Show it first.
-					// -----------------------------------------
-					var $collapsed = $target.closest(".collapse");
-					var $unrendered = $target.closest(".render-in-viewport");
-					var $tabbed = $target.closest(".tab-pane").length ? $('[href="#'+$target.closest(".tab-pane").attr('id')+'"]') : new Array ;
+						// Before executing the scroll make sure it is visible
+						// ---------------------------------------------------
+						var $collapsed = $target.closest(".collapse");
+						var $unrendered = $target.closest("section.preview");
+						var $tabbed = $target.closest(".tab-pane").length ? $('[href="#'+$target.closest(".tab-pane").attr('id')+'"]') : new Array ;
 
-					if($collapsed.length){
-						$collapsed.on('shown.bs.collapse', function () {
-							scrollToAnchorScroll();
-						});
-						// Close sibling panels
-						$collapsed.parents('.panel-group').find(".collapse.in").collapse('hide');
-						// Show this panel
-						$collapsed.collapse('show');
-					}
-					else if($unrendered.length){
-						$unrendered.render(function(){
-							scrollToAnchorScroll();
-						});
-					}
-					else if($tabbed.length){
-						$tabbed.on('shown.bs.tab', function () {
-							scrollToAnchorScroll();
-						});
-						$tabbed.tab('show');
-					}
-					else {
-						scrollToAnchorScroll();
-					}
+						if($collapsed.length){
 
-				}
-				else {
-					if(callback){
+							$collapsed.on('shown.bs.collapse', function () {
+								scrollToAnchorScroll();
+							});
+
+							// Close sibling panels
+							$collapsed.parents('.panel-group').find(".collapse.in").collapse('hide');
+							// Show this panel
+							$collapsed.collapse('show');
+						}
+						else if($unrendered.length){
+							$unrendered.render(function(){
+								scrollToAnchorScroll();
+							});
+						}
+						else if($tabbed.length){
+							$tabbed.on('shown.bs.tab', function () {
+								scrollToAnchorScroll();
+							});
+							$tabbed.tab('show');
+						}
+						else {
+							scrollToAnchorScroll();
+						}
+
+					}
+					// The has is not in the DOM or the section is incomplete
+					// Get the section via ajax
+					else if(isTranslation) {
+
+						// New for Reading Room 2.1.2
+						// Get part via ajax if hash not in DOM
+						// --------------------------------------
+						// console.log(hash + ' not present in DOM');
+
+						var params = [];
+						params.push("part=" + hash.substr(hash.indexOf('#') + 1));
+						var urlArchivePath = $.getUrlParameter('archive-path');
+						if(urlArchivePath > ''){
+							params.push("archive-path=" + urlArchivePath);
+						}
+						params.push("view-mode=ajax-part");
+						var ajaxUrl = window.location.pathname + '?' + params.join('&');
+
+						$.wait("Loading section...");
+
+						//console.log(ajaxUrl);
+						$.ajax({
+			    			url: ajaxUrl,
+			    			type: 'GET',
+			    			dataType: 'html',
+			    			success: function(data) {
+
+			    				$.wait("", true);
+
+			    				// Find the id within the content
+			    				var $data = $(data);
+			    				var $dataPart = $data.find(hash).closest("section");
+			    				var dataPartId = $dataPart.attr('id');
+			    				//console.log(dataPartId);
+			    				if(dataPartId !== undefined){
+			    					var $target = $("#" + dataPartId);
+			    					if($target.length){
+			    						$target.replaceWith($dataPart);
+			    						$.scrollToAnchor(hash, 0, null, null, callback);
+			    					}
+			    				}
+			    				else if(callback){
+									callback();
+								}
+			    				
+			    			},
+			    			error: function(data) {
+			    				$.wait("", true);
+			    				if(callback){
+									callback();
+								}
+			    			}
+
+			    		});
+			    		
+					}
+					else if(callback){
 						callback();
 					}
 				}
+				else if(callback){
+					callback();
+				}
+			}
+			else if(callback){
+				callback();
 			}
 		}
 	}($));
 
+	// Scroll to anchor link
+	// -----------------------------------------
 	var rewindHistory = new Array;
-
-	$(document).on("click",'a.scroll-to-anchor', function() {
+	$(document).on("click",'a.scroll-to-anchor', function(e) {
 
 		// Check it's on this page
 		// -------------------------------------------
-		if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
+		// console.log(window.location);
+		// console.log(this.pathname);
+		// console.log(this.hostname);
+
+		if(window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname == this.hostname) {
 			
+			e.preventDefault();
+
 			var $this = $(this);
 
-			if($this.not(".pop-up")){
+			var postScrollToAnchor = function(){
 
 				// Rewind functionality
 				// -------------------------------------------
-				$target = $(this.hash);
+				if($this.not(".pop-up")){
 
-				var $buttonContainer = $("#rewind-btn-container");
-				var $button = $buttonContainer.find("button");
-				var currentLocation = $.currentLocation();
-				
-				if(currentLocation !== undefined && 'hash' in currentLocation){
-					//console.log("rewindHistory.push: " + currentLocation.hash);
-					rewindHistory.push(currentLocation.hash);
+					var $buttonContainer = $("#rewind-btn-container");
+					var $button = $buttonContainer.find("button");
+					var currentLocation = $.currentLocation();
+					
+					if(currentLocation !== undefined && 'hash' in currentLocation){
+						//console.log("rewindHistory.push: " + currentLocation.hash);
+						rewindHistory.push(currentLocation.hash);
+					}
+					$buttonContainer.removeClass("hidden");
+					$button.pulse();
+
 				}
-				$buttonContainer.removeClass("hidden");
-				$button.pulse();
-
-			}
-
-			if($this.has("[data-mark]")){
 
 				// Mark elements in the text
 				// -------------------------------------------
-				var selector = $this.data("mark");
-				selector = (this.hash != selector) ? this.hash + " " + selector : selector;
-				var $targets = $(selector);
+				if($this.has("[data-mark]")){
+
+					$.markNodes($this.data("mark"));
+
+				}
+
+			}
+
+			// Smooth scroll to the hash
+			// -------------------------------------------
+			//console.log(this.hash);
+			$.scrollToAnchor(this.hash, 0, null, null, postScrollToAnchor);
+
+			return false;
+		}
+	});
+
+	// Mark
+	// -----------------------------------------
+	(function ($) { 
+		$.markNodes = function (selector) {
+
+			var $targets = $(selector);
+
+			if($targets){
+
+				// Pop-up if it's a pop-up
+				if($targets.first().is('.pop-up')){
+					$targets.first().click();
+				}
 
 				$targets
 					.removeClass("mark")
@@ -557,29 +564,13 @@ jQuery(document).ready(function($) {
 					$targets.addClass("ease-all").removeClass("mark");
 					setTimeout(function(){
 						$targets.removeClass("ease-all");
-					},2000);
+					},3000);
 				},3000);
 
 			}
-
-			// Smooth scroll to the hash
-			// -------------------------------------------
-			$.scrollToAnchor(this.hash);
-
-			return false;
+			
 		}
-	});
-
-	// Show/hide scroll to top link
-	// --------------------------------------
-	$(window).scroll(function () {
-		if($(document).scrollTop() > 200){
-			$(".link-to-top").addClass("in");
-		}
-		else if($(document).scrollTop() < 200){
-			$(".link-to-top").removeClass("in");
-		}
-	});
+	}($));
 
 	// Add behaviour...
 	// Cancel empty hash links
@@ -598,75 +589,6 @@ jQuery(document).ready(function($) {
 		$(this).removeClass("open");
 	});
 
-/*
-	// Image sizing
-	// DEPRECATED in favour of object-fit property
-	// --------------------------------------
-	(function ($) { 
-		$.fn.centerWithMargins = function () {
-			this.each(function(){
-				var $this = $(this);
-				$this.css({
-					'margin-top': 0,
-					'margin-bottom': 0,
-					'margin-left': 0,
-					'margin-right': 0,
-					'width': '',
-					'height': ''
-				});
-				var $viewport = $this.parents(".thumbnail");
-				var viewport_width = parseFloat($viewport.outerWidth());
-				var viewport_height = parseFloat($viewport.outerHeight());
-				var image_width = parseFloat($this.width());
-				var image_height = parseFloat($this.height());
-				var image_ratio = image_width/image_height;
-				var min_width_margin = -300;
-				var min_height_margin = -300;
-				if($this.data("max-horizontal-crop")){
-					min_width_margin = -(parseInt($this.data("max-horizontal-crop")));
-				}
-				if($this.data("max-vertical-crop")){
-					min_height_margin = -(parseInt($this.data("max-vertical-crop")));
-				}
-				var width_margin = (viewport_width-image_width)/2;
-				var height_margin = (viewport_height-image_height)/2;
-				if(width_margin < min_width_margin){
-					image_width = viewport_width - (min_width_margin * 2);
-					width_margin = min_width_margin;
-					image_height = image_width/image_ratio;
-					height_margin = (viewport_height-image_height)/2;
-				}
-				if(height_margin < min_height_margin){
-					image_height = viewport_height - (min_height_margin * 2);
-					height_margin = min_height_margin;
-					image_width = image_height*image_ratio;
-					width_margin = (viewport_width-image_width)/2;
-				}
-				var css = {
-					'margin-top': height_margin.toFixed(0) + "px",
-					'margin-bottom': height_margin.toFixed(0) + "px",
-					'margin-left': width_margin.toFixed(0) + "px",
-					'margin-right': width_margin.toFixed(0) + "px",
-					'width': image_width.toFixed(0) + "px",
-					'height': image_height.toFixed(0) + "px"
-				};
-				//console.log(css);
-				$this.css(css);
-			});
-			return this;
-		};
-	}($));
-
-	// Size image on loading image
-	// --------------------------------------
-	$('.thumbnail img').on("load", function () {
-		$(this).centerWithMargins();
-	});
-	
-	// Size images on loading page
-	// --------------------------------------
-	$('.thumbnail img').centerWithMargins();
-*/
 	// Lightbox
 	// -------------------------------------------------------
 	if($('html').hasClass('screen') && $('[data-lightbox="slideshow"]').length) {
@@ -735,18 +657,15 @@ jQuery(document).ready(function($) {
     		// Compile bookmark data object for an element
 	    	// -------------------------------------------
 	    	$.fn.bookmarkData = function () {
-	    		var location = window.location.href;
-	    	    var locationSplit = location.split("#");
-	    	    var page = locationSplit[0];
-	    	    var href = this.attr('href');
+	    		//console.log(window.location);
+	    		var href = this.attr('href');
 	    	    var hrefSplit = href.split("#");
 	    	    var targetId = hrefSplit[hrefSplit.length - 1];
-	    	    var hash = targetId ? "#" + targetId : "#top";
-	    	    var pageTitle = $("#front-matter h1").text();
-	    	    var sectionTitle = this.parents("section, aside").find("h3, h4").first().text();
-	    	    var milestoneTitle = this.text();
-	    	    var title = pageTitle + (sectionTitle ? " / " + sectionTitle : "") + (milestoneTitle ? " / " + milestoneTitle : "");
-	    	    return {'page': page, 'hash': hash, 'title': title};
+	    	    return {
+	    	    	'page': window.location.pathname, 
+	    	    	'hash': targetId ? "#" + targetId : "#top", 
+	    	    	'title': this.data("bookmark")
+	    	    };
 	    	}
 
     	}($));
@@ -797,10 +716,6 @@ jQuery(document).ready(function($) {
     		$.loadBookmarks = function () {
     			
     			// get bookmarks from cookies
-    			
-	    	    var location = window.location.href;
-	    	    locationSplit = location.split("#");
-	    	    var page = locationSplit[0];
     			var bookmarks = $.getBookmarks();
     			
     			var $tbody = $("table#bookmarks-list tbody");
@@ -815,9 +730,7 @@ jQuery(document).ready(function($) {
          			for(var i = 0; i < bookmarks.length; i++){
          			    
          			    var href = bookmarks[i].page + bookmarks[i].hash;
-         			    var cssClass = (bookmarks[i].page == page) ? "scroll-to-anchor" : "";
-         			    
-         			    var $link = $("<a>", {"href": href, "class": cssClass}).text(bookmarks[i].title);
+         			    var $link = $("<a>", {"href": href, "class": "scroll-to-anchor"}).text(bookmarks[i].title);
          			    var $removeLink = $("<a>", {"href": href, "class": "remove-bookmark", "title": "Remove this bookmark"}).html('<i class="fa fa-minus-circle"></i>');
          			    
 						var $trow = $("<tr>");
@@ -854,7 +767,7 @@ jQuery(document).ready(function($) {
 
     	// Add a bookmark on clicking a milestone
 	    // -------------------------------------------
-    	$(document).on("click",'a.milestone', function(e) {
+    	$(document).on("click",'a[data-bookmark]', function(e) {
     	  	
             e.preventDefault();
     	    
@@ -893,7 +806,7 @@ jQuery(document).ready(function($) {
 
 				var currentLocation;
 
-			    $(".translation :not(.unrendered-preview, render-in-viewport) a.milestone:visible").each(function(index){
+			    $(".translation a[data-bookmark]:visible").each(function(index){
 			    	
 			    	var $this = $(this);
 			    	if($this.elementInView() == "topInView"){
@@ -927,7 +840,8 @@ jQuery(document).ready(function($) {
     			// get bookmarks from cookies
     			
 	    	    var lastLocation = Cookies.get('lastLocation');
-	    	    
+	    	    //console.log(lastLocation);
+
 	    	    if(lastLocation){
 
 	    	        lastLocation = JSON.parse(lastLocation);
@@ -944,11 +858,13 @@ jQuery(document).ready(function($) {
 	    	        		}
 	    	        	}
 
-	    	        	if(!bookmarked)
-	    	        	{
+	    	        	if(!bookmarked) {
+
+	    	        		var lastLocationHash = lastLocation.hash.substr(lastLocation.hash.indexOf('#'));
+	    	        		//console.log(lastLocationHash);
+	    	        		
 	    	        		// Check it's not on screen
-					    	if(['inView', 'topInView'].indexOf($(lastLocation.hash).elementInView()) < 0)
-	    	        		{
+					    	if(['inView', 'topInView'].indexOf($(lastLocationHash).elementInView()) < 0) {
 
 	    	        			// Offer some options
 			    	        	$alert = $("#page-alert");
@@ -1045,53 +961,35 @@ jQuery(document).ready(function($) {
         
         var $this = $(this);
         var $popupFooter = $('#popup-footer');
+        var $popupFooterDataContainer = $popupFooter.find('.data-container');
 
-        $('.collapse').not($popupFooter).collapse('hide');
-        $popupFooter.removeClass('in');
-        
-        var doPopUp = function(){
+        // The target of the link
+        var $target = $($this.attr("href"));
 
-        	// Trigger pre-events
-	        $this.trigger("prepare");
+        //Check it's not already open
+        if($popupFooter.is('.collapse.in') && $target.attr('id') + "-pop-up" == $popupFooterDataContainer.children().first().attr('id')){
+        	// The footer is open with the same id
+        	// So leave it
+        }
+        else {
 
-	        // The target of the link
-	        var $target = $($this.attr("href"));
-
-	        // Parse that content
-	        if($target.hasClass('glossarize')){
-	        	parseParagraph($target);
-	        }
-	        $target.find(".glossarize, .glossarize-complete").each(function(){
-	        	parseParagraph($(this));
-	        });
-
-	        // Get the content from the target
+        	// Get the content from the target
 	        var $content = $target.clone();
 
+	        // Close open pop-up
+	        $('.collapse').not($popupFooter).collapse('hide');
+	        $popupFooter.removeClass('in');
+
 	        // Reset the id
-	        $content.attr("id", "");
+	        $content.attr("id", $content.attr("id") + "-pop-up");
 
 	        // Copy content to the footer
-	        $('#popup-footer .data-container').html($content);
+	        $popupFooterDataContainer.html($content);
 
 	        // Show the footer
 			$popupFooter.collapse('show');
-
         }
 
-        // Is this the first call to the glossary?
-        if($this.hasClass("glossary-link")){
-	        $.wait("Loading the glossary...");
-	    	setTimeout(function(){
-	    		doPopUp();
-	        	$.wait("", true);
-
-	        },100);
-	    }
-	    else {
-        	// Just do it
-        	doPopUp();
-        }
 	});
 
 	// Pop-out sidebar
@@ -1108,7 +1006,7 @@ jQuery(document).ready(function($) {
         $sidebar.removeClass('in');
         
         if(selector == "#contents-sidebar" &&  !$sidebar.hasClass("loaded")){
-        	var $toc = $("#contents  .contents-table");
+        	var $toc = $("#toc  .contents-table");
         	$sidebar.find(".data-container").html($toc.clone());
         	$sidebar.addClass("loaded");
         	$sidebar.find('[data-toggle="collapse"]').each(function(){
@@ -1137,417 +1035,6 @@ jQuery(document).ready(function($) {
 
 	});
 
-	// Find instances of the glossary items in the text 
-    // and link them to the glossary.
-    // -----------------------------------------------------------
-    if($('html').hasClass('screen')){
-
-    	if($("#glossary .glossary-item").length){
-
-    		// Extend contains selector to ignore case
-    		// ----------------------------------------
-			$.expr[":"].contains = $.expr.createPseudo(function(arg) {
-			    return function( elem ) {
-			        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-			    };
-			});
-
-            var isWorking = false;
-
-            // What we are parsing
-            // ------------------------------
-            var $allGlossaries = $("#glossary .glossary-item:not(.ignore)"),
-                $allMatchable = $(".glossarize-section .glossarize:not(.ignore), .glossarize-section .glossarize-complete:not(.ignore)");
-
-            var countWords = function(term){
-                var words = term.split(' ');
-                return words.length;
-            };
-
-            // Prioritise glossary items
-            // ------------------------------
-            // Do a fake .slice() to apply .sort() to jQuery array
-            var $allGlossariesPrioritised = $allGlossaries.slice(0).sort(function(a, b) {
-            	if(!a.wordCount){
-            		a.wordCount = countWords($(a).find(".term").first().text());
-            	}
-            	if(!b.wordCount){
-            		b.wordCount = countWords($(b).find(".term").first().text());
-            	}
-            	return b.wordCount - a.wordCount;
-			});
-
-            var escapeRegExp = function(stringToGoIntoTheRegex) {
-                
-	                // Prioritise glossary items
-	            	// ------------------------------
-                    return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                    
-                },
-                glossarize = function($glossaries, $matchable, callback){
-                
-					// Highlight instances of the glossary items in each
-					// paragraph with a link to the glossary.
-					// -------------------------------------------------
-					$glossaries.each(function(){
-
-					    var $glossary = $(this);
-
-					    $glossary.find('.term').each(function(){
-					    	if($glossary.data("match") == "marked"){
-
-					    		// Markup marked glossaries
-					    		glossaryMarked($(this), $glossary, $matchable);
-						    }
-						    else {
-
-						    	// Markup matching glossaries
-						    	glossaryMatch($(this), $glossary, $matchable);
-
-						    }
-					    });
-					});
-					if(callback){
-					   callback(arguments[3], arguments[4]);
-					}
-                   
-                },
-                glossaryRegEx = function(term){
-
-                	// Unfortunately JS doesn't consider accented characters as "word" characters.
-			    	// Therefore cannot use the \b or \w metacharacters. We have to enumerate all word boundaries ourselves.
-			    	// -----------------------------------------------------------------------------------------------------
-                	return new RegExp("(^|\\s|‘|'|“|:|;|—|\"|\\/|\\(|\\[|>)(" + escapeRegExp(term.toLowerCase()) + ")($|\\s|\\.|,|:|;|\\!|\\?|\\/|—|’\\W|'\\W|”|\"|\\)|\\]|<|s$|s\\W|s<|es$|es\\W|es<|’s$|’s\\W|’s<|'s$|'s\\W|'s<|s’$|s’\\W|s’<|s'$|s'\\W|s'<)","gi");
-                },
-                glossaryMarked = function($term, $glossary, $matchable){
-                	
-                	// Glossarise the marked up terms and replace with links
-                	// -------------------------------------------------
-			    	var glossaryId = $glossary.attr("id");
-			        var regEx = glossaryRegEx($term.text());
-			        
-			        $matchable
-			        	.find("span.match")
-			        	.filter(function(){ 
-			        		
-			        		var $this = $(this);
-			        		var this_ref = $this.data('ref');
-			        		if(this_ref){
-			        			//console.log(this_ref + " ? " + glossaryId + " = " + (this_ref == glossaryId).toString());
-			        			return this_ref == glossaryId;
-			        		}
-			        		//console.log($term.text() + " ? " + $(this).text() + " = " + $(this).text().match(regEx));
-			        		return $this.text().match(regEx);
-			        		//return $(this).text().toLowerCase() == $term.text().toLowerCase(); 
-			        	})
-			        	.each(function(spanIndex){
-
-				        	var $span = $(this);
-				        	$span.replaceWith('<a href="#' + glossaryId + '" class="glossary-link pop-up">' + $span.html().replace('glossarize', '') + '</a>');
-			        	
-			        });
-                },
-                glossaryMatch = function($term, $glossary, $matchable){
-
-                	// Glossarise any matches in the text
-                	// -------------------------------------------------
-			    	var term = $term.text();
-			    	var glossaryId = $glossary.attr("id");
-			        
-			        $matchable.each(function(){
-			        	var $this = $(this);
-			        	if($this.hasClass('glossarize')){
-			        		var regEx = glossaryRegEx(term);
-			        		$this.replaceText(regEx, '$1<a href="#' + glossaryId + '" class="glossary-link pop-up">$2<\/a>$3');
-			        	}
-			        	else if($this.hasClass('glossarize-complete')){
-			        		var regEx = new RegExp("^(" + escapeRegExp(term) + ")$","gi");
-			        		$this.replaceText(regEx, '<a href="#' + glossaryId + '" class="glossary-link pop-up">$1<\/a>');
-			        	}
-			        	
-			        });
-                },
-                glossaryBackLink = function($glossaries, callback){
-                
-                    // Create a list of links in the glossary to its 
-                    // occurences in the text
-                    // ----------------------------------------------------
-                    $glossaries.filter(':not(.backlinked)').each(function(){
-                        
-                        var $glossaryItem = $(this);
-                        var glossaryId = $glossaryItem.attr("id");
-
-                    	// Create a list
-                        var $list = $("<ul>", {"class": "list-inline"});
-
-                        // Find references to this glossary in the text
-                        $allMatchable.has("a[href='#" + glossaryId + "']").each(function(refIndex){
-                        	
-                            var $paragraph = $(this);
-                            var paragraph_id = $paragraph.attr("id");
-                            if(!paragraph_id){
-                            	paragraph_id = $paragraph.parents("[id]").attr("id");
-                            }
-
-                            if(!$list.find("a[href='#" + paragraph_id + "']").length)
-                            {
-                            	// Create a link to it
-                                var linkAttributes = {
-                                	"href": "#" + paragraph_id, 
-                                	"class": "scroll-to-anchor", 
-                                	"data-mark": "a[href='#" + glossaryId + "']"
-                                };
-                                var $link = $("<a>", linkAttributes).text($list.find("li").length + 1);
-                                // Create a list item
-                                var $item = $("<li>");
-                                // Append the link to the item
-                                $item.append($link);
-                                // Append the item to the list
-                                $list.append($item);
-                            }
-                            
-                        });
-						
-						var countOccurences = $list.find("li").length;
-						var occurencesDesc = countOccurences == 1 ? "1 passage contains this term" : countOccurences + " passages contain this term";
-						$glossaryItem.find(".occurences h6").text(occurencesDesc);
-                        
-                        // Append the list to the glossary
-                        $glossaryItem.find(".occurences").append($list);
-                            
-                    });
-                    
-                    if(callback){
-                        callback();
-                    }
-                    
-                },
-                prepGlossary = function($glossary){
-
-                	// First glossarize terms with a higher priority
-                	// -------------------------------------------------
-
-                	var $terms = $glossary.find(".term");
-                	var priority = countWords($terms.first().text());
-                    var regExs = new Array();
-
-                	$terms.each(function(index){
-                		regExs.push(glossaryRegEx($(this).text()));
-                	});
-
-                    var $higherPriority = 
-                    	$allGlossariesPrioritised
-                    		.filter(':not(.backlinked)')
-                    		.filter(function() {
-                    			return parseInt($(this)[0].wordCount) > parseInt($glossary[0].wordCount);
-							})
-                    		.filter(function(){
-                    			var matchingTerm = false;
-                    			var $otherGlossTerms = $(this).find(".term");
-                    			$otherGlossTerms.each(function(){
-                    				var otherTermText = $(this).text();
-                    				for (var i = regExs.length - 1; i >= 0; i--) {
-	                    				if (otherTermText.match(regExs[i])) {
-	                    					matchingTerm = true;
-	                    					break;
-	                    				};
-	                    			}
-                    				if(matchingTerm){
-                    					return false;
-                    				}
-                    			});
-                    			return matchingTerm;
-                    		});
-
-					$higherPriority.each(function(){
-						var $otherGlossary = $(this);
-
-						glossarize($otherGlossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $otherGlossary, function(){ 
-                        	isWorking = false;
-                        	$otherGlossary.addClass("backlinked");
-                        });
-					});
-                },
-                parseParagraph = function($paragraph){
-                
-                    // Parse a particular paragraph
-                    // --------------------------------------
-                    
-                    if(!isWorking){
-                        isWorking = true;
-                        glossarize($allGlossariesPrioritised, $paragraph, function(){ 
-                        	isWorking = false; 
-                            $paragraph.addClass("glossarized")
-                        });
-                    }
-                    
-			    },
-			    parseGlossary = function($glossary){
-			        
-                    // Parse a particular glossary
-                    // --------------------------------------
-                    
-                    if(!isWorking){
-                        isWorking = true;
-                        prepGlossary($glossary);
-						glossarize($glossary, $allMatchable.filter(':not(.glossarized)'), glossaryBackLink, $glossary, function(){ 
-                        	isWorking = false;
-                        	$glossary.addClass("backlinked");
-                        });
-                    }
-                    
-			    },
-			    hideTermsTimeout;
-
-			(function ($){
-
-				// Show or hide the glossary links using .mute-glossary
-				// ----------------------------------------------------
-				$.showGlossaryLinks = function(){
-
-					var $translation = $(".translation");
-
-			    	$translation.removeClass("mute-glossary");
-
- 			    	clearTimeout(hideTermsTimeout);
-
- 			    	hideTermsTimeout = setTimeout(function(){
- 			    		$translation.addClass("mute-glossary");
- 			    	}, 2000);
-			    }
-			}($));
-
-			(function ($) { 
-
-				// Glossarize paragraphs that have become visible
-        		// ----------------------------------------------
-    			$.glossarizeVisibleParagraphs = function () {
-    
-        			if (isWorking) return false;
-        				
-        			$allMatchable.filter(':not(.glossarized)').each(function(){
-        			
-        			    var $paragraph = $(this);
-     			    	var elementInViewStatus = $paragraph.elementInView();
-
-     			    	$.showGlossaryLinks();
-     			    	
-     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
-                            parseParagraph($paragraph);
-     					}
-     					else if(elementInViewStatus == 'below'){
-     					    // This allows us to break on the first
-     					    // non-visible after a visible.
-     					    return false;
-     					}
-        			    
-     				});
-     				
-    			}
-    		}($));
-    		
-    		(function ($) { 
-
-    			// Back link glossaries that have become visible
-        		// ---------------------------------------------
-    			$.backlinkVisibleGlossaries = function () {
-    
-        			if (isWorking) return false;
-
-        			$allGlossaries.filter(':not(.backlinked)').each(function(){
-        			
-        			    var $glossaryItem = $(this);
-     			    	var elementInViewStatus = $glossaryItem.elementInView();
-     			    	
-     					if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
-                            parseGlossary($glossaryItem);
-     					}
-     					else if(elementInViewStatus == 'below'){
-     					    // This allows us to break on the first
-     					    // non-visible after a visible.
-     					    return false;
-     					}
-        			    
-     				});
-     				
-    			}
-    		}($));
-     		
-     		// Also implement on showing in pop-up footer:
-     		// Call prepare event on clicking a glossary link
-     		// ----------------------------------------------
-            $(document).on("prepare",'a.glossary-link', function(e) {
-               parseGlossary($($(this).attr("href")));
-           	});
-	     		
-    	}
-         
-    }
-
-    // Detect when user stops scrolling
-	// ---------------------------------------
-	(function ($) { 
-		$.fn.scrollEnd = function(callback, timeout) {  
-			var $this = this;
-			$this.scroll(function(){
-				if ($this.data('scrollTimeout')) {
-					clearTimeout($this.data('scrollTimeout'));
-				}
-				$this.data('scrollTimeout', setTimeout(callback, timeout));
-			});
-		};
-	}($));
-
-
-    // When a user stops scrolling...
-	// -------------------------------------------
-	$(window).scrollEnd(function () {
-
-		// Render the first visible section
-		// --------------------------------------------
-		// $.renderInViewport();
-
-		// Glossarize the currently visible elements
-		// --------------------------------------------
-		if(typeof $.glossarizeVisibleParagraphs === 'function'){ $.glossarizeVisibleParagraphs(); };
-		if(typeof $.backlinkVisibleGlossaries === 'function'){ $.backlinkVisibleGlossaries(); } ;
-		
-	}, 700);
-
-	// Add behaviour...
-	// Window scroll, fade in controls
-	// -------------------------------------------
-	$(window).on('scroll', function(){
-		var $this = $(this) ;
-		// Clear any existing timeout
-		if($this.data('showOnScroll')){
-			clearTimeout($this.data('showOnScroll'));
-		}
-		// Set new time out to hide again
-		$this.data(
-			'showOnScroll', 
-			setTimeout(
-				function() {
-					$('body').removeClass('scrolling'); 
-					//$('.show-on-scroll, .xs .show-on-scroll-xs').fadeOut(); 
-				}
-			, 2000)
-		);
-		// Show what's marked to show
-		$this.on(
-			'scroll', 
-			function(){ 
-				$('body').addClass('scrolling');
-				//$('.show-on-scroll, .show-on-scroll-xs').fadeIn(); 
-			}
-		);
-	});
-
-	// On load...
-	// Trigger scroll behaviour
-	// -------------------------------------------
-	$(window).scroll();
-
 	// Note unsaved changes to a form
 	// -------------------------------------------
 	$(document).on("change", "form.form-update input, form.form-update select, form.form-update textarea", function(e){
@@ -1575,8 +1062,79 @@ jQuery(document).ready(function($) {
 	    if(typeof $.saveCurrentLocation === 'function'){ $.saveCurrentLocation(); };
 	});
 
-	// Detect when user stops scrolling
-	// ---------------------------------------
+	
+	(function ($) { 
+		$.processElementInView = function() {
+
+			$(".reading-room.translation section.show [data-in-view-replace]").each(function() {
+
+				var $paragraph = $(this);
+
+				var elementInViewStatus = $paragraph.elementInView();
+
+				if(['inView', 'topInView'].indexOf(elementInViewStatus) >= 0){
+					//console.log($paragraph.data('in-view-replace'));
+
+					if($paragraph.data('in-view-replace') > ''){
+						$.replaceWithAjax(
+                    		$paragraph.data('in-view-replace'), 
+                    		$paragraph, 
+                    		function(){
+                    			$paragraph.data('in-view-replace', '');
+                    		}
+                    	);
+					}
+
+					}
+					else if(elementInViewStatus == 'below'){
+					    // This allows us to break on the first non-visible after a visible.
+					    return false;
+					}
+
+			});
+		};
+	}($));
+
+	// Add behaviour...
+	// Window scroll
+	// -------------------------------------------
+	var windowScroll200Timeout;
+	var windowScroll3000Timeout;
+	$(window).on('scroll', function(){
+
+		// Clear any existing timeouts
+		clearTimeout(windowScroll200Timeout);
+		clearTimeout(windowScroll3000Timeout);
+
+		$('body').addClass('scrolling');
+		//console.log('scroll');
+
+		// Show/hide scroll to top link
+		if($(document).scrollTop() > 200){
+			$(".link-to-top").addClass("in");
+		}
+
+		windowScroll200Timeout = 
+			setTimeout(function() { $.processElementInView(); } , 200);
+		
+		windowScroll3000Timeout = 
+			setTimeout(
+				function() {
+
+					$('body').removeClass('scrolling');
+					//console.log('un-scroll');
+
+					if($(document).scrollTop() < 200){
+						$(".link-to-top").removeClass("in");
+					}
+
+				}
+			, 3000);
+		
+	});
+
+	// Replace an element with some html via ajax
+	// ------------------------------------------
 	(function ($) { 
 		$.replaceWithAjax = function(source, $target, callback) {
 
@@ -1585,28 +1143,32 @@ jQuery(document).ready(function($) {
 			var sourceSplit = source.split("#");
 			var sourceUrl = sourceSplit[0];
 			var sourceFragment = sourceSplit[1];
+			var ajaxUrl = sourceUrl + (sourceUrl.indexOf('?') == -1 ? '?' : '&') + 'method=ajax' ;
 
 			$.ajax({
-    			url: sourceUrl,
+    			url: ajaxUrl,
     			type: 'GET',
     			dataType: 'html',
     			success: function(data) {
 
     				// Get a fragment of the result
 	    			// ----------------------------------------------
-	    			var $dataFragment = $(data).find("#" + sourceFragment);
+	    			var $data = $(data);
+	    			var $wrapper = $("<div>").append(data);
+	    			var $dataFragment = $wrapper.find("#" + sourceFragment);
+
 
 	    			// Remove ids when we insert from a different dom
 	    			// ----------------------------------------------
+	    			// Don't need to do this as we are replacing
 	    			// $dataFragment.find("[id]").addBack().removeAttr('id');
 
 	    			// Append the data to the target
 	    			// ----------------------------------------------
 	    			if($dataFragment.length){
-	    				$target.html($dataFragment);
-	    			}
-	    			else {
-	    				$target.html(data);
+	    				$target.replaceWith($dataFragment);
+		    			$.matchHeights($dataFragment);
+						$.prepFiltersCarousel($dataFragment);
 	    			}
 
 	    			// Do callbacks
@@ -1614,7 +1176,11 @@ jQuery(document).ready(function($) {
 			    	if(callback){
 			    		callback();
 			    	}
-	            }
+	            },
+    			error: function(data) {
+    				callback();
+    			}
+
     		});
 		};
 	}($));
@@ -1622,7 +1188,7 @@ jQuery(document).ready(function($) {
 	// Add behaviour...
     // Get the href content via ajax and put it in the specified element
     // ----------------------------------------------------------------- 
-    $(document).on("click", "[data-ajax-target]", function(e){
+    $(document).on("click", "a[data-ajax-target]", function(e){
         
         e.preventDefault();
         e.stopPropagation();
@@ -1631,7 +1197,6 @@ jQuery(document).ready(function($) {
         var source = $this.attr('href');
         var target = $this.data('ajax-target');
         var $target = $(target);
-        var $credentials;
 
         if($target.is('.replace')){
         	$target.html("").removeClass('loaded');
@@ -1642,46 +1207,64 @@ jQuery(document).ready(function($) {
         	$('.collapse').not($popupFooter).not($this.closest('.collapse')).collapse('hide');
         	$popupFooter.removeClass('in');
         	$.wait("Loading the source text...");
-	    	setTimeout(function(){
-	    		$.replaceWithAjax(source, $target, function(){ $popupFooter.collapse('show'); });
-	        	$.wait("", true);
-	        },100);
+	    	setTimeout(
+	    		function(){
+		    		$.replaceWithAjax(
+		    			source, 
+		    			$target, 
+		    			function(){
+		    				$popupFooter.collapse('show');
+		    				$.wait("", true); 
+		    			}
+		    		);
+		        }
+	        ,100);
         }
-        else if(!$target.is('.loaded')){
+        else if($target.length && !$this.is('.loaded')){
         	$.wait("Loading content...");
-        	setTimeout(function(){
-        		$.replaceWithAjax(source, $target, function(){ $target.collapse('show').addClass('loaded'); });
-	        	$.wait("", true);
-	        },100);
+        	setTimeout(
+        		function(){
+	        		var $collapse = $target.closest('.collapse');
+	        		$.replaceWithAjax(
+	        			source, 
+	        			$target, 
+	        			function(){ 
+	        				$collapse.collapse('show'); 
+	        				$this.addClass('loaded');
+	        				$.wait("", true);
+	        			}
+	        		);
+		        }
+	        ,100);
         }
         else{
-            $target.collapse('toggle');
+            $target.closest('.collapse').collapse('toggle');
         }
         
     });
 
-    // Add behaviour...
-    // Print a page in a link
-    // ----------------------------------------------------------------- 
-    $(document).on("click", "a.print-href", function(e){
+	$(document).on("submit", "form[data-ajax-target]", function(e){
 
-    	e.preventDefault();
+		e.preventDefault();
 
-    	var url = $(this).attr('href');
+		var $this = $(this);
+		var target = $this.data('ajax-target');
+		var $target = $(target);
+		var formAction = $this.attr('action');
+		var formData = $this.serialize();
+		var source = formAction + '?' + formData + target;
 
-    	var $iframe = $("#print-iframe");
+		$.wait("Loading content...");
 
-    	if(! $iframe.length)
-    	{
-    		$iframe = $("<iframe id='print-iframe' style='position:absolute;width:100%;height:100px;left:0px;top:-100px;z-index:-1;'>")
-    	}
-
-    	$iframe.attr("src", url).appendTo("body").on("load", function(){
-	    	var iframe = document.getElementById('print-iframe');
-			var iframeWindow = iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
-	    	iframeWindow.print();
-	    });
-
+		$.replaceWithAjax(
+			source, 
+			$target, 
+			function(){ 
+				$.wait("", true);
+			}
+		);
+		
+		return false;
 	});
 
 	// Add behaviour...
@@ -1693,26 +1276,6 @@ jQuery(document).ready(function($) {
     	window.print();
 
 	});
-
-    // Add behaviour...
-    // Before showing the print preview
-    // ----------------------------------------------------------------- 
-	var beforePrintFunc = function() {
-
-		// Un-collapse divs
-		// -----------------------------
-	    $('.collapse.print-expand').each(function(){
-    		$(this).attr('style', '');
-    	});
-	}
-	// Add listener for chrome
-	// -----------------------------
-	window.matchMedia('print').addListener(function(mql) {
-	    if (mql.matches) {
-	        beforePrintFunc();
-	    }
-	});
-	window.onbeforeprint = beforePrintFunc;
 
     // Add behaviour...
     // Filter on change
@@ -1819,8 +1382,10 @@ jQuery(document).ready(function($) {
 
 				// If source is a url get ajax content
 				$.replaceWithAjax(source, $target, function(){});
+
 			}
 			else {
+
 				var $source = $(source);
 
 				// If source is a node get text
@@ -1831,6 +1396,7 @@ jQuery(document).ready(function($) {
 						}
 					}
 				}
+
 			}
 		}
 
@@ -1921,9 +1487,11 @@ jQuery(document).ready(function($) {
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 		// Match heights on hidden content
-		//------------------------------------------
-		$.matchHeights($(document));
-		$.setOneLineHeights($(document));
+		// ------------------------------------------
+		//console.log($(e.target).attr('href'));
+		var $target = $($(e.target).attr('href'));
+		$.matchHeights($target);
+		$.setOneLineHeights($target);
 
 	});
 
@@ -1956,7 +1524,6 @@ jQuery(document).ready(function($) {
 				$(this).attr('required', 'required');
 			});
 	});
-
 	$('[data-input-required]').on('hide.bs.tab', function (e) {
 		$($(this).data('input-required'))
 			.each(function(){
@@ -2045,7 +1612,8 @@ jQuery(document).ready(function($) {
         $('.collapse').not('.persist').collapse('hide');
 
         // show glossary highlights
-        if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
+        //if(typeof $.showGlossaryLinks === 'function'){ $.showGlossaryLinks(); };
+        $(window).scroll();
         
 	});
 
@@ -2071,7 +1639,7 @@ jQuery(document).ready(function($) {
 	// Add behaviour
 	// Match heights on expand
 	// ------------------------------------------
-	$(document).on('shown.bs.collapse', function () {
+	$('.collapse').on('shown.bs.collapse', function () {
 		$.matchHeights($(this));
 	});
 
@@ -2127,18 +1695,29 @@ jQuery(document).ready(function($) {
 		
 	});
 
-	// Add behaviour...
-	// Proof-of-concept!!!
-	// Text to speech
-	// --------------------------------------
-	// <script src="//vws.responsivevoice.com/v/e?key=nXM8DugR"/>
-	/*
-	$.fn.ignore = function(sel){
-		return this.clone().find(sel||">*").remove().end();
-	};
-	$(document).on("click", '.text-to-speech', function(e){
-		responsiveVoice.speak($("#summary p").ignore('.milestone').text());
-	});*/
+	// Add behaviour
+	// Show page alert on clicking a link
+	// (In addition to normal link behaviour)
+	// ------------------------------------------
+	$(document).on("click", "a[data-page-alert]", function(e){
+
+		var source = $(this).data("page-alert");
+		var $target = $("#page-alert");
+
+		$.replaceWithAjax(source, $target.find('.container'), function(){ $target.addClass('info').collapse('show').addClass('loaded'); });
+
+	});
+
+	// Add behaviour
+	// Set active
+	// ------------------------------------------
+	$(document).on("click", "a[data-toggle-active]", function(e){
+
+		var $target = $($(this).data("toggle-active"));
+		$target.siblings('.active').removeClass('active');
+		$target.toggleClass('active');
+
+	});
 
 	// On loading the page...
 	// Redirect to a different page
@@ -2147,31 +1726,45 @@ jQuery(document).ready(function($) {
 		location.href = $(this).attr("href");
 	});
 
-	// Add behaviour
-	// Show page alert on clicking a link
-	// (In addition to normal link behaviour)
-	// ------------------------------------------
-	$("a[data-page-alert]").on("click", function(e){
-
-		var source = $(this).data("page-alert");
-		var $target = $("#page-alert");
-
-		$.replaceWithAjax(source, $target, function(){ $target.addClass('info').collapse('show').addClass('loaded'); });
-
-	});
-
 	// On loading the page...
-	// Scroll to the hash location
-	// -------------------------------------------
-	$.scrollToAnchor(window.location.hash, 0, null, null, function(){
-		// Add callback...
-		// Show the last location option on loading the page
-		// --------------------------------------------------
-    	if($("#page-alert").length && typeof $.lastLocationOption === 'function'){
-    		$.lastLocationOption();
-    	}
-	});
+	// Set up the filters carousel
+	// ------------------------------------------
 
+	(function ($) { 
+		$.prepFiltersCarousel = function ($element) {
+
+			$element.find('#filters-carousel').each(function(e){
+
+				var $filters = $(this);
+				var $viewport = $filters.find('.viewport');
+				var $slider = $viewport.find('.slider');
+				var $filter_items = $slider.find('.col-filter');
+				var filter_width = $filter_items.first().outerWidth();
+				var row_width = $filter_items.length * filter_width;
+				var increment = $filter_items.filter('.active').index() * filter_width;
+
+				// Set width of slider
+				$slider.innerWidth(row_width + 30);
+				$filters.removeClass('not-ready');
+
+				// Set offset default based on the active element
+				$viewport.animate({ scrollLeft: increment }, "slow");
+
+				// Add events to controls
+				$filters.find("a.carousel-control").on("click", function(e){
+					e.preventDefault();
+
+					increment = $(this).hasClass('left') ? -filter_width : filter_width ;
+
+					$viewport.animate({ scrollLeft: ($viewport.scrollLeft() + increment) });
+					$viewport.data('offset', $viewport.scrollLeft());
+
+				});
+
+			});
+		}
+	}($));
+	
 	// On loading the page...
 	// Close temporary alerts
 	// -----------------------------------------
@@ -2203,13 +1796,19 @@ jQuery(document).ready(function($) {
 	// Flash a button
 	// ------------------------------------------
 	$('[data-onload-pulse]').each(function(e){
+
 		var $this = $(this);
-		setInterval(function(){
-			$this.pulse();
-		}, $this.data('onload-pulse'));
+
+		setInterval(
+			function(){
+				$this.pulse();
+			}, 
+			$this.data('onload-pulse')
+		);
 		
 	});
 
+	// On loading the page...
 	// Affix nav
 	// ------------------------------------------
 	$("[data-spy='affix']").each(function(){
@@ -2218,7 +1817,7 @@ jQuery(document).ready(function($) {
 		$this.affix({
 			offset: {
 				top: function () {
-			    	return $this.parents('.affix-container').offset().top;
+			    	return $this.closest('.affix-container').offset().top;
 			    }/*,
 				bottom: function () {
 			    	return (this.bottom = $('body > footer').outerHeight(true) + 20);
@@ -2228,17 +1827,53 @@ jQuery(document).ready(function($) {
 	});
 
 	// On resize...
-	//------------------------------------------
+	// ------------------------------------------
 	$(window).on("resize", function(){
-		$.mediaSize();
-		$.matchHeights($(document));
-		$.popupFooterHeight();
-		$.setOneLineHeights($(document));
+
+		$.wait("Rendering page...");
+
+    	setTimeout(
+    		function(){
+	    		$.mediaSize();
+				$.matchHeights($(document));
+				$.popupFooterHeight();
+	    		$.wait("", true);
+	        }
+        ,100);
+		
 	});
 
-	// On loading the page...
-	// Trigger resize events
-	//------------------------------------------
-	$(window).resize();
+	$.mediaSize();
+	$.popupFooterHeight();
+	$.matchHeights($(document));
+	$.prepFiltersCarousel($(document));
 
+	// Scroll to the hash location
+	// Do this after all other layout processes
+	// -------------------------------------------
+	$.scrollToAnchor(window.location.hash, 0, null, null, function(){
+
+		// Add callback...
+
+    	// Mark elements in the text
+		// -------------------------------------------
+    	var paramaterMark = $.getUrlParameter('mark');
+    	if(paramaterMark) {
+
+			$.markNodes('[data-mark-id="'+ paramaterMark +'"]');
+
+    	}
+		// Show the last location option on loading the page
+		// --------------------------------------------------
+    	else if($("#page-alert").length && typeof $.lastLocationOption === 'function'){
+    		$.lastLocationOption();
+    	}
+
+    	// Trigger scroll behaviour
+		// This adds .scrolling which shows some stuff
+		// -------------------------------------------
+		$(window).scroll();
+
+	});
+	
 });

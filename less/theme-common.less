@@ -69,16 +69,17 @@ body {
         
         //background-color: rgba(255,255,255,.75);
         background-image: url('/imgs/eft-bg-pattern.svg');
-        background-size: 500px;
+        background-size: 200px;
         background-position: center top;
         background-repeat: repeat;
 
         position: relative;
         z-index: 1;
+        overflow: visible;
 
         blockquote {
             color: #fff;
-            background-color: @brand-blue;
+            background-color: @brand-green;
             margin: @line-height-computed 0px;
             padding: 16px 20px;
             border: 0px;
@@ -104,7 +105,7 @@ body {
             height: 23vw;
             border-radius: 12vw;
             margin-top: -1vw;
-            margin-bottom: -6vw;
+            margin-bottom: -4vw;
             float: right;
             //border: 20px solid @brand-blue;
         }
@@ -135,12 +136,21 @@ body {
     // Viewport smaller than sm
     @media only screen and (max-width: @screen-md) {
         .banner-band {
+            blockquote {
+                position: relative;
+                z-index: 1;
+                margin-top: 60vw;
+                margin-bottom: 0px;
+            }
             img {
-                width: 70vw;
-                height: 70vw;
-                border-radius: 35vw;
-                margin-top: -5vw;
-                margin-bottom: -20vw;
+                width: 80vw;
+                height: 80vw;
+                border-radius: 40vw;
+                position: absolute;
+                top: -15px;
+                right: 15px;
+                margin-top: 0;
+                margin-bottom: 0;
             }
         }
     }
@@ -223,7 +233,7 @@ p.intro {
 // Disable page while processing
 // -------------------------------------------
 body.wait {
-    &:after{
+    &:after {
         content:'';
         z-index: 1000;
         position:fixed;
@@ -233,7 +243,7 @@ body.wait {
         height:100%;
         background-color:rgba(255,255,255,.3);
     }
-    > #wait{
+    > #wait {
         position:fixed;
         display:inline-block;
         text-align:center;
@@ -419,7 +429,7 @@ body.wait {
         position: relative;
         z-index: 2;
 
-        > #search-controls {
+        > .search-controls {
             button {
                 padding: 7px 12px;
                 height: 36px;
@@ -910,7 +920,7 @@ ul.dropdown-menu {
     .nav-controls.show-on-scroll-xs {
         display: block;
         bottom: -@nav-controls-sm-height;
-        .transition(.25s ease-in);
+        .transition(.25s ease-out);
     }
 
     .scrolling .nav-controls.show-on-scroll-xs {
@@ -985,6 +995,9 @@ a.link-to-top {
     }
     a:hover, &.a:hover {
         text-decoration: underline;
+    }
+    &.source {
+        line-height: 2em;
     }
 }
 .text-sa, .text-wy {
@@ -1246,9 +1259,9 @@ span.indent {
 // ------------------------------------------
 .fixed-sidebar {
 
-    position:fixed;
-    bottom:0px;
-    top:0px;
+    position: fixed;
+    bottom: 0px;
+    top: 0px;
     right: 0px;
     background-color: #fff;
     border-left: 1px solid @hr-border;
@@ -1259,17 +1272,16 @@ span.indent {
     .sidebar-content {
         position: relative;
         overflow: auto;
-        margin: 35px 20px 20px 20px;
+        padding: 35px 20px 20px 20px;
     }
 
-    h2, h4 {
-        margin-top: 0px !important;
+    h2, h3, h4, h5 {
+        margin-bottom: (@line-height-computed / 2) !important;
         text-align: left !important;
-    }
-
-    h4 {
         color: @text-color;
-        font-family: @font-family-serif;
+        &:first-child {
+            margin-top: 0px !important;
+        }
     }
 
 }
@@ -1289,7 +1301,7 @@ span.indent {
 
     display: block;
     margin: 20px 0px;
-    padding: 15px 30px;
+    padding: 20px 20px 15px 20px;
     text-align: center;
     background: 
         url(/imgs/ornament/title-ornament.svg) no-repeat top center, 
@@ -1306,17 +1318,16 @@ span.indent {
 
     
     h1, h2, h3, h4 {
-        //text-shadow: 1px 2px 3px #dfe0e0;
+        
         margin-top: 15px;
         margin-bottom: 0px;
         padding-bottom: 15px;
         border-bottom: 1px solid @panel-inner-border;
-        &:first-child {
-            margin-top: 25px;
-        }
+
         &:last-child {
             border-bottom: 0px;
         }
+
         &.text-bo, &.text-sa, &.text-wy {
             font-weight: normal !important;
         }
@@ -1352,7 +1363,7 @@ span.indent {
 
     .footer {
 
-        margin: 20px -30px -15px -30px;
+        margin: 20px -20px -15px -20px;
         padding: 0px;
         background-color: #fff;
         font-family: @font-family-sans-serif;
@@ -1476,10 +1487,15 @@ table.contents-table {
             }
         }
         td {
-            padding: 14px 10px 0px 0px;
+            padding: 0px;
+            padding-top: 14px;
+            padding-right: 10px;
             line-height: 1.3em;
             break-inside: auto;
             page-break-inside: auto;
+        }
+        td:last-child {
+            padding-right: 0px;
         }
     }
     tbody {
@@ -1543,7 +1559,7 @@ table.contents-table {
             }
         }
 
-        a.render {
+        a.reveal {
             bottom: 10px;
         }
 
@@ -1568,32 +1584,22 @@ table.contents-table {
 // -------------------------------------------
 @media screen {
 
-    section {
+    section, aside {
 
-        > .render-in-viewport {
-            display: none;
-        }
+        display: block;
+        overflow: hidden;
+        position: relative;
 
-        > .unrendered-preview {
-            .fade-out(80px);
-            a {
-                border-bottom: 0 !important;
-                color: inherit !important;
-                text-decoration: none !important;
-            }
-        }
+        a.reveal {
 
-        a.render, a.preview {
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
             position: absolute;
             z-index: 4;
             text-align: center;
-            margin-top: 0px !important; // in case it occurs after a .space
-        }
+            margin-top: 0px !important;
 
-        a.render {
-            bottom: -(@btn-round-size / 2);
-            left: 0px;
-            right: 0px;
             .btn-round {
                 background-color: #fff;
                 border: 1px solid @brand-red;
@@ -1602,11 +1608,17 @@ table.contents-table {
                 }
             }
         }
-        
+
         a.preview {
+
             position: absolute;
             top: 0px;
             right: 0px;
+            position: absolute;
+            z-index: 4;
+            text-align: center;
+            margin-top: 0px !important;
+
             .btn-round {
                 background-color: #ccc;
                 i {
@@ -1615,32 +1627,47 @@ table.contents-table {
             }
         }
 
+        &.preview {
+
+            max-height: 300px;
+            .fade-out(80px);
+
+            a.preview {
+                display: none;
+            }
+        }
+
+        &.show {
+            
+            a.reveal {
+                display: none;
+            }
+        }
+
     }
 
     .collapse-one-line {
+
         overflow: hidden;
         cursor: pointer;
+
         .transition(height .25s linear);
+
         &.one-line {
             height: @line-height-computed;
         }
+
         &.small {
             padding-top: 3px;
         }
+        
     }
 
-    // Render everything in editor mode
-    // -------------------------------------
-    .editor-mode {
-        section, aside {
-            > .render-in-viewport {
-                display: block;
-            }
-        }
-    }
+    
 
 }
 
+/*
 @media only screen and (max-width: @screen-md) {
     section, aside {
         a.preview {
@@ -1648,6 +1675,7 @@ table.contents-table {
         }
     }
 }
+*/
 
 @media only screen and (min-width: @screen-sm) {
     .panel.main-panel > .panel-body {
@@ -1665,8 +1693,7 @@ table.contents-table {
        transition: none !important;
     }
 
-    @page  
-    { 
+    @page { 
         size: 210mm 297mm;
         margin: 20mm 15mm 20mm 15mm;  
     }
@@ -1740,16 +1767,16 @@ table.contents-table {
     }
 
     .page {
-
         margin-top: 300px !important;
+    }
+    .page + .page,
+    .page.page-force {
         break-before: always;
         page-break-before: always;
+    }
 
-        &.page-first {
-            break-before: avoid;
-            page-break-before: avoid;
-        }
-
+    #wait {
+        display: none;
     }
 
     .well.well-danger {

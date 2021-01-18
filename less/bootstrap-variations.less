@@ -36,6 +36,14 @@ a {
     overflow-wrap: break-word;
     word-wrap: break-word;
     cursor: pointer;
+    &:focus{
+        outline-width: 1px;
+        outline-offset:2px;
+        outline-color: #aaa;
+        .mark {
+            outline: none;
+        }
+    }
 }
 
 p {
@@ -73,6 +81,17 @@ label, .label {
 }
 .label + .label, a + .label {
     margin-left: 5px;
+}
+.label.label-filter {
+    margin: 4px 8px 8px 4px;
+    font-size: @font-size-small;
+    background-color: @gray-border-color;
+    white-space: normal;
+    padding: 0px 6px;
+    display: inline-block;
+    text-align: left;
+    box-shadow: 0px 0px 0px 4px @gray-border-color;
+    border-radius: 1px;
 }
 
 .radio,
@@ -123,7 +142,12 @@ p.form-control {
 }
 
 fieldset {
+    margin-top: @form-group-margin-bottom;
     margin-bottom: @form-group-margin-bottom;
+    legend {
+        font-size: @font-size-h4;
+        margin-bottom: @line-height-computed / 2;
+    }
 }
 
 .input-group-btn {
@@ -319,20 +343,26 @@ table.table-hover {
 
 // Carousel variations
 // --------------------------------------------
-.carousel-control i {
-    position: absolute;
-    top: 45%;
-}
-.carousel-control.left, .carousel-control.right {
-    background-image: none;
-}
-.carousel-control.left i {
-    left: 0px;
-}
-.carousel-control.right i {
-    right: 0px;
-}
+.carousel-control {
 
+    i {
+        position: absolute;
+        top: 45%;
+    }
+    &.left {
+        #gradient > .horizontal(@start-color: rgba(255,255,255,.7); @end-color: rgba(255,255,255,.0001));
+        i {
+            left: 0px;
+        }
+    }
+    &.right {
+        #gradient > .horizontal(@start-color: rgba(255,255,255,.0001); @end-color: rgba(255,255,255,.7));
+        i {
+            right: 0px;
+        }
+    }
+
+}
 
 // Print variations
 // --------------------------------------------

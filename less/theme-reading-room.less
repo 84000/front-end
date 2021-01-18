@@ -10,7 +10,7 @@ h2, h3, h4, h5, h6,
     color: @text-color;
 }
 
-h3, .milestone-h3 {
+h3 {
     margin-bottom: @line-height-computed;
 }
 
@@ -23,21 +23,61 @@ h3, .milestone-h3 {
     // Title variations 
     // ---------------------------------------------
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
         text-align: center;
     }
 
-    h3 {
-        text-transform: uppercase;
-        color: @brand-red;
+    h1, h2, h3, h4, h5 {
+        margin-top: 0px; 
+        margin-bottom: 0px; 
     }
 
-    h2, h3, h4, {
-        margin-top: @line-height-computed;
+    article {
+        padding-bottom: 30vh;
     }
 
-    .milestone-h2, .milestone-h3, .milestone-h4 {
-        margin-top: @line-height-computed + 5px;
+    section, aside {
+
+        margin-top: 40px;
+        margin-bottom: 40px;
+        position: relative;
+
+        > div {
+            .clearfix();
+        }
+
+    }
+
+    #titles, #long-titles, #body-title {
+        h1, h2, h3, h4 {
+            padding-top: 15px;
+        }
+        
+    }
+
+    #body-title {
+        .heading-section {
+
+            padding: 30px 0px;
+
+            > *:first-child {
+                margin-top: 0px;
+            }
+            
+        }
+    }
+
+    .section-label {
+        font-weight: bold;
+        //margin-top: @line-height-computed;
+        color: inherit;
+        margin-bottom: 5px;
+    }
+
+    // Layout
+    // ------------------------------------------
+    .panel-heading {
+        .text-center();
     }
 
     .trailer {
@@ -48,38 +88,17 @@ h3, .milestone-h3 {
         font-style: normal !important;
     }
 
-    .section-label {
-        font-weight: bold;
-        margin-top: @line-height-computed;
-        color: inherit;
-    }
-
-    // Milestones for titles
-    // ---------------------------------------------
-    .milestone-h2, .milestone-h3, .milestone-h4 {
-        display: block;
-    }
-
-    // Layout
-    // ------------------------------------------
-    .panel-heading {
-        .text-center();
-    }
-
-    section, aside {
-
-        margin-top: 70px;
-        margin-bottom: 70px;
-        position: relative;
-
-        > div {
-            .clearfix();
-        }
-
-    }
-
     // Link styles 
     // ---------------------------------------------
+    a.footnote-link, a.glossary-link {
+        .transition(.5s ease-in);
+        color: inherit;
+        text-decoration: none;
+        border-bottom-style: dashed;
+        border-bottom-width: 1px;
+        border-bottom-color: transparent;
+    }
+
     a.footnote-link {
         font-size: 75%;
         line-height: 0;
@@ -88,76 +107,42 @@ h3, .milestone-h3 {
         top: -0.5em;
     }
 
-    a.footnote-link, a.glossary-link, &.mute-glossary a.glossary-link:hover, &.mute-glossary .fixed-footer a.glossary-link {
+    a.footnote-link, 
+    a.glossary-link:hover, 
+    &.scrolling a.glossary-link, 
+    .fixed-footer a.glossary-link {
         .transition(none);
-        text-decoration: none;
-        border-bottom: 1px dashed lighten(@link-color, 20%);
+        color: @link-color;
+        border-bottom-color: lighten(@link-color, 20%);
         &.mark {
             color: #000;
             border-bottom-color: #000;
         }
     }
 
-    // Glossary links
-    // ---------------------------------------------
-    &.mute-glossary {
-        a.glossary-link {
-            .transition(1s ease-in);
-            color: inherit;
-            border-bottom-color: transparent;
-        }
-    }
-
-    // Gutter system
-    // --------------------------------
-    .rw { // row
-        display: block;
-        padding-left: @text-gtr-width;
-        padding-right: @text-gtr-width-right;
-        overflow: auto;
-        .rw {
-            margin-left: -@text-gtr-width;
-            margin-right: -@text-gtr-width-right;
-        }
-        .rw-heading {
-            overflow: auto;
-        }
-        .gtr {
-            display: block;
-            float: left;
-            margin-left: -@text-gtr-width;
-            overflow-wrap: break-word;
-            .milestone {
-                width: (@text-gtr-width - @panel-body-padding);
-                display: block;
-                overflow: auto;
-                overflow-wrap: break-word;
-                position: relative;
-                z-index: 2;
-            }
-        }
-    }
-
     // Title section
     // ---------------------------------------------
-    #front-matter {
+    #titles, #imprint {
 
         .text-center();
 
         .page {
-            margin-top: 70px;
+            margin-top: 50px;
             .clearfix();
         }
 
-        #titles {
+    }
+    #titles {
+
+        margin-top: 0px;
+
+        .section-panel {
+            padding: 45px 45px 30px 45px;
+        }
+
+        #main-titles {
             width: auto;
-            padding: 30px;
-            margin: 0px;
             .clearfix();
-        }
-
-        #toh {
-            margin: 20px 0px;
         }
 
         #long-titles {
@@ -170,8 +155,15 @@ h3, .milestone-h3 {
             .clearfix();
         }
 
-        #titles + #long-titles {
+        #main-titles + #long-titles {
             margin-top: 50px;
+        }
+    }
+
+    #imprint {
+
+        #toh {
+            margin: 20px 0px;
         }
 
         img.logo {
@@ -196,6 +188,10 @@ h3, .milestone-h3 {
 
         margin-bottom: 70px;
 
+        h5 {
+            margin-bottom: @line-height-computed / 2;
+        }
+
         a {
 
             display: inline-block;
@@ -208,22 +204,111 @@ h3, .milestone-h3 {
         font-style: italic;
     }
 
+    .heading-section {
+
+        h1, h2, h3, h4 {
+            margin-bottom: @line-height-computed / 2;
+        }
+
+        &.chapter {
+            h2, .h2 {
+                color: @brand-red;
+                text-transform: uppercase;
+            }
+            h4 {
+                .text-muted();
+            }
+        }
+
+        &.supplementary {
+
+            h4 {
+
+                .text-muted();
+
+                &:before {
+                    content: '[';
+                }
+                &:after {
+                    content: ']';
+                }
+                
+            }
+        }
+        
+    }
+
+    // Gutter system
+    // --------------------------------
+    .rw { // row
+
+        display: block;
+        padding-left: @text-gtr-width;
+        padding-right: @text-gtr-width-right;
+        overflow: auto;
+
+        .rw {
+            margin-left: -@text-gtr-width;
+            margin-right: -@text-gtr-width-right;
+        }
+
+        .rw-heading {
+            overflow: auto;
+        }
+
+        &.rw-section-head {
+            margin-top: @line-height-computed * 2;
+        }
+
+        .gtr { // left-hand gutter
+
+            display: block;
+            float: left;
+            clear: left;
+            margin-left: -@text-gtr-width;
+            overflow-wrap: break-word;
+
+            .milestone {
+                width: (@text-gtr-width - @panel-body-padding);
+                display: block;
+                overflow: auto;
+                overflow-wrap: break-word;
+                position: relative;
+                z-index: 2;
+            }
+
+        }
+    }
+
+    &.rw-full-width .rw {
+        padding-right: 0px;
+        .rw {
+            margin-right: 0px;
+        }
+    }
+
+    // Add a space
+    br+*,                           // after a br
+    .rw-section-head+.rw,           // after a section head
+    .section-label+.rw,             // after a section label
+    .rw-list-section+.rw,           // after a section list
+    .rw-list-bullet+.rw,            // after a bullet list
+    .rw-line-group,                 // before a line group
+    .rw-line-group+.rw,             // after a line group
+    .rw-blockquote,                 // before a blockquote
+    .rw-blockquote+.rw,             // after a blockquote
+    .rw-mantra,                     // before a mantra
+    .rw-mantra+.rw,                 // after a mantra
+    .rw-table,                      // before a table
+    .rw-table+.rw,                  // after a table
+    .rw-trailer                     // before a trailer
+    {
+        margin-top: @line-height-computed;
+    }
+
     // Sections containing text
     // ---------------------------------------------
     .text {
-
-        h4 {
-            color: @text-muted;
-            text-align: center;
-        }
-
-        h4+h2 {
-            margin-top: 0px;
-        }
-
-        h2 {
-            margin-bottom: @line-height-computed;
-        }
 
         br {
             display: none;
@@ -245,11 +330,10 @@ h3, .milestone-h3 {
             padding-left: @line-height-computed;
         }
 
-        // Add a space
+        // Cancel the indent after a space
         br+*,                           // after a br
-        .rw-chapter-title+.rw,          // after a chapter title
         .rw-section-head+.rw,           // after a section head
-        .rw-chapter-head+.rw,           // after a chapter head
+        .section-label+.rw,             // after a section label
         .rw-list-section+.rw,           // after a section list
         .rw-list-bullet+.rw,            // after a bullet list
         .rw-line-group,                 // before a line group
@@ -260,32 +344,20 @@ h3, .milestone-h3 {
         .rw-mantra+.rw,                 // after a mantra
         .rw-table,                      // before a table
         .rw-table+.rw,                  // after a table
-        .rw-trailer                     // before a trailer
+        .rw-trailer,                    // before a trailer
+        .rw.rw-label+.rw,               // after a label
+        .rw.rw-list-head+.rw,           // after a list header
+        .rw:first-child,                // first-child pseudo-class
+        .rw.first-child                 // first-child class
         {
-            margin-top: @line-height-computed;
-            // cancel the indent after a space
-            > p {
-                text-indent: 0;
-            }
-        }
-
-        // Add a double space
-        .rw-chapter-head, .rw-section-head // before a section head
-        {
-            margin-top: @line-height-computed * 2;
-            // cancel the indent after a space
             > p {
                 text-indent: 0;
             }
         }
 
         // cancel the indent in other cases
-        .rw:first-child > p,        // first paragraph (pseudo-class)
-        .rw.first-child > p,        // first paragraph (class)
-        .rw.rw-label+.rw > p,       // after a label
-        .rw.rw-list-head +.rw > p,  // after a list head
-        .footnote-number {                      // footnote number
-            text-indent: 0;
+        .footnote-number {              // footnote number
+            text-indent: 0 !important;
         }
 
         // Hanging indent 
@@ -296,75 +368,6 @@ h3, .milestone-h3 {
             }
         }
 
-        .heading-chapter {
-            h4 {
-                color: @text-color;
-                text-transform: uppercase;
-            }
-        }
-
-        .heading-section {
-            display: table;
-            margin: 0px auto;
-            h4 {
-                color: @text-color;
-                margin-bottom: 0px;
-                display: table-cell;
-                font-size: @font-size-h4;
-                text-align: center;
-            }
-            &:before {
-                padding-right: 10px;
-                display: table-cell;
-                text-align: right;
-            }
-            &:after {
-                padding-left: 10px;
-                display: table-cell;
-                text-align: left;
-            }
-            &.nesting-1 {
-                &:before, &:after  {
-                    content: '·';
-                }
-                h4 {
-                    font-size: (@font-size-h4 * 0.95);
-                }
-            } 
-            &.nesting-2 {
-                &:before, &:after  {
-                    content: '··';
-                }
-                h4 {
-                    font-size: (@font-size-h4 * 0.9);
-                }
-            } 
-            &.nesting-3 {
-                &:before, &:after  {
-                    content: '···';
-                }
-                h4 {
-                    font-size: (@font-size-h4 * 0.85);
-                }
-            } 
-            &.nesting-4 {
-                &:before, &:after  {
-                    content: '····';
-                }
-                h4 {
-                    font-size: (@font-size-h4 * 0.8);
-                }
-            } 
-            &.nesting-5 {
-                &:before, &:after  {
-                    content: '·····';
-                }
-                h4 {
-                    font-size: (@font-size-h4 * 0.7);
-                }
-            } 
-        } 
-        
         blockquote {
             padding: 0;
             margin-bottom: 0;
@@ -380,13 +383,26 @@ h3, .milestone-h3 {
         }
     }
 
+    // Cancel first item top margin
+    .rw-section-head+.rw-list-section {
+        .rw-list-item:first-child {
+            margin-top: 0px;
+        }
+    }
+    .rw-section-head+.nested-section {
+        .rw-section-head:first-child {
+            margin-top: @line-height-computed;
+        }
+    }
+
     // List types
     // --------------------------------------------------
     .list {
 
         // Cancel vertical spacing on list content, apply to list item instead
         // -------------------------------------------------------------------
-        p, .section-label {
+        //p, .section-label {
+        p {
             margin-top: 0;
             margin-bottom: 0;
         }
@@ -406,31 +422,15 @@ h3, .milestone-h3 {
                     } 
                 }
             }
-            &.nesting-1 > .rw > .list-item > .rw {
-                > p, > .section-label {
-                    padding-left: (@line-height-computed * 2);
+            .nesting-loop (@i) when (@i > 0) {
+                &.nesting-@{i} > .rw > .list-item > .rw {
+                    > p, > .section-label {
+                        padding-left: (@line-height-computed * (1 + @i));
+                    }
                 }
+                .nesting-loop(@i - 1);
             }
-            &.nesting-2 > .rw > .list-item > .rw {
-                > p, > .section-label {
-                    padding-left: (@line-height-computed * 3);
-                }
-            }
-            &.nesting-3 > .rw > .list-item > .rw {
-                > p, > .section-label {
-                    padding-left: (@line-height-computed * 4);
-                }
-            }
-            &.nesting-4 > .rw > .list-item > .rw {
-                > p, > .section-label {
-                    padding-left: (@line-height-computed * 5);
-                }
-            }
-            &.nesting-5 > .rw > .list-item > .rw {
-                > p, > .section-label {
-                    padding-left: (@line-height-computed * 6);
-                }
-            }
+            .nesting-loop (@nesting-levels);
         } 
 
         // Section lists have vertical spacing
@@ -439,22 +439,17 @@ h3, .milestone-h3 {
         &.list-section {
             > .rw-list-item {
                 margin-top: @line-height-computed;
-                > .list-item {
-                    margin-top: 0px;
-                }
             }
-            /*
-            > .rw.first-child , > .rw.rw-heading + .rw {
-                margin-top: 0;
-            }*/
         }
     }
 
     // Nested sections
     // --------------------------------------------
     .nested-section {
-        float: left;
-        width: 100%;
+
+        //float: left;
+        //width: 100%;
+
         .section-label {
             font-size: @font-size-h4;
         }
@@ -463,12 +458,44 @@ h3, .milestone-h3 {
                 font-size: @font-size-h5;
             }
         }
+
+        .heading-section {
+
+            display: table;
+            margin: 0px auto;
+
+            > * {
+                display: table-cell;
+            }
+            &:before {
+                display: table-cell;
+                padding-right: 10px;
+                text-align: right;
+            }
+            &:after {
+                display: table-cell;
+                padding-left: 10px;
+                text-align: left;
+            }
+
+            &.nested {
+                font-size: .9em;
+            }
+
+            .nesting-loop (@i) when (@i >= 1) {
+                &.nested-@{i} {
+                    &:before, &:after  {
+                        .content-dots(@i);
+                    }
+                }
+                .nesting-loop (@i - 1);
+            }
+            .nesting-loop (@nesting-levels);
+        }
+
+        
+
     }
-    /*
-    .nested-section+.nested-section {
-        margin-top: @line-height-computed;
-    }
-    */
 
     // Data table 
     // ---------------------------------------------
@@ -512,14 +539,12 @@ h3, .milestone-h3 {
         overflow: hidden;
 
         .term {
-            //line-height: 20px;
+            text-align: left;
             margin-top: 0px;
             margin-bottom: 4px;
-            //padding-bottom: 8px;
-            //border-bottom: 1px solid @hr-border;
         }
         
-        p {
+        p, ul {
             margin-bottom: 4px;
             &:last-child {
                 margin-bottom: 0px;
@@ -528,6 +553,12 @@ h3, .milestone-h3 {
 
         .text-sa, .text-wy {
             font-style: italic;   
+        }
+
+        .reconstructed {
+            &:before {
+                content: '*' !important;
+            }
         }
 
         .alternative {
@@ -539,18 +570,20 @@ h3, .milestone-h3 {
             margin-bottom: @line-height-computed / 2;
         }
 
-        .occurences {
-            h6 {
+        .locations {
+            h5 {
                 margin-top: 4px;
                 margin-bottom: 4px;
+                font-size: @font-size-small;
             }
             ul {
                 > li {
-                    width: 30px;
                     overflow: visible;
                     font-size: 13px;
+                    padding-right: 10px;
                     a {
                         white-space: nowrap;
+                        text-decoration: underline;
                     }
                 }
             }
@@ -640,9 +673,6 @@ h3, .milestone-h3 {
         padding: (@line-height-computed / 2) 0px;
         border-bottom: 1px solid @hr-border;
     }
-    .text-bo.source {
-        line-height: 2em;
-    }
 }
 
 // Info icon
@@ -661,16 +691,24 @@ a.info-icon {
 
 // Different styles for the editors
 // ---------------------------------------------
-.editor-mode {
+.editor-mode, .annotation-mode {
     &.translation {
         a.footnote-link, a.glossary-link {
             color: inherit;
             border-bottom-color: @brand-red-alert !important;
         }
+        a.glossary-link.not-cached {
+            background-color: lighten(@brand-red-alert, 35%);
+            color: #000;
+        }
         .glossary-item .alternative {
             display: block;
             color: @brand-orange;
         }
+        
+    }
+    [data-in-view-replace] {
+        background-color: #f5f5f5;
     }
 }
 
@@ -688,7 +726,13 @@ a.info-icon {
                 content: "";
             }
         }
-    } 
+    }
+
+    // Hide open / close controls
+    // ---------------------------------------
+    section.preview, a.reveal, a.preview {
+        display: none;
+    }
 
     .translation {
 
@@ -698,10 +742,46 @@ a.info-icon {
             margin-top: 0px;
         }
 
-        section, aside {
-            .glossary-link {
-                border-bottom: 0px;
+        // By default don't show these in print
+        section.preview, section.partial, aside {
+            display: none;
+        }
+
+        // Unless it's complete - then show everything
+        &.complete {
+            section.preview, aside {
+                display: block;
             }
+        }
+
+        // pdfs
+        &.pdf-mode.part {
+
+            // body and back: hide the front matter
+            &.part-body, &.part-back {
+                #titles, #imprint, #toc {
+                    display: none;
+                }
+            }
+
+            // body: show the body-title
+            &.part-body, &.part-body-title {
+                #body-title {
+                    display: block;
+                }
+            }
+
+            // front: show the table of contents
+            &.part-front {
+                #toc {
+                    display: block;
+                }
+            }
+            
+        }
+
+        a.glossary-link {
+            border-bottom: 0px;
         }
 
         .panel-body {
@@ -713,17 +793,27 @@ a.info-icon {
                 font-size: 12pt;
             }
         }
-        a.ref[href]:after, .visible-print-block a:after {
-            content: "";
+        a.ref[href], 
+        a.milestone,
+        a.footnote-number,
+        .visible-print-block a,
+        .contents-table a {
+            &:after {
+                content: "";
+            }
         }
         a.footnote-number {
             text-decoration: none;
             border-bottom: 1px dashed lighten(@link-color, 20%);
         }
-    }
+        .rw-section-head {
+            page-break-after: avoid;
+            page-break-inside: avoid;
+        }
 
-    .unrendered-preview, a.render, a.preview {
-        display: none;
+        article {
+            padding-bottom: 0;
+        }
     }
 
 }
@@ -757,23 +847,16 @@ a.info-icon {
             }
         }
 
-        h2, h3, h4 {
-            margin-top: (@line-height-computed / 2);
-        }
-
-        .milestone-h2, .milestone-h3, .milestone-h4 {
-            margin-top: (@line-height-computed / 2) + 5px;
-        }
-
         .rw { // row
             padding-right: @text-gtr-width-sm-right;
             .rw {
                 margin-right: -@text-gtr-width-sm-right;
             }
             .rw-heading {
-                padding-right: @text-gtr-width;
+                padding-right: @text-gtr-width-sm - @text-gtr-width-sm-right;
             }
         }
+
         .download-options {
             margin-top: 0px;
             margin-bottom: 70px;
@@ -804,21 +887,19 @@ a.info-icon {
             p {
                 text-align: left;
             }
-            .heading-section {
-                h4 {
-                    text-align: left;
-                }
-            }
         }
 
         .rw { // row
+
             position: relative;
             padding-left: @text-gtr-width-sm;
+
             .rw {
                 margin-left: -@text-gtr-width-sm;
                 margin-right: 0px;
                 left: 0px;
             }
+
             .gtr {
                 margin-left: -@text-gtr-width-sm;
                 .milestone {
@@ -826,12 +907,15 @@ a.info-icon {
                 }
                 
             }
+
             .rw-heading {
+
                 padding-left: 0px;
                 padding-right: 0px;
                 margin-left: 0px;
                 margin-right: 0px;
-                > * {
+
+                h1, h2, h3, h4 {
                     text-align: left;
                 }
             }

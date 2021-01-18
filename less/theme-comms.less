@@ -9,7 +9,7 @@
 
     .heading {
         font-family: @font-family-heading;
-        font-weight: 700;
+        //font-weight: 700;
         text-transform: uppercase;
     }
 
@@ -1076,12 +1076,11 @@ ul.responsive-tabs__list{
     // -------------------------------
     #title {
         
-        margin-bottom: 25px;
+        margin-bottom: @line-height-computed;
 
         .title {
 
             text-align: center;
-            margin-bottom: 25px;
 
             h1 {
                 color: @brand-red;
@@ -1094,8 +1093,8 @@ ul.responsive-tabs__list{
                 color: @text-color;
             }
 
-            p {
-                margin-bottom: 15px;
+            .logo {
+                margin-top: 25px;
             }
 
         }
@@ -1109,6 +1108,7 @@ ul.responsive-tabs__list{
         background-color: @brand-orange;
         border-radius: @border-radius-base;
         margin: 0px auto;
+        margin-bottom: @line-height-computed;
         padding: 3px;
 
         td {
@@ -1130,24 +1130,29 @@ ul.responsive-tabs__list{
     // ------------------------------
     .translation-links {
         .list-unstyled();
+        font-size: @font-size-small;
         > li {
             margin-bottom: 5px;
         }
         i {
             width: 26px;
             text-align: left;
+            font-size: 16px;
         }
     }
 
     // The summary in the about tab
     // -------------------------------
     #summary {
+
         h1 {
             text-align: left;
         }
+
         h4 {
             font-weight: bold;
         }
+
         p {
             text-align: justify;
             .title {
@@ -1157,13 +1162,132 @@ ul.responsive-tabs__list{
         
     }
 
+    #filters-sidebar {
+
+        label {
+            font-family: @font-family-serif;
+        }
+
+        .filter-panel {
+
+            border-bottom: 1px solid @hr-border;
+            padding: 5px 10px;
+
+            /*&.active {
+                
+                background-color: @gray-lighter;
+
+                a {
+                    color: @text-color;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }*/
+             
+        }
+    }
+
+    #filters-carousel {
+
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: @line-height-computed;
+
+        .viewport {
+            width: 100%;
+            overflow: scroll;
+        }
+
+        .slider {
+
+            padding: 0 15px;
+            .transition(margin-left .75s ease-in);
+
+            .col-filter {
+        
+                float: left;
+                clear: none;
+                width: 298px;
+                padding-left: 15px;
+                padding-right: 15px;
+
+                .filter-panel {
+                    margin-bottom: 0px;
+                    text-align: center;
+                }
+                
+            }
+        }
+        
+        // Remove this class when ready
+        &.not-ready {
+            .viewport {
+                overflow: hidden;
+            }
+            .slider {
+                width: 4000px;
+                //margin-left: 1500px;
+            }
+        }
+
+        .filter-panel {
+
+            display: block;
+            padding: 10px 20px;
+            margin-bottom: @line-height-computed;
+            background: url('/imgs/background-pattern-transparent.svg');
+            background-color: @brand-blue;
+            background-size: 40px;
+            color: @gray-lighter;
+            border-radius: @border-radius-base;
+            text-decoration: none;
+
+            h3 {
+                color: #fff !important;
+                margin: 3px 0 7px 0;
+                padding-bottom: 5px;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+        }
+
+        .active .filter-panel {
+            background-color: @brand-orange;
+        }
+
+        .more-filters .filter-panel {
+            background-color: @gray;
+        }
+    }
+
+    .hover & {
+        #filters-carousel {
+            .viewport {
+                overflow: hidden;
+            }
+        }
+    }
+
+    .nested-checkbox {
+        .nested-checkbox {
+            padding-left: 15px;
+        }
+        .checkbox {
+            border-bottom: 1px solid @hr-border;
+            padding: 5px 0;
+            margin: 5px 0px 5px 0px;    
+        }
+    }
+
 }
 
 // Alternating list
 // ---------------------------
 .text-list {
 
-    margin: 15px;
+    margin: 0px 15px;
     page-break-inside: avoid;
 
     .table-headers {

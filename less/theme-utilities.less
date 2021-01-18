@@ -5,7 +5,7 @@
 .control-label {
     text-align: left;
 }
-
+/*
 fieldset {
     border-color: @legend-border-color;
 }
@@ -13,11 +13,11 @@ fieldset {
 legend {
     color: @legend-color;
     padding: 8px;
-}
+}*/
 
 .preview-list {
     a.preview {
-        top: -24px;
+        top: 0px;
     }
 }
 
@@ -208,9 +208,11 @@ legend {
     position: relative;
 
     .item {
+
         border-top: 1px solid @hr-border;
         padding: (@line-height-computed / 2) 0px;
         position: relative;
+        
         &.item-first {
             margin-top: 15px;
             padding-top: (@line-height-computed / 2);
@@ -228,9 +230,6 @@ legend {
         > .item-row:last-child {
             margin-bottom: 0px;
         }
-        &.show-background {
-            background-color: #e5e5e5;
-        }
         &.selected {
             border: 1px solid @hr-border;
             z-index: 2;
@@ -239,6 +238,14 @@ legend {
         }
         &.pad {
             padding: 15px;
+            &.flagged {
+                border-left: 5px solid @brand-red;
+                padding-left: 10px;
+            }
+        }
+
+        .glossary-item {
+            margin-bottom: 0px;
         }
     }
 

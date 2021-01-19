@@ -197,7 +197,7 @@ jQuery(document).ready(function($) {
 				//console.log(documentWidth);
 
 				// Loop through all sub-nodes with [data-match-height]
-				$element.find("[data-match-height]:visible").each(function(){
+				$element.find("[data-match-height]").each(function(){
 					var $this = $(this);
 					// Don't repeat if this was already done for this width
 					if($this.data("matched-height") == documentWidth) return;

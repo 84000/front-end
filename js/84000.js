@@ -197,7 +197,7 @@ jQuery(document).ready(function($) {
 				//console.log(documentWidth);
 
 				// Loop through all sub-nodes with [data-match-height]
-				$element.find("[data-match-height]:visible").each(function(){
+				$element.find("[data-match-height]").each(function(){
 					var $this = $(this);
 					// Don't repeat if this was already done for this width
 					if($this.data("matched-height") == documentWidth) return;
@@ -207,6 +207,7 @@ jQuery(document).ready(function($) {
 					// Get the height
 					var this_height = $this.outerHeight();
 					var height_group = $this.data('match-height');
+					//console.log(height_group + ':' + this_height);
 					// Set the height for this group if it's taller
 					if(!heights[height_group] || this_height > heights[height_group]){
 						heights[height_group] = this_height;
@@ -449,7 +450,7 @@ jQuery(document).ready(function($) {
 			    				var $data = $(data);
 			    				var $dataPart = $data.find(hash).closest("section");
 			    				var dataPartId = $dataPart.attr('id');
-			    				//console.log(dataPartId);
+			    				// console.log(dataPartId);
 			    				if(dataPartId !== undefined){
 			    					var $target = $("#" + dataPartId);
 			    					if($target.length){

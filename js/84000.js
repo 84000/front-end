@@ -1849,6 +1849,7 @@ jQuery(document).ready(function($) {
 	$.popupFooterHeight();
 	$.matchHeights($(document));
 	$.prepFiltersCarousel($(document));
+	$.setOneLineHeights($(document));
 
 	// Scroll to the hash location
 	// Do this after all other layout processes

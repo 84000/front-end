@@ -1080,9 +1080,11 @@ jQuery(document).ready(function($) {
                     		$paragraph.data('in-view-replace'), 
                     		$paragraph, 
                     		function(){
-                    			$paragraph.data('in-view-replace', '');
+                    			//$paragraph.data('in-view-replace', '');
                     		}
                     	);
+                    	// set this immediately to avoid multiple calls
+                    	$paragraph.data('in-view-replace', '');
 					}
 
 					}

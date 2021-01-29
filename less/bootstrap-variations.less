@@ -374,9 +374,11 @@ table.table-hover {
 // Print variations
 // --------------------------------------------
 @media print {
+
     a.printable[href]:after {
         content: "";
     }
+
     hr, 
     .well, 
     .well hr, 
@@ -385,8 +387,14 @@ table.table-hover {
     table.table td {
         border-color: @gray-light !important;
     }
+
     .label {
         background-color: transparent !important;
         color: @text-color !important;
+    }
+
+    blockquote {
+        border: 0px;
+        border-left: 5px solid @blockquote-border-color;
     }
 }

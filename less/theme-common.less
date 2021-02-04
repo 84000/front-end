@@ -1547,16 +1547,32 @@ table.contents-table {
         }
 
         .search-match {
+
             display: block;
             border-left: 1px solid @hr-border;
             padding-left: 12px;
             margin-left: 12px;
-            margin-bottom: 5px;
+            margin-bottom: 12px;
             text-decoration: none;
             color: @text-color;
             a {
                 text-decoration: underline;
             }
+        }
+
+        .search-match-gloss {
+            > * {
+                margin-top: 0px;
+                margin-bottom: 5px;
+                color: @text-color;
+            }
+            h4 {
+                font-weight: bold;
+            }
+        }
+
+        .search-match-title, .search-match-head {
+            text-transform: uppercase;
         }
 
         a.reveal {

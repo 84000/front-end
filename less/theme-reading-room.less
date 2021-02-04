@@ -297,11 +297,8 @@ h3 {
     .rw-line-group+.rw,             // after a line group
     .rw-blockquote,                 // before a blockquote
     .rw-blockquote+.rw,             // after a blockquote
-    .rw-mantra,                     // before a mantra
-    .rw-mantra+.rw,                 // after a mantra
     .rw-table,                      // before a table
     .rw-table+.rw,                  // after a table
-    .rw-trailer                     // before a trailer
     {
         margin-top: @line-height-computed;
     }
@@ -340,11 +337,8 @@ h3 {
         .rw-line-group+.rw,             // after a line group
         .rw-blockquote,                 // before a blockquote
         .rw-blockquote+.rw,             // after a blockquote
-        .rw-mantra,                     // before a mantra
-        .rw-mantra+.rw,                 // after a mantra
         .rw-table,                      // before a table
         .rw-table+.rw,                  // after a table
-        .rw-trailer,                    // before a trailer
         .rw.rw-label+.rw,               // after a label
         .rw.rw-list-head+.rw,           // after a list header
         .rw:first-child,                // first-child pseudo-class
@@ -372,7 +366,7 @@ h3 {
 
             padding: 0;
             margin-bottom: 0;
-            
+
             p {
                 padding-left: @line-height-computed;
             }
@@ -607,9 +601,6 @@ h3 {
                 text-align: center;
             }
         }
-        h5 {
-            margin-top: @line-height-computed;
-        }
         .table {
             width: auto;
             > tbody > tr {
@@ -632,9 +623,10 @@ h3 {
     // Bibliography
     // --------------------------------------------
     #bibliography {
-        p {
+        p.bibl {
             padding-left: @line-height-computed;
             text-indent: -@line-height-computed;
+            margin-bottom: (@line-height-computed / 2);
         }
     }
 

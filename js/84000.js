@@ -1832,22 +1832,31 @@ jQuery(document).ready(function($) {
 	// ------------------------------------------
 	$(window).on("resize", function(){
 
-		$.wait("Rendering page...");
+		// Resize fires too often on some browsers due to showing/hiding of address bar
+		// Actually we are only interested in the width
+		if($(window).data('window-width') !== $(window).width()) {
 
-    	setTimeout(
-    		function(){
-	    		$.mediaSize();
-				$.matchHeights($(document));
-				$.popupFooterHeight();
-	    		$.wait("", true);
-	        }
-        ,100);
+			$(window).data('window-width', $(window).width());
+			//console.log($(window).data('window-width'));
+
+			$.wait("Rendering page...");
+
+	    	setTimeout(
+	    		function(){
+		    		$.mediaSize();
+					$.matchHeights($(document));
+					$.popupFooterHeight();
+		    		$.wait("", true);
+		        }
+	        ,100);
+
+		}
 		
 	});
 
 	$.mediaSize();
-	$.popupFooterHeight();
 	$.matchHeights($(document));
+	$.popupFooterHeight();
 	$.prepFiltersCarousel($(document));
 	$.setOneLineHeights($(document));
 

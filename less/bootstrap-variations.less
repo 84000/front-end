@@ -226,23 +226,25 @@ mark, .mark {
     padding: 0px;
 
     > li {
+
         break-inside: avoid;
+
         + li:before, &:last-child:after {
             content: '';
             padding: 0px;
         }
+
         &:after {
             content: "@{breadcrumb-separator}";
             padding: 0 5px;
             color: @breadcrumb-color;
         }
+
     }
     > li > a {
         white-space: nowrap;
     }
-    h1 {
-        display: inline-block;
-    }
+    
 }
 
 // Bootstrap modifies the behaviour of all dropdowns in the navbar
@@ -344,6 +346,10 @@ table.table-hover {
 // Carousel variations
 // --------------------------------------------
 .carousel-control {
+
+    &, a {
+        color: @carousel-control-color;
+    }
 
     i {
         position: absolute;

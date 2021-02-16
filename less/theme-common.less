@@ -41,16 +41,12 @@ body {
         }
 
         h1 {
-            line-height: 30px;
-            margin-bottom: 0px;
             margin-top: 0px;
+            margin-bottom: 0px;
             font-size: 1.2em;
-            position: relative;
-            z-index: 1;
+            line-height: 30px;
+            color: #fff;
             text-transform: uppercase;
-            &, a {
-                color: #fff;
-            }
         }
 
         a {
@@ -124,33 +120,35 @@ body {
     // Viewport smaller than md
     @media only screen and (max-width: @screen-md) {
         .banner-band {
-            img {
-                width: 50vw;
-                height: 50vw;
-                border-radius: 25vw;
-                margin-top: -5vw;
-                margin-bottom: -12vw;
-            }
-        }
-    }
-    // Viewport smaller than sm
-    @media only screen and (max-width: @screen-md) {
-        .banner-band {
             blockquote {
                 position: relative;
                 z-index: 1;
-                margin-top: 60vw;
                 margin-bottom: 0px;
+                margin-top: 45vw;
+            }
+            img {
+                position: absolute;
+                top: -15px;
+                right: 15px;
+                width: 60vw;
+                height: 60vw;
+                border-radius: 30vw;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // Viewport smaller than sm
+    @media only screen and (max-width: @screen-sm) {
+        .banner-band {
+            blockquote {
+                margin-top: 60vw;
             }
             img {
                 width: 80vw;
                 height: 80vw;
                 border-radius: 40vw;
-                position: absolute;
-                top: -15px;
-                right: 15px;
-                margin-top: 0;
-                margin-bottom: 0;
             }
         }
     }
@@ -1297,7 +1295,7 @@ span.indent {
 
 // A panel for a section of a canon
 // --------------------------------------------
-.section-panel {
+.ornamental-panel {
 
     display: block;
     margin: 20px 0px;
@@ -1315,32 +1313,25 @@ span.indent {
         url(/imgs/ornament/title-sides.svg) repeat-y top right;
     background-size: 50px, 18px, 18px, 18px, 18px, 50px, 50px, 6px, 6px;
     background-color: #fff;
-
     
-    h1, h2, h3, h4 {
+    .title {
         
-        margin-top: 15px;
+        font-size: 1.1em;
+        margin-top: 13px;
         margin-bottom: 0px;
-        padding-bottom: 15px;
+        padding-bottom: 13px;
         border-bottom: 1px solid @panel-inner-border;
 
         &:last-child {
             border-bottom: 0px;
         }
 
-        &.text-bo, &.text-sa, &.text-wy {
-            font-weight: normal !important;
+        &.main-title {
+            font-size: 1.3em;
+            font-family: @font-family-heading;
+            font-weight: 700;
         }
-    }
 
-    h2, h3, h4 {
-        color: @gray;
-    }
-
-    h2, h3 {
-        color: @gray;
-        font-family: @font-family-heading;
-        font-weight: 700;
     }
 
     a {
@@ -1600,11 +1591,11 @@ table.contents-table {
 // -------------------------------------------
 @media screen {
 
-    section, aside {
+    section {
 
         display: block;
-        overflow: hidden;
         position: relative;
+        //overflow: hidden;
 
         a.reveal {
 
@@ -1682,16 +1673,6 @@ table.contents-table {
     
 
 }
-
-/*
-@media only screen and (max-width: @screen-md) {
-    section, aside {
-        a.preview {
-            top: -@btn-round-size;
-        }
-    }
-}
-*/
 
 @media only screen and (min-width: @screen-sm) {
     .panel.main-panel > .panel-body {
@@ -1816,7 +1797,7 @@ table.contents-table {
         color: initial !important;
     }
 
-    .section-panel {
+    .ornamental-panel {
 
         * {
             border-color: @gray-light !important;

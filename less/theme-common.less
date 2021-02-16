@@ -1274,12 +1274,15 @@ span.indent {
     }
 
     h2, h3, h4, h5 {
+
         margin-bottom: (@line-height-computed / 2) !important;
         text-align: left !important;
         color: @text-color;
+
         &:first-child {
             margin-top: 0px !important;
         }
+
     }
 
 }
@@ -1299,8 +1302,9 @@ span.indent {
 
     display: block;
     margin: 20px 0px;
-    padding: 20px 20px 15px 20px;
+    padding: 45px 45px 30px 45px;
     text-align: center;
+    font-size: 1.5em;
     background: 
         url(/imgs/ornament/title-ornament.svg) no-repeat top center, 
         url(/imgs/ornament/title-corner-top-left.svg) no-repeat top left, 
@@ -1316,20 +1320,25 @@ span.indent {
     
     .title {
         
-        font-size: 1.1em;
         margin-top: 13px;
         margin-bottom: 0px;
         padding-bottom: 13px;
         border-bottom: 1px solid @panel-inner-border;
+        color: @text-color;
+
+        &.main-title {
+            font-size: 1.1em;
+            font-family: @font-family-heading;
+            font-weight: 700;
+            color: @brand-red;
+        }
+
+        &.text-bo:before {
+            content: '༄༅། །';
+        }
 
         &:last-child {
             border-bottom: 0px;
-        }
-
-        &.main-title {
-            font-size: 1.3em;
-            font-family: @font-family-heading;
-            font-weight: 700;
         }
 
     }
@@ -1454,29 +1463,36 @@ span.indent {
 // Download dana pop-up
 // -------------------------------------------
 #dana-description {
+
     i {
         font-size: 30px;
     }
+
     h2 {
         font-family: @font-family-heading;
         font-weight: 700;
         margin-top: 5px;
         margin-bottom: 11px;
     }
+
 }
 
 // Contents table
 // ---------------------------------------------
 table.contents-table {
+
     tr {
+
         vertical-align: top;
         break-inside: auto;
         page-break-inside: auto;
+
         &.sub {
             > td {
                 padding-top: 3px;
             }
         }
+
         td {
             padding: 0px;
             padding-top: 14px;
@@ -1485,10 +1501,13 @@ table.contents-table {
             break-inside: auto;
             page-break-inside: auto;
         }
+
         td:last-child {
             padding-right: 0px;
         }
+
     }
+
     tbody {
         tr:first-child {
             td {
@@ -1496,23 +1515,28 @@ table.contents-table {
             }
         }
     }
+
     tfoot {
         td {
             font-style: italic;
             color: @text-muted;
         }
     }
+
     table {
         margin-top: 6px;
     }
+
     img.icon {
         width: 22px;
     }
+
 }
 
 // Search results
 // -------------------------------------------------
 #search-container {
+
     form {
         //margin-bottom: @line-height-computed;
     }

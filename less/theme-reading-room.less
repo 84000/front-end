@@ -345,10 +345,6 @@ h1, .h1 {
             }
         }
 
-        .title {
-            font-style: italic;
-        }
-
         // cancel the indent in other cases
         .footnote-number {              // footnote number
             text-indent: 0 !important;
@@ -370,13 +366,21 @@ h1, .h1 {
             p {
                 padding-left: @line-height-computed;
             }
+
             > .rw {
                 margin-top: 0px;
             }
+
             .line-group .line {
                 padding-left: (@line-height-computed * 2);
             }
+            
         }
+
+        cite {
+            font-style: italic;
+        }
+
     }
 
     // Cancel first item top margin

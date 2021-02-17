@@ -529,6 +529,17 @@ a.center-vertical {
 
 }
 
+// Dots
+// -----------------------------------
+.dot-parenth {
+    &:before {
+        content: '@{entity-dot}@{entity-space}';
+    }
+    &:after {
+        content: '@{entity-space}@{entity-dot}';
+    }
+}
+
 // Table without a borders
 // ---------------------------------------------
 table.table {

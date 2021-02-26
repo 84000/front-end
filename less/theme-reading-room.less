@@ -195,6 +195,9 @@ h1, .h1 {
             
             > * {
                 margin-bottom: @line-height-computed / 2;
+                &:last-child {
+                    margin-bottom: 0px;
+                }
             }
 
             .h4 {
@@ -233,7 +236,7 @@ h1, .h1 {
         display: block;
         padding-left: @text-gtr-width;
         padding-right: @text-gtr-width-right;
-        overflow: auto;
+        //overflow: auto;
 
         .rw {
             margin-left: -@text-gtr-width;
@@ -294,6 +297,17 @@ h1, .h1 {
         margin-top: @line-height-computed;
     }
 
+    // Cancel if first in section
+    .rw-line-group,
+    .rw-blockquote, 
+    .rw-table,
+    .rw-mantra,
+    .rw-trailer {
+        &.rw-first {
+            margin-top: 0px;
+        }
+    }
+
     // Sections containing text
     // ---------------------------------------------
     .text {
@@ -338,7 +352,7 @@ h1, .h1 {
         .rw.rw-label+.rw,               // after a label
         .rw.rw-list-head+.rw,           // after a list header
         .rw:first-child,                // first-child pseudo-class
-        .rw.first-child                 // first-child class
+        .rw.rw-first                    // first-child class
         {
             > p {
                 text-indent: 0;
@@ -383,12 +397,8 @@ h1, .h1 {
 
     }
 
-    // Cancel first item top margin
-    .rw-section-head+.rw-list-section {
-        .rw-list-item:first-child {
-            margin-top: 0px;
-        }
-    }
+    // Add space to first head of new section
+    // --------------------------------------------------
     .rw-section-head+.nested-section {
         .rw-section-head:first-child {
             margin-top: @line-height-computed;
@@ -410,8 +420,8 @@ h1, .h1 {
         // Bullet lists have horizontal spacing
         // --------------------------------------------------
         &.list-bullet {
-             > .rw-list-item {
-                margin-top: 5px;
+            > .rw-list-item {
+                //margin-top: 5px;
                 > .list-item {
                     margin-top: 0px;
                     padding-left: 0px;
@@ -435,12 +445,21 @@ h1, .h1 {
 
         // Section lists have vertical spacing
         // --------------------------------------------------
-        /**/
         &.list-section {
             > .rw-list-item {
                 margin-top: @line-height-computed;
             }
         }
+    }
+
+    // Cancel section list first item top margin after section head
+    // ------------------------------------------------------------
+    .rw-section-head+.rw-list-section {
+        .list.list-section {
+            > .rw-list-item:first-child  {
+                margin-top: 0px;
+            }
+        } 
     }
 
     // Nested sections
@@ -492,8 +511,6 @@ h1, .h1 {
             }
             .nesting-loop (@nesting-levels);
         }
-
-        
 
     }
 

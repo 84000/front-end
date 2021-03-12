@@ -114,6 +114,12 @@ h1, .h1 {
         }
     }
 
+    .reconstructed {
+        &:before {
+            content: '*' !important;
+        }
+    }
+
     // Title section
     // ---------------------------------------------
     #titles, #imprint {
@@ -569,12 +575,6 @@ h1, .h1 {
 
         .text-sa, .text-wy {
             font-style: italic;   
-        }
-
-        .reconstructed {
-            &:before {
-                content: '*' !important;
-            }
         }
 
         .alternative {
